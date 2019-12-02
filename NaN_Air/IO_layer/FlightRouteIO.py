@@ -9,13 +9,18 @@ class FlightRouteIO():
 
     def read_from_file(self, csvFile):
         csvReader = csv.DictReader(csvFile, delimiter=",")
-        next(csvReader, None)
+        returnList = []
+        # next(csvReader, None)
         for line in csvReader:
-            print(line)
+            # print(line[Flight], line[RouteID], line[Country], line[Airport], line[FlightDistance])
+            returnList.append(line)
+        return returnList
 
     def open_file(self):
         with open(FILENAME, encoding="utf8") as csvFile:
-            self.read_from_file(csvFile)
+            myList = self.read_from_file(csvFile)
+            for i in myList:
+                print(i)
 
 
 flightRoute = FlightRouteIO()
