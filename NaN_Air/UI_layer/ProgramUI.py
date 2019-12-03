@@ -22,21 +22,29 @@ Input your ID to login''')
         mainMenuInput = input("Input choice(q to Quit): ")
         mainMenuInput = mainMenuInput.lower()
         if mainMenuInput == "1":
-            View.viewMenu()
-            ProgramUI.mainMenu()
+            viewMenuOutput = View.viewMenu()
+            if viewMenuOutput == "b":
+                ProgramUI.mainMenu()
+            elif viewMenuOutput == "q":
+                return viewMenuOutput
         elif mainMenuInput == "2":
-            Create.createMenu()
-            ProgramUI.mainMenu()
+            createMenuOutput = Create.createMenu()
+            if createMenuOutput == "b":
+                ProgramUI.mainMenu()
+            elif createMenuOutput == "q":
+                return createMenuOutput
         elif mainMenuInput == "3":
-            Update.updateMenu()
-            ProgramUI.mainMenu()
+            updateMenuOutput = Update.updateMenu()
+            if updateMenuOutput == "b":
+                ProgramUI.mainMenu()
+            elif updateMenuOutput == "q":
+                return updateMenuOutput
         elif mainMenuInput == "q":
-            print("Forriti lokað!")
+            return mainMenuInput
         else:
-            print("WRONG INPUT, TRY AGAIN")
-            print(mainMenuInput)
+            print("Wrong input, try again")
             ProgramUI.mainMenu()
-        return mainMenuInput
+
     
     loginWindow()
     mainMenu()
