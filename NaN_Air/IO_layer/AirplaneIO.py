@@ -1,7 +1,7 @@
 import csv
 import collections
 
-FILENAME = "DataFiles/airplane.csv"
+FILENAME = "../DataFiles/airplane.csv"
 FIELDNAMES = ["airplane id", "plane reg", "manufacturer", "model", "status", "number of seats",
               "odometer"]  # for update row
 
@@ -18,7 +18,6 @@ def readFile():
 
 def writeToFile(list):
     """takes in a list and creates a new row in the airplane.csv file"""
-    print(list)
     with open(FILENAME, "a", encoding="utf8", newline="") as csvFile:
         csvWriter = csv.writer(csvFile)
         csvWriter.writerow(list)
@@ -44,6 +43,10 @@ class OnLoad:
         self.__objectList = []
         for object in fileData:
             self.__objectList.append(object)
+
+    def returnObjectList(self):
+        return self.__objectList
+
 
     def __str__(self):
         """Prints all lines in a formatted way."""

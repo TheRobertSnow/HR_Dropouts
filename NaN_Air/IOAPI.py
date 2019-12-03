@@ -1,8 +1,8 @@
 from IO_layer import *
-from logic_layer import *
 
 
-
-# create instances
-planeInstances = AirplaneIO.OnLoad()
+def getPlaneInstance():
+    planeInstances = AirplaneIO.OnLoad()
+    planeInstances = AirplaneIO.OnLoad.returnObjectList(planeInstances)
+    return planeInstances
 
