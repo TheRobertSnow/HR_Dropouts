@@ -1,7 +1,6 @@
 class Update():
 
-    def update_Worker():
-        ssnInput = int(input("Input the the Social Security Number of the worker you wish to change: "))
+    def update_Worker(ssn):
         print("""1. Update Worker
 John - {}
 --------------------------------------------
@@ -9,40 +8,42 @@ John - {}
 2. Home Phone Number:
 3. Mobile Phone Number:
 4. E-mail Address
---------------------------------------------""".format(ssnInput))
+--------------------------------------------""".format(ssn))
         updateWorkerMenuInput = input("Input choice(q to Quit, b for Back, m for Main Menu): ")
         updateWorkerMenuInput = updateWorkerMenuInput.lower()
         if updateWorkerMenuInput == "1":
             print("Current Home Address: Rasberry Street 1")
             newhomeAddress = input("Input new value: ")
             print("New Home Address: {}".format(newhomeAddress))
-            Update.updateMenu()
+            Update.update_Worker(ssn)
         elif updateWorkerMenuInput == "2":
             print("Current Phone Number: 5812345")
             newhphoneNumber = int(input("Input Phone Number: "))
             print("New Phone Number is: {}".format(newhphoneNumber))
-            Update.updateMenu()
+            Update.update_Worker(ssn)
         elif updateWorkerMenuInput == "3":
             print("Current Mobile Phone Number is: 5812345")
             newhhomeNumber = int(input("Input new Home Number: "))
             print("New Phone Number is: {}".format(newhhomeNumber))
-            Update.updateMenu()
+            Update.update_Worker(ssn)
         elif updateWorkerMenuInput == "4":
             print("Current E-mail Address is: alexanders19@ru.is")
             newEmail = input("Input new E-mail Address: ")
             print("New E-mail Address is: {}\n".format(newEmail))
+            Update.update_Worker(ssn)
         elif updateWorkerMenuInput == "b":
             Update.updateMenu()
         elif updateWorkerMenuInput == "q":
             print("Forriti lokað!")
+            return updateWorkerMenuInput
         else:
             print("WRONG INPUT, TRY AGAIN")
-            Update.update_Worker(self)
+            Update.update_Worker()
         #return ssn og key, 
         
                 
-    def updateairplaneStatus():
-        airplane_reg_num_Input = input("Input Airplane Registration Number: ")
+    def updateairplaneStatus(airplane_reg_num_Input):
+        #airplane_reg_num_Input = input("Input Airplane Registration Number: ")
         #Þetta ákveðna tilvik af airplane fundið
         print("""2. Update Airplane Status
 Boeing - {}: Select Airplane Status
@@ -119,11 +120,11 @@ Boeing - {}: Select Airplane Status
             print("Current Emergency Contact number: 5812345")
             emergencycontactnumInput = input("Input new value: ")
             print("Emergency Contact number succesfully changed!\nNew emergency contact number: {}".format(emergencycontactnumInput))
-        elif updateairplanestatusMenuInput == "b":
+        elif updateflightrouteMenuInput == "b":
             Update.updateMenu()
-        elif updateairplanestatusMenuInput == "m":
+        elif updateflightrouteMenuInput == "m":
             Update.updateMenu()
-        elif updateairplanestatusMenuInput == "q":
+        elif updateflightrouteMenuInput == "q":
             print("Forriti lokað!")
         else:
             print("Invalid input")
@@ -301,10 +302,12 @@ Flight - {}: Select Flight Status
         updateMenuInput = updateMenuInput.lower()
         
         if updateMenuInput == "1":
-            Update.update_Worker() #Kallar á update worker function
+            ssnInput = int(input("Input the the Social Security Number of the worker you wish to change: "))
+            Update.update_Worker(ssnInput) #Kallar á update worker function
             updateMenuInput = Update.updateMenu()
         elif updateMenuInput == "2":
-            Update.updateairplaneStatus() #Kallar á update airplane status function
+            airplane_reg_num_Input = input("Input Airplane Registration Number: ")
+            Update.updateairplaneStatus(airplane_reg_num_Input) #Kallar á update airplane status function
             updateMenuInput = Update.updateMenu()
         elif updateMenuInput == "3":
             Update.updatecurrentflightRoutes()
@@ -324,4 +327,4 @@ Flight - {}: Select Flight Status
             updateMenuInput = Update.updateMenu()
         return updateMenuInput
 
-Update.updateairplaneStatus()
+Update.updateMenu()
