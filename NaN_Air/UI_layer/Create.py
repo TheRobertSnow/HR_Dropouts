@@ -42,8 +42,7 @@ class Create():
 1. Create Voyage using existing flights
 2. Create Voyage by creating 2 flights
 --------------------------------------------''')
-                
-        createVoyageMenuInput = input("Input choice(q to Quit, b for Back, m for Main Menu): ")
+        createVoyageMenuInput = input("Input choice(q to Quit, b for Back): ")
         createVoyageMenuInput = createVoyageMenuInput.lower()
         if createVoyageMenuInput == "1":
             print('''4.1. Create Voyage using existing flights
@@ -102,14 +101,13 @@ Please input the following information:''')
             Create.createMenu()
         elif createVoyageMenuInput == "b":
             Create.createMenu()
-        elif createVoyageMenuInput == "m":
-            return None
+            #Create.createMenu()
         elif createVoyageMenuInput == "q":
-            print("Forriti lokað!")
+            return createVoyageMenuInput
         else:
-            print("WRONG INPUT, TRY AGAIN")
+            print("Wrong input, try again")
             Create.createVoyageMenu()
-        return createVoyageMenuInput
+            
     def createMenu():
         print('''Create Data
 --------------------------------------------
@@ -152,7 +150,7 @@ Please input the following information:''')
             print(createWorkerList)
             #Prints out info on the created worker
             print("--------------------------------------------")
-            Create.createMenu()
+            createMenuInput = Create.createMenu()
         elif createMenuInput == "2":
             print('''2. Create Airplane
 --------------------------------------------
@@ -172,7 +170,7 @@ Please input the following information:''')
             print(createAirplaneList)
             #Prints info on the created airplane
             print("--------------------------------------------")
-            Create.createMenu()
+            createMenuInput = Create.createMenu()
         elif createMenuInput == "3":
             print('''3. Create Flight Route
 --------------------------------------------
@@ -194,7 +192,7 @@ Please input the following information:''')
             print(createFlightRouteList)
             #Prints the created flight route
             print("--------------------------------------------")
-            Create.createMenu()
+            createMenuInput = Create.createMenu()
         elif createMenuInput == "4":
             Create.createVoyageMenu()
         elif createMenuInput == "5":
@@ -206,12 +204,12 @@ Please input the following information:''')
             print(flightList)
             #Prints the created flight
             print("--------------------------------------------")
-            Create.createMenu()
+            createMenuInput = Create.createMenu()
         elif createMenuInput == "b":
-            return None
+            return createMenuInput
         elif createMenuInput == "q":
-            print("Forriti lokað!")
+            return createMenuInput
         else:
-            print("WRONG INPUT, TRY AGAIN")
-            Create.createMenu()
+            print("Wrong input, try again")
+            createMenuInput = Create.createMenu()
         return createMenuInput
