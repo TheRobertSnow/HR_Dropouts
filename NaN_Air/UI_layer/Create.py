@@ -212,4 +212,8 @@ Please input the following information:''')
         else:
             print("Wrong input, try again")
             createMenuInput = Create.createMenu()
+<<<<<<< HEAD
         return createMenuInput
+=======
+        return createMenuInput
+>>>>>>> d03aad65c30abfcab49244f5b7ac7b4dad3acb78

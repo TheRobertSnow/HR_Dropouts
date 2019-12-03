@@ -7,10 +7,10 @@ class ProgramUI():
         print('''NaN Air flights system
 --------------------------------------------
 Input your ID to login''')
-    
+
         loginIDinput = input("Input: ")
         return loginIDinput
-    
+
     def mainMenu():
         print('''Main Menu
 --------------------------------------------
@@ -18,7 +18,7 @@ Input your ID to login''')
   2. Create Data
   3. Update Data
 --------------------------------------------''')
-    
+
         mainMenuInput = input("Input choice(q to Quit): ")
         mainMenuInput = mainMenuInput.lower()
         if mainMenuInput == "1":
@@ -44,7 +44,12 @@ Input your ID to login''')
         else:
             print("Wrong input, try again")
             ProgramUI.mainMenu()
+<<<<<<< HEAD
 
     
+=======
+        return mainMenuInput
+
+>>>>>>> d03aad65c30abfcab49244f5b7ac7b4dad3acb78
     loginWindow()
     mainMenu()

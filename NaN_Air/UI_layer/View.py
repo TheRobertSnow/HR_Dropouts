@@ -33,4 +33,8 @@ class View():
         else:
             print("Wrong input, try again")
             viewMenuInput = View.viewMenu()
+<<<<<<< HEAD
         return viewMenuInput
+=======
+        return viewMenuInput
+>>>>>>> d03aad65c30abfcab49244f5b7ac7b4dad3acb78
