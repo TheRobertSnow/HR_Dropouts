@@ -1,5 +1,6 @@
 import sys, os
-import IO_layer
+from IO_layer import *
+myInstance = FlightRouteIO.FlightRoute()
 
 # sys.path.append(os.path.abspath('IO_layer'))
 # print('\n'.join(sys.path))

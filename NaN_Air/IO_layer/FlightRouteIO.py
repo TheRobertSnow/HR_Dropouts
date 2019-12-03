@@ -1,6 +1,6 @@
 import csv
 import sys
-FILENAME = '../DataFiles/flightRoutes.csv'
+FILENAME = 'DataFiles/flightRoutes.csv'
 
 
 class FlightRoute():

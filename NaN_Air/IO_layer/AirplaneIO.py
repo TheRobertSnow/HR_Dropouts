@@ -1,7 +1,7 @@
 import csv
 import collections
 
-FILENAME = "../DataFiles/airplane.csv"
+FILENAME = "DataFiles/airplane.csv"
 
 
 def readFile():
@@ -82,12 +82,11 @@ class OnLoad:
 
 
 
-# main for testing
-createInstanceVariable = OnLoad()
-
-# add new row to csv
-toAdd = ["BA1234", "Boeing", "123", "Grounded", "120", "0"]
-
-createInstanceVariable.newAirplane(toAdd)
-print(createInstanceVariable)
-
+# # main for testing
+# createInstanceVariable = OnLoad()
+#
+# # add new row to csv
+# toAdd = ["BA1234", "Boeing", "123", "Grounded", "120", "0"]
+#
+# createInstanceVariable.newAirplane(toAdd)
+# print(createInstanceVariable)
