@@ -13,24 +13,24 @@ class View():
         viewMenuInput = viewMenuInput.lower()
         if viewMenuInput == "1":
             print("")
-            View.viewMenu()
+            viewMenuInput = View.viewMenu()
         elif viewMenuInput == "2":
             print("")
-            View.viewMenu()
+            viewMenuInput = View.viewMenu()
         elif viewMenuInput == "3":
             print("")
-            View.viewMenu()
+            viewMenuInput = View.viewMenu()
         elif viewMenuInput == "4":
             print("")
-            View.viewMenu()
+            viewMenuInput = View.viewMenu()
         elif viewMenuInput == "5":
             print("")
-            View.viewMenu()
+            viewMenuInput = View.viewMenu()
         elif viewMenuInput == "b":
-            return None
+            return viewMenuInput
         elif viewMenuInput == "q":
-            print("Forriti lokað!")
+            return viewMenuInput
         else:
-            print("WRONG INPUT, TRY AGAIN")
-            View.viewMenu()
+            print("Wrong input, try again")
+            viewMenuInput = View.viewMenu()
         return viewMenuInput

@@ -1,5 +1,5 @@
 class Update():
-    def updateMenu(self):
+    def updateMenu():
         print('''Update Data
 --------------------------------------------
   1. Update Worker
@@ -13,24 +13,24 @@ class Update():
         updateMenuInput = updateMenuInput.lower()
         if updateMenuInput == "1":
             print("")
-            Update.updateMenu()
+            updateMenuInput = Update.updateMenu()
         elif updateMenuInput == "2":
             print("")
-            Update.updateMenu()
+            updateMenuInput = Update.updateMenu()
         elif updateMenuInput == "3":
             print("")
-            Update.updateMenu()
+            updateMenuInput = Update.updateMenu()
         elif updateMenuInput == "4":
             print("")
-            Update.updateMenu()
+            updateMenuInput = Update.updateMenu()
         elif updateMenuInput == "5":
             print("")
-            Update.updateMenu()
+            updateMenuInput = Update.updateMenu()
         elif updateMenuInput == "b":
-            return None
+            return updateMenuInput
         elif updateMenuInput == "q":
-            print("Forriti lokað!")
+            return updateMenuInput
         else:
-            print("WRONG INPUT, TRY AGAIN")
-            Update.updateMenu()
+            print("Wrong input, try again")
+            updateMenuInput = Update.updateMenu()
         return updateMenuInput
