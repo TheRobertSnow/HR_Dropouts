@@ -1,16 +1,16 @@
-from create import Create
-from update import Update
-from view import View
+from Create import Create
+from Update import Update
+from View import View
 
 class ProgramUI():
     def loginWindow():
         print('''NaN Air flights system
 --------------------------------------------
 Input your ID to login''')
-    
+
         loginIDinput = input("Input: ")
         return loginIDinput
-    
+
     def mainMenu():
         print('''Main Menu
 --------------------------------------------
@@ -18,7 +18,7 @@ Input your ID to login''')
   2. Create Data
   3. Update Data
 --------------------------------------------''')
-    
+
         mainMenuInput = input("Input choice(q to Quit): ")
         mainMenuInput = mainMenuInput.lower()
         if mainMenuInput == "1":
@@ -37,6 +37,6 @@ Input your ID to login''')
             print(mainMenuInput)
             ProgramUI.mainMenu()
         return mainMenuInput
-    
+
     loginWindow()
     mainMenu()
