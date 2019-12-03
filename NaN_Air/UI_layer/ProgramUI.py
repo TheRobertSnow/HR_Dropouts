@@ -1,6 +1,9 @@
-from Create import Create
-from Update import Update
-from View import View
+#from Create import Create
+#from Update import Update
+#from View import View
+from UI_layer import Create
+from UI_layer import Update
+from UI_layer import View
 
 class ProgramUI():
     def loginWindow():
