@@ -1,6 +1,7 @@
 import csv
 import collections
 
+
 FILENAME = "../DataFiles/airplane.csv"
 FIELDNAMES = ["airplane id", "plane reg", "manufacturer", "model", "status", "number of seats",
               "odometer"]  # for update row
@@ -117,3 +118,4 @@ class OnLoad:
             return "Plane updated"
         else:
             return "plane register does not exist."
+
