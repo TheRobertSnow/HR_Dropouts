@@ -1,3 +1,5 @@
-Airplane ID,Plane reg,Manufacturer,Model,Status,Number of seats,Odometer
-0001,BA0345,Boeing,777,In-Air,340,3400524
-0002,BA5236,Boeing,723,Cancelled,500,41435351
+airplane id,plane reg,manufacturer,model,status,number of seats,odometer
+1,BA0345,Fokker,777,Broken,340,3400524
+2,BA5236,Boeing,723,Cancelled,500,41435351
+3,BA1234,Boeing,123,Grounded,120,0
+4,BA1237,Boeing,123,Grounded,120,0
