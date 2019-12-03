@@ -44,12 +44,7 @@ Input your ID to login''')
         else:
             print("Wrong input, try again")
             ProgramUI.mainMenu()
-<<<<<<< HEAD
-
-    
-=======
         return mainMenuInput
-
->>>>>>> d03aad65c30abfcab49244f5b7ac7b4dad3acb78
+    
     loginWindow()
     mainMenu()

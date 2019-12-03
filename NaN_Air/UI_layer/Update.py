@@ -1,6 +1,4 @@
 class Update():
-<<<<<<< HEAD
-=======
 
     def update_Worker(ssn):
         print("""1. Update Worker
@@ -291,7 +289,6 @@ Flight - {}: Select Flight Status
             print("WRONG INPUT, TRY AGAIN")
             Update.updateFlights()
 
->>>>>>> d03aad65c30abfcab49244f5b7ac7b4dad3acb78
     def updateMenu():
         print('''Update Data
 --------------------------------------------
@@ -305,21 +302,6 @@ Flight - {}: Select Flight Status
         updateMenuInput = updateMenuInput.lower()
         
         if updateMenuInput == "1":
-<<<<<<< HEAD
-            print("")
-            updateMenuInput = Update.updateMenu()
-        elif updateMenuInput == "2":
-            print("")
-            updateMenuInput = Update.updateMenu()
-        elif updateMenuInput == "3":
-            print("")
-            updateMenuInput = Update.updateMenu()
-        elif updateMenuInput == "4":
-            print("")
-            updateMenuInput = Update.updateMenu()
-        elif updateMenuInput == "5":
-            print("")
-=======
             ssnInput = int(input("Input the the Social Security Number of the worker you wish to change: "))
             Update.update_Worker(ssnInput) #Kallar á update worker function
             updateMenuInput = Update.updateMenu()
@@ -335,7 +317,6 @@ Flight - {}: Select Flight Status
             updateMenuInput = Update.updateMenu()
         elif updateMenuInput == "5":
             Update.updateFlights()
->>>>>>> d03aad65c30abfcab49244f5b7ac7b4dad3acb78
             updateMenuInput = Update.updateMenu()
         elif updateMenuInput == "b":
             return updateMenuInput
@@ -344,10 +325,6 @@ Flight - {}: Select Flight Status
         else:
             print("Wrong input, try again")
             updateMenuInput = Update.updateMenu()
-<<<<<<< HEAD
-        return updateMenuInput
-=======
         return updateMenuInput
 
 Update.updateMenu()
->>>>>>> d03aad65c30abfcab49244f5b7ac7b4dad3acb78
