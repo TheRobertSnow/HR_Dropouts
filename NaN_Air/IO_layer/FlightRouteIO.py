@@ -3,10 +3,11 @@ import sys
 FILENAME = '../DataFiles/flightRoutes.csv'
 
 
-class FlightRouteIO():
+class FlightRoute():
 
     def __init__(self):
-        self.get_flight_route_from_file()
+        # self.get_flight_route_from_file()
+        pass
 
     def get_flight_route_from_file(self):
         """Get flight routes from file in a list of dictionaries"""

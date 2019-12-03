@@ -1,4 +1,9 @@
-import os
-IO_PATH = "C:\\Users\\Dinkus\\Documents\\HR_Dropouts\\NaN_Air\\IO_layer"
-mypath = os.path.abspath(__file__)
-print(iopath)
+import sys, os
+import IO_layer
+
+# sys.path.append(os.path.abspath('IO_layer'))
+# print('\n'.join(sys.path))
+
+# import FlightRouteIO as f
+#
+# myflightroute = f.FlightRoute()
