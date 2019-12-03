@@ -1,19 +1,10 @@
 import csv
 import collections
 
-<<<<<<< HEAD
-FILENAME = "DataFiles/airplane.csv"
-<<<<<<< HEAD
-=======
-FIELDNAMES = ["airplane id", "plane reg", "manufacturer", "model", "status", "number of seats",
-              "odometer"]  # for update row
->>>>>>> 34f5655694436993af5f8c3a8d490af70fd097c0
-=======
 
-FILENAME = "../DataFiles/airplane.csv"
+FILENAME = "DataFiles/airplane.csv"
 FIELDNAMES = ["airplane id", "plane reg", "manufacturer", "model", "status", "number of seats",
               "odometer"]  # for update row
->>>>>>> d03aad65c30abfcab49244f5b7ac7b4dad3acb78
 
 
 # if more fieldnames are added, they also have to be added to the newAirplane method along with the FIELDNAMES constant.
@@ -99,25 +90,6 @@ class OnLoad:
                         highestID = int(value)
         return highestID + 1
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-    def UpdateAirplaneInstance(self):
-        """Takes in a ID of a plane, and all parameters"""
-        pass
-
-
-
-# # main for testing
-# createInstanceVariable = OnLoad()
-#
-# # add new row to csv
-# toAdd = ["BA1234", "Boeing", "123", "Grounded", "120", "0"]
-#
-# createInstanceVariable.newAirplane(toAdd)
-# print(createInstanceVariable)
-=======
-=======
->>>>>>> d03aad65c30abfcab49244f5b7ac7b4dad3acb78
     def checkIfRegExists(self, objectList, register):
         """takes in the object list and compares it to a register, returns True if the register exists"""
         for dictionary in objectList:
@@ -146,8 +118,3 @@ class OnLoad:
             return "Plane updated"
         else:
             return "plane register does not exist."
-<<<<<<< HEAD
->>>>>>> 34f5655694436993af5f8c3a8d490af70fd097c0
-=======
-
->>>>>>> d03aad65c30abfcab49244f5b7ac7b4dad3acb78
