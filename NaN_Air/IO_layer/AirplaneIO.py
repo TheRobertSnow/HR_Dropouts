@@ -1,7 +1,7 @@
 import csv
 import collections
 
-FILENAME = "../DataFiles/airplane.csv"
+FILENAME = "DataFiles/airplane.csv"
 FIELDNAMES = ["airplane id", "plane reg", "manufacturer", "model", "status", "number of seats",
               "odometer"]  # for update row
 
@@ -114,14 +114,3 @@ class OnLoad:
             return "Plane updated"
         else:
             return "plane register does not exist."
-
-
-# main for testing
-createInstanceVariable = OnLoad()
-# add new row to csv
-toAdd = ["BA1237", "Boeing", "123", "Grounded", "120", "0"]
-dummyData = ["BA0345", "status", "Broken"]
-print(createInstanceVariable.newAirplane(toAdd))
-print(createInstanceVariable.updateAirplaneInstance(dummyData))
-dummyData = ["BA9999", "manufacturer", "Fokker"]
-print(createInstanceVariable.updateAirplaneInstance(dummyData))
