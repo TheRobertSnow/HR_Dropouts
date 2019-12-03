@@ -63,7 +63,7 @@ Please input the following information:''')
             #Prints out Voyage info
             print(voyageList)
             print("--------------------------------------------")
-            Create.createMenu()
+            return createVoyageMenuInput
         elif createVoyageMenuInput == "2":
             print('''4.2. Create Voyage by creating 2 flights
 --------------------------------------------
@@ -98,15 +98,15 @@ Please input the following information:''')
             #Prints out Voyage info
             print(voyageList2)
             print("--------------------------------------------")
-            Create.createMenu()
+            return createVoyageMenuInput
         elif createVoyageMenuInput == "b":
-            Create.createMenu()
-            #Create.createMenu()
+            return createVoyageMenuInput
         elif createVoyageMenuInput == "q":
             return createVoyageMenuInput
         else:
             print("Wrong input, try again")
-            Create.createVoyageMenu()
+            createVoyageMenuInput = Create.createVoyageMenu()
+        return createVoyageMenuInput
             
     def createMenu():
         print('''Create Data
@@ -194,7 +194,13 @@ Please input the following information:''')
             print("--------------------------------------------")
             createMenuInput = Create.createMenu()
         elif createMenuInput == "4":
-            Create.createVoyageMenu()
+            createVoyageMenuOutput = Create.createVoyageMenu()
+            if createVoyageMenuOutput == "b":
+                createMenuInput = Create.createMenu()
+            elif createVoyageMenuOutput == "q":
+                return createVoyageMenuOutput
+            else:
+                createMenuInput = Create.createMenu()
         elif createMenuInput == "5":
             print('''5. Create Flight
 --------------------------------------------
