@@ -1,6 +1,6 @@
-from create import Create
-from update import Update
-from view import View
+from Create import Create
+from Update import Update
+from View import View
 
 class ProgramUI():
     def loginWindow():
