@@ -64,6 +64,7 @@ class View():
         elif viewWorkerInput == "4":
             viewAllStaff()
 ############################################
+# Pilots
     def viewPilots():
         print('''1 View Specific Pilot
 2 View All Pilots''') 
@@ -80,6 +81,31 @@ class View():
     def viewAllPilots():
         AllPilots = getAllPilots()
         print(AllPilots)
+#attendants
+    def viewAttendants():
+        print('''-----------------------------------------
+        View Attendants
+-----------------------------------------
+    1 View Specific Attendant
+    2 View All Attendants''')
+        ViewAttendantsInput = input("Input choice(q to Quit, b for Back): ")
+    def viewSpecificAttendant():
+        AttendantSSN = input("  - Please input SSN")
+        AttendantInfo = getAttendantInfo(AttendantSSN)
+        print(AttendantInfo)
+    def viewAllAttendants
+#Bosses
+
+    def viewBosses():
+        print('''-----------------------------------------
+        View Bosses
+----------------------------------------- ''')
+
+        BossInfo = getAllBosses()
+        print(BossInfo)
+
+
+#AllWorkers    
 ############################################
         
 
@@ -111,14 +137,26 @@ class View():
 
 ############################################
     def viewFlightRoutes():
+        print('''-----------------------------------------
+        View Flight Routes
+-----------------------------------------
+1 Specific Route
+2 All Flight Routes
+''')
+        viewFlightRoutesInput = input("Input choice(q to Quit, b for Back): ")
+        if viewFlightRoutesInput == "1":
+            viewSpecificRoute()
+        elif viewFlightRoutesInput == "2":
+            viewAllRoutes()
+
         
 
 ############################################
-    def viewVoyages():
+  #  def viewVoyages():
 
 
 ############################################
-    def viewFlight():
+   # def viewFlight():
         
     
 
@@ -333,3 +371,4 @@ Arrival Time
 ''')
 
 """
+
