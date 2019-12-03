@@ -1,12 +1,19 @@
 import csv
 import collections
 
+<<<<<<< HEAD
 FILENAME = "DataFiles/airplane.csv"
 <<<<<<< HEAD
 =======
 FIELDNAMES = ["airplane id", "plane reg", "manufacturer", "model", "status", "number of seats",
               "odometer"]  # for update row
 >>>>>>> 34f5655694436993af5f8c3a8d490af70fd097c0
+=======
+
+FILENAME = "../DataFiles/airplane.csv"
+FIELDNAMES = ["airplane id", "plane reg", "manufacturer", "model", "status", "number of seats",
+              "odometer"]  # for update row
+>>>>>>> d03aad65c30abfcab49244f5b7ac7b4dad3acb78
 
 
 # if more fieldnames are added, they also have to be added to the newAirplane method along with the FIELDNAMES constant.
@@ -21,7 +28,6 @@ def readFile():
 
 def writeToFile(list):
     """takes in a list and creates a new row in the airplane.csv file"""
-    print(list)
     with open(FILENAME, "a", encoding="utf8", newline="") as csvFile:
         csvWriter = csv.writer(csvFile)
         csvWriter.writerow(list)
@@ -47,6 +53,10 @@ class OnLoad:
         self.__objectList = []
         for object in fileData:
             self.__objectList.append(object)
+
+    def returnObjectList(self):
+        return self.__objectList
+
 
     def __str__(self):
         """Prints all lines in a formatted way."""
@@ -90,6 +100,7 @@ class OnLoad:
         return highestID + 1
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     def UpdateAirplaneInstance(self):
         """Takes in a ID of a plane, and all parameters"""
         pass
@@ -105,6 +116,8 @@ class OnLoad:
 # createInstanceVariable.newAirplane(toAdd)
 # print(createInstanceVariable)
 =======
+=======
+>>>>>>> d03aad65c30abfcab49244f5b7ac7b4dad3acb78
     def checkIfRegExists(self, objectList, register):
         """takes in the object list and compares it to a register, returns True if the register exists"""
         for dictionary in objectList:
@@ -133,4 +146,8 @@ class OnLoad:
             return "Plane updated"
         else:
             return "plane register does not exist."
+<<<<<<< HEAD
 >>>>>>> 34f5655694436993af5f8c3a8d490af70fd097c0
+=======
+
+>>>>>>> d03aad65c30abfcab49244f5b7ac7b4dad3acb78
