@@ -1,6 +1,3 @@
-#from Create import Create
-#from Update import Update
-#from View import View
 from UI_layer import Create
 from UI_layer import Update
 from UI_layer import View
@@ -25,13 +22,13 @@ Input your ID to login''')
         mainMenuInput = input("Input choice(q to Quit): ")
         mainMenuInput = mainMenuInput.lower()
         if mainMenuInput == "1":
-            viewMenuOutput = View.viewMenu()
+            viewMenuOutput = View.View.viewMenu()
             if viewMenuOutput == "b":
                 ProgramUI.mainMenu()
             elif viewMenuOutput == "q":
                 return viewMenuOutput
         elif mainMenuInput == "2":
-            createMenuOutput = Create.createMenu()
+            createMenuOutput = Create.Create.createMenu()
             if createMenuOutput == "b":
                 ProgramUI.mainMenu()
             elif createMenuOutput == "q":

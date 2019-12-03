@@ -327,4 +327,4 @@ Flight - {}: Select Flight Status
             updateMenuInput = Update.updateMenu()
         return updateMenuInput
 
-Update.updateMenu()
+
