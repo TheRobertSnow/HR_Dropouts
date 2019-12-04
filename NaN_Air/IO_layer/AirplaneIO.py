@@ -2,7 +2,7 @@ import csv
 import collections
 
 
-FILENAME = "../DataFiles/airplane.csv"
+FILENAME = "./DataFiles/airplane.csv"
 FIELDNAMES = ["airplane id", "plane reg", "manufacturer", "model", "status", "number of seats",
               "odometer"]  # for update row
 
@@ -40,12 +40,12 @@ class OnLoad:
     """Load this class on load to create all rows as a instance variable inside 1 list"""
 
     def __init__(self):
-        fileData = readFile()
         self.__objectList = []
-        for object in fileData:
-            self.__objectList.append(object)
 
     def returnObjectList(self):
+        fileData = readFile()
+        for object in fileData:
+            self.__objectList.append(object)
         return self.__objectList
 
 
@@ -72,9 +72,9 @@ class OnLoad:
         orderedDict["plane reg"] = list[0]
         orderedDict["manufacturer"] = list[1]
         orderedDict["model"] = list[2]
-        orderedDict["status"] = list[3]
-        orderedDict["number of seats"] = list[4]
-        orderedDict["odometer"] = "0"
+        orderedDict["status"] = "Ready"
+        orderedDict["number of seats"] = list[3]
+        orderedDict["odometer"] = list[4]
         self.__objectList.append(orderedDict)
         list.insert(0, newID)
         writeToFile(list)
@@ -83,6 +83,7 @@ class OnLoad:
     def getHighestID(self):
         """Finds the current highest ID in the airplane.csv and returns a new higher ID"""
         highestID = 0
+        print(self.__objectList)
         for dictionary in self.__objectList:
             for key, value in dictionary.items():
                 if key == "airplane id":

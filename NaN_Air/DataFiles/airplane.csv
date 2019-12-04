@@ -6,3 +6,10 @@ airplane id,plane reg,manufacturer,model,status,number of seats,odometer
 5,BA1234,Boeing,123,Grounded,120,0
 6,BA1234,Boeing,123,Grounded,120,0
 7,BA1234,Boeing,123,Grounded,120,0
+8,BA0888,fokker,nice,300,20
+9,Test,idk,mby,500,90
+10,BA0934,o,i,300,2500
+11,BA1233,o,i,350,30
+12,BA0954,1,t,30,50
+13,BA1236,i,i,30,30
+1,1,1,1,1,1

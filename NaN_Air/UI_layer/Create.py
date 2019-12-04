@@ -1,5 +1,8 @@
-class Create():
-    def createFlight(airplane = None, origin = None, destination = None):
+import UIAPI
+class Create:
+    def __init__(self):
+        self.object = UIAPI.UIAPI()
+    def createFlight(self, airplane = None, origin = None, destination = None):
         flightList = []
         if airplane == None:
             airplane = input("  - Airplane registration number: ")
@@ -16,7 +19,7 @@ class Create():
         flightList.append(departureDateTime)
         return flightList
     
-    def addCrew():
+    def addCrew(self):
         print("\nAdd Crew")
         crewList = []
         mainPilot = int(input("  - Main pilot social security number: "))
@@ -36,7 +39,7 @@ class Create():
         crewList.append(flightAttendants)
         return crewList
     
-    def createVoyageMenu():
+    def createVoyageMenu(self):
         print('''4. Create Voyage
 --------------------------------------------
 1. Create Voyage using existing flights
@@ -54,7 +57,7 @@ Please input the following information:''')
             flightBackId = int(input("  - Flight to iceland id: "))
             voyageList.append(flightBackId)
             #gets the flights and validates  that they exist
-            crewList = Create.addCrew()
+            crewList = Create.addCrew(self)
             voyageList.append(crewList)
             print("Crew successfully Added!")
             #prints out crew info
@@ -88,7 +91,7 @@ Please input the following information:''')
             print(flightList)
             #print(flightBackList)
             
-            crewList = Create.addCrew()
+            crewList = Create.addCrew(self)
             print("Crew successfully Added!")
             #prints out crew info
             print(crewList)
@@ -105,10 +108,10 @@ Please input the following information:''')
             return createVoyageMenuInput
         else:
             print("Wrong input, try again")
-            createVoyageMenuInput = Create.createVoyageMenu()
+            createVoyageMenuInput = Create.createVoyageMenu(self)
         return createVoyageMenuInput
             
-    def createMenu():
+    def createMenu(self):
         print('''Create Data
 --------------------------------------------
   1. Create Worker
@@ -150,7 +153,7 @@ Please input the following information:''')
             print(createWorkerList)
             #Prints out info on the created worker
             print("--------------------------------------------")
-            createMenuInput = Create.createMenu()
+            createMenuInput = Create.createMenu(self)
         elif createMenuInput == "2":
             print('''2. Create Airplane
 --------------------------------------------
@@ -166,11 +169,19 @@ Please input the following information:''')
             createAirplaneList.append(numberOfSeats)
             odometer = int(input("  - Odometer(number of km the airplane has travelled): "))
             createAirplaneList.append(odometer)
-            print("Airplane successfully created!")
-            print(createAirplaneList)
+            print("Request sent in...\n")
+            #
+            #
+            #
+            result = UIAPI.UIAPI.newPlaneRequest(self.object, createAirplaneList)
+            print(result)
+            print(self.object)
+            #
+            #
+            #
             #Prints info on the created airplane
             print("--------------------------------------------")
-            createMenuInput = Create.createMenu()
+            createMenuInput = Create.createMenu(self)
         elif createMenuInput == "3":
             print('''3. Create Flight Route
 --------------------------------------------
@@ -192,30 +203,30 @@ Please input the following information:''')
             print(createFlightRouteList)
             #Prints the created flight route
             print("--------------------------------------------")
-            createMenuInput = Create.createMenu()
+            createMenuInput = Create.createMenu(self)
         elif createMenuInput == "4":
-            createVoyageMenuOutput = Create.createVoyageMenu()
+            createVoyageMenuOutput = Create.createVoyageMenu(self)
             if createVoyageMenuOutput == "b":
-                createMenuInput = Create.createMenu()
+                createMenuInput = Create.createMenu(self)
             elif createVoyageMenuOutput == "q":
                 return createVoyageMenuOutput
             else:
-                createMenuInput = Create.createMenu()
+                createMenuInput = Create.createMenu(self)
         elif createMenuInput == "5":
             print('''5. Create Flight
 --------------------------------------------
 Please input the following information:''')
-            flightList = Create.createFlight()
+            flightList = Create.createFlight(self)
             print("Flight successfully created!")
             print(flightList)
             #Prints the created flight
             print("--------------------------------------------")
-            createMenuInput = Create.createMenu()
+            createMenuInput = Create.createMenu(self)
         elif createMenuInput == "b":
             return createMenuInput
         elif createMenuInput == "q":
             return createMenuInput
         else:
             print("Wrong input, try again")
-            createMenuInput = Create.createMenu()
+            createMenuInput = Create.createMenu(self)
         return createMenuInput
