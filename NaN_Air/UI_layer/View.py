@@ -2,7 +2,7 @@ class View():
     def viewMenu():
         print('''View Data
 --------------------------------------------
-  1. View worker
+  1. View Worker
   2. View Airplane
   3. View Flight routes
   4. View Voyages
@@ -41,7 +41,7 @@ class View():
         return viewMenuInput
     
     def viewWorker():
-        print('''View Worker
+        print('''1. View Worker
 --------------------------------------------
   1. View Pilots
   2. View Attendants
@@ -67,15 +67,11 @@ class View():
             else:
                 viewWorkerInput = View.viewWorker()
         elif viewWorkerInput == "3":
-            print('''3. View Bosses
---------------------------------------------''')
             #BossInfo = getAllBosses()
             #print(BossInfo)
             print("")
             viewWorkerInput = View.viewWorker()
         elif viewWorkerInput == "4":
-            print('''4. View All Staff
---------------------------------------------''')
             #print(getAllStaff())
             print("")
             viewWorkerInput = View.viewWorker()
@@ -90,10 +86,10 @@ class View():
     
 # Pilots
     def viewPilots():
-        print('''1. View Pilots
+        print('''1.1. View Pilots
 --------------------------------------------
-  1. View Specific Pilot
-  2. View All Pilots
+  1. View specific pilot
+  2. View all pilots
 --------------------------------------------''') 
         viewPilotsInput = input("Input choice(q to Quit, b for Back): ")
         if viewPilotsInput == "1":
@@ -120,10 +116,10 @@ class View():
 
 #Attendants
     def viewAttendants():
-        print('''2. View Attendants
+        print('''1.2. View Attendants
 --------------------------------------------
-  1. View Specific Attendant
-  2. View All Attendants
+  1. View specific attendant
+  2. View all attendants
 --------------------------------------------''')
         viewAttendantsInput = input("Input choice(q to Quit, b for Back): ")
         if viewAttendantsInput == "1":
@@ -148,7 +144,7 @@ class View():
         print('''2. View Airplane
 --------------------------------------------
   1. View specific airplane
-  2. View All Airplanes
+  2. View all airplanes
 --------------------------------------------''')
 
         viewAirplaneInput = input("Input choice(q to Quit, b for Back): ")
@@ -175,8 +171,8 @@ class View():
     def viewFlightRoutes():
         print('''3. View Flight Routes
 --------------------------------------------
-  1. Specific Route
-  2. All Flight Routes
+  1. Specific route
+  2. All flight routes
 --------------------------------------------''')
         
         viewFlightRoutesInput = input("Input choice(q to Quit, b for Back): ")
@@ -202,8 +198,8 @@ class View():
     def viewVoyages():
         print('''4. View Voyages
 --------------------------------------------
-  1. View a Specific Voyage
-  2. View all Voyages
+  1. View a specific voyage
+  2. View all voyages
 --------------------------------------------''')
         
         viewVoyagesInput = input("Input choice(q to Quit, b for Back): ")
@@ -229,10 +225,10 @@ class View():
     def viewFlight():
         print('''5. View Flights
 --------------------------------------------
-  1. View specific Flight
-  2. View All FLights
-  3. View Active Flights
-  4. View Cancelled Flights
+  1. View specific flight
+  2. View all fLights
+  3. View active flights
+  4. View cancelled flights
 --------------------------------------------''')
 
         viewFlightInput = input("Input choice(q to Quit, b for Back): ")
