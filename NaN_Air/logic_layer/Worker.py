@@ -13,12 +13,8 @@ class Worker():
         self.__myDictionary["Plane Licence"] = dictionary["plane licence"]
 
 
-
     def __str__(self): 
-        
         returnString = []
         for key, val in self.__myDictionary.items():
             returnString.append((key + ": " + val))
         return "\n".join(returnString)
-worker = Worker(workerDict)
-print(worker)
