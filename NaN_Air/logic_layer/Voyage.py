@@ -15,13 +15,8 @@ class CreateVoyage:
     def __str__(self):
         returnString = []
         for key, val in self.__myDictionary.items():
-            print(key, val)
+            #print(key, val)
             returnString.append((key + ": " + val))
         return "\n".join(returnString)
 
-"""dict1 = {'voyage id': '1', 'Flight out ID': '3', 'Flight back ID': '4', 'Main Pilot': '101013641', 'Assisting Pilot': '101233641', 'Main Flight Attendant': '101233444', 
-'Flight Attendants': '["1212886219", "1111435259"]', 'Flight route ID': '5', 'departure from is': '14:00', 'departure to is': '18:00'}"""
-
-#voyage = CreateVoyage(dict1)
-#print(voyage)
 
