@@ -14,6 +14,5 @@ class CreateFlightRoute:
     def __str__(self):
         returnString = []
         for key, val in self.__myDictionary.items():
-            #print(key, val)
             returnString.append((key + ": " + val))
         return "\n".join(returnString)
