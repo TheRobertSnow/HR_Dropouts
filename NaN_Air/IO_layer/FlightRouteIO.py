@@ -89,7 +89,6 @@ class FlightRoute():
         for index, dictionary in enumerate(self.__dictList):
             for key, value in dictionary.items():
                 if key == 'flight route id':
-                    print("We here bro")
                     if value == aList[0]:
                         print('key found')
                         self.__dictList[index][aList[1]] = aList[2]
