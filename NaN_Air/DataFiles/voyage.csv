@@ -1,2 +1,3 @@
-Voyage ID,Flight out ID,Flight back ID,Pilots,Crew,Flight route ID,Departure from IS,Departure to IS
-1,0,1,0101013641;3001883212,1212886089;1111955259,2,16:30,22:30
+Voyage ID,Flight out ID,Flight back ID,Main Pilot,Assisting Pilot,Main Flight Attendant,Flight Attendants,Flight route ID,Departure from IS,Departure to IS
+
+
