@@ -26,20 +26,14 @@ Input your ID to login''')
             viewMenuOutput = View.View.viewMenu()
             if viewMenuOutput == "b":
                 ProgramUI.mainMenu()
-            #elif viewMenuOutput == "q":
-                #return viewMenuOutput
         elif mainMenuInput == "2":
             createMenuOutput = Create.Create.createMenu()
             if createMenuOutput == "b":
                 ProgramUI.mainMenu()
-            #elif createMenuOutput == "q":
-                #return createMenuOutput
         elif mainMenuInput == "3":
             updateMenuOutput = Update.Update.updateMenu()
             if updateMenuOutput == "b":
                 ProgramUI.mainMenu()
-            #elif updateMenuOutput == "q":
-                #return updateMenuOutput
         elif mainMenuInput == "q":
             return mainMenuInput
         else:

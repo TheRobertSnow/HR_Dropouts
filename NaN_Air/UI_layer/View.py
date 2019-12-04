@@ -12,15 +12,25 @@ class View():
         viewMenuInput = input("Input choice(q to Quit, b for Back): ")
         viewMenuInput = viewMenuInput.lower()
         if viewMenuInput == "1":
-            viewMenuInput = View.viewWorker()
+            viewWorkerOutput = View.viewWorker()
+            if viewWorkerOutput == "b":
+                viewMenuInput = View.viewMenu()
         elif viewMenuInput == "2":
-            viewMenuInput = View.viewAirplane()
+            viewAirplaneOutput = View.viewAirplane()
+            if viewAirplaneOutput == "b":
+                viewMenuInput = View.viewMenu()
         elif viewMenuInput == "3":
-            viewMenuInput = View.viewFlightRoutes()
+            viewFlightRoutesOutput = View.viewFlightRoutes()
+            if viewFlightRoutesOutput == "b":
+                viewMenuInput = View.viewMenu()
         elif viewMenuInput == "4":
-            viewMenuInput = View.viewVoyages()
+            viewVoyagesOutput = View.viewVoyages()
+            if viewVoyagesOutput == "b":
+                viewMenuInput = View.viewMenu()
         elif viewMenuInput == "5":
-            viewMenuInput = View.viewFlight()
+            viewFlightOutput = View.viewFlight()
+            if viewFlightOutput == "b":
+                viewMenuInput = View.viewMenu()
         elif viewMenuInput == "b":
             return viewMenuInput
         elif viewMenuInput == "q":
@@ -41,15 +51,36 @@ class View():
 
         viewWorkerInput = input("Input choice(q to Quit, b for Back): ")
         if viewWorkerInput == "1":
-            viewWorkerInput = View.viewPilots()
+            viewPilotsOutput = View.viewPilots()
+            if viewPilotsOutput == "b":
+                viewWorkerInput = View.viewWorker()
+            elif viewPilotsOutput == "q":
+                return viewWorkerInput
+            else:
+                viewWorkerInput = View.viewWorker()
         elif viewWorkerInput == "2":
-            viewWorkerInput = View.viewAttendants()
+            viewAttendantsOutput = View.viewAttendants()
+            if viewAttendantsOutput == "b":
+                viewWorkerInput = View.viewWorker()
+            elif viewAttendantsOutput == "q":
+                return viewWorkerInput
+            else:
+                viewWorkerInput = View.viewWorker()
         elif viewWorkerInput == "3":
-            viewWorkerInput = View.viewBosses() 
+            print('''3. View Bosses
+--------------------------------------------''')
+            #BossInfo = getAllBosses()
+            #print(BossInfo)
+            print("")
+            viewWorkerInput = View.viewWorker()
         elif viewWorkerInput == "4":
-            viewWorkerInput = View.viewAllStaff()
+            print('''4. View All Staff
+--------------------------------------------''')
+            #print(getAllStaff())
+            print("")
+            viewWorkerInput = View.viewWorker()
         elif viewWorkerInput == "b":
-            viewWorkerInput = View.viewMenu()
+            return viewWorkerInput
         elif viewWorkerInput == "q":
             return viewWorkerInput
         else:
@@ -70,14 +101,16 @@ class View():
             print(pilotSSN)
             #PilotInfo = getPilotInfo(PilotSSN)
             #print(pilotInfo)
-            return viewPilotsInput  
+            #View.viewWorker()
+            return viewPilotsInput
         elif viewPilotsInput == "2":
             print("")
             #AllPilots = getAllPilots()
             #print(AllPilots)
-            return viewPilotsInput  
+            #View.viewWorker()
+            return viewPilotsInput
         elif viewPilotsInput == "b":
-            viewPilotsInput = View.viewWorker()
+            return viewPilotsInput
         elif viewPilotsInput == "q":
             return viewPilotsInput
         else:
@@ -103,32 +136,13 @@ class View():
             print("")
             return viewAttendantsInput
         elif viewAttendantsInput == "b":
-            viewAttendantsInput = View.viewWorker()
+            return viewAttendantsInput
         elif viewAttendantsInput == "q":
             return viewAttendantsInput
         else:
             print("Wrong input, try again")
             viewAttendantsInput = View.viewAttendants()
         return viewAttendantsInput
-
-#Bosses
-    def viewBosses():
-        print('''3. View Bosses
---------------------------------------------''')
-        #BossInfo = getAllBosses()
-        #print(BossInfo)
-        print("")
-        return ""
-
-#All staff
-    def viewAllStaff():
-        print('''4. View All Staff
---------------------------------------------''')
-        #print(getAllStaff())
-        print("")
-        return ""
-
-
         
     def viewAirplane():     
         print('''2. View Airplane
@@ -143,14 +157,14 @@ class View():
             #AirplaneInfo = getAirplaneInfo(AirplaneID)
             #print(AirplaneInfo)
             print(AirplaneID)
-            return viewAirplaneInput
+            viewAirplaneInput = View.viewAirplane()
         elif viewAirplaneInput == "2":
             #AllAirplanesInfo = getAllAirplanes()
             #print(AllAirplanesInfo)
             print("")
-            return viewAirplaneInput
+            viewAirplaneInput = View.viewAirplane()
         elif viewAirplaneInput == "b":
-            viewAirplaneInput = View.viewMenu()
+            return viewAirplaneInput
         elif viewAirplaneInput == "q":
             return viewAirplaneInput
         else:
@@ -171,13 +185,13 @@ class View():
             print(FlightRouteID)
             #FlightRoute = getFlightRoute(FlightRouteID)
             #print(FlightRoute)
-            return viewFlightRoutesInput
+            viewFlightRoutesInput = View.viewFlightRoutes()
         elif viewFlightRoutesInput == "2":
             #print(getAllFlightRoutes)
             print("")   
-            return viewFlightRoutesInput
+            viewFlightRoutesInput = View.viewFlightRoutes()
         elif viewFlightRoutesInput == "b":
-            viewFlightRoutesInput = View.viewMenu()
+            return viewFlightRoutesInput
         elif viewFlightRoutesInput == "q":
             return viewFlightRoutesInput
         else:
@@ -198,13 +212,13 @@ class View():
             #VoyageInfo = getVoyageInfo(SSN)
             #print(VoyageInfo)
             print(SSN)
-            return viewVoyagesInput
+            viewVoyagesInput = View.viewVoyages()
         elif viewVoyagesInput == "2":
             print("")
             #print(getAllVoyages())
-            return viewVoyagesInput
+            viewVoyagesInput = View.viewVoyages()
         elif viewVoyagesInput == "b":
-            viewVoyagesInput = View.viewMenu()
+            return viewVoyagesInput
         elif viewVoyagesInput == "q":
             return viewVoyagesInput
         else:
@@ -227,21 +241,21 @@ class View():
             print(SSN)
             #FlightInfo = getSpecificFlight(SSN)
             #print(FlightInfo)
-            return viewFlightInput
+            viewFlightInput = View.viewFlight()
         if viewFlightInput == "2":
             #print(getAllFlights())
             print("")
-            return viewFlightInput
+            viewFlightInput = View.viewFlight()
         if viewFlightInput == "3":
             #print(getActiveFlights())
             print("")
-            return viewFlightInput
+            viewFlightInput = View.viewFlight()
         if viewFlightInput == "4":
             #print(getCancelledFlights)
             print("")
-            return viewFlightInput
+            viewFlightInput = View.viewFlight()
         elif viewFlightInput == "b":
-            viewFlightInput = View.viewMenu()
+            return viewFlightInput
         elif viewFlightInput == "q":
             return viewFlightInput
         else:
