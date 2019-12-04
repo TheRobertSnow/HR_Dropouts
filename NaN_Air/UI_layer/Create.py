@@ -18,7 +18,6 @@ class Create():
     
     def addCrew():
         print("\nAdd Crew")
-        crewList = []
         mainPilot = int(input("  - Main pilot social security number: "))
         assistingPilot = int(input("  - Assisting pilot social security number: "))
         mainFlightAttendant = int(input("  - Main flight attendant social security number: "))
@@ -30,11 +29,7 @@ class Create():
                 break
             else:
                 flightAttendants.append(flightAttendant)
-        crewList.append(mainPilot)
-        crewList.append(assistingPilot)
-        crewList.append(mainFlightAttendant)
-        crewList.append(flightAttendants)
-        return crewList
+        return mainPilot, assistingPilot, mainFlightAttendant, flightAttendants
     
     def createVoyageMenu():
         print('''4. Create Voyage
@@ -54,11 +49,14 @@ Please input the following information:''')
             flightBackId = int(input("  - Flight to iceland id: "))
             voyageList.append(flightBackId)
             #gets the flights and validates  that they exist
-            crewList = Create.addCrew()
-            voyageList.append(crewList)
+            mainPilot, assistingPilot, mainFlightAttendant, flightAttendants = Create.addCrew()
             print("Crew successfully Added!")
             #prints out crew info
-            print(crewList)
+            print(mainPilot, assistingPilot, mainFlightAttendant, flightAttendants)
+            voyageList.append(mainPilot)
+            voyageList.append(assistingPilot)
+            voyageList.append(mainFlightAttendant)
+            voyageList.append(flightAttendants)
             print("Voyage successfully created!")
             #Prints out Voyage info
             print(voyageList)
@@ -87,13 +85,15 @@ Please input the following information:''')
             print("Flight 2 successfully created!")
             print(flightList)
             #print(flightBackList)
-            
-            crewList = Create.addCrew()
+
+            mainPilot, assistingPilot, mainFlightAttendant, flightAttendants = Create.addCrew()
             print("Crew successfully Added!")
             #prints out crew info
-            print(crewList)
-            
-            voyageList2.append(crewList)
+            print(mainPilot, assistingPilot, mainFlightAttendant, flightAttendants)
+            voyageList2.append(mainPilot)
+            voyageList2.append(assistingPilot)
+            voyageList2.append(mainFlightAttendant)
+            voyageList2.append(flightAttendants)
             print("Voyage successfully created!")
             #Prints out Voyage info
             print(voyageList2)
