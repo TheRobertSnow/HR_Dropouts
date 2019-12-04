@@ -198,28 +198,28 @@ class View():
 
         viewFlightInput = input("Input choice(q to Quit, b for Back): ")
 
-        if viewFlightINput == "1":
+        if viewFlightInput == "1":
             View.viewSpecificFlight()
-        if viewFlightINput == "2":
+        if viewFlightInput == "2":
             View.viewAllFlights()
-        if viewFlightINput == "3":
+        if viewFlightInput == "3":
             View.viewActiveFlights()
-        if viewFlightINput == "4":
+        if viewFlightInput == "4":
             View.viewCancelledFlights()
 
-        def viewSpecificFlight():
-            SSN = input('  - Please input Voyage ID: ')
-            FlightInfo = getSpecificFlight(SSN)
-            print(FlightInfo)
+    def viewSpecificFlight():
+        SSN = input('  - Please input Voyage ID: ')
+        FlightInfo = getSpecificFlight(SSN)
+        print(FlightInfo)
 
-        def viewAllFlights():
-            print(getAllFlights())
+    def viewAllFlights():
+        print(getAllFlights())
 
-        def viewActiveFLights():
-            print(getActiveFlights())
+    def viewActiveFlights():
+        print(getActiveFlights())
 
-        def viewCancelledFlights():
-            print(getCancelledFlights)
+    def viewCancelledFlights():
+        print(getCancelledFlights)
         
     
 
