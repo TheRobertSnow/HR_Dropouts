@@ -4,13 +4,11 @@ class IOAPI:
     def __init__(self):
         self.airplanes = AirplaneIO.OnLoad()
 
-    def getPlaneInstance(self):
-        """ Returns a list with dictionaries that hold each plane"""
-        planeInstances = AirplaneIO.OnLoad()
-        planeInstances = AirplaneIO.OnLoad.returnObjectList(planeInstances)
-        return planeInstances
-
-    def createPlaneRequest(self, list):
-        returnString = AirplaneIO.OnLoad.newAirplane(self.airplanes, list)
+    def createPlaneRequest(self, dictionary, list):
+        returnString = self.airplanes.newAirplane(dictionary, list)
         return returnString
+
+    def getPlaneList(self):
+        planeList = self.airplanes.returnObjectList()
+        return planeList
 
