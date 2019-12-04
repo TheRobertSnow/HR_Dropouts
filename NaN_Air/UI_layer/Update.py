@@ -266,9 +266,9 @@ Flight - {}: Select Flight Status
                 currentStatus = "Cancelled"
                 print("Status succesfully updated!")
                 print("Flight {} status: {}\n".format(flightID, currentStatus)) #Fundið statusinn í þessu sérstaka tilviki
-            elif updateairplanestatusMenuInput == "b":
+            elif updateflightstatusMenuInput == "b":
                 Update.updateFlights()
-            elif updateairplanestatusMenuInput == "q":
+            elif updateflightstatusMenuInput== "q":
                 print("Forriti lokað!")
             else:
                 print("WRONG INPUT, TRY AGAIN")
@@ -289,7 +289,7 @@ Flight - {}: Select Flight Status
             print("WRONG INPUT, TRY AGAIN")
             Update.updateFlights()
 
-    def updateMenu():
+    def updateMenu(self):
         print('''Update Data
 --------------------------------------------
   1. Update Worker
@@ -326,5 +326,4 @@ Flight - {}: Select Flight Status
             print("Wrong input, try again")
             updateMenuInput = Update.updateMenu()
         return updateMenuInput
-
 
