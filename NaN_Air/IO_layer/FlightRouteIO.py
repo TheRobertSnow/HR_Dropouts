@@ -7,6 +7,7 @@ class FlightRoute():
 
     def __init__(self):
         # self.get_flight_route_from_file()
+        self.__dictList=[]
         pass
 
     def get_flight_route_from_file(self):
