@@ -15,7 +15,10 @@ class AirplaneLL:
         print(len(self.instanceList), "objects in our system, this print command is found in AirplaneLL")
 
     def createNewPlane(self, list):
-        #planeObject = Airplane.CreateAirplane()
+        for airplane in self.instanceList:
+            reg = airplane.getReg()
+            if reg == list[0]:
+                return ["Plane with that register already exists"], "Plane creation failed"
         orderedDict = collections.OrderedDict()
         newID = 0
         for instance in self.instanceList:
