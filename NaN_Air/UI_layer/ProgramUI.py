@@ -1,13 +1,14 @@
 from UI_layer import Create
 from UI_layer import View
 from UI_layer import Update
-
+import UIAPI
 
 class ProgramUI:
     def __init__(self):
-        self.viewInstance = View.View()
-        self.createInstance = Create.Create()
-        self.updateInstance = Update.Update()
+        #self.viewInstance = View.View()
+        #self.createInstance = Create.Create()
+        #self.updateInstance = Update.Update()
+        self.object = UIAPI.UIAPI()
 
     def login(self):
         print('''NaN Air flight system
@@ -29,16 +30,15 @@ Input your ID to login''')
         mainMenuInput = input("Input choice(q to Quit): ")
         mainMenuInput = mainMenuInput.lower()
         if mainMenuInput == "1":
-            # viewMenuOutput = self.viewInstance.viewMenu()
-            viewMenuOutpu = self.updateInstance.viewMenu()
+            viewMenuOutput = View.View.viewMenu(self.object)
             if viewMenuOutput == "b":
                 ProgramUI.mainMenu(self)
         elif mainMenuInput == "2":
-            createMenuOutput = self.createInstance.createMenu()
+            createMenuOutput = Create.Create.createMenu(self.object)
             if createMenuOutput == "b":
                 ProgramUI.mainMenu(self)
         elif mainMenuInput == "3":
-            updateMenuOutput = self.updateInstance.updateMenu()
+            updateMenuOutput = Update.Update.updateMenu(self.object)
             if updateMenuOutput == "b":
                 ProgramUI.mainMenu(self)
         elif mainMenuInput == "q":

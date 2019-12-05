@@ -12,6 +12,7 @@ class AirplaneLL:
         for dict in self.planeList:
             airplane = Airplane.CreateAirplane(dict)
             self.instanceList.append(airplane)
+        print(hex(id(self.instanceList)))
         print(len(self.instanceList), "objects in our system, this print command is found in AirplaneLL")
 
     def createNewPlane(self, list):
@@ -26,9 +27,26 @@ class AirplaneLL:
         orderedDict["status"] = "Grounded"
         orderedDict["number of seats"] = list[3]
         orderedDict["odometer"] = list[4]
-        list.insert(4, "Grounded")
+        list.insert(3, "Grounded")
         newAirPlane = Airplane.CreateAirplane(orderedDict)
         self.instanceList.append(newAirPlane)
         print("now there are", len(self.instanceList), "objects in system")
         returnString = self.ioAPI.createPlaneRequest(orderedDict, list)
         return returnString
+
+    def getAllFlights(self):
+        return self.instanceList
+
+    def getSpecificFlight(self, regToFind):
+        for object in self.instanceList:
+            currentReg = object.getReg()
+            if currentReg == regToFind:
+                return object
+        return "No flight with that Register"
+
+    def getXplane(self, tagToFind):
+        for object in self.instanceList:
+            tag = object.getReg()
+            if tag.lower() == tagToFind.lower():
+                return object
+        return "Flight not found!"

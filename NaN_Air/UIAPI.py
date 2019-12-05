@@ -1,6 +1,7 @@
 from logic_layer import *
 
-#functions that UI layer calls --
+
+# functions that UI layer calls --
 class UIAPI:
     def __init__(self):
         self.airplaneInstance = AirplaneLL.AirplaneLL()
@@ -8,16 +9,18 @@ class UIAPI:
     #
     # plane related
     #
-    def newPlaneRequest(self, list):
+    def newPlaneRequest(self, myList):
         """"""
-        returnString = self.airplaneInstance.createNewPlane(list)
+        returnString = self.airplaneInstance.createNewPlane(myList)
         return returnString
 
     def viewXplane(self, idToFind):
-        pass
+        returnData = self.airplaneInstance.getXplane(idToFind)
+        return returnData
 
     def viewAllPlanes(self):
-        pass
+        returnData = self.airplaneInstance.getAllFlights()
+        return returnData
 
     #
     # worker related

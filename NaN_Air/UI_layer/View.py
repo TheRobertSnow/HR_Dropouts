@@ -27,7 +27,7 @@ class View:
             if viewWorkerOutput == "b":
                 viewMenuInput = self.viewMenu()
         elif viewMenuInput == "2":
-            viewAirplaneOutput = View.viewAirplane()
+            viewAirplaneOutput = View.viewAirplane(self)
             if viewAirplaneOutput == "b":
                 viewMenuInput = self.viewMenu()
         elif viewMenuInput == "3":
@@ -151,7 +151,7 @@ class View:
             viewAttendantsInput = View.viewAttendants()
         return viewAttendantsInput
 
-    def viewAirplane():
+    def viewAirplane(self):
         print('''2. View Airplane
 --------------------------------------------
   1. View specific airplane
@@ -163,20 +163,34 @@ class View:
             AirplaneID = input("  - Please input Airplane ID: ")
             # AirplaneInfo = getAirplaneInfo(AirplaneID)
             # print(AirplaneInfo)
-            print(AirplaneID)
-            viewAirplaneInput = View.viewAirplane()
+            viewAirplaneInput = UIAPI.UIAPI.viewXplane(self, AirplaneID)
+            print(viewAirplaneInput)
         elif viewAirplaneInput == "2":
             # AllAirplanesInfo = getAllAirplanes()
             # print(AllAirplanesInfo)
             print("")
-            viewAirplaneInput = View.viewAirplane()
+            #
+            #
+            #
+            #viewAirplaneInput = self.instance.viewAllPlanes()
+            viewAirplaneInput = UIAPI.UIAPI.viewAllPlanes(self)
+            print(viewAirplaneInput)
+            for count, plane in enumerate(viewAirplaneInput):
+                if len(viewAirplaneInput) > 4:
+                    if count >= 4:
+                        if count % 4 == 0:
+                            input("\nPress enter to see next")
+                print(plane)
+            #
+            #
+            #
         elif viewAirplaneInput == "b":
             return viewAirplaneInput
         elif viewAirplaneInput == "q":
             return viewAirplaneInput
         else:
             print("Wrong input, try again")
-            viewAirplaneInput = View.viewAirplane()
+            viewAirplaneInput = View.viewAirplane(self)
         return viewAirplaneInput
 
     def viewFlightRoutes(self):
