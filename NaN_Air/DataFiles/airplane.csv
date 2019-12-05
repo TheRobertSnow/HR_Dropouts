@@ -4,3 +4,4 @@ airplane id,plane reg,manufacturer,model,status,number of seats,odometer
 3,BA1234,Boeing,123,Grounded,120,0
 4,EA1233,Boeing,777,Ready,230,213244
 5,EA1255,Boeing,737,Ready,321312,214412
+6,EA123,boeing,777,Ready,123,1231255
