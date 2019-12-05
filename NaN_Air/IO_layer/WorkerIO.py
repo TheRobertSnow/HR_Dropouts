@@ -1,5 +1,5 @@
 import csv
-import sys
+import sys, os
 FILENAME = 'DataFiles/worker.csv'
 
 
@@ -49,9 +49,8 @@ class Worker():
             for dictionary in self.__dictList:
                 writer.writerow(dictionary)
 
-    def convert_to_dict_no_id(self, aList):
-        """Function converts list to dict but doesn't
-        generate an id since ID should be provided in argument list"""
+    def convert_to_dict(self, aList):
+        """Function converts list to dict"""
         orderedDict = {}
         orderedDict['social security number'] = aList[0]
         orderedDict['name'] = aList[1]
@@ -70,7 +69,16 @@ class Worker():
         and writes the changes to file"""
         for index, dictionary in enumerate(self.__dictList):
             for key, value in dictionary.items():
-                if key == 'flight route id':
+                if key == 'social security number':
                     if value == aList[0]:
                         self.__dictList[index][aList[1]] = aList[2]
                         self.write_dictList_to_file()
+
+
+# writeList = ['2201992909','Geir Jonsson','Pilot','Richgata 69','0696969','9192943','bjani@gmail.com','True','True','0001;0002']
+# updateList = ['0101013641', 'position', 'Looser']
+# worker = Worker()
+# # print(newline)
+# print(worker.get_worker_from_file())
+# worker.write_worker_to_file(writeList)
+# worker.update_data_in_file(updateList)

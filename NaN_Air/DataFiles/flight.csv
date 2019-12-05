@@ -1,3 +1,4 @@
 flight id,flight number,airplane reg,sold seats,flight route id,flight status,travel time,departure time,arrival time
 1,NA010,T-911,8,0002,Boarding,18:35,20:32,23:05
 2,NA011,T-911,8,0003,crashing,18:35,20:32,23:06
+3,NA011,T-911,8,1,0002,Boarding,18:35,20:32
