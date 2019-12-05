@@ -1,8 +1,12 @@
+import UIAPI
 class View():
-    def viewMenu():
+    def __init__(self):
+        self.object = UIAPI.UIAPI()
+
+    def viewMenu(self):
         print('''View Data
 --------------------------------------------
-  1. View worker
+  1. View Worker
   2. View Airplane
   3. View Flight routes
   4. View Voyages
@@ -12,216 +16,285 @@ class View():
         viewMenuInput = input("Input choice(q to Quit, b for Back): ")
         viewMenuInput = viewMenuInput.lower()
         if viewMenuInput == "1":
-            print("")
-            View.viewWorker()
-            View.viewMenu()
+            viewWorkerOutput = View.viewWorker(self)
+            if viewWorkerOutput == "b":
+                viewMenuInput = View.viewMenu(self)
         elif viewMenuInput == "2":
-            print("")
-            View.viewAirplane()
-            View.viewMenu()
-            
+            viewAirplaneOutput = View.viewAirplane(self)
+            if viewAirplaneOutput == "b":
+                viewMenuInput = View.viewMenu(self)
         elif viewMenuInput == "3":
-            print("")
-            View.viewFlightRoutes()
-            View.viewMenu()
+            viewFlightRoutesOutput = View.viewFlightRoutes(self)
+            if viewFlightRoutesOutput == "b":
+                viewMenuInput = View.viewMenu(self)
         elif viewMenuInput == "4":
-            print("")
-            View.viewVoyages()
-            View.viewMenu()
+            viewVoyagesOutput = View.viewVoyages(self)
+            if viewVoyagesOutput == "b":
+                viewMenuInput = View.viewMenu(self)
         elif viewMenuInput == "5":
-            print("")
-            View.viewFlight()
-            View.viewMenu()
+            viewFlightOutput = View.viewFlight(self)
+            if viewFlightOutput == "b":
+                viewMenuInput = View.viewMenu(self)
         elif viewMenuInput == "b":
-            return None
+            return viewMenuInput
         elif viewMenuInput == "q":
-            print("Forriti lokað!")
+            return viewMenuInput
         else:
-            print("WRONG INPUT, TRY AGAIN")
-            View.viewMenu()
+            print("Wrong input, try again")
+            viewMenuInput = View.viewMenu(self)
         return viewMenuInput
     
-    def viewWorker():
-        print('''       View Worker
------------------------------------------
-    1 View Pilots
-    2 View Attendants
-    3 View Bosses
-    4 View All Staff''')
+    def viewWorker(self):
+        print('''1. View Worker
+--------------------------------------------
+  1. View Pilots
+  2. View Attendants
+  3. View Bosses
+  4. View All Staff
+--------------------------------------------''')
+
         viewWorkerInput = input("Input choice(q to Quit, b for Back): ")
+        viewWorkerInput = viewWorkerInput.lower()
         if viewWorkerInput == "1":
-            View.viewPilots()
-
-            View.viewWorker()
-        
+            viewPilotsOutput = View.viewPilots()
+            if viewPilotsOutput == "b":
+                viewWorkerInput = View.viewWorker(self)
+            elif viewPilotsOutput == "q":
+                return viewWorkerInput
+            else:
+                viewWorkerInput = View.viewWorker(self)
         elif viewWorkerInput == "2":
-            View.viewAttendants()
-        
+            viewAttendantsOutput = View.viewAttendants()
+            if viewAttendantsOutput == "b":
+                viewWorkerInput = View.viewWorker(self)
+            elif viewAttendantsOutput == "q":
+                return viewWorkerInput
+            else:
+                viewWorkerInput = View.viewWorker(self)
         elif viewWorkerInput == "3":
-            View.viewBosses() 
-
+            # BossInfo = getAllBosses()
+            # print(BossInfo)
+            print("")
+            viewWorkerInput = View.viewWorker(self)
         elif viewWorkerInput == "4":
-            View.viewAllStaff()
-############################################
+            # print(getAllStaff())
+            print("")
+            viewWorkerInput = View.viewWorker(self)
+        elif viewWorkerInput == "b":
+            return viewWorkerInput
+        elif viewWorkerInput == "q":
+            return viewWorkerInput
+        else:
+            print("Wrong input, try again")
+            viewWorkerInput = View.viewWorker(self)
+        return viewWorkerInput        
+    
 # Pilots
-    def viewPilots():
-        print('''1 View Specific Pilot
-2 View All Pilots''') 
+    def viewPilots(self):
+        print('''1.1. View Pilots
+--------------------------------------------
+  1. View specific pilot
+  2. View all pilots
+--------------------------------------------''')
         viewPilotsInput = input("Input choice(q to Quit, b for Back): ")
+        viewPilotsInput = viewPilotsInput.lower()
         if viewPilotsInput == "1":
-            View.viewSpecificPilot()
+            pilotSSN = input("  - Please input SSN: ")
+            print(pilotSSN)
+            # PilotInfo = getPilotInfo(PilotSSN)
+            # print(pilotInfo)
+            # View.viewWorker()
+            return viewPilotsInput
         elif viewPilotsInput == "2":
-            View.viewAllPilots()
+            print("")
+            # AllPilots = getAllPilots()
+            # print(AllPilots)
+            # View.viewWorker()
+            return viewPilotsInput
+        elif viewPilotsInput == "b":
+            return viewPilotsInput
+        elif viewPilotsInput == "q":
+            return viewPilotsInput
+        else:
+            print("Wrong input, try again")
+            viewPilotsInput = View.viewPilots(self)
+        return viewPilotsInput    
 
-    def viewSpecificPilot():
-        PilotSSN = input("  - Please input SSN: ")
-        PilotInfo = getPilotInfo(PilotSSN)
-        print(pilotInfo)
-    def viewAllPilots():
-        AllPilots = getAllPilots()
-        print(AllPilots)
-#attendants
-    def viewAttendants():
-        print('''-----------------------------------------
-        View Attendants
------------------------------------------
-    1 View Specific Attendant
-    2 View All Attendants''')
-        ViewAttendantsInput = input("Input choice(q to Quit, b for Back): ")
-        if ViewAttendantsInput == "1":
-            View.viewSpecificAttendant()
-        elif ViewAttendantsInput == "2":
-            View.viewAllAttendants()
-    def viewSpecificAttendant():
-        AttendantSSN = input("  - Please input SSN: ")
-        AttendantInfo = getAttendantInfo(AttendantSSN)
-        print(AttendantInfo)
-
-    def viewAllAttendants():
-        print(getAllAttendants())
-#Bosses
-
-    def viewBosses():
-        print('''-----------------------------------------
-        View Bosses
------------------------------------------ ''')
-
-        BossInfo = getAllBosses()
-        print(BossInfo)
-
-    def viewAllStaff():
-        print(getAllStaff())
-
-#AllWorkers    
-############################################
+#Attendants
+    def viewAttendants(self):
+        print('''1.2. View Attendants
+--------------------------------------------
+  1. View specific attendant
+  2. View all attendants
+--------------------------------------------''')
+        viewAttendantsInput = input("Input choice(q to Quit, b for Back): ")
+        viewAttendantsInput = viewAttendantsInput.lower()
+        if viewAttendantsInput == "1":
+            attendantSSN = input("  - Please input SSN: ")
+            print(attendantSSN)
+            # AttendantInfo = getAttendantInfo(AttendantSSN)
+            return viewAttendantsInput
+        elif viewAttendantsInput == "2":
+            # print(getAllAttendants())
+            print("")
+            return viewAttendantsInput
+        elif viewAttendantsInput == "b":
+            return viewAttendantsInput
+        elif viewAttendantsInput == "q":
+            return viewAttendantsInput
+        else:
+            print("Wrong input, try again")
+            viewAttendantsInput = View.viewAttendants(self)
+        return viewAttendantsInput
         
-
-    def viewAirplane():
-        
-        print('''-----------------------------------------
-        View Airplane
------------------------------------------
-
-1 View specific airplane
-2 View All Airplanes
-''')
+    def viewAirplane(self):     
+        print('''2. View Airplane
+--------------------------------------------
+  1. View specific airplane
+  2. View all airplanes
+--------------------------------------------''')
 
         viewAirplaneInput = input("Input choice(q to Quit, b for Back): ")
+        viewAirplaneInput = viewAirplaneInput.lower()
         if viewAirplaneInput == "1":
-            viewSpecificAirplane()
+            AirplaneID = input("  - Please input Airplane ID: ")
+            # AirplaneInfo = getAirplaneInfo(AirplaneID)
+            # print(AirplaneInfo)
+            viewAirplaneInput = UIAPI.UIAPI.viewXplane(self, AirplaneID)
+            print(viewAirplaneInput)
+            viewAirplaneInput = View.viewAirplane(self)
         elif viewAirplaneInput == "2":
-            viewAllAirplanes()
-        
-    def viewSpecificAirplane():
-        AirplaneID = input("  - Please input Airplane ID: ")
-        AirplaneInfo = getAirplaneInfo(AirplaneID)
-        print(AirplaneInfo)
+            # AllAirplanesInfo = getAllAirplanes()
+            # print(AllAirplanesInfo)
+            #viewAirplaneInput = self.instance.viewAllPlanes()
+            viewAirplaneInput = UIAPI.UIAPI.viewAllPlanes(self)
+            print(viewAirplaneInput)
+            for count, plane in enumerate(viewAirplaneInput):
+                if len(viewAirplaneInput) > 4:
+                    if count >= 4:
+                        if count % 4 == 0:
+                            input("\nPress enter to see next")
+                print(plane)
+            viewAirplaneInput = View.viewAirplane(self)
+        elif viewAirplaneInput == "b":
+            return viewAirplaneInput
+        elif viewAirplaneInput == "q":
+            return viewAirplaneInput
+        else:
+            print("Wrong input, try again")
+            viewAirplaneInput = View.viewAirplane(self)
+        return viewAirplaneInput
 
-    def viewAllAirplanes():
-        AllAirplanesInfo = getAllAirplanes()
-        print(AllAirplanesInfo)
+    def viewFlightRoutes(self):
+        print('''3. View Flight Routes
+--------------------------------------------
+  1. Specific route
+  2. All flight routes
+--------------------------------------------''')
 
-
-############################################
-    def viewFlightRoutes():
-        print('''-----------------------------------------
-        View Flight Routes
------------------------------------------
-1 Specific Route
-2 All Flight Routes
-''')
         viewFlightRoutesInput = input("Input choice(q to Quit, b for Back): ")
+        viewFlightRoutesInput = viewFlightRoutesInput.lower()
         if viewFlightRoutesInput == "1":
-            View.viewSpecificRoute()
+            FlightRouteID = input("  - Please input Flight Route ID: ")
+            print(FlightRouteID)
+            #FlightRoute = getFlightRoute(FlightRouteID)
+            #print(FlightRoute)
+            viewFlightRoutesInput = View.viewFlightRoutes(self)
         elif viewFlightRoutesInput == "2":
-            View.viewAllRoutes()
+            #print(getAllFlightRoutes)
+            print("")   
+            viewFlightRoutesInput = View.viewFlightRoutes(self)
+        elif viewFlightRoutesInput == "b":
+            return viewFlightRoutesInput
+        elif viewFlightRoutesInput == "q":
+            return viewFlightRoutesInput
+        else:
+            print("Wrong input, try again")
+            viewFlightRoutesInput = View.viewFlightRoutes(self)
+        return viewFlightRoutesInput
 
-    def viewSpecificRoute():
-        FlightRouteID = input("  - Please input Flight Route ID: ")
+    def viewVoyages(self):
+        print('''4. View Voyages
+--------------------------------------------
+  1. View a specific voyage
+  2. View all voyages
+--------------------------------------------''')
 
-        FlightRoute = getFlightRoute(FlightRouteID)
-        print(FlightRoute)
-
-    def viewAllRoutes():
-        print(getAllFlightRoutes)
-
-        
-
-############################################
-    def viewVoyages():
-        print('''1 View a Specific Voyage
-2 View all Voyages
-3''')
         viewVoyagesInput = input("Input choice(q to Quit, b for Back): ")
+        viewVoyagesInput = viewVoyagesInput.lower()
         if viewVoyagesInput == "1":
-            View.viewSpecificVoyage()
+            SSN = input('  - Please input Voyage ID: ')
+            # VoyageInfo = getVoyageInfo(SSN)
+            # print(VoyageInfo)
+            print(SSN)
+            viewVoyagesInput = View.viewVoyages(self)
         elif viewVoyagesInput == "2":
-            View.viewAllVoyages()
-
-    def viewSpecificVoyage():
-
-        SSN = input('  - Please input Voyage ID: ')
-        VoyageInfo = getVoyageInfo(SSN)
-        print(VoyageInfo)
-
-    def viewAllVoyages():
-        print(getAllVoyages())
-
-
-
-############################################
-    def viewFlight():
-        print('''1 View specific Flight
-2 View All FLights
-3 View Active Flights
-4 View Cancelled Flights''')
+            print("")
+            #print(getAllVoyages())
+            viewVoyagesInput = View.viewVoyages(self)
+        elif viewVoyagesInput == "b":
+            return viewVoyagesInput
+        elif viewVoyagesInput == "q":
+            return viewVoyagesInput
+        else:
+            print("Wrong input, try again")
+            viewVoyagesInput = View.viewVoyages(self)
+        return viewVoyagesInput
+      
+    def viewFlight(self):
+        print('''5. View Flights
+--------------------------------------------
+  1. View specific flight
+  2. View all flights
+  3. View active flights
+  4. View cancelled flights
+--------------------------------------------''')
 
         viewFlightInput = input("Input choice(q to Quit, b for Back): ")
-
+        viewFlightInput = viewFlightInput.lower()
         if viewFlightInput == "1":
-            View.viewSpecificFlight()
+            flightNumber = input('  - Please input flight number: ')
+            viewFlight = UIAPI.UIAPI.viewXflight(self, flightNumber)
+            print(viewFlight)
+            #FlightInfo = getSpecificFlight(SSN)
+            #print(FlightInfo)
+            viewFlightInput = View.viewFlight(self)
         if viewFlightInput == "2":
-            View.viewAllFlights()
+            # print(getAllFlights())
+            viewAllFlights = UIAPI.UIAPI.viewAllFlights(self)
+            for count, flight in enumerate(viewAllFlights):
+                if len(viewAllFlights) > 4:
+                    if count >= 4:
+                        if count % 4 == 0:
+                            input("\nPress enter to see next")
+                print(flight)
+                print()
+            viewFlightInput = View.viewFlight(self)
         if viewFlightInput == "3":
-            View.viewActiveFlights()
+            viewActiveFlights = UIAPI.UIAPI.viewActiveFlights(self)
+            for count, flight in enumerate(viewActiveFlights):
+                if len(viewActiveFlights) > 4:
+                    if count >= 4:
+                        if count % 4 == 0:
+                            input("\nPress enter to see next")
+                print(flight)
+                print()
+            viewFlightInput = View.viewFlight(self)
         if viewFlightInput == "4":
-            View.viewCancelledFlights()
-
-    def viewSpecificFlight():
-        SSN = input('  - Please input Voyage ID: ')
-        FlightInfo = getSpecificFlight(SSN)
-        print(FlightInfo)
-
-    def viewAllFlights():
-        print(getAllFlights())
-
-    def viewActiveFlights():
-        print(getActiveFlights())
-
-    def viewCancelledFlights():
-        print(getCancelledFlights)
-        
-    
-
-
-View.viewMenu()
+            viewCancelledFlights = UIAPI.UIAPI.viewCancelledFlights(self)
+            for count, flight in enumerate(viewCancelledFlights):
+                if len(viewCancelledFlights) > 4:
+                    if count >= 4:
+                        if count % 4 == 0:
+                            input("\nPress enter to see next")
+                print(flight)
+                print()
+            viewFlightInput = View.viewFlight(self)
+        elif viewFlightInput == "b":
+            return viewFlightInput
+        elif viewFlightInput == "q":
+            return viewFlightInput
+        else:
+            print("Wrong input, try again")
+            viewFlightInput = View.viewFlight(self)
+        return viewFlightInput
