@@ -1,19 +1,21 @@
 class Worker():
     def __init__(self, dictionary):
-        self.__myDictionary = {}
-        self.__myDictionary["Social security number"] = dictionary['social security number']
-        self.__myDictionary['Name'] = dictionary["name"]
-        self.__myDictionary["Position"] = dictionary["position"]
-        self.__myDictionary["Address"] = dictionary["address"]
-        self.__myDictionary["Phone"] = dictionary["phone"]
-        self.__myDictionary["Cellphone"] = dictionary["cellphone"]
-        self.__myDictionary["Email"] = dictionary["email"]
-        self.__myDictionary["Active"] = dictionary["active"]
-        self.__myDictionary["Available"] = dictionary["available"] 
-        self.__myDictionary["Plane Licence"] = dictionary["plane licence"]
+        self.__myDictionary = dictionary
+        self.__workerID = dictionary['Worker ID']
+        self.__socialSecurityNumber = dictionary['Social security number']
+        self.__name = dictionary["Name"]
+        self.__position = dictionary["Position"]
+        self.__rank = dictionary["Rank"]
+        self.__planeLicence = dictionary["Plane licence"]
+        self.__address = dictionary["Address"]
+        self.__phone = dictionary["Phone"]
+        self.__cellphone = dictionary["Cellphone"]
+        self.__email = dictionary["Email"]
+        self.__active = dictionary["Active"]
+        self.__available = dictionary["Available"]
 
 
-    def __str__(self): 
+    def __str__(self):
         returnString = []
         for key, val in self.__myDictionary.items():
             returnString.append((key + ": " + val))
