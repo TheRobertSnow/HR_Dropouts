@@ -20,21 +20,13 @@ class AirplaneLL:
             if reg == list[0]:
                 return ["Plane with that register already exists"], "Plane creation failed"
         orderedDict = collections.OrderedDict()
-        newID = 0
-        for instance in self.instanceList:
-            id = instance.getID()
-            if int(id) > newID:
-                newID = int(id)
-        newID += 1
-        orderedDict["airplane id"] = newID
         orderedDict["plane reg"] = list[0]
         orderedDict["manufacturer"] = list[1]
         orderedDict["model"] = list[2]
-        orderedDict["status"] = "Ready"
+        orderedDict["status"] = "Grounded"
         orderedDict["number of seats"] = list[3]
         orderedDict["odometer"] = list[4]
-        list.insert(0, newID)
-        list.insert(4, "Ready")
+        list.insert(4, "Grounded")
         newAirPlane = Airplane.CreateAirplane(orderedDict)
         self.instanceList.append(newAirPlane)
         print("now there are", len(self.instanceList), "objects in system")
