@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 airplane id,plane reg,manufacturer,model,status,number of seats,odometer
 1,BA0345,Fokker,777,Broken,340,3400524
 2,BA5236,Boeing,723,Cancelled,500,41435351
@@ -6,15 +5,4 @@ airplane id,plane reg,manufacturer,model,status,number of seats,odometer
 4,EA1233,Boeing,777,Ready,230,213244
 5,EA1255,Boeing,737,Ready,321312,214412
 6,EA123,boeing,777,Ready,123,1231255
-=======
-plane reg,manufacturer,model,status,seats,odometer
-TF-EPG,Fokker,F100,Grounded,110
-TF-UVR,Fokker,F28,Grounded,79
-TF-XZR,BAe,146,Grounded,98
-TF-XZM,BAe,146,Grounded,98
-TF-IZE,Fokker,F100,Grounded,110
-TF-PGK,BAe,146,Grounded,98
-TF-TYQ,Fokker,F100,Grounded,110
-TF-LNQ,BAe,146,Grounded,98
-TF-XUP,Fokker,F100,Grounded,110
->>>>>>> dccdb552357ed02ec05cfe71046df5f6af3990d2
+7,EA112,Boeing,777,Ready,234,123214

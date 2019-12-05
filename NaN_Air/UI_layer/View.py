@@ -2,6 +2,7 @@ import UIAPI
 class View():
     def __init__(self):
         self.object = UIAPI.UIAPI()
+        
     def viewMenu(self):
         print('''View Data
 --------------------------------------------
