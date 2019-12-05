@@ -12,12 +12,7 @@ class AirplaneLL:
         for dict in self.planeList:
             airplane = Airplane.CreateAirplane(dict)
             self.instanceList.append(airplane)
-<<<<<<< HEAD
         print(len(self.instanceList), "Airplane objects in our system")
-=======
-        print(hex(id(self.instanceList)))
-        print(len(self.instanceList), "objects in our plane system, this print command is found in AirplaneLL")
->>>>>>> 6271cd5141a99f1bf0437a89f0b8c0b7e42d2b7b
 
     def createNewPlane(self, myList):
         for airplane in self.instanceList:
