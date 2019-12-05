@@ -1,5 +1,4 @@
 import csv
-import collections
 
 FILENAME = "./DataFiles/airplane.csv"
 
@@ -17,11 +16,11 @@ def readFile():
     return returnList
 
 
-def writeToFile(list):
+def writeToFile(myList):
     """takes in a list and creates a new row in the airplane.csv file"""
     with open(FILENAME, "a", encoding="utf8", newline="") as csvFile:
         csvWriter = csv.writer(csvFile)
-        csvWriter.writerow(list)
+        csvWriter.writerow(myList)
 
 
 def updateRow(objectList):
@@ -38,7 +37,6 @@ def updateRow(objectList):
 
 class OnLoad:
     """Load this class on load to create all rows as a instance variable inside 1 list"""
-
     def __init__(self):
         self.__objectList = []
         fileData = readFile()
@@ -57,11 +55,11 @@ class OnLoad:
             returnList.append("\n")
         return "\n".join(returnList)
 
-    def newAirplane(self, dict, list):
+    def newAirplane(self, newPlaneDict, newPlaneList):
         """takes in a dictionary and a lsit with all required fields for the airplane.csv format,
             returns the new plane in a list and a string with the outcome"""
-        self.__objectList.append(dict)
-        writeToFile(list)
+        self.__objectList.append(newPlaneDict)
+        writeToFile(newPlaneList)
         return list, "Plane added successfully"
 
     def getHighestID(self):

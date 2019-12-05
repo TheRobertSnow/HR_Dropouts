@@ -6,9 +6,9 @@ class CreateAirplane:
         return self.__myDictionary["plane reg"]
 
     def __str__(self):
-        returnString = []
+        returnList = []
         for key, val in self.__myDictionary.items():
-            returnString.append((key + ": " + val))
-        return "\n".join(returnString)
+            returnList.append(str(key) + ": " + str(val))
+        return " | ".join(returnList)
 
 

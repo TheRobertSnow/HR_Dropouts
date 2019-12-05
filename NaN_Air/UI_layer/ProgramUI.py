@@ -3,10 +3,10 @@ from UI_layer import View
 from UI_layer import Update
 import UIAPI
 
-class ProgramUI():
+class ProgramUI:
     def __init__(self):
         self.object = UIAPI.UIAPI()
-        
+
     def login(self):
         print('''NaN Air flight system
 --------------------------------------------
@@ -42,5 +42,5 @@ Input your ID to login''')
             return mainMenuInput
         else:
             print("Wrong input, try again")
-            ProgramUI.mainMenu()
+            ProgramUI.mainMenu(self)
         return mainMenuInput
