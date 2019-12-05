@@ -173,7 +173,8 @@ Please input the following information:''')
             odometer = int(input("  - Odometer(number of km the airplane has travelled): "))
             createAirplaneList.append(odometer)
             print("Request sent in ...\n")
-            result = UIAPI.UIAPI.newPlaneRequest(self.object, createAirplaneList)
+            #result = UIAPI.UIAPI.newPlaneRequest(self.object, createAirplaneList)
+            result = UIAPI.UIAPI.newPlaneRequest(self, createAirplaneList)
             print(result)
 
             # Prints info on the created airplane

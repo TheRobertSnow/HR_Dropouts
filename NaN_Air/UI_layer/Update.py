@@ -1,6 +1,6 @@
 class Update():
 
-    def update_Worker(ssn):
+    def update_Worker(self, ssn):
         print("""1. Update Worker
 John - {}
 --------------------------------------------
