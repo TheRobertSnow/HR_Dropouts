@@ -7,3 +7,5 @@ flight id,flight number,airplane reg,flight route id,destination,flight status,t
 5,FLIGHTNUmber is hert,EA13214,ice,greece,On Air,TravelTIMEisGOnnaBEHEre,20/10/2010T14:15:00,ArrivalTIMEISgonnaBEhere
 6,NA001,EA123,0,1,On Air,TravelTIMEisGOnnaBEHEre,24/12/2019T13:45:00,ArrivalTIMEISgonnaBEhere
 7,NA000,EA123,0,3,On Air,TravelTIMEisGOnnaBEHEre,25/12/2019T14:50:00,ArrivalTIMEISgonnaBEhere
+8,NA0201,AB123,20,0,On Air,TravelTIMEisGOnnaBEHEre,24/12/2099T13:20:00,ArrivalTIMEISgonnaBEhere
+9,NA000,ABC123,0,4,On Air,TravelTIMEisGOnnaBEHEre,23/12/2040T14:30:00,ArrivalTIMEISgonnaBEhere

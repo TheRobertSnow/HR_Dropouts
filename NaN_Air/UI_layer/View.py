@@ -158,13 +158,10 @@ class View():
             # print(AirplaneInfo)
             viewAirplaneInput = UIAPI.UIAPI.viewXplane(self, AirplaneID)
             print(viewAirplaneInput)
+            viewAirplaneInput = View.viewAirplane(self)
         elif viewAirplaneInput == "2":
             # AllAirplanesInfo = getAllAirplanes()
             # print(AllAirplanesInfo)
-            print("")
-            #
-            #
-            #
             #viewAirplaneInput = self.instance.viewAllPlanes()
             viewAirplaneInput = UIAPI.UIAPI.viewAllPlanes(self)
             print(viewAirplaneInput)
@@ -174,9 +171,7 @@ class View():
                         if count % 4 == 0:
                             input("\nPress enter to see next")
                 print(plane)
-            #
-            #
-            #
+            viewAirplaneInput = View.viewAirplane(self)
         elif viewAirplaneInput == "b":
             return viewAirplaneInput
         elif viewAirplaneInput == "q":

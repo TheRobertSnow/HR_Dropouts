@@ -41,11 +41,11 @@ class FlightLL():
         orderedDict["travel time"] = "TravelTIMEisGOnnaBEHEre"
         orderedDict["departure time"] = flightList[3]
         orderedDict["arrival time"] = "ArrivalTIMEISgonnaBEhere"
-        list.insert(0, newID)
-        list.insert(1, flightNumber)
-        list.insert(5, "On Air")
-        list.insert(6, "TravelTIMEisGOnnaBEHEre")
-        list.insert(8, "ArrivalTIMEISgonnaBEhere")
+        flightList.insert(0, newID)
+        flightList.insert(1, flightNumber)
+        flightList.insert(5, "On Air")
+        flightList.insert(6, "TravelTIMEisGOnnaBEHEre")
+        flightList.insert(8, "ArrivalTIMEISgonnaBEhere")
         newFlight = Flight.CreateFlight(orderedDict)
         self.instanceList.append(newFlight)
         

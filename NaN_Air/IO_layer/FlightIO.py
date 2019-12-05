@@ -46,7 +46,7 @@ class FlightIO():
     def newFlight(self, objectDict, flightList):
         self.__objectList.append(objectDict)
         FlightIO.write_flight_to_file(self, flightList)
-        return list, "Flight added successfully"
+        return flightList, "Flight added successfully"
     
     def write_dictList_to_file(self):
         """Method overwrites file with data from dictList"""

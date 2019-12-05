@@ -60,7 +60,7 @@ class OnLoad:
             returns the new plane in a list and a string with the outcome"""
         self.__objectList.append(newPlaneDict)
         writeToFile(newPlaneList)
-        return list, "Plane added successfully"
+        return newPlaneList, "Plane added successfully"
 
     def getHighestID(self):
         """Finds the current highest ID in the airplane.csv and returns a new higher ID"""

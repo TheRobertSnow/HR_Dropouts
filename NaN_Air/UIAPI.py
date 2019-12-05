@@ -4,7 +4,7 @@ from logic_layer import *
 # functions that UI layer calls --
 class UIAPI:
     def __init__(self):
-        self.instance = AirplaneLL.AirplaneLL()
+        self.airplaneInstance = AirplaneLL.AirplaneLL()
         self.flightInstance = FlightLL.FlightLL()
 
     #
@@ -32,7 +32,7 @@ class UIAPI:
     #
     def newFlightRequest(self, flightList):
         """"""
-        returnString = FlightLL.FlightLL.createNewFlight(self.instance, flightList)
+        returnString = FlightLL.FlightLL.createNewFlight(self.flightInstance, flightList)
         return returnString
     #
     # voyage related
