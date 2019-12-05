@@ -3,7 +3,7 @@ import collections
 
 FILENAME = "./DataFiles/airplane.csv"
 
-FIELDNAMES = ["airplane id", "plane reg", "manufacturer", "model", "status", "number of seats",
+FIELDNAMES = ["plane reg", "manufacturer", "model", "status", "seats",
               "odometer"]  # for update row
 
 

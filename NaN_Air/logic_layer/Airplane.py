@@ -1,15 +1,9 @@
 class CreateAirplane:
     def __init__(self, dictionary):
-        self.__myDictionary = {"airplaneId": dictionary["airplane id"], "planeReg": dictionary["plane reg"],
-                               "manufacturer": dictionary["manufacturer"], "model": dictionary["model"],
-                               "status": dictionary["status"], "numbOfSeats": dictionary["number of seats"],
-                               "odometer": dictionary["odometer"]}
-
-    def getID(self):
-        return self.__myDictionary["airplaneId"]
+        self.__myDictionary = dictionary
 
     def getReg(self):
-        return self.__myDictionary["planeReg"]
+        return self.__myDictionary["plane reg"]
 
     def __str__(self):
         returnString = []
