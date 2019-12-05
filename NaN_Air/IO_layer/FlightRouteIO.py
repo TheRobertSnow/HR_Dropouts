@@ -7,6 +7,7 @@ class FlightRoute():
 
     def __init__(self):
         # self.get_flight_route_from_file()
+        self.__dictList=[]
         pass
 
     def get_flight_route_from_file(self):
@@ -89,7 +90,6 @@ class FlightRoute():
         for index, dictionary in enumerate(self.__dictList):
             for key, value in dictionary.items():
                 if key == 'flight route id':
-                    print("We here bro")
                     if value == aList[0]:
                         print('key found')
                         self.__dictList[index][aList[1]] = aList[2]

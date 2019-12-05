@@ -1,9 +1,24 @@
 from IO_layer import *
 
+class IOAPI:
+    def __init__(self):
+        self.airplanes = AirplaneIO.OnLoad()
+        self.flights = FlightIO.FlightIO()
 
-def getPlaneInstance():
-    planeInstances = AirplaneIO.OnLoad()
-    planeInstances = AirplaneIO.OnLoad.returnObjectList(planeInstances)
-    return planeInstances
+    def createPlaneRequest(self, dictionary, myList):
+        returnString = self.airplanes.newAirplane(dictionary, myList)
+        return returnString
 
+    def getPlaneList(self):
+        planeList = self.airplanes.returnObjectList()
+        return planeList
+    
+    def createFlightRequest(self, objectDict, flightList):
+        returnString = self.flights.newFlight(objectDict, flightList)
+        return returnString
 
+    def getFlightList(self):
+        flightList = self.flights.returnObjectList()
+        return flightList
+    
+ 

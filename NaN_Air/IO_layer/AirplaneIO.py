@@ -1,9 +1,8 @@
 import csv
-import collections
 
+FILENAME = "./DataFiles/airplane.csv"
 
-FILENAME = "../DataFiles/airplane.csv"
-FIELDNAMES = ["airplane id", "plane reg", "manufacturer", "model", "status", "number of seats",
+FIELDNAMES = ["plane reg", "manufacturer", "model", "status", "seats",
               "odometer"]  # for update row
 
 
@@ -17,11 +16,11 @@ def readFile():
     return returnList
 
 
-def writeToFile(list):
+def writeToFile(myList):
     """takes in a list and creates a new row in the airplane.csv file"""
     with open(FILENAME, "a", encoding="utf8", newline="") as csvFile:
         csvWriter = csv.writer(csvFile)
-        csvWriter.writerow(list)
+        csvWriter.writerow(myList)
 
 
 def updateRow(objectList):
@@ -38,16 +37,14 @@ def updateRow(objectList):
 
 class OnLoad:
     """Load this class on load to create all rows as a instance variable inside 1 list"""
-
     def __init__(self):
-        fileData = readFile()
         self.__objectList = []
+        fileData = readFile()
         for object in fileData:
             self.__objectList.append(object)
 
     def returnObjectList(self):
         return self.__objectList
-
 
     def __str__(self):
         """Prints all lines in a formatted way."""
@@ -58,31 +55,17 @@ class OnLoad:
             returnList.append("\n")
         return "\n".join(returnList)
 
-    def newAirplane(self, list):
-        """Takes in a list with all parameters required in airplane.csv (except id and odometer) and
-            writes it to the list
-            returns a string with the outcome"""
-        notLegal = self.checkIfRegExists(self.__objectList, list[0])
-        if notLegal:
-            return "plane register already exists."
-        newID = self.getHighestID()
-        newID = str(newID)
-        orderedDict = collections.OrderedDict()
-        orderedDict["airplane id"] = newID
-        orderedDict["plane reg"] = list[0]
-        orderedDict["manufacturer"] = list[1]
-        orderedDict["model"] = list[2]
-        orderedDict["status"] = list[3]
-        orderedDict["number of seats"] = list[4]
-        orderedDict["odometer"] = "0"
-        self.__objectList.append(orderedDict)
-        list.insert(0, newID)
-        writeToFile(list)
-        return "Plane successfully added"
+    def newAirplane(self, newPlaneDict, newPlaneList):
+        """takes in a dictionary and a lsit with all required fields for the airplane.csv format,
+            returns the new plane in a list and a string with the outcome"""
+        self.__objectList.append(newPlaneDict)
+        writeToFile(newPlaneList)
+        return newPlaneList, "Plane added successfully"
 
     def getHighestID(self):
         """Finds the current highest ID in the airplane.csv and returns a new higher ID"""
         highestID = 0
+        print(self.__objectList)
         for dictionary in self.__objectList:
             for key, value in dictionary.items():
                 if key == "airplane id":
@@ -118,4 +101,3 @@ class OnLoad:
             return "Plane updated"
         else:
             return "plane register does not exist."
-
