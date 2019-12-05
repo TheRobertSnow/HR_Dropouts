@@ -32,7 +32,23 @@ class UIAPI:
     #
     def newFlightRequest(self, flightList):
         """"""
-        returnString = FlightLL.FlightLL.createNewFlight(self.flightInstance, flightList)
+        returnString = self.flightInstance.createNewFlight(flightList)
+        return returnString
+    
+    def viewXflight(self, flightNumber):
+        returnString = self.flightInstance.getXflight(flightNumber)
+        return returnString
+    
+    def viewAllFlights(self):
+        returnData = self.flightInstance.getAllFlights()
+        return returnData
+    
+    def viewActiveFlights(self):
+        returnString = self.flightInstance.getActiveFlights()
+        return returnString
+    
+    def viewCancelledFlights(self):
+        returnString = self.flightInstance.getCancelledFlights()
         return returnString
     #
     # voyage related

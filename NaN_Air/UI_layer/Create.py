@@ -11,10 +11,10 @@ class Create():
             airplane = input("  - Airplane registration number: ")
         flightList.append(airplane)
         if origin == None:
-            origin = input("  - Origin airport ID: ")
+            origin = input("  - Origin ID: ")
         flightList.append(origin)
         if destination == None:
-            destination = input("  - Destination airport ID: ")
+            destination = input("  - Destination ID: ")
         flightList.append(destination)
         departureTime = input("  - Departure time from {}(f.x. 12:30): ".format(origin))
         departureDate = input("  - Departure date from {}(f.x. 24/12/2019): ".format(origin))
@@ -214,11 +214,9 @@ Please input the following information:''')
 --------------------------------------------
 Please input the following information:''')
             flightList = Create.createFlight(self)
-            
             print("Request sent in ...\n")
             result = UIAPI.UIAPI.newFlightRequest(self, flightList)
             print(result)
-            
             #print("Flight successfully created!")
             #print(flightList)
             # Prints the created flight
