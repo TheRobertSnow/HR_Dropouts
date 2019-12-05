@@ -3,5 +3,6 @@ airplane id,plane reg,manufacturer,model,status,number of seats,odometer
 2,BA5236,Boeing,723,Cancelled,500,41435351
 3,BA1234,Boeing,123,Grounded,120,0
 4,BA0644,Boeing,N82,Ready,300,987010
-5,2,2,2,Ready,2,2
-6,53,53,53,Ready,53,53
+5,test,e,f,Ready,34,3
+6,test2,t,i,Ready,9898,341
+7,BA98398,34,3,Ready,34,33

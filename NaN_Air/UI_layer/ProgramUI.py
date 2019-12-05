@@ -2,10 +2,13 @@ from UI_layer import Create
 from UI_layer import View
 from UI_layer import Update
 
-class ProgramUI():
+
+class ProgramUI:
     def __init__(self):
-        self.myInstance = Create.Create()
-        
+        self.viewInstance = View.View()
+        self.createInstance = Create.Create()
+        self.updateInstance = Update.Update()
+
     def login(self):
         print('''NaN Air flight system
 --------------------------------------------
@@ -26,20 +29,21 @@ Input your ID to login''')
         mainMenuInput = input("Input choice(q to Quit): ")
         mainMenuInput = mainMenuInput.lower()
         if mainMenuInput == "1":
-            viewMenuOutput = View.View.viewMenu()
+            # viewMenuOutput = self.viewInstance.viewMenu()
+            viewMenuOutpu = self.updateInstance.viewMenu()
             if viewMenuOutput == "b":
                 ProgramUI.mainMenu(self)
         elif mainMenuInput == "2":
-            createMenuOutput = Create.Create.createMenu(self.myInstance)
+            createMenuOutput = self.createInstance.createMenu()
             if createMenuOutput == "b":
                 ProgramUI.mainMenu(self)
         elif mainMenuInput == "3":
-            updateMenuOutput = Update.Update.updateMenu()
+            updateMenuOutput = self.updateInstance.updateMenu()
             if updateMenuOutput == "b":
                 ProgramUI.mainMenu(self)
         elif mainMenuInput == "q":
             return mainMenuInput
         else:
             print("Wrong input, try again")
-            ProgramUI.mainMenu()
+            ProgramUI.mainMenu(self)
         return mainMenuInput
