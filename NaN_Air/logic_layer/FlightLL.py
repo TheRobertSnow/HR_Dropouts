@@ -26,9 +26,9 @@ class FlightLL():
         orderedDict = collections.OrderedDict()
         newID = 0
         for instance in self.instanceList:
-            id = instance.getID()
-            if int(id) > newID:
-                newID = int(id)
+            flightID = instance.flightID
+            if int(flightID) > newID:
+                newID = int(flightID)
         newID += 1
         flightNumber = getFlightNumber(self, flightList)
         orderedDict["Flight ID"] = newID
