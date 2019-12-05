@@ -58,12 +58,11 @@ class OnLoad:
         return "\n".join(returnList)
 
     def newAirplane(self, dict, list):
-        """Takes in a list with all parameters required in airplane.csv (except id and status) and
-            writes it to the list
-            returns a string with the outcome"""
+        """takes in a dictionary and a lsit with all required fields for the airplane.csv format,
+            returns the new plane in a list and a string with the outcome"""
         self.__objectList.append(dict)
         writeToFile(list)
-        return "Plane added successfully"
+        return list, "Plane added successfully"
 
     def getHighestID(self):
         """Finds the current highest ID in the airplane.csv and returns a new higher ID"""

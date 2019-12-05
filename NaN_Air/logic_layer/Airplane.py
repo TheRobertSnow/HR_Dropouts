@@ -8,6 +8,9 @@ class CreateAirplane:
     def getID(self):
         return self.__myDictionary["airplaneId"]
 
+    def getReg(self):
+        return self.__myDictionary["planeReg"]
+
     def __str__(self):
         returnString = []
         for key, val in self.__myDictionary.items():
