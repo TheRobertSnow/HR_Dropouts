@@ -5,9 +5,6 @@ import UIAPI
 
 class ProgramUI:
     def __init__(self):
-        #self.viewInstance = View.View()
-        #self.createInstance = Create.Create()
-        #self.updateInstance = Update.Update()
         self.object = UIAPI.UIAPI()
 
     def login(self):

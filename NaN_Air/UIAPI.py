@@ -4,13 +4,14 @@ from logic_layer import *
 # functions that UI layer calls --
 class UIAPI:
     def __init__(self):
-        self.airplaneInstance = AirplaneLL.AirplaneLL()
+        self.instance = AirplaneLL.AirplaneLL()
+        self.flightInstance = FlightLL.FlightLL()
 
     #
     # plane related
-    #
+    #      
     def newPlaneRequest(self, myList):
-        """"""
+        """"""   
         returnString = self.airplaneInstance.createNewPlane(myList)
         return returnString
 
@@ -29,7 +30,10 @@ class UIAPI:
     #
     # flight related
     #
-
+    def newFlightRequest(self, flightList):
+        """"""
+        returnString = FlightLL.FlightLL.createNewFlight(self.instance, flightList)
+        return returnString
     #
     # voyage related
     #

@@ -1,14 +1,7 @@
 import UIAPI
-
-
-class View:
+class View():
     def __init__(self):
-        self.instance = UIAPI.UIAPI()
-        """self.__plane = UIAPI.UIAPI()
-        self.__voyage = UIAPI.UIAPI()
-        self.__worker = UIAPI.UIAPI()
-        self.__flight = UIAPI.UIAPI()
-        self.__flightRoute = UIAPI.UIAPI()"""
+        self.object = UIAPI.UIAPI()
 
     def viewMenu(self):
         print('''View Data
@@ -25,32 +18,32 @@ class View:
         if viewMenuInput == "1":
             viewWorkerOutput = View.viewWorker(self)
             if viewWorkerOutput == "b":
-                viewMenuInput = self.viewMenu()
+                viewMenuInput = View.viewMenu(self)
         elif viewMenuInput == "2":
             viewAirplaneOutput = View.viewAirplane(self)
             if viewAirplaneOutput == "b":
-                viewMenuInput = self.viewMenu()
+                viewMenuInput = View.viewMenu(self)
         elif viewMenuInput == "3":
             viewFlightRoutesOutput = View.viewFlightRoutes(self)
             if viewFlightRoutesOutput == "b":
-                viewMenuInput = self.viewMenu()
+                viewMenuInput = View.viewMenu(self)
         elif viewMenuInput == "4":
             viewVoyagesOutput = View.viewVoyages(self)
             if viewVoyagesOutput == "b":
-                viewMenuInput = self.viewMenu()
+                viewMenuInput = View.viewMenu(self)
         elif viewMenuInput == "5":
             viewFlightOutput = View.viewFlight(self)
             if viewFlightOutput == "b":
-                viewMenuInput = self.viewMenu()
+                viewMenuInput = View.viewMenu(self)
         elif viewMenuInput == "b":
             return viewMenuInput
         elif viewMenuInput == "q":
             return viewMenuInput
         else:
             print("Wrong input, try again")
-            viewMenuInput = self.viewMenu()
+            viewMenuInput = View.viewMenu(self)
         return viewMenuInput
-
+    
     def viewWorker(self):
         print('''1. View Worker
 --------------------------------------------
@@ -64,38 +57,38 @@ class View:
         if viewWorkerInput == "1":
             viewPilotsOutput = View.viewPilots()
             if viewPilotsOutput == "b":
-                viewWorkerInput = View.viewWorker()
+                viewWorkerInput = View.viewWorker(self)
             elif viewPilotsOutput == "q":
                 return viewWorkerInput
             else:
-                viewWorkerInput = View.viewWorker()
+                viewWorkerInput = View.viewWorker(self)
         elif viewWorkerInput == "2":
             viewAttendantsOutput = View.viewAttendants()
             if viewAttendantsOutput == "b":
-                viewWorkerInput = View.viewWorker()
+                viewWorkerInput = View.viewWorker(self)
             elif viewAttendantsOutput == "q":
                 return viewWorkerInput
             else:
-                viewWorkerInput = View.viewWorker()
+                viewWorkerInput = View.viewWorker(self)
         elif viewWorkerInput == "3":
             # BossInfo = getAllBosses()
             # print(BossInfo)
             print("")
-            viewWorkerInput = View.viewWorker()
+            viewWorkerInput = View.viewWorker(self)
         elif viewWorkerInput == "4":
             # print(getAllStaff())
             print("")
-            viewWorkerInput = View.viewWorker()
+            viewWorkerInput = View.viewWorker(self)
         elif viewWorkerInput == "b":
             return viewWorkerInput
         elif viewWorkerInput == "q":
             return viewWorkerInput
         else:
             print("Wrong input, try again")
-            viewWorkerInput = View.viewWorker()
-        return viewWorkerInput
-
-    # Pilots
+            viewWorkerInput = View.viewWorker(self)
+        return viewWorkerInput        
+    
+# Pilots
     def viewPilots(self):
         print('''1.1. View Pilots
 --------------------------------------------
@@ -122,10 +115,10 @@ class View:
             return viewPilotsInput
         else:
             print("Wrong input, try again")
-            viewPilotsInput = View.viewPilots()
-        return viewPilotsInput
+            viewPilotsInput = View.viewPilots(self)
+        return viewPilotsInput    
 
-    # Attendants
+#Attendants
     def viewAttendants(self):
         print('''1.2. View Attendants
 --------------------------------------------
@@ -148,10 +141,10 @@ class View:
             return viewAttendantsInput
         else:
             print("Wrong input, try again")
-            viewAttendantsInput = View.viewAttendants()
+            viewAttendantsInput = View.viewAttendants(self)
         return viewAttendantsInput
-
-    def viewAirplane(self):
+        
+    def viewAirplane(self):     
         print('''2. View Airplane
 --------------------------------------------
   1. View specific airplane
@@ -204,20 +197,20 @@ class View:
         if viewFlightRoutesInput == "1":
             FlightRouteID = input("  - Please input Flight Route ID: ")
             print(FlightRouteID)
-            # FlightRoute = getFlightRoute(FlightRouteID)
-            # print(FlightRoute)
-            viewFlightRoutesInput = View.viewFlightRoutes()
+            #FlightRoute = getFlightRoute(FlightRouteID)
+            #print(FlightRoute)
+            viewFlightRoutesInput = View.viewFlightRoutes(self)
         elif viewFlightRoutesInput == "2":
-            # print(getAllFlightRoutes)
-            print("")
-            viewFlightRoutesInput = View.viewFlightRoutes()
+            #print(getAllFlightRoutes)
+            print("")   
+            viewFlightRoutesInput = View.viewFlightRoutes(self)
         elif viewFlightRoutesInput == "b":
             return viewFlightRoutesInput
         elif viewFlightRoutesInput == "q":
             return viewFlightRoutesInput
         else:
             print("Wrong input, try again")
-            viewFlightRoutesInput = View.viewFlightRoutes()
+            viewFlightRoutesInput = View.viewFlightRoutes(self)
         return viewFlightRoutesInput
 
     def viewVoyages(self):
@@ -233,20 +226,20 @@ class View:
             # VoyageInfo = getVoyageInfo(SSN)
             # print(VoyageInfo)
             print(SSN)
-            viewVoyagesInput = View.viewVoyages()
+            viewVoyagesInput = View.viewVoyages(self)
         elif viewVoyagesInput == "2":
             print("")
-            # print(getAllVoyages())
-            viewVoyagesInput = View.viewVoyages()
+            #print(getAllVoyages())
+            viewVoyagesInput = View.viewVoyages(self)
         elif viewVoyagesInput == "b":
             return viewVoyagesInput
         elif viewVoyagesInput == "q":
             return viewVoyagesInput
         else:
             print("Wrong input, try again")
-            viewVoyagesInput = View.viewVoyages()
+            viewVoyagesInput = View.viewVoyages(self)
         return viewVoyagesInput
-
+      
     def viewFlight(self):
         print('''5. View Flights
 --------------------------------------------
@@ -260,26 +253,26 @@ class View:
         if viewFlightInput == "1":
             SSN = input('  - Please input Voyage ID: ')
             print(SSN)
-            # FlightInfo = getSpecificFlight(SSN)
-            # print(FlightInfo)
-            viewFlightInput = View.viewFlight()
+            #FlightInfo = getSpecificFlight(SSN)
+            #print(FlightInfo)
+            viewFlightInput = View.viewFlight(self)
         if viewFlightInput == "2":
             # print(getAllFlights())
             print("")
-            viewFlightInput = View.viewFlight()
+            viewFlightInput = View.viewFlight(self)
         if viewFlightInput == "3":
             # print(getActiveFlights())
             print("")
-            viewFlightInput = View.viewFlight()
+            viewFlightInput = View.viewFlight(self)
         if viewFlightInput == "4":
             # print(getCancelledFlights)
             print("")
-            viewFlightInput = View.viewFlight()
+            viewFlightInput = View.viewFlight(self)
         elif viewFlightInput == "b":
             return viewFlightInput
         elif viewFlightInput == "q":
             return viewFlightInput
         else:
             print("Wrong input, try again")
-            viewFlightInput = View.viewFlight()
+            viewFlightInput = View.viewFlight(self)
         return viewFlightInput
