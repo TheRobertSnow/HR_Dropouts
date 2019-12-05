@@ -1,8 +1,11 @@
-airplane id,plane reg,manufacturer,model,status,number of seats,odometer
-1,BA0345,Fokker,777,Broken,340,3400524
-2,BA5236,Boeing,723,Cancelled,500,41435351
-3,BA1234,Boeing,123,Grounded,120,0
-4,BA0644,Boeing,N82,Ready,300,987010
-5,test,e,f,Ready,34,3
-6,test2,t,i,Ready,9898,341
-7,BA98398,34,3,Ready,34,33
+plane reg,manufacturer,model,status,seats,odometer
+TF-EPG,Fokker,F100,Grounded,110,0
+TF-UVR,Fokker,F28,Grounded,79,0
+TF-XZR,BAe,146,Grounded,98,0
+TF-XZM,BAe,146,Grounded,98,0
+TF-IZE,Fokker,F100,Grounded,110,0
+TF-PGK,BAe,146,Grounded,98,0
+TF-TYQ,Fokker,F100,Grounded,110,0
+TF-LNQ,BAe,146,Grounded,98,0
+TF-XUP,Fokker,F100,Grounded,110,0
+test,1,1,1,Grounded,1
