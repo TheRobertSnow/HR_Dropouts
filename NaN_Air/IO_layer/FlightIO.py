@@ -1,6 +1,6 @@
 import csv
 import sys
-FILENAME = '../DataFiles/flight.csv'
+FILENAME = 'DataFiles/flight.csv'
 
 
 class FlightIO():
