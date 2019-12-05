@@ -24,12 +24,7 @@ class FlightLL():
 
     def createNewFlight(self, flightList):
         orderedDict = collections.OrderedDict()
-        newID = 0
-        for instance in self.instanceList:
-            flightID = instance.flightID
-            if int(flightID) > newID:
-                newID = int(flightID)
-        newID += 1
+        newID = self.ioAPI.getHigestFlightID()
         flightNumber = getFlightNumber(self, flightList)
         orderedDict["Flight ID"] = newID
         orderedDict["Flight number"] = flightNumber
@@ -52,11 +47,27 @@ class FlightLL():
         return returnString
     
     def getXflight(self, flightNumber):
-        for object in self.instanceList:
-            tag = object.getFlightNumber()
-            if tag.lower() == flightNumber.lower():
-                return object
+        for instance in self.instanceList:
+            flightNumbers = instance.flightNumber
+            if flightNumbers.lower() == flightNumber.lower():
+                return instance
         return "Flight not found!"
     
     def getAllFlights(self):
         return self.instanceList
+    
+    def getActiveFlights(self):
+        activeFlightList = []
+        for instance in self.instanceList:
+            flightStatus = instance.flightStatus
+            if flightStatus != "Cancelled":
+                activeFlightList.append(instance)
+        return activeFlightList
+    
+    def getCancelledFlights(self):
+        cancelledFlightList = []
+        for instance in self.instanceList:
+            flightStatus = instance.flightStatus
+            if flightStatus == "Cancelled":
+                cancelledFlightList.append(instance)
+        return cancelledFlightList

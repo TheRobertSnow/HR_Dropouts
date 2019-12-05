@@ -21,4 +21,6 @@ class IOAPI:
         flightList = self.flights.returnObjectList()
         return flightList
     
- 
+    def getHigestFlightID(self):
+        highestID = self.flights.getHighestID()
+        return highestID

@@ -271,12 +271,24 @@ class View():
                 print()
             viewFlightInput = View.viewFlight(self)
         if viewFlightInput == "3":
-            # print(getActiveFlights())
-            print("")
+            viewActiveFlights = UIAPI.UIAPI.viewActiveFlights(self)
+            for count, flight in enumerate(viewActiveFlights):
+                if len(viewActiveFlights) > 4:
+                    if count >= 4:
+                        if count % 4 == 0:
+                            input("\nPress enter to see next")
+                print(flight)
+                print()
             viewFlightInput = View.viewFlight(self)
         if viewFlightInput == "4":
-            # print(getCancelledFlights)
-            print("")
+            viewCancelledFlights = UIAPI.UIAPI.viewCancelledFlights(self)
+            for count, flight in enumerate(viewCancelledFlights):
+                if len(viewCancelledFlights) > 4:
+                    if count >= 4:
+                        if count % 4 == 0:
+                            input("\nPress enter to see next")
+                print(flight)
+                print()
             viewFlightInput = View.viewFlight(self)
         elif viewFlightInput == "b":
             return viewFlightInput

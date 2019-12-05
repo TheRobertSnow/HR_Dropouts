@@ -65,7 +65,7 @@ class FlightIO():
         highestID = 0
         for dictionary in self.__objectList:
             for key, value in dictionary.items():
-                if key == "flight id":
+                if key == "Flight ID":
                     if int(value) > highestID:
                         highestID = int(value)
         return highestID + 1
@@ -105,7 +105,7 @@ class FlightIO():
         and writes the changes to file"""
         for index, dictionary in enumerate(self.__dictList):
             for key, value in dictionary.items():
-                if key == 'flight id':
+                if key == 'Flight ID':
                     if value == aList[0]:
                         self.__dictList[index][aList[1]] = aList[2]
                         self.write_dictList_to_file()

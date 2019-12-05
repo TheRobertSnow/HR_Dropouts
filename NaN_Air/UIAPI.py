@@ -43,10 +43,13 @@ class UIAPI:
         returnData = self.flightInstance.getAllFlights()
         return returnData
     
-    def viewActiveFlights():
-        print("viewActiveFlights")
-    def viewCancelledFlights():
-        print("viewCancelledFlights")
+    def viewActiveFlights(self):
+        returnString = self.flightInstance.getActiveFlights()
+        return returnString
+    
+    def viewCancelledFlights(self):
+        returnString = self.flightInstance.getCancelledFlights()
+        return returnString
     #
     # voyage related
     #
