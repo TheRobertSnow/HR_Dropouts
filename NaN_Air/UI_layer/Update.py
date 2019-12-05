@@ -85,7 +85,7 @@ Boeing - {}: Select Airplane Status
 
     def updatecurrentflightRoutes():
         flightrouteID = input("Input flight route ID: ") #Þetta ákveðna tilvik af flight route fundið
-        print("Country: Iceland\nAirport: Keflavik\nFlight Distance: 700 km\nTravel time: 75 minutes")
+        print("Country: Iceland\nAirport: Keflavik\nFlight Distance: 700 km\nTravel time: 75 minutes\n")
         print("""3. Update Current Flights Routes
 --------------------------------------------
 1. Update Country
@@ -99,27 +99,27 @@ Boeing - {}: Select Airplane Status
         if updateflightrouteMenuInput == "1":
             print("Current country: Greece ")
             countryInput = input("Input new country: ")
-            print("Country succesfully changed!\nNew country: {}".format(countryInput))
+            print("Country succesfully changed!\nNew country: {}\n".format(countryInput))
         elif updateflightrouteMenuInput == "2":
             print("Current airport: Antetekounmpo airport")
             airportInput = input("Input name of new airport: ")
-            print("Airport succesfully changed!\nNew aiport: {}".format(airportInput))
+            print("Airport succesfully changed!\nNew aiport: {}\n".format(airportInput))
         elif updateflightrouteMenuInput == "3":
             print("Current Flight Distance: 500 km\n")
             flightdistanceInput = input("Input new flight distance in kilometers: ")
-            print("Flight Distance succesfully changed!\nNew flight distance: {} km".format(flightdistanceInput))
+            print("Flight Distance succesfully changed!\nNew flight distance: {} km\n".format(flightdistanceInput))
         elif updateflightrouteMenuInput == "4":
             print("Current travel time: 120 minutes")
             traveltimeInput = input("Input new travel time in minutes: ")
-            print("Travel Time succesfully changed!\nNew travel time: {} minutes".format(traveltimeInput))
+            print("Travel Time succesfully changed!\nNew travel time: {} minutes\n".format(traveltimeInput))
         elif updateflightrouteMenuInput == "5":
             print("Current Emergency Contact: Gunni")
             emergencycontactInput = input("Input new value: ")
-            print("Emergency Contact succesfully changed!\nNew emergency contact: {}".format(emergencycontactInput))
+            print("Emergency Contact succesfully changed!\nNew emergency contact: {}\n".format(emergencycontactInput))
         elif updateflightrouteMenuInput == "6":
             print("Current Emergency Contact number: 5812345")
             emergencycontactnumInput = input("Input new value: ")
-            print("Emergency Contact number succesfully changed!\nNew emergency contact number: {}".format(emergencycontactnumInput))
+            print("Emergency Contact number succesfully changed!\nNew emergency contact number: {}\n".format(emergencycontactnumInput))
         elif updateflightrouteMenuInput == "b":
             Update.updateMenu()
         elif updateflightrouteMenuInput == "m":
@@ -132,8 +132,7 @@ Boeing - {}: Select Airplane Status
         print("")
         #Update.updateMenu(Update) HVAÐ Á ÉG AÐ CALLA HÉR???
 
-    def updateVoyage():
-        voyageID = input("Input voyage ID: ") #Þetta ákveðna tilvik af flight route fundið
+    def updateVoyage(voyageID):
         print("""Voyage ID: {}
         Flight out ID: NA21x
         Flight back ID:NA21(x+1)
@@ -141,7 +140,7 @@ Boeing - {}: Select Airplane Status
         Crew: [Emma - 12436576, Jónsi - 3434656539]
         Flight route ID: 23
         Departure from Iceland: datetime
-        Departure to Iceland: datetime""".format(voyageID))
+        Departure to Iceland: datetime\n""".format(voyageID))
         print("""4. Update Voyage 
 --------------------------------------------
 1. Update Pilots
@@ -152,7 +151,7 @@ Boeing - {}: Select Airplane Status
 --------------------------------------------""")
         updatevoyageMenuInput = input("Input choice(q to Quit, b for Back, m for Main Menu): ") #Á að taka inn int
         if updatevoyageMenuInput == "1":
-            print("Current Pilots: [John - 123456789, Hooper - 2607962249]")
+            print("Current Pilots: [John - 123456789, Hooper - 2607962249]\n")
             print("""1. Update Pilots 
 --------------------------------------------
 1. Add Pilot(s)
@@ -161,12 +160,12 @@ Boeing - {}: Select Airplane Status
             updatepilotMenuInput = input("Input choice(q to Quit, b for Back, m for Main Menu): ")
             if updatepilotMenuInput == "1":
                 print("""
-            1. Add Pilot
+1. Add Pilot
 --------------------------------------------""")
                 pilottoaddInput = input("Input Social Security Number of Pilot to add: ") #Bæta við chekki sem kannar hvort að þetta sé main pilot
                 print("""Pilot succesfully added!
 Current Pilots: [John - 123456789, Hooper - 2607962249]
---------------------------------------------""")
+--------------------------------------------\n""")
             elif updatepilotMenuInput == "2":
                 print("""
             2. Remove Pilots
@@ -174,10 +173,10 @@ Current Pilots: [John - 123456789, Hooper - 2607962249]
                 pilottoremoveInput = input("Input Social Security Number of Pilot to remove: ") #Bæta við chekki sem kannar hvort að þetta sé main pilot
                 print("""Pilot succesfully removed!
 Current Pilots: [John - 123456789]
---------------------------------------------""")
+--------------------------------------------\n""")
                 
         elif updatevoyageMenuInput == "2":
-            print("Current Crew members: [Sansa - 123456789, Bertha - 2607962249]")
+            print("Current Crew members: [Sansa - 123456789, Bertha - 2607962249]\n")
             print("""1. Update Cew 
 --------------------------------------------
 1. Add Crew member
@@ -191,7 +190,7 @@ Current Pilots: [John - 123456789]
                 pilottoaddInput = input("Input Social Security Number of Crew member to add: ") #Bæta við chekki sem kannar hvort að þetta sé main pilot
                 print("""Crew member succesfully added!
                 Current Crew members: [Sansa - 123456789, Bertha - 2607962249]
-                --------------------------------------------""")
+                --------------------------------------------\n""")
             elif updatecrewMenuInput == "2":
                 print("""
             2. Remove Crew member
@@ -199,29 +198,29 @@ Current Pilots: [John - 123456789]
                 pilottoremoveInput = input("Input Social Security Number of Crew member to remove: ") #Bæta við chekki sem kannar hvort að þetta sé main pilot
                 print("""Crew member succesfully removed!
                 Current Crew members: [[Sansa - 123456789]
-                --------------------------------------------""")
+                --------------------------------------------\n""")
         
         elif updatevoyageMenuInput == "3":
             print("""3. Update Departure from Iceland
 --------------------------------------------""")
             print("""Current departure time: 05/29/2015 05:50""")
             departuretimeInput = input("Input new departure time with slashes in between: ")
-            print("Departure time succesfully changed!\nNew Departure time: {}".format(departuretimeInput))
+            print("Departure time succesfully changed!\nNew Departure time: {}\n".format(departuretimeInput))
         
         elif updatevoyageMenuInput == "4":
             print("""4. Update Departure to Iceland
 --------------------------------------------""")
             print("""Current departure time: 05/29/2015 11:20""")
             departuretimeInput = input("Input new departure time with slashes in between: ")
-            print("Departure time succesfully changed!\nNew Departure time: {}".format(departuretimeInput))
+            print("Departure time succesfully changed!\nNew Departure time: {}\n".format(departuretimeInput))
         
         elif updatevoyageMenuInput == "5":
             voyageID = input("Input voyage ID of the voyage you wish to cancel: ") 
             #Route cancelled, return nauðsynlegu info
-            print("Voyage succesfully cancelled!")
+            print("Voyage succesfully cancelled!\n")
 
         elif updatevoyageMenuInput == "b":
-            Update.updateVoyage()
+            Update.updateVoyage(voyageID)
         elif updatevoyageMenuInput == "m":
             Update.updateMenu()
         elif updatevoyageMenuInput == "q":
@@ -229,7 +228,6 @@ Current Pilots: [John - 123456789]
         else:
             print("Invalid input")
             updatecurrentflightRoutes()
-        print("")
         #Update.updateMenu(Update) HVAÐ Á ÉG AÐ CALLA HÉR???
 
     def updateFlights(): 
@@ -279,7 +277,7 @@ Flight - {}: Select Flight Status
 --------------------------------------------""")
             print("""Current departure time: 01/01/2015 01:50""")
             departuretimeInput = input("Input new departure time with slashes in between: ")
-            print("Departure time succesfully changed!\nNew Departure time: {}".format(departuretimeInput))
+            print("Departure time succesfully changed!\nNew Departure time: {}\n".format(departuretimeInput))
 
         elif updateflightMenuInput == "b":
                 Update.updateFlights()
@@ -313,7 +311,8 @@ Flight - {}: Select Flight Status
             Update.updatecurrentflightRoutes()
             updateMenuInput = Update.updateMenu()
         elif updateMenuInput == "4":
-            Update.updateVoyage() #Kallar á update voyage function
+            voyageID = input("Input voyage ID: ") #Þetta ákveðna tilvik af flight route fundið
+            Update.updateVoyage(voyageID) #Kallar á update voyage function
             updateMenuInput = Update.updateMenu()
         elif updateMenuInput == "5":
             Update.updateFlights()
@@ -321,10 +320,13 @@ Flight - {}: Select Flight Status
         elif updateMenuInput == "b":
             return updateMenuInput
         elif updateMenuInput == "q":
-            return updateMenuInput
+            return None
         else:
             print("Wrong input, try again")
             updateMenuInput = Update.updateMenu()
+        print("")
         return updateMenuInput
+
+
 
 
