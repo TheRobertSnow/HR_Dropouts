@@ -12,25 +12,30 @@ class AirplaneLL:
         for dict in self.planeList:
             airplane = Airplane.CreateAirplane(dict)
             self.instanceList.append(airplane)
+<<<<<<< HEAD
         print(len(self.instanceList), "Airplane objects in our system")
+=======
+        print(hex(id(self.instanceList)))
+        print(len(self.instanceList), "objects in our plane system, this print command is found in AirplaneLL")
+>>>>>>> 6271cd5141a99f1bf0437a89f0b8c0b7e42d2b7b
 
-    def createNewPlane(self, list):
+    def createNewPlane(self, myList):
         for airplane in self.instanceList:
             reg = airplane.getReg()
-            if reg == list[0]:
+            if reg == myList[0]:
                 return ["Plane with that register already exists"], "Plane creation failed"
         orderedDict = collections.OrderedDict()
-        orderedDict["plane reg"] = list[0]
-        orderedDict["manufacturer"] = list[1]
-        orderedDict["model"] = list[2]
+        orderedDict["plane reg"] = myList[0]
+        orderedDict["manufacturer"] = myList[1]
+        orderedDict["model"] = myList[2]
         orderedDict["status"] = "Grounded"
-        orderedDict["number of seats"] = list[3]
-        orderedDict["odometer"] = list[4]
-        list.insert(3, "Grounded")
+        orderedDict["number of seats"] = myList[3]
+        orderedDict["odometer"] = myList[4]
+        myList.insert(3, "Grounded")
         newAirPlane = Airplane.CreateAirplane(orderedDict)
         self.instanceList.append(newAirPlane)
         print("now there are", len(self.instanceList), "objects in system")
-        returnString = self.ioAPI.createPlaneRequest(orderedDict, list)
+        returnString = self.ioAPI.createPlaneRequest(orderedDict, myList)
         return returnString
 
     def getAllFlights(self):

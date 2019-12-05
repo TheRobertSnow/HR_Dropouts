@@ -3,4 +3,6 @@ Flight ID,Flight number,Airplane registration number,Origin ID,Destination ID,Fl
 1,NA011,T-912,7,5,Boarding,4:00,20:32,00:32
 2,NA012,T-913,10,6,Active,3:30,20:32,00:02
 3,NA013,T-914,0,4,Active,3:30,20:32,00:02
-4,NA014,T-915,2,3,Cancelled,3:30,20:32,00:025,NA01321,123456,132,1234,On Air,TravelTIMEisGOnnaBEHEre,124125T124241:00,ArrivalTIMEISgonnaBEhere
+4,NA014,T-915,2,3,Cancelled,3:30,20:32,00:02
+5,NA01321,123456,132,1234,On Air,TravelTIMEisGOnnaBEHEre,124125T124241:00,ArrivalTIMEISgonnaBEhere
+6,NA01231,123124,123,12411,On Air,TravelTIMEisGOnnaBEHEre,124T23421:00,ArrivalTIMEISgonnaBEhere
