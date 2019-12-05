@@ -4,7 +4,6 @@ import collections
 
 def getFlightNumber(self, flightList):
     company = "NA"
-    print(flightList[1])
     if flightList[1] == "0":
         lastNumber = "0"
     else:
@@ -21,7 +20,7 @@ class FlightLL():
         for objectDict in self.flightList:
             flight = Flight.CreateFlight(objectDict)
             self.instanceList.append(flight)
-        print(len(self.instanceList), "Flight objects in our system, this print command is found in FlightLL")
+        print(len(self.instanceList), "Flight objects in our system")
 
     def createNewFlight(self, flightList):
         orderedDict = collections.OrderedDict()
@@ -32,15 +31,15 @@ class FlightLL():
                 newID = int(id)
         newID += 1
         flightNumber = getFlightNumber(self, flightList)
-        orderedDict["flight id"] = newID
-        orderedDict["flight number"] = flightNumber
-        orderedDict["airplane reg"] = flightList[0]
-        orderedDict["flight route id"] = flightList[1]
-        orderedDict["destination"] = flightList[2]
-        orderedDict["flight status"] = "On Air"
-        orderedDict["travel time"] = "TravelTIMEisGOnnaBEHEre"
-        orderedDict["departure time"] = flightList[3]
-        orderedDict["arrival time"] = "ArrivalTIMEISgonnaBEhere"
+        orderedDict["Flight ID"] = newID
+        orderedDict["Flight number"] = flightNumber
+        orderedDict["Airplane registration number"] = flightList[0]
+        orderedDict["Origin ID"] = flightList[1]
+        orderedDict["Destination ID"] = flightList[2]
+        orderedDict["Flight status"] = "On Air"
+        orderedDict["Travel time"] = "TravelTIMEisGOnnaBEHEre"
+        orderedDict["Departure time"] = flightList[3]
+        orderedDict["Arrival time"] = "ArrivalTIMEISgonnaBEhere"
         flightList.insert(0, newID)
         flightList.insert(1, flightNumber)
         flightList.insert(5, "On Air")
@@ -48,7 +47,16 @@ class FlightLL():
         flightList.insert(8, "ArrivalTIMEISgonnaBEhere")
         newFlight = Flight.CreateFlight(orderedDict)
         self.instanceList.append(newFlight)
-        
         print("now there are", len(self.instanceList), "Flight objects in system")
         returnString = self.ioAPI.createFlightRequest(orderedDict, flightList)
         return returnString
+    
+    def getXflight(self, flightNumber):
+        for object in self.instanceList:
+            tag = object.getFlightNumber()
+            if tag.lower() == flightNumber.lower():
+                return object
+        return "Flight not found!"
+    
+    def getAllFlights(self):
+        return self.instanceList

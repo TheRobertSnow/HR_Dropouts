@@ -14,7 +14,7 @@ class IOAPI:
         return planeList
     
     def createFlightRequest(self, objectDict, flightList):
-        returnString = self.flights.newFlight(objectDict, flightList)
+        returnString = self.flights.write_flight_to_file(objectDict, flightList)
         return returnString
 
     def getFlightList(self):

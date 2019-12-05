@@ -3,10 +3,13 @@ class CreateFlight:
         self.__myDictionary = objectDict
         
     def getID(self):
-        return self.__myDictionary["flight id"]
+        return self.__myDictionary["Flight ID"]
     
-    def getFlightRouteID(self):
-        return self.__myDictionary["flight route id"]
+    def getFlightNumber(self):
+        return self.__myDictionary["Flight number"]
+    
+    def getOriginID(self):
+        return self.__myDictionary["Origin ID"]
     
     def __str__(self):
         returnString = []

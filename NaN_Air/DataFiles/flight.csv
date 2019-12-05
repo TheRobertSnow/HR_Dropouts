@@ -1,4 +1,4 @@
-flight id,flight number,airplane reg,flight route id,destination,flight status,travel time,departure time,arrival time
+Flight ID,Flight number,Airplane registration number,Origin ID,Destination ID,Flight status,Travel time,Departure time,Arrival time
 0,NA010,T-911,8,7,Boarding,3:00,20:32,23:32
 1,NA011,T-911,8,5,crashing,4:00,20:32,00:32
 2,NA011,T-911,8,4,Boarding,3:30,20:32,00:02
@@ -9,3 +9,13 @@ flight id,flight number,airplane reg,flight route id,destination,flight status,t
 7,NA000,EA123,0,3,On Air,TravelTIMEisGOnnaBEHEre,25/12/2019T14:50:00,ArrivalTIMEISgonnaBEhere
 8,NA0201,AB123,20,0,On Air,TravelTIMEisGOnnaBEHEre,24/12/2099T13:20:00,ArrivalTIMEISgonnaBEhere
 9,NA000,ABC123,0,4,On Air,TravelTIMEisGOnnaBEHEre,23/12/2040T14:30:00,ArrivalTIMEISgonnaBEhere
+10,NA0121,EA1234,12,23,On Air,TravelTIMEisGOnnaBEHEre,124T124:00,ArrivalTIMEISgonnaBEhere
+11,NA021,Typpi328,2,5,On Air,TravelTIMEisGOnnaBEHEre,12/08/2012T14:55:00,ArrivalTIMEISgonnaBEhere
+12,NA01231,Píka123,123,124,On Air,TravelTIMEisGOnnaBEHEre,1244125T14:50:00,ArrivalTIMEISgonnaBEhere
+13,NA0121,API,12,123,On Air,TravelTIMEisGOnnaBEHEre,421214T24112:00,ArrivalTIMEISgonnaBEhere
+14,NA0125151,123124,12515,125315,On Air,TravelTIMEisGOnnaBEHEre,135135T135135:00,ArrivalTIMEISgonnaBEhere
+15,NA01231,123,123,123,On Air,TravelTIMEisGOnnaBEHEre,123T123:00,ArrivalTIMEISgonnaBEhere
+16,NA01231,123,123,123,On Air,TravelTIMEisGOnnaBEHEre,123T123:00,ArrivalTIMEISgonnaBEhere
+17,NA0121,EA145,12,13,On Air,TravelTIMEisGOnnaBEHEre,15135T12451:00,ArrivalTIMEISgonnaBEhere
+18,NA04121,12123,412,124,On Air,TravelTIMEisGOnnaBEHEre,1241T12414:00,ArrivalTIMEISgonnaBEhere
+19,NA012511,1241413,1251,123123,On Air,TravelTIMEisGOnnaBEHEre,13T1213:00,ArrivalTIMEISgonnaBEhere
