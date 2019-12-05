@@ -1,11 +1,9 @@
-flight id,flight number,airplane reg,flight route id,destination,flight status,travel time,departure time,arrival time
+Flight ID,Flight number,Airplane registration number,Origin ID,Destination ID,Flight status,Travel time,Departure time,Arrival time
 0,NA010,T-911,8,7,Boarding,3:00,20:32,23:32
-1,NA011,T-911,8,5,crashing,4:00,20:32,00:32
-2,NA011,T-911,8,4,Boarding,3:30,20:32,00:02
-3,FLIGHTNUmber is hert,EA123,Iceland,London,On Air,TravelTIMEisGOnnaBEHEre,24/12/2019T12:45:00,ArrivalTIMEISgonnaBEhere
-4,FLIGHTNUmber is hert,EA132,London,Iceland,On Air,TravelTIMEisGOnnaBEHEre,26/12/2020T14:15:00,ArrivalTIMEISgonnaBEhere
-5,FLIGHTNUmber is hert,EA13214,ice,greece,On Air,TravelTIMEisGOnnaBEHEre,20/10/2010T14:15:00,ArrivalTIMEISgonnaBEhere
-6,NA001,EA123,0,1,On Air,TravelTIMEisGOnnaBEHEre,24/12/2019T13:45:00,ArrivalTIMEISgonnaBEhere
-7,NA000,EA123,0,3,On Air,TravelTIMEisGOnnaBEHEre,25/12/2019T14:50:00,ArrivalTIMEISgonnaBEhere
-8,NA0201,AB123,20,0,On Air,TravelTIMEisGOnnaBEHEre,24/12/2099T13:20:00,ArrivalTIMEISgonnaBEhere
-9,NA000,ABC123,0,4,On Air,TravelTIMEisGOnnaBEHEre,23/12/2040T14:30:00,ArrivalTIMEISgonnaBEhere
+1,NA011,T-912,7,5,Boarding,4:00,20:32,00:32
+2,NA012,T-913,10,6,Active,3:30,20:32,00:02
+3,NA013,T-914,0,4,Active,3:30,20:32,00:02
+4,NA014,T-915,2,3,Cancelled,3:30,20:32,00:02
+5,NA01321,123456,132,1234,On Air,TravelTIMEisGOnnaBEHEre,124125T124241:00,ArrivalTIMEISgonnaBEhere
+6,NA01231,123124,123,12411,On Air,TravelTIMEisGOnnaBEHEre,124T23421:00,ArrivalTIMEISgonnaBEhere
+7,NA012341,123124,1234,421,On Air,TravelTIMEisGOnnaBEHEre,124124T124124:00,ArrivalTIMEISgonnaBEhere

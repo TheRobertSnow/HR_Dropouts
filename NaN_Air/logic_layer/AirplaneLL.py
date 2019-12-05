@@ -12,8 +12,8 @@ class AirplaneLL:
         for dict in self.planeList:
             airplane = Airplane.CreateAirplane(dict)
             self.instanceList.append(airplane)
-        # print(hex(id(self.instanceList))) <--- to see memory address
-        print(len(self.instanceList), "objects in our plane system, this print command is found in AirplaneLL")
+
+        print(len(self.instanceList), "Airplane objects in our system")
 
     def createNewPlane(self, myList):
         for airplane in self.instanceList:
