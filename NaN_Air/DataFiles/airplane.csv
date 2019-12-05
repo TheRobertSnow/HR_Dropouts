@@ -1,10 +1,10 @@
-plane reg,manufacturer,model,status,seats,odometer
-TF-EPG,Fokker,F100,Grounded,110
-TF-UVR,Fokker,F28,Grounded,79
-TF-XZR,BAe,146,Grounded,98
-TF-XZM,BAe,146,Grounded,98
-TF-IZE,Fokker,F100,Grounded,110
-TF-PGK,BAe,146,Grounded,98
-TF-TYQ,Fokker,F100,Grounded,110
-TF-LNQ,BAe,146,Grounded,98
-TF-XUP,Fokker,F100,Grounded,110
+plane reg,manufacturer,model,status,seats,odometer,0
+TF-EPG,Fokker,F100,Grounded,110,0
+TF-UVR,Fokker,F28,Grounded,79,0
+TF-XZR,BAe,146,Grounded,98,0
+TF-XZM,BAe,146,Grounded,98,0
+TF-IZE,Fokker,F100,Grounded,110,0
+TF-PGK,BAe,146,Grounded,98,0
+TF-TYQ,Fokker,F100,Grounded,110,0
+TF-LNQ,BAe,146,Grounded,98,0
+TF-XUP,Fokker,F100,Grounded,110,0
