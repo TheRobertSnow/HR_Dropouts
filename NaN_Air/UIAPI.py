@@ -73,7 +73,27 @@ class UIAPI:
     # flight route related
     #
 
+    def createNewFlightRoute(self, flightRouteList):
+        """Takes in list with flight route ID, country, airport, flight distance, travel time, emergecy contact and emergency number and creates Flight Route """
+        returnData = flightRouteLL.createFlightRoute()
+        return returnData
 
+    def updateFlightRoute(self,flightRouteID, key, newValue):
+        """Uses flightRouteID to find the instance and uses the key to update the instance with a new value"""
+        returnData = flightRouteLL.updateFlightRoute()
+        return returnData
+
+    def viewFlightRoute(self, flightRouteID):
+        """Uses flightRouteID to view a certain flightRouteID"""
+        returnData = flightRouteLL.viewFlightRoute()
+        return returnData
+
+    def viewAllFlightRoutes(self):
+        """Prints all FLight Routes"""
+        returnData = flightRouteLL.viewFlightRoute()
+        return returnData
+
+    
 # ++++++++++ Test Case ++++++++++
 # UIAPI = UIAPI()
 # UIAPI.get_airplanes()
