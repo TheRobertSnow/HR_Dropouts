@@ -42,11 +42,11 @@ class FlightLL():
         flightList.insert(8, "ArrivalTIMEISgonnaBEhere")
         newFlight = Flight.CreateFlight(orderedDict)
         self.instanceList.append(newFlight)
-        print("now there are", len(self.instanceList), "Flight objects in system")
+        print("Now there are", len(self.instanceList), "Flight objects in system")
         returnString = self.ioAPI.createFlightRequest(orderedDict, flightList)
         return returnString
     
-    def getXflight(self, flightNumber):
+    def getCertainflight(self, flightNumber):
         for instance in self.instanceList:
             flightNumbers = instance.flightNumber
             if flightNumbers.lower() == flightNumber.lower():
@@ -56,6 +56,15 @@ class FlightLL():
     def getAllFlights(self):
         return self.instanceList
     
+    
+    def viewFlightsByStatus(self, status):
+        flightsByStatusList = []
+        for instance in self.instanceList:
+            flightStatus = instance.flightStatus
+            if flightStatus == status:
+                flightsByStatusList.append(instance)
+        return flightsByStatusList
+    
     def getActiveFlights(self):
         activeFlightList = []
         for instance in self.instanceList:
@@ -63,11 +72,3 @@ class FlightLL():
             if flightStatus != "Cancelled":
                 activeFlightList.append(instance)
         return activeFlightList
-    
-    def getCancelledFlights(self):
-        cancelledFlightList = []
-        for instance in self.instanceList:
-            flightStatus = instance.flightStatus
-            if flightStatus == "Cancelled":
-                cancelledFlightList.append(instance)
-        return cancelledFlightList

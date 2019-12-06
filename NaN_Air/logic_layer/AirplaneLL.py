@@ -17,20 +17,20 @@ class AirplaneLL:
         
     def createNewAirlane(self, airplaneList):
         for airplane in self.instanceList:
-            reg = airplane.getReg()
+            reg = airplane.airplaneReg
             if reg == airplaneList[0]:
-                return ["Plane with that register already exists"], "Plane creation failed"
+                return ["Plane with that register already exists"], "Airplane creation failed"
         orderedDict = collections.OrderedDict()
-        orderedDict["plane reg"] = airplaneList[0]
-        orderedDict["manufacturer"] = airplaneList[1]
-        orderedDict["model"] = airplaneList[2]
-        orderedDict["status"] = "Grounded"
-        orderedDict["seats"] = airplaneList[3]
-        orderedDict["odometer"] = airplaneList[4]
+        orderedDict["Airplane registration number"] = airplaneList[0]
+        orderedDict["Manufacturer"] = airplaneList[1]
+        orderedDict["Model"] = airplaneList[2]
+        orderedDict["Status"] = "Grounded"
+        orderedDict["Number of seats"] = airplaneList[3]
+        orderedDict["Odometer"] = airplaneList[4]
         airplaneList.insert(3, "Grounded")
         newAirPlane = Airplane.CreateAirplane(orderedDict)
         self.instanceList.append(newAirPlane)
-        print("now there are", len(self.instanceList), "objects in system")
+        print("Now there are", len(self.instanceList), "Airplane objects in system")
         returnString = self.ioAPI.createPlaneRequest(orderedDict, airplaneList)
         return returnString
 

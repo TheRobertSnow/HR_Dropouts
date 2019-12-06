@@ -11,42 +11,56 @@ class WorkerLL():
         for object in self.workerList:
             worker = Worker.CreateWorker(object)
             self.instanceList.append(worker)
-        print(len(self.instanceList), "objects in our system, this print command is found in WorkerLL")
+        print(len(self.instanceList), "Worker objects in our system")
 
-    def createNewWorker(self, workerInfoList): #Verður að fá inn SSN til þess að búa til nýja starfsmanninn
-        """ssn = workerInfoList[0]
+    def createNewWorker(self, workerList): #Verður að fá inn SSN til þess að búa til nýja starfsmanninn
         for worker in self.instanceList:
             workerssn = worker.socialSecurityNumber
-            if ssn == workerssn:
-                return "Worker with that Social Security Number already exists", "Worker creation failed"
-        """
+            if workerList[0] == workerssn:
+                return "Worker with that Social security number already exists, Worker creation failed"
+            
         orderedDict = collections.OrderedDict()
-        print(workerInfoList)
-        orderedDict["Social Security Number"] = workerInfoList[0]
-        orderedDict["Name"] = workerInfoList[1]
-        orderedDict["Position"] = workerInfoList[2]
-        orderedDict["Plane License"] = workerInfoList[3]
-        orderedDict["Address"] = workerInfoList[4]
-        orderedDict["Phone"] = workerInfoList[5]
-        orderedDict["Cellphone"] = workerInfoList[6]
-        orderedDict["Email"] = workerInfoList[7]
+        newID = self.ioAPI.getHigestFlightID()
+        orderedDict["ID"] = newID
+        orderedDict["Social security number"] = workerList[0]
+        orderedDict["Name"] = workerList[1]
+        orderedDict["Position"] = workerList[2]
+        orderedDict["Plane license"] = workerList[3]
+        orderedDict["Address"] = workerList[4]
+        orderedDict["Phone"] = workerList[5]
+        orderedDict["Cellphone"] = workerList[6]
+        orderedDict["Email"] = workerList[7]
         orderedDict["Active"] = "True"
         orderedDict["Available"] = "True"
-        workerInfoList.insert(8, "True")
-        #workerInfoList.insert(9, "True")
+        workerList.insert(0, newID)
+        workerList.insert(8, "True")
+        workerList.insert(9, "True")
         newWorker = Worker.CreateWorker(orderedDict)
         self.instanceList.append(newWorker)
         print("Now there are", len(self.instanceList), "Worker objects in the system")
-        returnString = self.ioAPI.createWorkerRequest(orderedDict, workerInfoList)
+        returnString = self.ioAPI.createWorkerRequest(orderedDict, workerList)
         return returnString
         
-
+    def viewWorkerByPosAndSSn(self, Captain, Copilot, MainFA, FA, ssn):
+        for instance in self.instanceList:
+            currentssn = instance.socialSecurityNumber
+            position = instance.position
+            if ssn != "":
+                if currentssn == ssn:
+                    if position == Captain or position == Copilot or position == MainFA or position == FA:
+                        return instance
+                    return "Worker found but he is not in this/these positions"
+            else:
+                if position == Captain or position == Copilot or position == MainFA or position == FA:
+                    return instance
+        return "Worker not found!"
+    
     def update_data_in_file(self, aList):
             """Method takes in list of data, updates the dictionary list
             and writes the changes to file"""
             for index, dictionary in enumerate(self.__dictList ):
                 for key, value in dictionary.items():
-                    if key == 'social security number':
+                    if key == 'Social security number':
                         if value == aList[0]:
                             self[index][aList[1]] = aList[2]
                             self.write____to_file()

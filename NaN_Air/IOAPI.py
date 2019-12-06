@@ -18,6 +18,10 @@ class IOAPI:
     #
     # worker related
     #
+    def getHigestWorkerID(self):
+        highestID = self.workerIO.getHighestID()
+        return highestID
+    
     def createWorkerRequest(self, objectDictionary, myList):
         returnString = self.workerIO.write_worker_to_file(objectDictionary, myList)
         return returnString

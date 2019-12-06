@@ -10,29 +10,7 @@ class UIAPI:
 
     #def get_airplanes(self):
         #[print(instance) for instance in self.airplaneLL.get_airplane_list()]
-    """
-    #
-    # worker related
-    #
-    def newWorkerRequest(self, workerList):
-        returnString = self.workerInstance.createNewWorker(workerList)
-        return returnString
-    #
-    # flight related
-    #
-    def newFlightRequest(self, flightList):
-        """"""
-        returnString = self.flightInstance.createNewFlight(flightList)
-        return returnString
-    
-    def viewXflight(self, flightNumber):
-        returnString = self.flightInstance.getXflight(flightNumber)
-        return returnString
-    
-    def viewAllFlights(self):
-        returnData = self.flightInstance.getAllFlights()
-        return returnData
-    
+    """ 
     def viewActiveFlights(self):
         returnString = self.flightInstance.getActiveFlights()
         return returnString
@@ -71,9 +49,9 @@ class UIAPI:
         returnData = self.workerLL.createNewWorker(workerList)
         return returnData
     
-    def viewWorkerByPosOrSSn(self, positionWeWantToPrint = "", ssn = ""):
+    def viewWorkerByPosAndSSn(self, Captain = "", Copilot = "", MainFA = "", FA = "", ssn = ""):
         """give us all workers that have a certain position"""
-        returnData = self.workerLL.viewWorkerByPosOrSSn(ssn, positionWeWantToPrint)
+        returnData = self.workerLL.viewWorkerByPosAndSSn(Captain, Copilot, MainFA, FA, ssn)
         return returnData
     
     def viewAllWorkers(self):

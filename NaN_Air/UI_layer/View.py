@@ -72,8 +72,6 @@ class View():
             else:
                 viewWorkerInput = View.viewWorker(self)
         elif viewWorkerInput == "3":
-            # BossInfo = getAllBosses()
-            # print(BossInfo)
             print("")
             viewWorkerInput = View.viewWorker(self)
         elif viewWorkerInput == "4":
@@ -99,8 +97,10 @@ class View():
         viewPilotsInput = input("Input choice(q to Quit, b for Back): ")
         viewPilotsInput = viewPilotsInput.lower()
         if viewPilotsInput == "1":
-            pilotSSN = input("  - Please input SSN: ")
-            print(pilotSSN)
+            pilotSSN = input("  - Please input social security number: ")
+            
+            pilot = UIAPI.UIAPI.viewWorkerByPosAndSSn(self, "Captain", "Copilot", "", "", pilotSSN)
+            print(pilot)
             # PilotInfo = getPilotInfo(PilotSSN)
             # print(pilotInfo)
             # View.viewWorker()
@@ -131,7 +131,8 @@ class View():
         viewAttendantsInput = viewAttendantsInput.lower()
         if viewAttendantsInput == "1":
             attendantSSN = input("  - Please input SSN: ")
-            print(attendantSSN)
+            pilot = UIAPI.UIAPI.viewWorkerByPosAndSSn(self, "", "", "Flight service manager", "Flight attendant", attendantSSN)
+            print(pilot)
             # AttendantInfo = getAttendantInfo(AttendantSSN)
             return viewAttendantsInput
         elif viewAttendantsInput == "2":
@@ -168,13 +169,13 @@ class View():
             # print(AllAirplanesInfo)
             #viewAirplaneInput = self.instance.viewAllPlanes()
             allAirplanes = UIAPI.UIAPI.viewAllAirplanes(self)
-            print(allAirplanes)
             for count, plane in enumerate(allAirplanes):
                 if len(allAirplanes) > 4:
                     if count >= 4:
                         if count % 4 == 0:
                             input("\nPress enter to see next")
                 print(plane)
+                print()
             viewAirplaneInput = View.viewAirplane(self)
         elif viewAirplaneInput == "b":
             return viewAirplaneInput
@@ -254,7 +255,7 @@ class View():
         viewFlightInput = viewFlightInput.lower()
         if viewFlightInput == "1":
             flightNumber = input('  - Please input flight number: ')
-            viewFlight = UIAPI.UIAPI.viewXflight(self, flightNumber)
+            viewFlight = UIAPI.UIAPI.viewCertainFlight(self, flightNumber)
             print(viewFlight)
             #FlightInfo = getSpecificFlight(SSN)
             #print(FlightInfo)
@@ -271,7 +272,7 @@ class View():
                 print()
             viewFlightInput = View.viewFlight(self)
         if viewFlightInput == "3":
-            viewActiveFlights = UIAPI.UIAPI.viewActiveFlights(self)
+            viewActiveFlights = UIAPI.UIAPI.viewFlightsByStatus(self, "Active")
             for count, flight in enumerate(viewActiveFlights):
                 if len(viewActiveFlights) > 4:
                     if count >= 4:
@@ -281,7 +282,7 @@ class View():
                 print()
             viewFlightInput = View.viewFlight(self)
         if viewFlightInput == "4":
-            viewCancelledFlights = UIAPI.UIAPI.viewCancelledFlights(self)
+            viewCancelledFlights = UIAPI.UIAPI.viewFlightsByStatus(self, "Cancelled")
             for count, flight in enumerate(viewCancelledFlights):
                 if len(viewCancelledFlights) > 4:
                     if count >= 4:
