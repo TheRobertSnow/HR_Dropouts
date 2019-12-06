@@ -8,9 +8,9 @@ class WorkerLL():
         self.ioAPI = IOAPI.IOAPI()
         self.workerList = self.ioAPI.getWorkerList()
         self.instanceList = []
-        for dicts in self.workerList:
-            worker = Worker.CreateWorker(dicts)
-            self.workerList.append(worker)
+        for object in self.workerList:
+            worker = Worker.CreateWorker(object)
+            self.instanceList.append(worker)
         print(len(self.instanceList), "objects in our system, this print command is found in WorkerLL")
 
     def createNewWorker(self, workerInfoList): #Verður að fá inn SSN til þess að búa til nýja starfsmanninn
@@ -21,6 +21,7 @@ class WorkerLL():
                 return "Worker with that Social Security Number already exists", "Worker creation failed"
         """
         orderedDict = collections.OrderedDict()
+        print(workerInfoList)
         orderedDict["Social Security Number"] = workerInfoList[0]
         orderedDict["Name"] = workerInfoList[1]
         orderedDict["Position"] = workerInfoList[2]
@@ -32,7 +33,7 @@ class WorkerLL():
         orderedDict["Active"] = "True"
         orderedDict["Available"] = "True"
         workerInfoList.insert(8, "True")
-        workerInfoList.insert(9, "True")
+        #workerInfoList.insert(9, "True")
         newWorker = Worker.CreateWorker(orderedDict)
         self.instanceList.append(newWorker)
         print("Now there are", len(self.instanceList), "Worker objects in the system")

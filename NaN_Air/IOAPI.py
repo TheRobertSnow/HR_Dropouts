@@ -18,8 +18,8 @@ class IOAPI:
     #
     # worker related
     #
-    def createWorkerRequest(self, objectDict, myList):
-        returnString = self.workers.write_worker_to_file(objectDict, myList)
+    def createWorkerRequest(self, objectDictionary, myList):
+        returnString = self.workers.write_worker_to_file(objectDictionary, myList)
         return returnString
     
     def getWorkerList(self):

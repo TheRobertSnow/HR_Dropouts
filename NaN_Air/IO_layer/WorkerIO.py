@@ -17,7 +17,7 @@ class WorkerIO():
     
     def readFile():
         returnList = []
-        with open(FILENAME, encoding="utf8") as csvFile:
+        with open(FILENAME, 'r', encoding="utf8") as csvFile:
             csvReader = csv.DictReader(csvFile, delimiter=",")
             for line in csvReader:
                 returnList.append(line)
@@ -32,17 +32,16 @@ class WorkerIO():
                 returnList.append(line)
         return returnList"""
 
-
-    def write_worker_to_file(self, objectDict, aList):
+    def write_worker_to_file(self, objectDict, workerList):
         """Method takes in a list of data and writes to file"""
         with open(FILENAME, 'a', encoding="utf8", newline='') as csvFile:
             csvWriter = csv.writer(csvFile)
             #orderedDict = self.convert_to_dict(aList)
             self.__objectList.append(objectDict)
             newList = []
-            [newList.append(i) for i in aList]
+            [newList.append(i) for i in workerList]
             csvWriter.writerow(newList)
-        return aList, "Worker successfully created!"
+        return workerList, "Worker successfully created!"
 
     def write_dictList_to_file(self):
         """Method overwrites file with data from dictList"""
@@ -51,9 +50,9 @@ class WorkerIO():
             writer.writeheader()
             for dictionary in self.__dictList:
                 writer.writerow(dictionary)
-
+    """
     def convert_to_dict(self, aList):
-        """Function converts list to dict"""
+        Function converts list to dict
         orderedDict = {}
         orderedDict['Social Security Number'] = aList[0]
         orderedDict['Name'] = aList[1]
@@ -68,8 +67,8 @@ class WorkerIO():
         return orderedDict   
 
     def update_data_in_file(self, aList):
-        """Method takes in list of data, updates the dictionary list
-        and writes the changes to file"""
+        Method takes in list of data, updates the dictionary list
+        and writes the changes to file
         for index, dictionary in enumerate(self.__dictList):
             for key, value in dictionary.items():
                 if key == 'Social Security Number':
@@ -78,9 +77,9 @@ class WorkerIO():
                         self.write_dictList_to_file()
 
     def updateWorker(self, aList):
-        """Takes in a list with SSN of a worker, key and new value
+        Takes in a list with SSN of a worker, key and new value
         example list = ["2607962249", "position", "pilot"]
-        Returns a string with a outcome"""
+        Returns a string with a outcome
 
         indexValue = 0
         valueExists = False
@@ -96,3 +95,4 @@ class WorkerIO():
             return "Worker updated"
         else:
             return "Worker does not exist"
+        """
