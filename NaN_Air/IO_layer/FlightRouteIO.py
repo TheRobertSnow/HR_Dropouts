@@ -128,7 +128,7 @@ class FlightRoute:
         return f"< Flight route ID: {self.flightRouteID} \n>"
 
 # +++ Test cases +++
-flightroutes = FlightRouteIO()
+# flightroutes = FlightRouteIO()
 # updateline = ["1","Country", "Denmark"]
 # newline = ["Denmark","Reykjavik","0","0:00", "Áslaug Steingrímsdóttir", "3547745010"]
 # # # print(newline)

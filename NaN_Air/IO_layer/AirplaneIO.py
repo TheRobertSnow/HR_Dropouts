@@ -99,9 +99,9 @@ class Airplane():
         return "\n".join(returnString)
 
 # +++++++++++ Test Case +++++++++++++++
-writeList = ['TF-EPG','Fokker','F100','Grounded','110','0']
-updateList = ['TF-EPG', 'Status', 'Homosexual']
-airplane = AirplaneIO()
+# writeList = ['TF-EPG','Fokker','F100','Grounded','110','0']
+# updateList = ['TF-EPG', 'Status', 'Homosexual']
+# airplane = AirplaneIO()
 # # print(newline)
 # airplane.write_airplane_to_file(writeList)
 # airplane.update_data_in_file(updateList)
