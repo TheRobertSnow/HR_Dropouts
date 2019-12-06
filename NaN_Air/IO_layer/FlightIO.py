@@ -107,7 +107,7 @@ class FlightIO():
 
     def create_flight_instances(self):
         """Methood runs through list of dictionaries,
-        creates an instance of worker and appends to the list."""
+        creates an instance of flight and appends to the list."""
         self.__flightList = []
         for dictionary in self.__dictList:
             flight = Flight(dictionary)
