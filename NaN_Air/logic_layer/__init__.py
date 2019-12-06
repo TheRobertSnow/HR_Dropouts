@@ -1,2 +1,1 @@
-__all__ = ["AirplaneLL", "Airplane", "Flight", "FlightLL", "FlightRoute", "FlightRouteLL", "Voyage",
-           "VoyageLL", "Worker", "WorkerLL"]
+__all__ = ["AirplaneLL", "FlightLL", "FlightRouteLL", "VoyageLL", "WorkerLL"]
