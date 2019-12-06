@@ -16,17 +16,24 @@ class UIAPI:
     #
     # plane related
     #
-    def newPlaneRequest(self, myList):
-        """"""
-        returnString = self.airplaneLL.createNewPlane(myList)
+    def createNewAirplane(self, airplaneList):
+        """takes in airplaneList, and you return us the created instance"""
+        returnString = self.airplaneLL.createNewAirlane(airplaneList)
         return returnString
 
-    def viewXplane(self, idToFind):
-        returnData = self.airplaneLL.getXplane(idToFind)
+    def viewCertainAirplane(self, airplaneReg):
+        """we give you the airplaneReg and you return us the instance of that airplane"""
+        returnData = self.airplaneLL.getCertainAirplane(airplaneReg)
         return returnData
 
-    def viewAllPlanes(self):
-        returnData = self.airplaneLL.getAllFlights()
+    def viewAllAirlanes(self):
+        """give us all airplane instances, would be nice if we can get 5 at a time or something instead of all at once"""
+        returnData = self.airplaneLL.getAllAirplanes()
+        return returnData
+    
+    def updateAirplaneStatus(self, airplaneReg, newStatus):
+        """takes in airplaneReg and newStatus and you have to change the status of that airplane and return the airplane object"""
+        returnData = self.airplaneLL.updateAirplaneStatus(airplaneReg, newStatus)
         return returnData
 
     #
@@ -37,12 +44,13 @@ class UIAPI:
         returnData = self.workerLL.createNewWorker(workerList)
         return returnData
     
-    def viewWorkerByPosOrSSn(self, positionWeWantToPrint, ssn = ""):
+    def viewWorkerByPosOrSSn(self, positionWeWantToPrint = "", ssn = ""):
         """give us all workers that have a certain position"""
         returnData = self.workerLL.viewWorkerByPosOrSSn(ssn, positionWeWantToPrint)
         return returnData
     
     def viewAllWorkers(self):
+        """give us all worker instances, would be nice if we can get 5 at a time or something instead of all at once"""
         returnData = self.workerLL.viewAllWorkers()
         return returnData
     
@@ -74,9 +82,9 @@ class UIAPI:
         returnData = self.flightLL.viewFlightsByStatus(status)
         return returnData
     
-    def updateFlightStatus(self, newStatus):
-        """we give you a new status and you update the instance and the csv file according to that"""
-        returnData = self.flightLL.updateFlightStatus()
+    def updateFlightStatus(self, flightID, newStatus):
+        """we give you a new status of a certain flight and you update the instance and the csv file according to that"""
+        returnData = self.flightLL.updateFlightStatus(flightID, newStatus)
         return returnData
     
     def updateFlightDepartureTime(self, newDepartureTime):
@@ -90,6 +98,25 @@ class UIAPI:
     #
     # flight route related
     #
+    def createNewFlightRoute(self, flightRouteList):
+        """Takes in list with flight route ID, country, airport, flight distance, travel time, emergecy contact and emergency number and creates Flight Route """
+        returnData = self.flightRouteLL.createNewFlightRoute(flightRouteList)
+        return returnData
+
+    def updateFlightRoute(self,flightRouteID, key, newValue):
+        """Uses flightRouteID to find the instance and uses the key to update the instance with a new value"""
+        returnData = self.flightRouteLL.updateFlightRoute(flightRouteID, key, newValue)
+        return returnData
+
+    def viewFlightRoute(self, flightRouteID):
+        """Uses flightRouteID to view a certain flightRouteID"""
+        returnData = self.flightRouteLL.viewFlightRoute(flightRouteID)
+        return returnData
+
+    def viewAllFlightRoutes(self):
+        """Prints all FLight Routes"""
+        returnData = self.flightRouteLL.viewAllFlightRoutes()
+        return returnData
     
 
 # ++++++++++ Test Case ++++++++++
