@@ -16,13 +16,17 @@ class AirplaneIO():
 
     def get_airplanes_from_file(self):
         """Get airplanes from file in a list of dictionaries"""
-        returnList = []
+        dictList = []
         with open(FILENAME, 'r', encoding="utf8") as csvFile:
             csvReader = csv.DictReader(csvFile, delimiter=',')
             # next(csvReader, None)
             for line in csvReader:
-                returnList.append(line)
-        self.__dictList = returnList
+                dictList.append(line)
+        self.__dictList = dictList
+        for dictionary in self.__dictList:
+            airplane = Airplane(dictionary)
+            self.__airplaneList.append(airplane)
+        return self.__airplaneList
 
     def write_airplane_to_file(self, aList):
         """Method takes in a list of data and writes to file"""
@@ -114,12 +118,12 @@ class Airplane():
 #
 # # if more fieldnames are added, they also have to be added to the newAirplane method along with the FIELDNAMES constant.
 # def readFile():
-#     returnList = []
+#     dictList = []
 #     with open(FILENAME, encoding="utf8") as csvFile:
 #         csvReader = csv.DictReader(csvFile, delimiter=",")
 #         for line in csvReader:
-#             returnList.append(line)
-#     return returnList
+#             dictList.append(line)
+#     return dictList
 #
 #
 # def writeToFile(myList):
@@ -154,12 +158,12 @@ class Airplane():
 #
 #     def __str__(self):
 #         """Prints all lines in a formatted way."""
-#         returnList = []
+#         dictList = []
 #         for i in self.__objectList:
 #             for key, value in i.items():
-#                 returnList.append((key + ": " + value))
-#             returnList.append("\n")
-#         return "\n".join(returnList)
+#                 dictList.append((key + ": " + value))
+#             dictList.append("\n")
+#         return "\n".join(dictList)
 #
 #     def newAirplane(self, newPlaneDict, newPlaneList):
 #         """takes in a dictionary and a lsit with all required fields for the airplane.csv format,

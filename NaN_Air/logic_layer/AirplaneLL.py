@@ -13,10 +13,19 @@ class AirplaneLL():
         self.airplane = self.IOAPI.request_airplanes()
         return self.airplane
 
+    def getCertainAirplane(self, airplaneReg):
+        self.airplanes = self.IOAPI.request_airplanes()
+        for instance in self.airplanes:
+            if instance.getReg == airplaneReg:
+                return instance
+        return "Airplane not found!"
+
     def find_airplane_by_reg(self, reg):
         for instance in self.airplane:
             if instance.planeRegistration == reg:
                 print(instance)
+
+
 
 # +++++++++ Test Case ++++++++++
 # airplaneLL = AirplaneLL()
