@@ -32,6 +32,10 @@ class UIAPI:
     #
     # worker related
     #
+    def view_worker(self, ssn="", Position):
+        """Methood for retreving worker by ssn and, or position"""
+        returnData = self.workerLL.find_worker_by_ssn(ssn, Position)
+        return returnData
 
     #
     # flight related
