@@ -8,7 +8,6 @@ import IOAPI
 class AirplaneLL():
     def __init__(self):
         self.IOAPI = IOAPI.IOAPI()
-        self.get_airplane_list()
 
     def get_airplane_list(self):
         self.airplane = self.IOAPI.request_airplanes()

@@ -1,5 +1,5 @@
 import csv
-FILENAME = 'DataFiles/worker.csv'
+FILENAME = 'DataFiles/flight.csv'
 
 
 class FlightIO():

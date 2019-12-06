@@ -7,13 +7,13 @@ class FlightRouteIO():
 
     def __init__(self):
         self.__dictList = []
-        self.__flightRouteList = []
+        self.flightRouteList = []
         self.get_flight_route_from_file()
         self.create_flight_route_instances()
 
-    def get_flights(self):
+    def get_flight_routes(self):
         """Return a list of flight instances"""
-        return self.__flightRouteList
+        return self.flightRouteList
 
     def get_flight_route_from_file(self):
         """Get flight routes from file in a list of dictionaries"""
@@ -101,16 +101,16 @@ class FlightRouteIO():
     def create_flight_route_instances(self):
         """Methood runs through list of dictionaries,
         creates an instance of flight route and appends to the list."""
-        self.__flightRouteList = []
+        self.flightRouteList = []
         for dictionary in self.__dictList:
-            flight = FlightRoute(dictionary)
-            self.__flightRouteList.append(flight)
+            flightRoute = FlightRoute(dictionary)
+            self.flightRouteList.append(flightRoute)
 
 
 class FlightRoute:
     def __init__(self, dictionary):
-        self.__myDictionary = {}
-        self.flightRouteId = dictionary["Flight route ID"]
+        self.__myDictionary = dictionary
+        self.flightRouteID = dictionary["Flight route ID"]
         self.Country = dictionary["Country"]
         self.airport = dictionary["Airport"]
         self.flightDistance = dictionary["Flight distance"]
@@ -124,8 +124,11 @@ class FlightRoute:
             returnString.append((key + ": " + val))
         return "\n".join(returnString)
 
+    def __repr__(self):
+        return f"< Flight route ID: {self.flightRouteID} \n>"
+
 # +++ Test cases +++
-# flightroutes = FlightRouteIO()
+flightroutes = FlightRouteIO()
 # updateline = ["1","Country", "Denmark"]
 # newline = ["Denmark","Reykjavik","0","0:00", "Áslaug Steingrímsdóttir", "3547745010"]
 # # # print(newline)

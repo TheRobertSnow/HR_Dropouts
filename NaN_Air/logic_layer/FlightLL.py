@@ -6,7 +6,6 @@ import IOAPI
 class FlightLL():
     def __init__(self):
         self.IOAPI = IOAPI.IOAPI()
-        self.get_flight_list()
 
     def get_flight_list(self):
         self.flight = self.IOAPI.request_flights()
