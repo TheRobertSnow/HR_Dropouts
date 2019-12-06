@@ -2,7 +2,7 @@ from IO_layer import *
 
 class IOAPI:
     def __init__(self):
-        # self.airplanes = AirplaneIO.OnLoad()
+        self.airplanes = AirplaneIO.AirplaneIO()
         # self.flights = FlightIO.FlightIO()
         self.workers = WorkerIO.WorkerIO()
 
@@ -10,13 +10,17 @@ class IOAPI:
         workerList = self.workers.get_workers()
         return workerList
 
-    def createPlaneRequest(self, dictionary, myList):
-        returnString = self.airplanes.newAirplane(dictionary, myList)
-        return returnString
+    def request_airplanes(self):
+        airplaneList = self.airplanes.get_airplanes()
+        return airplaneList
 
-    def getPlaneList(self):
-        planeList = self.airplanes.returnObjectList()
-        return planeList
+    # def createPlaneRequest(self, dictionary, myList):
+    #     returnString = self.airplanes.newAirplane(dictionary, myList)
+    #     return returnString
+    #
+    # def getPlaneList(self):
+    #     planeList = self.airplanes.returnObjectList()
+    #     return planeList
 
     def createFlightRequest(self, objectDict, flightList):
         returnString = self.flights.write_flight_to_file(objectDict, flightList)
