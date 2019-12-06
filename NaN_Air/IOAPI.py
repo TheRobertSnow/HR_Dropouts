@@ -2,8 +2,13 @@ from IO_layer import *
 
 class IOAPI:
     def __init__(self):
-        self.airplanes = AirplaneIO.OnLoad()
-        self.flights = FlightIO.FlightIO()
+        # self.airplanes = AirplaneIO.OnLoad()
+        # self.flights = FlightIO.FlightIO()
+        self.workers = WorkerIO.WorkerIO()
+
+    def request_workers(self):
+        workerList = self.workers.get_workers()
+        return workerList
 
     def createPlaneRequest(self, dictionary, myList):
         returnString = self.airplanes.newAirplane(dictionary, myList)
@@ -12,7 +17,7 @@ class IOAPI:
     def getPlaneList(self):
         planeList = self.airplanes.returnObjectList()
         return planeList
-    
+
     def createFlightRequest(self, objectDict, flightList):
         returnString = self.flights.write_flight_to_file(objectDict, flightList)
         return returnString
@@ -20,7 +25,7 @@ class IOAPI:
     def getFlightList(self):
         flightList = self.flights.returnObjectList()
         return flightList
-    
+
     def getHigestFlightID(self):
         highestID = self.flights.getHighestID()
         return highestID

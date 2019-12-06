@@ -1,12 +1,18 @@
 import csv
-FILENAME = '../DataFiles/worker.csv'
+FILENAME = 'DataFiles/worker.csv'
 
 
 class WorkerIO():
 
     def __init__(self):
+        self.__dictList = []
+        self.__workerList = []
         self.get_workers_from_file()
         self.create_worker_instances()
+
+    def get_workers(self):
+        """Return a list of worker instances"""
+        return self.__workerList
 
     def get_workers_from_file(self):
         """Get worker from file in a list of dictionaries"""
@@ -48,11 +54,13 @@ class WorkerIO():
             writer.writeheader()
             for dictionary in self.__dictList:
                 writer.writerow(dictionary)
-
+    # TODO: This should be named getNextId instead as we already added 1
     def getHighestID(self):
         """This method is only used by 'add_dict_to_list'.
         Returns the next id that is to be assigned."""
         highestID = 0
+        # could use self.__dictList.count but what would not work if we allow
+        # deleteing.
         for dictionary in self.__dictList:
             for key, value in dictionary.items():
                 if key == "Worker ID":
@@ -107,39 +115,40 @@ class WorkerIO():
                         self.write_dictList_to_file()
 
     def create_worker_instances(self):
+        """Methood runs through list of dictionaries,
+        creates an instance of worker and appends to the list."""
         self.__workerList = []
         for dictionary in self.__dictList:
             worker = Worker(dictionary)
             self.__workerList.append(worker)
-        print(self.__workerList)
 
 
 class Worker():
     def __init__(self, dictionary):
-        self.__myDictionary = dictionary
-        self.__workerID = dictionary['Worker ID']
-        self.__socialSecurityNumber = dictionary['Social security number']
-        self.__name = dictionary["Name"]
-        self.__position = dictionary["Position"]
-        self.__rank = dictionary["Rank"]
-        self.__planeLicence = dictionary["Plane licence"]
-        self.__address = dictionary["Address"]
-        self.__phone = dictionary["Phone"]
-        self.__cellphone = dictionary["Cellphone"]
-        self.__email = dictionary["Email"]
-        self.__active = dictionary["Active"]
-        self.__available = dictionary["Available"]
+        self.myDictionary = dictionary
+        self.workerID = dictionary['Worker ID']
+        self.socialSecurityNumber = dictionary['Social security number']
+        self.name = dictionary["Name"]
+        self.position = dictionary["Position"]
+        self.rank = dictionary["Rank"]
+        self.planeLicence = dictionary["Plane licence"]
+        self.address = dictionary["Address"]
+        self.phone = dictionary["Phone"]
+        self.cellphone = dictionary["Cellphone"]
+        self.email = dictionary["Email"]
+        self.active = dictionary["Active"]
+        self.available = dictionary["Available"]
 
 
     def __str__(self):
         returnString = []
-        for key, val in self.__myDictionary.items():
+        for key, val in self.myDictionary.items():
             returnString.append((key + ": " + val))
         return "\n".join(returnString)
 
-writeList = ['35','1107951952','Elizabeth Mcfadden','Cabincrew','Flight Attendant','N/A','Fellsmúli 35','8998835','8998835','test@test.com','True','True']
-updateList = ['35', 'Position', 'Looser']
-worker = WorkerIO()
-# print(newline)
-worker.write_worker_to_file(writeList)
-worker.update_data_in_file(updateList)
+# writeList = ['35','1107951952','Elizabeth Mcfadden','Cabincrew','Flight Attendant','N/A','Fellsmúli 35','8998835','8998835','test@test.com','True','True']
+# updateList = ['35', 'Position', 'Looser']
+# worker = WorkerIO()
+# # print(newline)
+# worker.write_worker_to_file(writeList)
+# worker.update_data_in_file(updateList)
