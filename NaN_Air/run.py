@@ -7,5 +7,5 @@ def main():
     ProgramUI.ProgramUI.login(ui)
 
 
-if __name__ == '__main__':
+if __name__ == '__main__':    
     main()
