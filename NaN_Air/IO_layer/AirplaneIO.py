@@ -1,6 +1,6 @@
 import csv
-
 FILENAME = "DataFiles/airplane.csv"
+
 
 class AirplaneIO():
 
@@ -12,7 +12,7 @@ class AirplaneIO():
 
     def get_airplanes(self):
         """Return a list of worker instances"""
-        return self.__workerList
+        return self.__airplaneList
 
     def get_airplanes_from_file(self):
         """Get airplanes from file in a list of dictionaries"""
@@ -75,13 +75,13 @@ class AirplaneIO():
     def create_airplane_instances(self):
         """Methood runs through list of dictionaries,
         creates an instance of worker and appends to the list."""
-        self.__workerList = []
+        self.__airplaneList = []
         for dictionary in self.__dictList:
-            worker = Worker(dictionary)
-            self.__workerList.append(worker)
+            airplane = Airplane(dictionary)
+            self.__airplaneList.append(airplane)
 
 
-class Worker():
+class Airplane():
     def __init__(self, dictionary):
         self.myDictionary = dictionary
         self.planeRegistration = dictionary['Plane registration']
@@ -103,8 +103,8 @@ writeList = ['TF-EPG','Fokker','F100','Grounded','110','0']
 updateList = ['TF-EPG', 'Status', 'Homosexual']
 airplane = AirplaneIO()
 # # print(newline)
-airplane.write_airplane_to_file(writeList)
-airplane.update_data_in_file(updateList)
+# airplane.write_airplane_to_file(writeList)
+# airplane.update_data_in_file(updateList)
 
 
 

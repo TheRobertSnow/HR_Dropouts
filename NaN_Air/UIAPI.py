@@ -1,4 +1,4 @@
-from logic_layer import WorkerLL
+from logic_layer import WorkerLL, AirplaneLL
 
 
 # functions that UI layer calls --
@@ -7,6 +7,10 @@ class UIAPI:
         # self.airplaneInstance = AirplaneLL.AirplaneLL()
         # self.flightInstance = FlightLL.FlightLL()
         self.workerLL = WorkerLL.WorkerLL()
+        self.airplaneLL = AirplaneLL.AirplaneLL()
+
+    def get_airplanes(self):
+        [print(instance) for instance in self.airplaneLL.get_airplane_list()]
 
     #
     # plane related
@@ -62,3 +66,4 @@ class UIAPI:
 
 # ++++++++++ Test Case ++++++++++
 # UIAPI = UIAPI()
+# UIAPI.get_airplanes()
