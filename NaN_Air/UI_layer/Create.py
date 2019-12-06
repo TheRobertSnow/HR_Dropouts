@@ -1,6 +1,4 @@
 import UIAPI
-
-
 class Create():
     def __init__(self):
         self.object = UIAPI.UIAPI()
@@ -134,14 +132,27 @@ Please input the following information:''')
             ssn = int(input("  - Social security number: "))
             createWorkerList.append(ssn)
             name = input("  - Name: ")
-            createWorkerList.append(name)
+            createWorkerList.append(name)            
             print('''\n  Select worker position\n
-    1. Main pilot
-    2. Assisting pilot
-    3. Main flight attendant
-    4. Flight attendant''')
+    1. Captain
+    2. Copilot
+    3. Flight service manager
+    4. Flight attendant
+    5. Staff manager
+    6. Trip manager''')
             position = input("  Input choice: ")
-            createWorkerList.append(position)
+            if position == "1":
+                createWorkerList.append("Captain")
+            elif position == "2":
+                createWorkerList.append("Copilot")
+            elif position == "3":
+                createWorkerList.append("Flight service manager")
+            elif position == "4":
+                createWorkerList.append("Flight attendant")
+            elif position == "5":
+                createWorkerList.append("Staff manager")
+            elif position == "6":
+                createWorkerList.append("Trip manager")
             address = input("  - Address: ")
             createWorkerList.append(address)
             phone = int(input("  - Phone: "))
