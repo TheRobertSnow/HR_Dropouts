@@ -1,28 +1,21 @@
 import csv
-import sys
-FILENAME = 'DataFiles/flight.csv'
+FILENAME = 'DataFiles/worker.csv'
+
 
 class FlightIO():
 
     def __init__(self):
-        self.__objectList = []
-        fileData = FlightIO.readFile()
-        for object in fileData:
-            self.__objectList.append(object)
-    
-    def returnObjectList(self):
-        return self.__objectList
-    
-    def readFile():
-        returnList = []
-        with open(FILENAME, encoding="utf8") as csvFile:
-            csvReader = csv.DictReader(csvFile, delimiter=",")
-            for line in csvReader:
-                returnList.append(line)
-        return returnList
+        self.__dictList = []
+        self.__flightList = []
+        self.get_flights_from_file()
+        self.create_flight_instances()
 
-    """def get_flight_from_file(self):
-        Get flight from file in a list of dictionaries
+    def get_flights(self):
+        """Return a list of flight instances"""
+        return self.__flightList
+
+    def get_flights_from_file(self):
+        """Get flight from file in a list of dictionaries"""
         returnList = []
         with open(FILENAME, 'r', encoding="utf8") as csvFile:
             csvReader = csv.DictReader(csvFile, delimiter=',')
@@ -30,17 +23,17 @@ class FlightIO():
             for line in csvReader:
                 returnList.append(line)
         self.__dictList = returnList
-        return self.__dictList"""
 
-    def write_flight_to_file(self, objectDict, flightList):
+    def write_flight_to_file(self, aList):
         """Method takes in a list of data and writes to file"""
         with open(FILENAME, 'a', encoding="utf8", newline='') as csvFile:
             csvWriter = csv.writer(csvFile)
-            self.__objectList.append(objectDict)
+            orderedDict = self.convert_to_dict_with_id(aList)
+            self.__dictList.append(orderedDict)
             newList = []
-            [newList.append(i) for i in flightList]
+            newList.append(orderedDict['Flight ID'])
+            [newList.append(i) for i in aList]
             csvWriter.writerow(newList)
-        return flightList, "Flight added successfully"
 
     def write_dictList_to_file(self):
         """Method overwrites file with data from dictList"""
@@ -58,23 +51,26 @@ class FlightIO():
             writer.writeheader()
             for dictionary in self.__dictList:
                 writer.writerow(dictionary)
-
+    # TODO: This should be named getNextId instead as we already added 1
     def getHighestID(self):
         """This method is only used by 'add_dict_to_list'.
         Returns the next id that is to be assigned."""
         highestID = 0
-        for dictionary in self.__objectList:
+        # could use self.__dictList.count but what would not work if we allow
+        # deleteing.
+        for dictionary in self.__dictList:
             for key, value in dictionary.items():
                 if key == "Flight ID":
                     if int(value) > highestID:
                         highestID = int(value)
         return highestID + 1
 
-    """def convert_to_dict_with_id(self, aList):
-        Function converts list to dict, generates an ID
-        and assigns it to the dictionary
-        orderedDict, newId = {}, self.getHighestID()
-        orderedDict['Flight ID'] = newId
+    def convert_to_dict_with_id(self, aList):
+        """Function takes in a list of arguments,
+        generates an ID, adds ID to a dictionary and then adds
+        everyting from list to the dictionary."""
+        orderedDict, newID = {}, self.getHighestID()
+        orderedDict['Flight ID'] = newID
         orderedDict['Flight number'] = aList[0]
         orderedDict['Airplane registration number'] = aList[1]
         orderedDict['Origin ID'] = aList[2]
@@ -85,9 +81,8 @@ class FlightIO():
         orderedDict['Arrival time'] = aList[7]
         return orderedDict
 
-    def convert_to_dict_no_id(self, aList):
-        Function converts list to dict but doesn't
-        generate an id since ID should be provided in argument list
+    def convert_to_dict(self, aList):
+        """Function converts list to dict"""
         orderedDict = {}
         orderedDict['Flight ID'] = aList[0]
         orderedDict['Flight number'] = aList[1]
@@ -98,7 +93,7 @@ class FlightIO():
         orderedDict['Travel time'] = aList[6]
         orderedDict['Departure time'] = aList[7]
         orderedDict['Arrival time'] = aList[8]
-        return orderedDict"""
+        return orderedDict
 
     def update_data_in_file(self, aList):
         """Method takes in list of data, updates the dictionary list
@@ -110,11 +105,40 @@ class FlightIO():
                         self.__dictList[index][aList[1]] = aList[2]
                         self.write_dictList_to_file()
 
-"""
-flight = FlightIO()
-newline = ['NA011','T-911','8','1','0002','Boarding','18:35','20:32']
-updateline = ["2","flight status", "crashing"]
-# print(newline)
-flight.write_flight_to_file(newline)
-flight.update_data_in_file(updateline)
-"""
+    def create_flight_instances(self):
+        """Methood runs through list of dictionaries,
+        creates an instance of worker and appends to the list."""
+        self.__flightList = []
+        for dictionary in self.__dictList:
+            flight = Flight(dictionary)
+            self.__flightList.append(flight)
+
+
+class Flight():
+    def __init__(self, dictionary):
+        self.myDictionary = dictionary
+        self.flightID = dictionary['Flight ID']
+        self.flightNumber = dictionary['Flight number']
+        self.airplaneRegistrationNumber = dictionary["Airplane registration number"]
+        self.originID = dictionary["Origin ID"]
+        self.destinationID = dictionary["Destination ID"]
+        self.flightStatus = dictionary["Flight status"]
+        self.travelTime = dictionary["Travel time"]
+        self.departureTime = dictionary["Departure time"]
+        self.arrivalTime = dictionary["Arrival time"]
+
+
+    def __str__(self):
+        returnString = []
+        for key, val in self.myDictionary.items():
+            returnString.append((key + ": " + val))
+        return "\n".join(returnString)
+
+
+# +++++++++ Test Case ++++++++++++
+# writeList = ['35','1107951952','Elizabeth Mcfadden','Cabincrew','Flight Attendant','N/A','Fellsmúli 35','8998835','8998835','test@test.com','True','True']
+# updateList = ['35', 'Position', 'Looser']
+# worker = WorkerIO()
+# # print(newline)
+# worker.write_worker_to_file(writeList)
+# worker.update_data_in_file(updateList)
