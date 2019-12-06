@@ -1,7 +1,7 @@
 import csv
 import sys
 FILENAME = 'DataFiles/worker.csv'
-fieldnames = ['Social Security Number', 'Name', 'Position', 'Plane License', 'Address', 'Phone', 'Cellphone', 'Email', 'Active', 'Available']
+fieldnames = ['ID','Social security number', 'Name', 'Position', 'Plane license', 'Address', 'Phone', 'Cellphone', 'Email', 'Active', 'Available']
 
 
 class WorkerIO():
@@ -54,16 +54,17 @@ class WorkerIO():
     def convert_to_dict(self, aList):
         Function converts list to dict
         orderedDict = {}
-        orderedDict['Social Security Number'] = aList[0]
-        orderedDict['Name'] = aList[1]
-        orderedDict['Position'] = aList[2]
-        orderedDict['Plane License'] = aList[3]
-        orderedDict['Address'] = aList[4]
-        orderedDict['Phone'] = aList[5]
-        orderedDict['Cellphone'] = aList[6]
-        orderedDict['Email'] = aList[7]
-        orderedDict['Active'] = aList[8]
-        orderedDict['Available'] = aList[9]
+        orderedDict['ID'] = aList[0]
+        orderedDict['Social security number'] = aList[1]
+        orderedDict['Name'] = aList[2]
+        orderedDict['Position'] = aList[3]
+        orderedDict['Plane license'] = aList[4]
+        orderedDict['Address'] = aList[5]
+        orderedDict['Phone'] = aList[6]
+        orderedDict['Cellphone'] = aList[7]
+        orderedDict['Email'] = aList[8]
+        orderedDict['Active'] = aList[9]
+        orderedDict['Available'] = aList[10]
         return orderedDict   
 
     def update_data_in_file(self, aList):
@@ -71,7 +72,7 @@ class WorkerIO():
         and writes the changes to file
         for index, dictionary in enumerate(self.__dictList):
             for key, value in dictionary.items():
-                if key == 'Social Security Number':
+                if key == 'Social security number':
                     if value == aList[0]:
                         self.__dictList[index][aList[1]] = aList[2]
                         self.write_dictList_to_file()
@@ -85,7 +86,7 @@ class WorkerIO():
         valueExists = False
         for count, dictionary in enumerate(self.__dictList):
             for key, value in dictionary.items():
-                if key == "Social Security Number":
+                if key == "Social security number":
                     if value == aList[0]:
                         indexValue = count
                         valueExists = True

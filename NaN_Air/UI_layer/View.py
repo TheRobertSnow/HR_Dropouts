@@ -56,7 +56,7 @@ class View():
         viewWorkerInput = input("Input choice(q to Quit, b for Back): ")
         viewWorkerInput = viewWorkerInput.lower()
         if viewWorkerInput == "1":
-            viewPilotsOutput = View.viewPilots()
+            viewPilotsOutput = View.viewPilots(self)
             if viewPilotsOutput == "b":
                 viewWorkerInput = View.viewWorker(self)
             elif viewPilotsOutput == "q":
@@ -64,7 +64,7 @@ class View():
             else:
                 viewWorkerInput = View.viewWorker(self)
         elif viewWorkerInput == "2":
-            viewAttendantsOutput = View.viewAttendants()
+            viewAttendantsOutput = View.viewAttendants(self)
             if viewAttendantsOutput == "b":
                 viewWorkerInput = View.viewWorker(self)
             elif viewAttendantsOutput == "q":
@@ -157,20 +157,20 @@ class View():
         viewAirplaneInput = input("Input choice(q to Quit, b for Back): ")
         viewAirplaneInput = viewAirplaneInput.lower()
         if viewAirplaneInput == "1":
-            AirplaneID = input("  - Please input Airplane ID: ")
+            airplaneReg = input("  - Please input Airplane registration number: ")
             # AirplaneInfo = getAirplaneInfo(AirplaneID)
             # print(AirplaneInfo)
-            viewAirplaneInput = UIAPI.UIAPI.viewXplane(self, AirplaneID)
-            print(viewAirplaneInput)
+            airplane = UIAPI.UIAPI.viewCertainAirplane(self, airplaneReg)
+            print(airplane)
             viewAirplaneInput = View.viewAirplane(self)
         elif viewAirplaneInput == "2":
             # AllAirplanesInfo = getAllAirplanes()
             # print(AllAirplanesInfo)
             #viewAirplaneInput = self.instance.viewAllPlanes()
-            viewAirplaneInput = UIAPI.UIAPI.viewAllPlanes(self)
-            print(viewAirplaneInput)
-            for count, plane in enumerate(viewAirplaneInput):
-                if len(viewAirplaneInput) > 4:
+            allAirplanes = UIAPI.UIAPI.viewAllAirplanes(self)
+            print(allAirplanes)
+            for count, plane in enumerate(allAirplanes):
+                if len(allAirplanes) > 4:
                     if count >= 4:
                         if count % 4 == 0:
                             input("\nPress enter to see next")

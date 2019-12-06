@@ -14,39 +14,32 @@ class AirplaneLL:
             self.instanceList.append(airplane)
 
         print(len(self.instanceList), "Airplane objects in our system")
-
-    def createNewPlane(self, myList):
+        
+    def createNewAirlane(self, airplaneList):
         for airplane in self.instanceList:
             reg = airplane.getReg()
-            if reg == myList[0]:
+            if reg == airplaneList[0]:
                 return ["Plane with that register already exists"], "Plane creation failed"
         orderedDict = collections.OrderedDict()
-        orderedDict["plane reg"] = myList[0]
-        orderedDict["manufacturer"] = myList[1]
-        orderedDict["model"] = myList[2]
+        orderedDict["plane reg"] = airplaneList[0]
+        orderedDict["manufacturer"] = airplaneList[1]
+        orderedDict["model"] = airplaneList[2]
         orderedDict["status"] = "Grounded"
-        orderedDict["seats"] = myList[3]
-        orderedDict["odometer"] = myList[4]
-        myList.insert(3, "Grounded")
+        orderedDict["seats"] = airplaneList[3]
+        orderedDict["odometer"] = airplaneList[4]
+        airplaneList.insert(3, "Grounded")
         newAirPlane = Airplane.CreateAirplane(orderedDict)
         self.instanceList.append(newAirPlane)
         print("now there are", len(self.instanceList), "objects in system")
-        returnString = self.ioAPI.createPlaneRequest(orderedDict, myList)
+        returnString = self.ioAPI.createPlaneRequest(orderedDict, airplaneList)
         return returnString
 
-    def getAllFlights(self):
+    def getAllAirplanes(self):
         return self.instanceList
 
-    def getSpecificFlight(self, regToFind):
-        for aObject in self.instanceList:
-            currentReg = aObject.getReg()
-            if currentReg == regToFind:
-                return aObject
+    def getCertainAirplane(self, airplaneReg):
+        for airplaneObject in self.instanceList:
+            currentReg = airplaneObject.airplaneReg
+            if currentReg == airplaneReg:
+                return airplaneObject
         return "No flight with that Register"
-
-    def getXplane(self, tagToFind):
-        for object in self.instanceList:
-            tag = object.getReg()
-            if tag.lower() == tagToFind.lower():
-                return object
-        return "Flight not found!"

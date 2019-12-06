@@ -3,7 +3,7 @@ import sys
 FILENAME = 'DataFiles/flightRoutes.csv'
 
 
-class FlightRoute():
+class FlightRouteIO():
 
     def __init__(self):
         # self.get_flight_route_from_file()
@@ -28,20 +28,20 @@ class FlightRoute():
             orderedDict = self.convert_to_dict_with_id(aList)
             self.__dictList.append(orderedDict)
             newList = []
-            newList.append(orderedDict['flight route id'])
+            newList.append(orderedDict['Flight route ID'])
             [newList.append(i) for i in aList]
             csvWriter.writerow(newList)
 
     def write_dictList_to_file(self):
         """Method overwrites file with data from dictList"""
         with open(FILENAME, 'w', newline='', encoding='utf8') as csvfile:
-            fieldnames = ['flight route id'
-                        ,'country'
-                        ,'airport'
-                        ,'flight distance'
-                        ,'travel time'
-                        ,'emergency contact'
-                        ,'emergency number']
+            fieldnames = ['Flight route ID'
+                        ,'Country'
+                        ,'Airport'
+                        ,'Flight distance'
+                        ,'Travel time'
+                        ,'Emergency contact'
+                        ,'Emergency contact number']
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
             writer.writeheader()
             for dictionary in self.__dictList:
@@ -53,7 +53,7 @@ class FlightRoute():
         highestID = 0
         for dictionary in self.__dictList:
             for key, value in dictionary.items():
-                if key == "flight route id":
+                if key == "Flight route ID":
                     if int(value) > highestID:
                         highestID = int(value)
         return highestID + 1
@@ -62,26 +62,26 @@ class FlightRoute():
         """Function converts list to dict, generates an ID
         and assigns it to the dictionary"""
         orderedDict, newId = {}, self.getHighestID()
-        orderedDict['flight route id'] = newId
-        orderedDict['country'] = aList[0]
-        orderedDict['airport'] = aList[1]
-        orderedDict['flight distance'] = aList[2]
-        orderedDict['travel time'] = aList[3]
-        orderedDict['emergency contact'] = aList[4]
-        orderedDict['emergency number'] = aList[5]
+        orderedDict['Flight route ID'] = newId
+        orderedDict['Country'] = aList[0]
+        orderedDict['Airport'] = aList[1]
+        orderedDict['Flight distance'] = aList[2]
+        orderedDict['Travel time'] = aList[3]
+        orderedDict['Emergency contact'] = aList[4]
+        orderedDict['Emergency contact number'] = aList[5]
         return orderedDict
 
     def convert_to_dict_no_id(self, aList):
         """Function converts list to dict but doesn't
         generate an id since ID should be provided in argument list"""
         orderedDict = {}
-        orderedDict['flight route id'] = aList[0]
-        orderedDict['country'] = aList[1]
-        orderedDict['airport'] = aList[2]
-        orderedDict['flight distance'] = aList[3]
-        orderedDict['travel time'] = aList[4]
-        orderedDict['emergency contact'] = aList[5]
-        orderedDict['emergency number'] = aList[6]
+        orderedDict['Flight route ID'] = aList[0]
+        orderedDict['Country'] = aList[1]
+        orderedDict['Airport'] = aList[2]
+        orderedDict['Flight distance'] = aList[3]
+        orderedDict['Travel time'] = aList[4]
+        orderedDict['Emergency contact'] = aList[5]
+        orderedDict['Emergency contact number'] = aList[6]
         return orderedDict
 
     def update_data_in_file(self, aList):
@@ -89,7 +89,7 @@ class FlightRoute():
         and writes the changes to file"""
         for index, dictionary in enumerate(self.__dictList):
             for key, value in dictionary.items():
-                if key == 'flight route id':
+                if key == 'Flight route ID':
                     if value == aList[0]:
                         print('key found')
                         self.__dictList[index][aList[1]] = aList[2]

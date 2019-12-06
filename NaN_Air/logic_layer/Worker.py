@@ -1,10 +1,10 @@
 class CreateWorker():
     def __init__(self, dictionary):
         self.__myDictionary = dictionary
-        self.socialSecurityNumber = dictionary["Social Security Number"]
+        self.socialSecurityNumber = dictionary["Social security number"]
         self.name = dictionary["Name"]
         self.position = dictionary["Position"]
-        self.planelicense = dictionary["Plane License"]
+        self.planelicense = dictionary["Plane license"]
         self.address = dictionary["Address"]
         self.phone = dictionary["Phone"]
         self.cellphone = dictionary["Cellphone"]

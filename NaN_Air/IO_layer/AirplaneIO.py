@@ -2,8 +2,8 @@ import csv
 
 FILENAME = "./DataFiles/airplane.csv"
 
-FIELDNAMES = ["plane reg", "manufacturer", "model", "status", "seats",
-              "odometer"]  # for update row
+FIELDNAMES = ["Plane registration number", "Manufacturer", "Model", "Status", "Number of seats",
+              "Odometer"]  # for update row
 
 
 # if more fieldnames are added, they also have to be added to the newAirplane method along with the FIELDNAMES constant.
@@ -35,7 +35,7 @@ def updateRow(objectList):
             csvWriter.writerow(writeList)
 
 
-class OnLoad:
+class AirplaneIO:
     """Load this class on load to create all rows as a instance variable inside 1 list"""
     def __init__(self):
         self.__objectList = []
@@ -68,7 +68,7 @@ class OnLoad:
         print(self.__objectList)
         for dictionary in self.__objectList:
             for key, value in dictionary.items():
-                if key == "airplane id":
+                if key == "Airplane ID":
                     if int(value) > highestID:
                         highestID = int(value)
         return highestID + 1
@@ -77,7 +77,7 @@ class OnLoad:
         """takes in the object list and compares it to a register, returns True if the register exists"""
         for dictionary in objectList:
             for key, value in dictionary.items():
-                if key == "plane reg":
+                if key == "Airplane registration number":
                     if value == register:
                         return True
         return False
@@ -91,7 +91,7 @@ class OnLoad:
         valueExists = False
         for count, dictionary in enumerate(self.__objectList):
             for key, value in dictionary.items():
-                if key == "plane reg":
+                if key == "Airplane registration number":
                     if value == aList[0]:
                         indexValue = count
                         valueExists = True
