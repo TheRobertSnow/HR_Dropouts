@@ -1,7 +1,7 @@
 import csv
 import sys
 FILENAME = 'DataFiles/worker.csv'
-#fieldnames = ['Social Security Number', 'Name', 'Position', 'Plane License', 'Address', 'Phone', 'Cellphone', 'Email', 'Active', 'Available']
+fieldnames = ['Social Security Number', 'Name', 'Position', 'Plane License', 'Address', 'Phone', 'Cellphone', 'Email', 'Active', 'Available']
 
 
 class WorkerIO():

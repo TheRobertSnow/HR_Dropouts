@@ -1,7 +1,7 @@
 class CreateWorker:
     def __init__(self, dictionary):
         self.__myDictionary = dictionary
-        self.socialSecurityNumber = dictionary["Social Security Number"]
+        #self.socialSecurityNumber = dictionary["Social Security Number"]
         self.name = dictionary["Name"]
         self.position = dictionary["Position"]
         self.planelicense = dictionary["Plane License"]
