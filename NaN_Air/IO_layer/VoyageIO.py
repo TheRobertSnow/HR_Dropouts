@@ -1,27 +1,146 @@
 import csv
-import collections
-
-FILENAME = "../DataFiles/voyage.csv"
-FIELDNAMES = ["voyage id", "Flight out ID", "Flight back ID", "Main Pilot", "Assisting Pilot", "Main Flight Attendant", "Flight Attendants",  
-"Flight route ID", "departure from is", "departure to is"]  # for update row
-
-# if more fieldnames are added, they also have to be added to the newAirplane method along with the FIELDNAMES constant.
-def readFile():
-    returnList = []
-    with open(FILENAME, encoding="utf8") as csvFile:
-        csvReader = csv.DictReader(csvFile, delimiter=",")
-        for line in csvReader:
-            returnList.append(line)
-    return returnList
-
-def writeToFile(list):
-    """takes in a list and creates a new row in the voyage.csv file"""
-    print(list)
-    with open(FILENAME, "a", encoding="utf8", newline="") as csvFile:
-        csvWriter = csv.writer(csvFile)
-        csvWriter.writerow(list)
-
-#Tester = list1 = ["5", "6", "7", "0101013321", "0101233641", "0101233449", ["1212346219", "1111435259"], "5", "23:00", "03:00"]
+FILENAME = 'DataFiles/voyage.csv'
 
 
+class VoyageIO():
 
+    def __init__(self):
+        self.__dictList = []
+        self.__voyageList = []
+        self.get_voyages_from_file()
+        self.create_voyage_instances()
+
+    def get_voyages(self):
+        """Return a list of voyage instances"""
+        return self.__voyageList
+
+    def get_voyages_from_file(self):
+        """Get voyages from file in a list of dictionaries"""
+        returnList = []
+        with open(FILENAME, 'r', encoding="utf8") as csvFile:
+            csvReader = csv.DictReader(csvFile, delimiter=',')
+            # next(csvReader, None)
+            for line in csvReader:
+                returnList.append(line)
+        self.__dictList = returnList
+
+    def write_voyage_to_file(self, aList):
+        """Method takes in a list of data and writes to file"""
+        with open(FILENAME, 'a', encoding="utf8", newline='') as csvFile:
+            csvWriter = csv.writer(csvFile)
+            orderedDict = self.convert_to_dict_with_id(aList)
+            self.__dictList.append(orderedDict)
+            newList = []
+            newList.append(orderedDict['Voyage ID'])
+            [newList.append(i) for i in aList]
+            csvWriter.writerow(newList)
+
+    def write_dictList_to_file(self):
+        """Method overwrites file with data from dictList"""
+        with open(FILENAME, 'w', newline='', encoding='utf8') as csvfile:
+            fieldnames = ['Voyage ID'
+                        ,'Flight out ID'
+                        ,'Flight back ID'
+                        ,'Main pilot'
+                        ,'Assisting pilot'
+                        ,'Main flight attendant'
+                        ,'Flight attendants'
+                        ,'Flight route ID'
+                        ,'Departure from IS'
+                        ,'Departure to IS']
+            writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+            writer.writeheader()
+            for dictionary in self.__dictList:
+                writer.writerow(dictionary)
+    # TODO: This should be named getNextId instead as we already added 1
+    def getHighestID(self):
+        """This method is only used by 'add_dict_to_list'.
+        Returns the next id that is to be assigned."""
+        highestID = 0
+        # could use self.__dictList.count but what would not work if we allow
+        # deleteing.
+        for dictionary in self.__dictList:
+            for key, value in dictionary.items():
+                if key == "Voyage ID":
+                    if int(value) > highestID:
+                        highestID = int(value)
+        return highestID + 1
+
+    def convert_to_dict_with_id(self, aList):
+        """Function takes in a list of arguments,
+        generates an ID, adds ID to a dictionary and then adds
+        everyting from list to the dictionary."""
+        orderedDict, newID = {}, self.getHighestID()
+        orderedDict['Voyage ID'] = newID
+        orderedDict['Flight out ID'] = aList[0]
+        orderedDict['Flight back ID'] = aList[1]
+        orderedDict['Main pilot'] = aList[2]
+        orderedDict['Assisting pilot'] = aList[3]
+        orderedDict['Main flight attendant'] = aList[4]
+        orderedDict['Flight attendants'] = aList[5]
+        orderedDict['Flight route ID'] = aList[6]
+        orderedDict['Departure from IS'] = aList[7]
+        orderedDict['Departure to IS'] = aList[8]
+        return orderedDict
+
+    def convert_to_dict(self, aList):
+        """Function converts list to dict"""
+        orderedDict = {}
+        orderedDict['Voyage ID'] = aList[0]
+        orderedDict['Flight out ID'] = aList[1]
+        orderedDict['Flight back ID'] = aList[2]
+        orderedDict['Main pilot'] = aList[3]
+        orderedDict['Assisting pilot'] = aList[4]
+        orderedDict['Main flight attendant'] = aList[5]
+        orderedDict['Flight attendants'] = aList[6]
+        orderedDict['Flight route ID'] = aList[7]
+        orderedDict['Departure from IS'] = aList[8]
+        orderedDict['Departure to IS'] = aList[9]
+        return orderedDict
+
+    def update_data_in_file(self, aList):
+        """Method takes in list of data, updates the dictionary list
+        and writes the changes to file"""
+        for index, dictionary in enumerate(self.__dictList):
+            for key, value in dictionary.items():
+                if key == 'Voyage ID':
+                    if value == aList[0]:
+                        self.__dictList[index][aList[1]] = aList[2]
+                        self.write_dictList_to_file()
+
+    def create_voyage_instances(self):
+        """Methood runs through list of dictionaries,
+        creates an instance of worker and appends to the list."""
+        self.__voyageList = []
+        for dictionary in self.__dictList:
+            voyage = Voyage(dictionary)
+            self.__voyageList.append(voyage)
+
+
+class Voyage():
+    def __init__(self, dictionary):
+        self.myDictionary = dictionary
+        self.voyageID = dictionary['Voyage ID']
+        self.flightOutID = dictionary['Flight out ID']
+        self.flightBackID = dictionary["Flight back ID"]
+        self.mainPilot = dictionary["Main pilot"]
+        self.assistingPilot = dictionary["Assisting pilot"]
+        self.mainFlightAttendant = dictionary["Main flight attendant"]
+        self.flightAttendants = dictionary["Flight attendants"]
+        self.flightRouteID = dictionary["Flight route ID"]
+        self.departureFromIS = dictionary["Departure from IS"]
+        self.departureToIS = dictionary["Departure to IS"]
+
+
+    def __str__(self):
+        returnString = []
+        for key, val in self.myDictionary.items():
+            returnString.append((key + ": " + val))
+        return "\n".join(returnString)
+
+# writeList = ['35','1107951952','Elizabeth Mcfadden','Cabincrew','Flight Attendant','N/A','Fellsmúli 35','8998835','8998835','test@test.com','True','True']
+# updateList = ['35', 'Position', 'Looser']
+# worker = WorkerIO()
+# # print(newline)
+# worker.write_worker_to_file(writeList)
+# worker.update_data_in_file(updateList)

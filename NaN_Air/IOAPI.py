@@ -6,6 +6,7 @@ class IOAPI:
         self.flights = FlightIO.FlightIO()
         self.workers = WorkerIO.WorkerIO()
         self.flightRoutes = FlightRouteIO.FlightRouteIO()
+        self.voyages = VoyageIO.VoyageIO()
 
     def request_airplanes(self):
         airplaneList = self.airplanes.get_airplanes()
@@ -23,6 +24,10 @@ class IOAPI:
         flightRouteList = self.flightRoutes.get_flight_routes()
         # print(flightRouteList)
         return flightRouteList
+
+    def request_voyages(self):
+        voyageList = self.voyages.get_voyages()
+        return voyageList
 
     # def createPlaneRequest(self, dictionary, myList):
     #     returnString = self.airplanes.newAirplane(dictionary, myList)

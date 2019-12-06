@@ -1,5 +1,5 @@
 import csv
-FILENAME = 'DataFiles/worker.csv'
+FILENAME = '../DataFiles/worker.csv'
 
 
 class WorkerIO():
@@ -42,7 +42,6 @@ class WorkerIO():
                         ,'Social security number'
                         ,'Name'
                         ,'Position'
-                        ,'Rank'
                         ,'Plane licence'
                         ,'Address'
                         ,'Phone'
@@ -77,14 +76,13 @@ class WorkerIO():
         orderedDict['Social security number'] = aList[0]
         orderedDict['Name'] = aList[1]
         orderedDict['Position'] = aList[2]
-        orderedDict['Rank'] = aList[3]
-        orderedDict['Plane licence'] = aList[4]
-        orderedDict['Address'] = aList[5]
-        orderedDict['Phone'] = aList[6]
-        orderedDict['Cellphone'] = aList[7]
-        orderedDict['Email'] = aList[8]
-        orderedDict['Active'] = aList[9]
-        orderedDict['Available'] = aList[10]
+        orderedDict['Plane licence'] = aList[3]
+        orderedDict['Address'] = aList[4]
+        orderedDict['Phone'] = aList[5]
+        orderedDict['Cellphone'] = aList[6]
+        orderedDict['Email'] = aList[7]
+        orderedDict['Active'] = aList[8]
+        orderedDict['Available'] = aList[9]
         return orderedDict
 
     def convert_to_dict(self, aList):
@@ -94,14 +92,13 @@ class WorkerIO():
         orderedDict['Social security number'] = aList[1]
         orderedDict['Name'] = aList[2]
         orderedDict['Position'] = aList[3]
-        orderedDict['Rank'] = aList[4]
-        orderedDict['Plane licence'] = aList[5]
-        orderedDict['Address'] = aList[6]
-        orderedDict['Phone'] = aList[7]
-        orderedDict['Cellphone'] = aList[8]
-        orderedDict['Email'] = aList[9]
-        orderedDict['Active'] = aList[10]
-        orderedDict['Available'] = aList[11]
+        orderedDict['Plane licence'] = aList[4]
+        orderedDict['Address'] = aList[5]
+        orderedDict['Phone'] = aList[6]
+        orderedDict['Cellphone'] = aList[7]
+        orderedDict['Email'] = aList[8]
+        orderedDict['Active'] = aList[9]
+        orderedDict['Available'] = aList[10]
         return orderedDict
 
     def update_data_in_file(self, aList):
@@ -130,7 +127,6 @@ class Worker():
         self.socialSecurityNumber = dictionary['Social security number']
         self.name = dictionary["Name"]
         self.position = dictionary["Position"]
-        self.rank = dictionary["Rank"]
         self.planeLicence = dictionary["Plane licence"]
         self.address = dictionary["Address"]
         self.phone = dictionary["Phone"]
@@ -146,8 +142,8 @@ class Worker():
             returnString.append((key + ": " + val))
         return "\n".join(returnString)
 
-# writeList = ['35','1107951952','Elizabeth Mcfadden','Cabincrew','Flight Attendant','N/A','Fellsmúli 35','8998835','8998835','test@test.com','True','True']
-# updateList = ['35', 'Position', 'Looser']
+# writeList = ['1107951952','Elizabeth Mcfadden','Flight Attendant','N/A','Fellsmúli 35','8998835','8998835','test@test.com','True','True']
+# updateList = ['35', 'Position', 'Homosexual']
 # worker = WorkerIO()
 # # print(newline)
 # worker.write_worker_to_file(writeList)
