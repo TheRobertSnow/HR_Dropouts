@@ -1,18 +1,17 @@
-class Worker():
+class CreateWorker:
     def __init__(self, dictionary):
-        self.__myDictionary = {}
-        self.__myDictionary["Social security number"] = dictionary['social security number']
-        self.__myDictionary['Name'] = dictionary["name"]
-        self.__myDictionary["Position"] = dictionary["position"]
-        self.__myDictionary["Address"] = dictionary["address"]
-        self.__myDictionary["Phone"] = dictionary["phone"]
-        self.__myDictionary["Cellphone"] = dictionary["cellphone"]
-        self.__myDictionary["Email"] = dictionary["email"]
-        self.__myDictionary["Active"] = dictionary["active"]
-        self.__myDictionary["Available"] = dictionary["available"] 
-        self.__myDictionary["Plane Licence"] = dictionary["plane licence"]
-
-
+        self.__myDictionary = dictionary
+        #self.socialSecurityNumber = dictionary["Social Security Number"]
+        self.name = dictionary["Name"]
+        self.position = dictionary["Position"]
+        self.planelicense = dictionary["Plane License"]
+        self.address = dictionary["Address"]
+        self.phone = dictionary["Phone"]
+        self.cellphone = dictionary["Cellphone"]
+        self.email = dictionary["Email"]
+        self.active = dictionary["Active"]
+        self.available = dictionary["Available"]
+        
     def __str__(self): 
         returnString = []
         for key, val in self.__myDictionary.items():

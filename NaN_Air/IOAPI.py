@@ -4,6 +4,7 @@ class IOAPI:
     def __init__(self):
         self.airplanes = AirplaneIO.OnLoad()
         self.flights = FlightIO.FlightIO()
+        self.workers = WorkerIO.WorkerIO()
     #
     # plane related
     #      
@@ -17,7 +18,13 @@ class IOAPI:
     #
     # worker related
     #
-
+    def createWorkerRequest(self, objectDict, myList):
+        returnString = self.workers.write_worker_to_file(objectDict, myList)
+        return returnString
+    
+    def getWorkerList(self):
+        workerList = self.workers.returnObjectList()
+        return workerList
     #
     # flight related
     #

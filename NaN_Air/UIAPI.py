@@ -6,7 +6,7 @@ class UIAPI:
     def __init__(self):
         self.airplaneInstance = AirplaneLL.AirplaneLL()
         self.flightInstance = FlightLL.FlightLL()
-
+        self.workerInstance = WorkerLL.WorkerLL()
     #
     # plane related
     #      
@@ -26,7 +26,9 @@ class UIAPI:
     #
     # worker related
     #
-
+    def newWorkerRequest(self, workerList):
+        returnString = self.workerInstance.createNewWorker(workerList)
+        return returnString
     #
     # flight related
     #
