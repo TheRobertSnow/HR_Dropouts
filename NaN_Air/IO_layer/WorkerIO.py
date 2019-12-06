@@ -1,5 +1,5 @@
 import csv
-FILENAME = '../DataFiles/worker.csv'
+FILENAME = 'DataFiles/worker.csv'
 
 
 class WorkerIO():
