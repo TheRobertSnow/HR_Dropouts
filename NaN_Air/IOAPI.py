@@ -5,6 +5,7 @@ class IOAPI:
         self.airplanes = AirplaneIO.OnLoad()
         self.flights = FlightIO.FlightIO()
         self.workers = WorkerIO.WorkerIO()
+        self.flightRoute = FlightRouteIO.FlightRoute()
     #
     # plane related
     #      
@@ -46,3 +47,12 @@ class IOAPI:
     #
     # flight route related
     #
+    def createFlightRouteRequest(self, newFlightRouteList):
+        flightRouteList = self.flightRoute.write_flight_route_to_file(
+            newFlightRouteList)
+        return flightRouteList
+
+    def getFlightRouteList(self):
+        flightRouteList = self.flightRoute.FlightRoute()
+        return flightRouteList
+    

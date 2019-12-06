@@ -1,28 +1,65 @@
 import csv
 import sys
+import os
 FILENAME = 'DataFiles/flightRoutes.csv'
+FIELDNAMES = ["flight route id", "country", "airport", "flight distance",
+              "travel time", "emergency contact", "emergency number"]
+
+
+def readFile():
+    returnList = []
+    with open(FILENAME, encoding="utf8") as csvFile:
+        csvReader = csv.DictReader(csvFile, delimiter=",")
+        for line in csvReader:
+            returnList.append(line)
+    return returnList
+
+
+def writeToFile(FRouteList):
+    """takes in a list and creates a new row in the airplane.csv file"""
+    with open(FILENAME, "a", encoding="utf8", newline="") as csvFile:
+        csvWriter = csv.writer(csvFile)
+        csvWriter.writerow(FRouteList)
+
+
+def updateRow(dictList):
+    """Rewrites the whole csv file with the new and updated object list"""
+    with open(FILENAME, "w", encoding="utf8", newline="") as csvFile:
+        csvWriter = csv.writer(csvFile)
+        csvWriter.writerow(FIELDNAMES)
+        for dictionary in dictList:
+            writeList = []
+            for value in dictionary.values():
+                writeList.append(value)
+            csvWriter.writerow(writeList)
 
 
 class FlightRoute():
 
     def __init__(self):
-        # self.get_flight_route_from_file()
-        self.__dictList=[]
-        pass
+        self.__dictList = []
+        fileData = readFile()
+        for object in fileData:
+            self.__dictList.append(object)
 
-    def get_flight_route_from_file(self):
-        """Get flight routes from file in a list of dictionaries"""
-        returnList = []
-        with open(FILENAME, 'r', encoding="utf8") as csvFile:
-            csvReader = csv.DictReader(csvFile, delimiter=',')
-            # next(csvReader, None)
-            for line in csvReader:
-                returnList.append(line)
-        self.__dictList = returnList
+    def returnDictList(self):
         return self.__dictList
 
+    def __str__(self):
+        returnList = []
+        for i in self.__dictList:
+            for key, value in i.items():
+                returnList.append((key + ": " + value))
+            returnList.append("\n")
+        return "\n".join(returnList)
+
+    def newFlightRoutes(self, FRouteDict, FRouteList):
+        self.__dictList.append(FRouteDict)
+        writeToFile(FRouteList)
+        return "Flight Route added successfully"
+
     def write_flight_route_to_file(self, aList):
-        """Method takes in a list of data and writes to file"""
+        #Method takes in a list of data and writes to file
         with open(FILENAME, 'a', encoding="utf8", newline='') as csvFile:
             csvWriter = csv.writer(csvFile)
             orderedDict = self.convert_to_dict_with_id(aList)
@@ -32,17 +69,11 @@ class FlightRoute():
             [newList.append(i) for i in aList]
             csvWriter.writerow(newList)
 
-    def write_dictList_to_file(self):
-        """Method overwrites file with data from dictList"""
+    def write_dictList_to_file(self, aList):
+        #Method overwrites file with data from dictList
         with open(FILENAME, 'w', newline='', encoding='utf8') as csvfile:
-            fieldnames = ['flight route id'
-                        ,'country'
-                        ,'airport'
-                        ,'flight distance'
-                        ,'travel time'
-                        ,'emergency contact'
-                        ,'emergency number']
-            writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+
+            writer = csv.DictWriter(csvfile, fieldnames=FIELDNAMES)
             writer.writeheader()
             for dictionary in self.__dictList:
                 writer.writerow(dictionary)
@@ -90,16 +121,19 @@ class FlightRoute():
         for index, dictionary in enumerate(self.__dictList):
             for key, value in dictionary.items():
                 if key == 'flight route id':
+                    print("We here bro")
                     if value == aList[0]:
                         print('key found')
                         self.__dictList[index][aList[1]] = aList[2]
                         print(self.__dictList)
-                        self.write_dictList_to_file()
+                        self.write_dictList_to_file(aList)
 
-# +++ Test cases +++
-# flightroutes = FlightRouteIO()
-# updateline = ["1","country", "Denmark"]
-# newline = ["Denmark","Reykjavik","0","0:00", "Áslaug Steingrímsdóttir", "3547745010"]
-# # print(newline)
-# flightroutes.write_flight_route_to_file(newline)
-# flightroutes.update_data_in_file(updateline)
+
+'''
+created = ["Færeyjar", "Þórshöfn", "795", "0:45", "Abel", "985581234"]
+
+updatedList = ["4","country", "Kúkur"]
+www = FlightRoute()
+www.write_flight_route_to_file(created)
+www.update_data_in_file(updatedList)
+'''
