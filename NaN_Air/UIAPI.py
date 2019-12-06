@@ -18,21 +18,21 @@ class UIAPI:
     #
     def newPlaneRequest(self, myList):
         """"""
-        returnString = self.airplaneInstance.createNewPlane(myList)
+        returnString = self.airplaneLL.createNewPlane(myList)
         return returnString
 
     def viewXplane(self, idToFind):
-        returnData = self.airplaneInstance.getXplane(idToFind)
+        returnData = self.airplaneLL.getXplane(idToFind)
         return returnData
 
     def viewAllPlanes(self):
-        returnData = self.airplaneInstance.getAllFlights()
+        returnData = self.airplaneLL.getAllFlights()
         return returnData
 
     #
     # worker related
     #
-    def view_worker(self, ssn="", Position):
+    def view_worker(self, Position, ssn=""):
         """Methood for retreving worker by ssn and, or position"""
         returnData = self.workerLL.find_worker_by_ssn(ssn, Position)
         return returnData

@@ -103,11 +103,12 @@ class View():
             print(pilotSSN)
             # PilotInfo = getPilotInfo(PilotSSN)
             # print(pilotInfo)
-            self.uiapi.view_worker(ssn, 'Pilot')
+            self.uiapi.view_worker('Pilot', pilotSSN)
             return viewPilotsInput
         elif viewPilotsInput == "2":
             print("")
-            self.uiapi.view_worker(ssn="","Pilot")
+            pilotSSN = ""
+            self.uiapi.view_worker("Pilot")
 
             # print(AllPilots)
             # View.viewWorker()
@@ -162,15 +163,16 @@ class View():
         if viewAirplaneInput == "1":
             AirplaneID = input("  - Please input Airplane ID: ")
             # AirplaneInfo = getAirplaneInfo(AirplaneID)
+
             # print(AirplaneInfo)
-            viewAirplaneInput = UIAPI.UIAPI.viewXplane(self, AirplaneID)
+            viewAirplaneInput = self.uiapi.viewXplane(self, AirplaneID)
             print(viewAirplaneInput)
             viewAirplaneInput = self.viewAirplane()
         elif viewAirplaneInput == "2":
             # AllAirplanesInfo = getAllAirplanes()
             # print(AllAirplanesInfo)
             #viewAirplaneInput = self.instance.viewAllPlanes()
-            viewAirplaneInput = UIAPI.UIAPI.viewAllPlanes()
+            viewAirplaneInput = self.uiapi.viewAllPlanes()
             print(viewAirplaneInput)
             for count, plane in enumerate(viewAirplaneInput):
                 if len(viewAirplaneInput) > 4:
@@ -257,14 +259,14 @@ class View():
         viewFlightInput = viewFlightInput.lower()
         if viewFlightInput == "1":
             flightNumber = input('  - Please input flight number: ')
-            viewFlight = UIAPI.UIAPI.viewXflight(self, flightNumber)
+            viewFlight = self.uiapi.viewXflight(self, flightNumber)
             print(viewFlight)
             #FlightInfo = getSpecificFlight(SSN)
             #print(FlightInfo)
             viewFlightInput = self.viewFlight()
         if viewFlightInput == "2":
             # print(getAllFlights())
-            viewAllFlights = UIAPI.UIAPI.viewAllFlights(self)
+            viewAllFlights = self.uiapi.viewAllFlights(self)
             for count, flight in enumerate(viewAllFlights):
                 if len(viewAllFlights) > 4:
                     if count >= 4:
@@ -274,7 +276,7 @@ class View():
                 print()
             viewFlightInput = self.viewFlight()
         if viewFlightInput == "3":
-            viewActiveFlights = UIAPI.UIAPI.viewActiveFlights(self)
+            viewActiveFlights = self.uiapi.viewActiveFlights(self)
             for count, flight in enumerate(viewActiveFlights):
                 if len(viewActiveFlights) > 4:
                     if count >= 4:
@@ -284,7 +286,7 @@ class View():
                 print()
             viewFlightInput = self.viewFlight()
         if viewFlightInput == "4":
-            viewCancelledFlights = UIAPI.UIAPI.viewCancelledFlights(self)
+            viewCancelledFlights = self.uiapi.viewCancelledFlights(self)
             for count, flight in enumerate(viewCancelledFlights):
                 if len(viewCancelledFlights) > 4:
                     if count >= 4:
