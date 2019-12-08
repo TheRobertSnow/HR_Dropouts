@@ -2,7 +2,7 @@ import csv
 FILENAME = "DataFiles/airplane.csv"
 
 
-class AirplaneIO():
+class AirplaneIO:
 
     def __init__(self):
         self.__dictList = []
@@ -77,7 +77,7 @@ class AirplaneIO():
                         self.create_airplane_instances()
 
     def create_airplane_instances(self):
-        """Methood runs through list of dictionaries,
+        """Method runs through list of dictionaries,
         creates an instance of worker and appends to the list."""
         self.__airplaneList = []
         for dictionary in self.__dictList:
@@ -85,7 +85,7 @@ class AirplaneIO():
             self.__airplaneList.append(airplane)
 
 
-class Airplane():
+class Airplane:
     def __init__(self, dictionary):
         self.myDictionary = dictionary
         self.planeRegistration = dictionary['Plane registration']

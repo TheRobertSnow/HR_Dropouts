@@ -1,5 +1,6 @@
 from IO_layer import *
 
+
 class IOAPI:
     def __init__(self):
         self.airplanes = AirplaneIO.AirplaneIO()
@@ -8,26 +9,45 @@ class IOAPI:
         self.flightRoutes = FlightRouteIO.FlightRouteIO()
         self.voyages = VoyageIO.VoyageIO()
 
+    #
+    # plane related
+    #
     def request_airplanes(self):
-        airplaneList = self.airplanes.get_airplanes_from_file()
-        return airplaneList
+        return self.airplanes.get_airplanes_from_file()
 
+    def newPlaneRequest(self, planeList):
+        """requests to write a new plane into the csv file with all parameters checked. needs to be returned the
+            instance of the plane that gets created"""
+        return self.airplanes.create_airplane_instances(planeList)
+
+    def updateAirplaneStatus(self, newStatus):
+        """sends forward the object and the new status of that airplane object, then returns it updated."""
+        return self.airplanes.update_data_in_file(newStatus)
+
+    #
+    # flight related
+    #
     def request_flights(self):
-        flightList = self.flights.get_flights()
-        return flightList
+        return self.request_flights()
 
+    #
+    # voyage related
+    #
+    def request_voyages(self):
+        return self.voyages.get_voyages()
+
+    #
+    # worker related
+    #
     def request_workers(self):
-        workerInstanceList = self.workers.get_workers_from_file()
-        return workerInstanceList
+        return self.workers.get_workers_from_file()
 
+    #
+    # flight route related
+    #
     def request_flight_routes(self):
         flightRouteList = self.flightRoutes.get_flight_routes()
-        # print(flightRouteList)
-        return flightRouteList
-
-    def request_voyages(self):
-        voyageList = self.voyages.get_voyages()
-        return voyageList
+        return self.flightRoutes.get_flight_route_from_file()
 
     # def createPlaneRequest(self, dictionary, myList):
     #     returnString = self.airplanes.newAirplane(dictionary, myList)
