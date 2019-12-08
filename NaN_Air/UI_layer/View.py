@@ -73,9 +73,6 @@ class View():
             else:
                 viewWorkerInput = View.viewWorker(self)
         elif viewWorkerInput == "3":
-            # BossInfo = getAllBosses()
-            # print(BossInfo)
-            print("")
             viewWorkerInput = View.viewWorker(self)
         elif viewWorkerInput == "4":
             allStaff = UIAPI.UIAPI.viewAllWorkers(self)
@@ -158,9 +155,7 @@ class View():
         if viewAirplaneInput == "1":
             AirplaneReg= input("  - Please input airplane registration: ")
             Airplane = UIAPI.UIAPI.viewCertainAirplane(self, AirplaneReg) #Ekki alveg búið fæ ekki self.__planereg = dictionary["Plane registration"] til að virka í Airplane.py
-            
-            print("\n" + str(Pilot) + "\n")
-            
+            print("\n" + str(Airplane) + "\n")
             viewAirplaneInput = self.uiapi.viewXplane(self, AirplaneID)
             print(viewAirplaneInput)
             viewAirplaneInput = self.viewAirplane()
@@ -186,8 +181,8 @@ class View():
     def viewFlightRoutes(self):
         print('''3. View Flight Routes
 --------------------------------------------
-  1. Specific route
-  2. All flight routes
+  1. View specific route
+  2. View all flight routes
 --------------------------------------------''')
 
         viewFlightRoutesInput = input("Input choice(q to Quit, b for Back): ")
@@ -197,18 +192,18 @@ class View():
             print(FlightRouteID)
             #FlightRoute = getFlightRoute(FlightRouteID)
             #print(FlightRoute)
-            viewFlightRoutesInput = self.viewFlightRoutes()
+            viewFlightRoutesInput = View.viewFlightRoutes(self)
         elif viewFlightRoutesInput == "2":
-            #print(getAllFlightRoutes)
-            print("")
-            viewFlightRoutesInput = self.viewFlightRoutes()
+            allFlightRoutes = UIAPI.UIAPI.viewAllFlightRoutes(self)
+            print(str(allFlightRoutes) + "\n")
+            viewFlightRoutesInput = View.viewFlightRoutes(self)
         elif viewFlightRoutesInput == "b":
             return viewFlightRoutesInput
         elif viewFlightRoutesInput == "q":
             return viewFlightRoutesInput
         else:
             print("Wrong input, try again")
-            viewFlightRoutesInput = self.viewFlightRoutes()
+            viewFlightRoutesInput = View.viewFlightRoutes(self)
         return viewFlightRoutesInput
 
     def viewVoyages(self):
