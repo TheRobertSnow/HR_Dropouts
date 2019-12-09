@@ -79,6 +79,9 @@ class IOAPI:
     def updateFlightStatus(self, flightlist):
         return self.flightIO.update_data_in_file(flightlist)
     
+    def updateFlightDepartureTime(self, newDepartureTime):
+        return self.flightIO.update_data_in_file(newDepartureTime)
+    
     def getAllFlightInstances(self):
         return self.flightIO.get_flights()
 

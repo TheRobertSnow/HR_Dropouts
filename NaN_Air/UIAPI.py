@@ -116,14 +116,14 @@ class UIAPI:
 
     def updateFlightDepartureTime(self, newDepartureTime):
         """we give you a new departure time and you update the instance and the csv file according to that"""
-        returnData = self.flightLL.updateFlightDepartureTime()
+        returnData = self.flightLL.updateFlightDepartureTime(newDepartureTime)
         return returnData
     #
     # voyage related
     #
     def viewVoyage(self, voyageID):
         """Uses voyageID to view a certain voyage"""
-        returnData = self.flightRouteLL.viewFlightRoute(flightRouteID)
+        returnData = self.flightRouteLL.viewFlightRoute(voyageID)
         return returnData
     
     def viewallVoyages(self):

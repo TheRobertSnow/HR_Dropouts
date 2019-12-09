@@ -52,4 +52,8 @@ class FlightLL():
     def updateFlightStatus(self, flightlist):
         flight = self.flightIO.updateFlightStatus(flightlist)
         return flight
+    
+    def updateFlightDepartureTime(self, newDepartureTime):
+        flight = self.flightIO.updateFlightDepartureTime(newDepartureTime)
+        return flight
         

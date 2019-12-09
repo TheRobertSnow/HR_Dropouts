@@ -1,4 +1,5 @@
 import UIAPI
+import datetime
 class Update:
     def __init__(self):
         self.uiapi = UIAPI.UIAPI()
@@ -301,12 +302,17 @@ Flight - {}: Select Flight Status
                 Update.updateFlights()
 
         elif updateflightMenuInput == "2":
-            print("""2. Update Departure from #Destination
+            print("""2. Update Departure time
 --------------------------------------------""")
-            print("""Current departure time: 01/01/2015 01:50""")
-            departuretimeInput = input("Input new departure time with slashes in between: ")
-            print("Departure time succesfully changed!\nNew Departure time: {}\n".format(departuretimeInput))
-
+            flightNumber = input("Input the Flight number of the Flight you wish to change: ")
+            departureTime = input("  - Updated departure time(f.x. 12:30): ")
+            hour, minute = map(int, departureTime.split(':'))
+            departureDate = input("  - Updated departure date(f.x. 24/12/2019): ")
+            day, month, year = map(int, departureDate.split('/'))
+            departureDateTime = datetime.datetime(year,month, day, hour, minute, 00)
+            departureTimeList = [flightNumber, "Departure time", departureDateTime]
+            flight = UIAPI.UIAPI.updateFlightDepartureTime(self, departureTimeList)
+            print(flight)
         elif updateflightMenuInput == "b":
             Update.updateFlights()
         elif updateflightMenuInput == "q":

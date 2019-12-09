@@ -1,6 +1,7 @@
 import csv
 FILENAME = 'DataFiles/flight.csv'
-
+from datetime import datetime  
+from datetime import timedelta  
 
 class FlightIO():
 
@@ -108,26 +109,19 @@ class FlightIO():
                 if key == 'Flight number':
                     if value == aList[0]:
                         if col != "Flight ID" or col != "Flight number":
-                            self.__dictList[index][col] = val
-                            self.write_dictList_to_file()
-                            self.get_flights_from_file()
-                            self.create_flight_instances()
                             for i in self.flightList:
                                 if i.flightNumber == aList[0]:
-                                    if col == "Airplane registration number":
-                                        i.airplaneRegistrationNumber = val
-                                    elif col == "Origin ID":
-                                        i.originID = val
-                                    elif col == "Destination ID":
-                                        i.destinationID = val
-                                    elif col == "Flight status":
+                                    if col == "Flight status":
                                         i.flightStatus = val
-                                    elif col == "Travel time":
-                                        i.travelTime = val
                                     elif col == "Departure time":
                                         i.departureTime = val
-                                    elif col == "Arrival time":
-                                        i.arrivalTime = val
+                                        travelHours, travelMinutes = map(int, i.travelTime.split(':'))
+                                        i.arrivalTime = val + timedelta(hours = travelHours, minutes = travelMinutes)
+                                        self.__dictList[index]["Arrival time"] = val + timedelta(hours = travelHours, minutes = travelMinutes)
+                                    self.__dictList[index][col] = val
+                                    self.write_dictList_to_file()
+                                    self.get_flights_from_file()
+                                    self.create_flight_instances()
                                     return i
 
     def create_flight_instances(self):
