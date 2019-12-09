@@ -144,8 +144,11 @@ class FlightIO():
         flight = self.write_flight_to_file(flightList)
         return flight  # returns the new object
 
+    def getFlightNumber(self, destinationID, departureTime):
+        pass
 
-class Flight():
+
+class Flight:
     def __init__(self, dictionary):
         self.myDictionary = dictionary
         self.flightID = dictionary['Flight ID']

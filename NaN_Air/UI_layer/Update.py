@@ -78,9 +78,8 @@ class Update:
             Update.updateairplaneStatus(self, airplane_reg_num_Input)
         Update.updateMenu(self)
 
-    def updatecurrentflightRoutes(self):
-        flightrouteID = input("Input flight route ID: ")  # Þetta ákveðna tilvik af flight route fundið
-        print("Country: Iceland\nAirport: Keflavik\nFlight Distance: 700 km\nTravel time: 75 minutes\n")
+    def updatecurrentflightRoutes(self, flightrouteID):
+        print("er í vinnslu :) gæti crashað atm. -Arnar")
         print("""3. Update Current Flights Routes
 --------------------------------------------
   1. Update Country
@@ -91,7 +90,7 @@ class Update:
   6. Update Emergency contact number
 --------------------------------------------""")
         updateflightrouteMenuInput = input(
-            "Input choice (q to Quit, b for Back, m for Main Menu): ")  # Á að taka inn int
+            "Input choice (q to Quit, b for Back, m for Main Menu): ")
         if updateflightrouteMenuInput == "1":
             countryInput = input("Input new country: ")
             flightRouteList = [flightrouteID, "Country", countryInput]
@@ -141,14 +140,7 @@ class Update:
         # Update.updateMenu(Update) HVAÐ Á ÉG AÐ CALLA HÉR???
 
     def updateVoyage(self, voyageID):
-        print("""Voyage ID: {}
-        Flight out ID: NA21x
-        Flight back ID:NA21(x+1)
-        Pilots: [John - 123456789, Hooper - 2607962249]
-        Crew: [Emma - 12436576, Jónsi - 3434656539]
-        Flight route ID: 23
-        Departure from Iceland: datetime
-        Departure to Iceland: datetime\n""".format(voyageID))
+        print("Update voyage isnt ready you will probably crash from here.. ")
         print("""4. Update Voyage 
 --------------------------------------------
   1. Update Pilots
@@ -242,7 +234,8 @@ Current Pilots: [John - 123456789]
             updatecurrentflightRoutes()
         # Update.updateMenu(Update) HVAÐ Á ÉG AÐ CALLA HÉR???
 
-    def updateFlights(self):
+    def updateFlights(self, flightID):
+        print("functionality not yet completed here, you might crash! - Arnar, Update.py line ~245")
         print("""5. Update Flights 
 --------------------------------------------
   1. Update Flight Status
@@ -338,7 +331,7 @@ Flight - {}: Select Flight Status
         elif updateMenuInput == "3":
             flightRouteID = Update.confirmFlightRoute(self)
             if flightRouteID:
-                Update.update_Worker(self, flightRouteID)
+                Update.updatecurrentflightRoutes(self, flightRouteID)
             else:
                 updateMenuInput = Update.updateMenu(self)
 
@@ -352,7 +345,7 @@ Flight - {}: Select Flight Status
         elif updateMenuInput == "5":
             flightID = Update.confirmFlightID(self)
             if flightID:
-                Update.update_Worker(self, flightID)
+                Update.updateFlights(self, flightID)
             else:
                 updateMenuInput = Update.updateMenu(self)
 

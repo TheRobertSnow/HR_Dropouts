@@ -140,6 +140,9 @@ class VoyageIO:
             voyage = Voyage(dictionary)
             self.__voyageList.append(voyage)
 
+    def createNewVoyage(self, voyageList):
+        return "were working on this method"
+
 
 class Voyage:
     def __init__(self, dictionary):

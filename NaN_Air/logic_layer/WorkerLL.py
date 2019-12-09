@@ -54,9 +54,8 @@ class WorkerLL():
         self.worker = self.IOAPI.request_workers()
         return self.worker
 
-
-
-
+    def createNewWorker(self, workerList):
+        return "were working on this method"
 
 # +++++++++ Test Case ++++++++++
 # workerLL = WorkerLL()

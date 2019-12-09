@@ -165,6 +165,9 @@ class WorkerIO():
             self.__workerList.append(worker)
         return self.__workerList
 
+    def createNewWorker(self, workerList):
+        pass
+
 
 class Worker():
     def __init__(self, dictionary):
