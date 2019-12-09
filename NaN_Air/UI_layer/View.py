@@ -221,7 +221,9 @@ class View():
             viewFlightRoutesInput = View.viewFlightRoutes(self)
         elif viewFlightRoutesInput == "2":
             allFlightRoutes = UIAPI.UIAPI.viewAllFlightRoutes(self)
-            printObjects(self, allFlightRoutes)
+            for flightRoute in allFlightRoutes:
+                print(flightRoute)
+                print("")
             viewFlightRoutesInput = View.viewFlightRoutes(self)
         elif viewFlightRoutesInput == "b":
             return viewFlightRoutesInput

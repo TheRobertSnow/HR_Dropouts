@@ -18,7 +18,7 @@ class UIAPI:
     #
     def createNewAirplane(self, airplaneList):
         """takes in airplaneList, and you return us the created instance"""
-        returnString = self.airplaneLL.createNewAirlane(airplaneList)
+        returnString = self.airplaneLL.createNewAirplane(airplaneList)
         return returnString
 
     def viewCertainAirplane(self, airplaneReg):
@@ -134,7 +134,7 @@ class UIAPI:
 
     def viewFlightRoute(self, flightRouteID):
         """Uses flightRouteID to view a certain flightRouteID"""
-        returnData = self.flightRouteLL.viewFlightRoute(flightRouteID)
+        returnData = self.flightRouteLL.find_flight_route_by_id(flightRouteID)
         return returnData
 
     def viewAllFlightRoutes(self):

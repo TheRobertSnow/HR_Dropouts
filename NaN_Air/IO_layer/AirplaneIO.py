@@ -1,8 +1,21 @@
 import csv
+
 FILENAME = "DataFiles/airplane.csv"
 
 
-class AirplaneIO():
+def convert_to_dict(aList):
+    """Function converts list to dict"""
+    orderedDict = {}
+    orderedDict['Plane registration'] = aList[0]
+    orderedDict['Manufacturer'] = aList[1]
+    orderedDict['Model'] = aList[2]
+    orderedDict['Status'] = "Grounded"  # default value
+    orderedDict['Seats'] = aList[3]
+    orderedDict['Odometer'] = aList[4]
+    return orderedDict
+
+
+class AirplaneIO:
 
     def __init__(self):
         self.__dictList = []
@@ -11,15 +24,15 @@ class AirplaneIO():
         self.create_airplane_instances()
 
     def get_airplanes(self):
-        """Return a list of worker instances"""
+        """Return a list of plane instances"""
         return self.__airplaneList
 
     def get_airplanes_from_file(self):
         """Get airplanes from file in a list of dictionaries"""
         dictList = []
+
         with open(FILENAME, 'r', encoding="utf8") as csvFile:
             csvReader = csv.DictReader(csvFile, delimiter=',')
-            # next(csvReader, None)
             for line in csvReader:
                 dictList.append(line)
         self.__dictList = dictList
@@ -32,10 +45,9 @@ class AirplaneIO():
         """Method takes in a list of data and writes to file"""
         with open(FILENAME, 'a', encoding="utf8", newline='') as csvFile:
             csvWriter = csv.writer(csvFile)
-            orderedDict = self.convert_to_dict(aList)
+            orderedDict = convert_to_dict(aList)
             self.__dictList.append(orderedDict)
             newList = []
-            newList.append(orderedDict['Plane registration'])
             [newList.append(i) for i in aList]
             csvWriter.writerow(newList)
 
@@ -43,26 +55,15 @@ class AirplaneIO():
         """Method overwrites file with data from dictList"""
         with open(FILENAME, 'w', newline='', encoding='utf8') as csvfile:
             fieldnames = ['Plane registration'
-                        ,'Manufacturer'
-                        ,'Model'
-                        ,'Status'
-                        ,'Seats'
-                        ,'Odometer']
+                , 'Manufacturer'
+                , 'Model'
+                , 'Status'
+                , 'Seats'
+                , 'Odometer']
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
             writer.writeheader()
             for dictionary in self.__dictList:
                 writer.writerow(dictionary)
-
-    def convert_to_dict(self, aList):
-        """Function converts list to dict"""
-        orderedDict = {}
-        orderedDict['Plane registration'] = aList[0]
-        orderedDict['Manufacturer'] = aList[1]
-        orderedDict['Model'] = aList[2]
-        orderedDict['Status'] = aList[3]
-        orderedDict['Seats'] = aList[4]
-        orderedDict['Odometer'] = aList[5]
-        return orderedDict
 
     def update_data_in_file(self, aList):
         """Method takes in list of data, updates the dictionary list
@@ -77,15 +78,37 @@ class AirplaneIO():
                         self.create_airplane_instances()
 
     def create_airplane_instances(self):
-        """Methood runs through list of dictionaries,
+        """Method runs through list of dictionaries,
         creates an instance of worker and appends to the list."""
         self.__airplaneList = []
         for dictionary in self.__dictList:
             airplane = Airplane(dictionary)
             self.__airplaneList.append(airplane)
 
+    def createNewAirplane(self, airplaneList):
+        """creates a new airplane instance and writes the airplane to the csv, then it returns the new
+            airplane object"""
+        # create instance
+        theDict = convert_to_dict(airplaneList)
+        airplane = Airplane(theDict)
+        self.__airplaneList.append(airplane)  # add the new object to our list
 
-class Airplane():
+        # write to file
+        self.write_airplane_to_file(airplaneList)
+        return airplane, "test"  # returns the new object
+
+    def UpdateCertainAirplane(self, planeInstance, newStatus):
+        """takes in the instance of a plane and the new status, updates the instance and the file then returns
+            the updated instance"""
+        # update the instance
+        planeInstance.updateStatus(newStatus)
+
+        # update the csv file
+        self.write_dictList_to_file()
+        return planeInstance
+
+
+class Airplane:
     def __init__(self, dictionary):
         self.myDictionary = dictionary
         self.planeRegistration = dictionary['Plane registration']
@@ -95,12 +118,14 @@ class Airplane():
         self.seats = dictionary["Seats"]
         self.odometer = dictionary["Odometer"]
 
+    def updateStatus(self, newStatus):
+        self.myDictionary["Status"] = newStatus
 
     def __str__(self):
         returnString = []
         for key, val in self.myDictionary.items():
-            returnString.append((key + ": " + val))
-        return "\n".join(returnString)
+            returnString.append((key + ": " + str(val)))
+        return " | ".join(returnString)
 
 # +++++++++++ Test Case +++++++++++++++
 # writeList = ['TF-EPG','Fokker','F100','Grounded','110','0']
@@ -109,8 +134,6 @@ class Airplane():
 # # print(newline)
 # airplane.write_airplane_to_file(writeList)
 # airplane.update_data_in_file(updateList)
-
-
 
 
 # FIELDNAMES = ['Plane registration','Manufacturer','Model','Status','Seats','Odometer']  # for update row
