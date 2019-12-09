@@ -88,6 +88,8 @@ class AirplaneIO:
     def createNewAirplane(self, airplaneList):
         """creates a new airplane instance and writes the airplane to the csv, then it returns the new
             airplane object"""
+        # add default values
+        airplaneList.insert(3, "Grounded")
         # create instance
         theDict = convert_to_dict(airplaneList)
         airplane = Airplane(theDict)
@@ -95,7 +97,7 @@ class AirplaneIO:
 
         # write to file
         self.write_airplane_to_file(airplaneList)
-        return airplane, "test"  # returns the new object
+        return airplane  # returns the new object
 
     def UpdateCertainAirplane(self, planeInstance, newStatus):
         """takes in the instance of a plane and the new status, updates the instance and the file then returns
