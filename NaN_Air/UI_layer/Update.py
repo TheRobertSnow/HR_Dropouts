@@ -1,6 +1,4 @@
 import UIAPI
-
-
 class Update:
     def __init__(self):
         self.object = UIAPI.UIAPI()

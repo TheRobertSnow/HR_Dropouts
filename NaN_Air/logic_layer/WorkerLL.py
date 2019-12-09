@@ -10,10 +10,13 @@ class WorkerLL():
         self.worker = self.IOAPI.request_workers()
         return self.worker
 
-    def find_worker_by_ID(self, id):
+    def findWorkerByPosOrSSN(self, id):
         for instance in self.worker:
             if instance.workerID == id:
                 print(instance)
+
+    
+    
 
 # +++++++++ Test Case ++++++++++
 # workerLL = WorkerLL()
