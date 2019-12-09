@@ -17,6 +17,7 @@ class AirplaneIO:
     def get_airplanes_from_file(self):
         """Get airplanes from file in a list of dictionaries"""
         dictList = []
+
         with open(FILENAME, 'r', encoding="utf8") as csvFile:
             csvReader = csv.DictReader(csvFile, delimiter=',')
             # next(csvReader, None)

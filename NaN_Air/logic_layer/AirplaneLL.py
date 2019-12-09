@@ -1,6 +1,3 @@
-import sys
-
-sys.path.append('..')
 import IOAPI
 
 
@@ -14,6 +11,7 @@ class AirplaneLL:
         """Returns a list with all airplanes from the airplane.csv file."""
         return self.__IOAPI.request_airplanes()
 
+
     def getCertainAirplane(self, airplaneReg):
         """checks all current airplanes in the csv file and returns the instance that matches
             takes in the object instance and the reg of the object you need."""
@@ -26,6 +24,7 @@ class AirplaneLL:
     def find_airplane_by_reg(self, reg):
         """Checks all current airplanes in the csv file and prints all matching instances of the reg."""
         self.airplanes = AirplaneLL.get_airplane_list(self)  # update our list in case there are new planes
+        print(len(self.airplanes))
         notFound = True
         for instance in self.airplanes:
             if instance.planeRegistration == reg:

@@ -13,7 +13,7 @@ class IOAPI:
     # plane related
     #
     def request_airplanes(self):
-        return self.airplanes.get_airplanes_from_file()
+        return self.airplanes.get_airplanes()
 
     def newPlaneRequest(self, planeList):
         """requests to write a new plane into the csv file with all parameters checked. needs to be returned the
