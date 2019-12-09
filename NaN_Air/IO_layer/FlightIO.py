@@ -15,6 +15,13 @@ class FlightIO():
         """Return a list of flight instances"""
         return self.flightList
 
+    def create_new_flight(self, newFilght):
+        try:
+            self.write_flight_to_file(newFilght)
+            return "New flight created."
+        except Exception as e:
+            return "Unable to create flight."
+
     def get_flights_from_file(self):
         """Only use for initializing FlightIO.
         Get flight from file in a list of dictionaries"""
@@ -35,6 +42,7 @@ class FlightIO():
             csvWriter = csv.writer(csvFile)
             orderedDict = self.convert_to_dict_with_id(aList)
             self.__dictList.append(orderedDict)
+            self.add_flight_instance(orderedDict)
             newList = []
             newList.append(orderedDict['Flight ID'])
             [newList.append(i) for i in aList]
@@ -123,6 +131,10 @@ class FlightIO():
                                     self.get_flights_from_file()
                                     self.create_flight_instances()
                                     return i
+
+    def add_flight_instance(self, dict):
+        flight = Flight(dict)
+        self.flightList.append(flight)
 
     def create_flight_instances(self):
         """Methood runs through list of dictionaries,
