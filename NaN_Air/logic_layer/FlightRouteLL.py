@@ -15,3 +15,11 @@ class FlightRouteLL():
         for instance in self.flight:
             if instance.flightID == id:
                 print(instance)
+
+    def createNewFlightRoute(self, flightRouteList):
+        "List of strings and ints, information on flight route"
+        "flight route list = str fx (Flight route succesfully created)"
+        self.ioAPI.createNewFlightRoute(flightRouteList)
+        return flightRouteList
+
+    

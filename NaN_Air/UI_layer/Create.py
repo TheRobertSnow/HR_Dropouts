@@ -132,7 +132,7 @@ Please input the following information:''')
             ssn = int(input("  - Social security number: "))
             createWorkerList.append(ssn)
             name = input("  - Name: ")
-            createWorkerList.append(name)            
+            createWorkerList.append(name)
             print('''\n  Select worker position\n
     1. Captain
     2. Copilot

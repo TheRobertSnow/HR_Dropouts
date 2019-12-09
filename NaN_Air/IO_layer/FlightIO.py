@@ -15,7 +15,6 @@ class FlightIO():
         return self.__flightList
 
     
-
     def get_flights_from_file(self):
         """Get flight from file in a list of dictionaries"""
         returnList = []
@@ -53,8 +52,8 @@ class FlightIO():
             writer.writeheader()
             for dictionary in self.__dictList:
                 writer.writerow(dictionary)
-    # TODO: This should be named getNextId instead as we already added 1
-    def getHighestID(self):
+
+    def getNextID(self):
         """This method is only used by 'add_dict_to_list'.
         Returns the next id that is to be assigned."""
         highestID = 0
@@ -71,7 +70,7 @@ class FlightIO():
         """Function takes in a list of arguments,
         generates an ID, adds ID to a dictionary and then adds
         everyting from list to the dictionary."""
-        orderedDict, newID = {}, self.getHighestID()
+        orderedDict, newID = {}, self.getNextID()
         orderedDict['Flight ID'] = newID
         orderedDict['Flight number'] = aList[0]
         orderedDict['Airplane registration number'] = aList[1]

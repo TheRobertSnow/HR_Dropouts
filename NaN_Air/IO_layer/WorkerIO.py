@@ -1,5 +1,6 @@
 import csv
 FILENAME = 'DataFiles/worker.csv'
+#fieldnames = ['Social Security Number', 'Name', 'Position', 'Plane License', 'Address', 'Phone', 'Cellphone', 'Email', 'Active', 'Available']
 
 
 class WorkerIO():
@@ -19,7 +20,6 @@ class WorkerIO():
         dictList = []
         with open(FILENAME, 'r', encoding="utf8") as csvFile:
             csvReader = csv.DictReader(csvFile, delimiter=',')
-            # next(csvReader, None)
             for line in csvReader:
                 dictList.append(line)
         self.__dictList = dictList
@@ -30,9 +30,10 @@ class WorkerIO():
 
     #def get_specific_Worker(self, SSN):
     #Verðum að gera function til þess að taka upp eitt instance!!!
-        
 
-    def write_worker_to_file(self, aList):
+
+
+    def write_worker_to_file(self, objectDict, aList):
         """Method takes in a list of data and writes to file"""
         with open(FILENAME, 'a', encoding="utf8", newline='') as csvFile:
             csvWriter = csv.writer(csvFile)
@@ -42,6 +43,7 @@ class WorkerIO():
             newList.append(orderedDict['Worker ID'])
             [newList.append(i) for i in aList]
             csvWriter.writerow(newList)
+        return aList, "Worker successfully created!"
 
     def write_dictList_to_file(self):
         """Method overwrites file with data from dictList"""
@@ -61,8 +63,8 @@ class WorkerIO():
             writer.writeheader()
             for dictionary in self.__dictList:
                 writer.writerow(dictionary)
-    # TODO: This should be named getNextId instead as we already added 1
-    def getHighestID(self):
+
+    def getNextID(self):
         """This method is only used by 'add_dict_to_list'.
         Returns the next id that is to be assigned."""
         highestID = 0
@@ -79,7 +81,7 @@ class WorkerIO():
         """Function takes in a list of arguments,
         generates an ID, adds ID to a dictionary and then adds
         everyting from list to the dictionary."""
-        orderedDict, newID = {}, self.getHighestID()
+        orderedDict, newID = {}, self.getNextID()
         orderedDict['Worker ID'] = newID
         orderedDict['Social security number'] = aList[0]
         orderedDict['Name'] = aList[1]
@@ -112,12 +114,32 @@ class WorkerIO():
     def update_data_in_file(self, aList):
         """Method takes in list of data, updates the dictionary list
         and writes the changes to file"""
+        col, val = aList[1], aList[2] # The column of the desired value and the value
         for index, dictionary in enumerate(self.__dictList):
             for key, value in dictionary.items():
                 if key == 'Worker ID':
                     if value == aList[0]:
-                        self.__dictList[index][aList[1]] = aList[2]
-                        self.write_dictList_to_file()
+                        if col != "Worker ID" or col != "Social security number" or col != "Name":
+                            self.__dictList[index][col] = val
+                            self.write_dictList_to_file()
+                            for i in self.__workerList:
+                                if i.workerID == aList[0]:
+                                    if col == "Position":
+                                        i.position = val
+                                    elif col == "Plane licence":
+                                        i.planeLicence = val
+                                    elif col == "Address":
+                                        i.address = val
+                                    elif col == "Phone":
+                                        i.phone = val
+                                    elif col == "Cellphone":
+                                        i.cellphone = val
+                                    elif col == "Email":
+                                        i.email = val
+                                    elif col == "Active":
+                                        i.active = val
+                                    elif col == "Available":
+                                        i.available = val
 
     def create_worker_instances(self):
         """Methood runs through list of dictionaries,
