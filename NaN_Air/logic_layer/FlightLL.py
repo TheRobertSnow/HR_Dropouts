@@ -1,4 +1,6 @@
 import sys
+from datetime import datetime  
+from datetime import timedelta  
 #import collections
 sys.path.append('..')
 import IOAPI
@@ -19,12 +21,18 @@ class FlightLL():
     
     def createNewFlight(self, flightList):
        newID = self.flightIO.getHigestFlightID()
-       flightNumber = getFlightNumber(self, flightList)
        flightList.insert(0, newID)
+       flightNumber = getFlightNumber(self, flightList)
        flightList.insert(1, flightNumber)
-       flightList.insert(5, "On Air")
-       flightList.insert(6, "TravelTIMEisGOnnaBEHEre")
-       flightList.insert(8, "ArrivalTIMEISgonnaBEhere")
+       flightList.insert(5, "On schedule")
+       """if flightList[3] = "0":
+           travelTime = self.flightIO.getTravelTime(flightList[4])
+       else:
+           travelTime = self.flightIO.getTravelTime(flightList[3])"""
+       travelTime = "03:45"
+       flightList.insert(6, travelTime)
+       arrivalTime = datetime.now() + timedelta(hours=int(travelTime[:2]), minutes=int(travelTime[3:]))
+       flightList.insert(8, arrivalTime)
        self.flightIO.createNewFlight(flightList)
        print("Now there are", len(self.__flightList), "Flight objects in system")
     

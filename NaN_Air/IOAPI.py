@@ -44,6 +44,9 @@ class IOAPI:
     def getHigestFlightID(self):
         return self.workerIO.getNextID()
     
+    def getTravelTime(self, flightRouteID):
+        return self.flightRouteIO.getTravelTime(flightRouteID)
+    
     def getAllFlightInstances(self):
         return self.flightIO.get_flights()
 

@@ -116,7 +116,7 @@ class View():
         if viewPilotsInput == "1":
             pilotSSN = input("Input SSN: ")
             pilot = UIAPI.UIAPI.viewWorkerBySSn(self, pilotSSN, "Pilot")
-            printObjects(self, pilot)
+            print(pilot)
             return viewPilotsInput
         elif viewPilotsInput == "2":
             allPilots = UIAPI.UIAPI.viewWorkerByPOS(self, "Pilot")
@@ -155,7 +155,7 @@ class View():
         if viewAttendantsInput == "1":
             attendantSSN = input("Input SSN: ")
             Attendant = UIAPI.UIAPI.viewWorkerBySSn(self, attendantSSN, "Attendant")
-            printObjects(self, Attendant)
+            print(Attendant)
             return viewAttendantsInput
         elif viewAttendantsInput == "2":
             allAttendants = UIAPI.UIAPI.viewWorkerByPOS(self, "Attendant")
@@ -191,7 +191,7 @@ class View():
         if viewAirplaneInput == "1":
             AirplaneReg= input("Please input airplane registration: ")
             Airplane = UIAPI.UIAPI.viewCertainAirplane(self, AirplaneReg) #Ekki alveg búið fæ ekki self.__planereg = dictionary["Plane registration"] til að virka í Airplane.py
-            printObjects(self, Airplane)
+            print(Airplane)
             return viewAirplaneInput
         elif viewAirplaneInput == "2":
             allPlanes = UIAPI.UIAPI.viewAllAirplanes(self)
@@ -217,7 +217,7 @@ class View():
         if viewFlightRoutesInput == "1":
             flightRouteID = input("Input Flight Route ID: ")
             flightRoute = UIAPI.UIAPI.viewFlightRoute(self, flightRouteID)
-            printObjects(self, flightRoute)
+            print(flightRoute)
             viewFlightRoutesInput = View.viewFlightRoutes(self)
         elif viewFlightRoutesInput == "2":
             allFlightRoutes = UIAPI.UIAPI.viewAllFlightRoutes(self)
@@ -243,7 +243,7 @@ class View():
         if viewVoyagesInput == "1":
             voyageID = input("Input Voyage ID: ")
             voyage = UIAPI.UIAPI.viewVoyage(self, voyageID)
-            printObjects(self, voyage)
+            print(voyage)
             viewVoyagesInput = View.viewVoyages(self)
         elif viewVoyagesInput == "2":
             voyages = UIAPI.UIAPI.viewAllVoyages(self)
@@ -272,7 +272,7 @@ class View():
         if viewFlightInput == "1":
             flightNumber = input("Input flight number: ")
             viewFlight = UIAPI.UIAPI.viewCertainFlight(self, flightNumber)
-            printObjects(self, viewFlight)
+            print(viewFlight)
             viewFlightInput = View.viewFlight(self)
         if viewFlightInput == "2":
             allFlights = UIAPI.UIAPI.viewAllFlights(self)
