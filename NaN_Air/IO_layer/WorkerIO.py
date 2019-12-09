@@ -16,7 +16,8 @@ class WorkerIO():
         return self.workerList
 
     def get_workers_from_file(self):
-        """Get workers from file in a list of dictionaries"""
+        """Only use for initializing WorkerIO.
+        Get workers from file in a list of dictionaries"""
         dictList = []
         with open(FILENAME, 'r', encoding="utf8") as csvFile:
             csvReader = csv.DictReader(csvFile, delimiter=',')

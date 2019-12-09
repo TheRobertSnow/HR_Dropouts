@@ -15,7 +15,8 @@ class FlightIO():
         return self.flightList
 
     def get_flights_from_file(self):
-        """Get flight from file in a list of dictionaries"""
+        """Only use for initializing FlightIO.
+        Get flight from file in a list of dictionaries"""
         returnList = []
         with open(FILENAME, 'r', encoding="utf8") as csvFile:
             csvReader = csv.DictReader(csvFile, delimiter=',')

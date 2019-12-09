@@ -15,7 +15,8 @@ class AirplaneIO():
         return self.__airplaneList
 
     def get_airplanes_from_file(self):
-        """Get airplanes from file in a list of dictionaries"""
+        """Only use for initializing AirplaneIO.
+        Get airplanes from file in a list of dictionaries"""
         dictList = []
         self.airplaneList = []
         with open(FILENAME, 'r', encoding="utf8") as csvFile:
