@@ -26,8 +26,8 @@ class AirplaneIO():
         self.__dictList = dictList
         for dictionary in self.__dictList:
             airplane = Airplane(dictionary)
-            self.__airplaneList.append(airplane)
-        return self.__airplaneList
+            self.airplaneList.append(airplane)
+        return self.airplaneList
 
     def write_airplane_to_file(self, aList):
         """Method takes in a list of data and writes to file"""
@@ -77,7 +77,7 @@ class AirplaneIO():
                             self.write_dictList_to_file()
                             self.get_airplanes_from_file()
                             self.create_airplane_instances()
-                            for i in self.__workerList:
+                            for i in self.airplaneList:
                                 if i.planeRegistration == aList[0]:
                                     if col == "Manufacturer":
                                         i.manufacturer = val
@@ -99,10 +99,10 @@ class AirplaneIO():
     def create_airplane_instances(self):
         """Methood runs through list of dictionaries,
         creates an instance of worker and appends to the list."""
-        self.__airplaneList = []
+        self.airplaneList = []
         for dictionary in self.__dictList:
             airplane = Airplane(dictionary)
-            self.__airplaneList.append(airplane)
+            self.airplaneList.append(airplane)
 
 
 class Airplane():

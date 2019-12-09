@@ -13,7 +13,7 @@ class WorkerIO():
 
     def get_workers(self):
         """Return a list of worker instances"""
-        return self.__workerList
+        return self.workerList
 
     def get_workers_from_file(self):
         """Get workers from file in a list of dictionaries"""
@@ -25,8 +25,7 @@ class WorkerIO():
         self.__dictList = dictList
         for dictionary in self.__dictList:
             worker = Worker(dictionary)
-            self.__workerList.append(worker)
-        return self.__workerList
+            self.workerList.append(worker)
 
     #def get_specific_Worker(self, SSN):
     #Verðum að gera function til þess að taka upp eitt instance!!!

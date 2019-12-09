@@ -20,10 +20,12 @@ class FlightRouteIO():
         returnList = []
         with open(FILENAME, 'r', encoding="utf8") as csvFile:
             csvReader = csv.DictReader(csvFile, delimiter=',')
-            # next(csvReader, None)
             for line in csvReader:
                 returnList.append(line)
         self.__dictList = returnList
+        for dictionary in self.__dictList:
+            flightRoute = FlightRoute(dictionary)
+            self.flightRouteList.append(flightRoute)
 
     def write_flight_route_to_file(self, aList):
         """Method takes in a list of data and writes to file"""

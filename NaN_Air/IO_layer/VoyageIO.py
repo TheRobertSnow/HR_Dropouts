@@ -15,7 +15,8 @@ class VoyageIO():
         return self.__voyageList
 
     def get_voyages_from_file(self):
-        """Get voyages from file in a list of dictionaries"""
+        """Only use for initializing VoyageIO.
+        Get voyages from file in a list of dictionaries"""
         returnList = []
         with open(FILENAME, 'r', encoding="utf8") as csvFile:
             csvReader = csv.DictReader(csvFile, delimiter=',')
@@ -23,6 +24,9 @@ class VoyageIO():
             for line in csvReader:
                 returnList.append(line)
         self.__dictList = returnList
+        for dictionary in self.__dictList:
+            voyage = Voyage(dictionary)
+            self.voyageList.append(voyage)
 
     def write_voyage_to_file(self, aList):
         """Method takes in a list of data and writes to file"""

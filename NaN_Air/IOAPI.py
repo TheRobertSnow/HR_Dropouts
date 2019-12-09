@@ -6,9 +6,9 @@ class IOAPI:
         self.flightIO = FlightIO.FlightIO()
         self.workerIO = WorkerIO.WorkerIO()
         self.flightRouteIO = FlightRouteIO.FlightRouteIO()
-        self.voyageIO = VoyageIO.VoyageIO()
+        # self.voyageIO = VoyageIO.VoyageIO()
         #self.send_instance_to_voyage()
-        
+
     #Worker
     def createNewWorker(self, workerList):
         return self.workerIO.createNewWorker(workerList)

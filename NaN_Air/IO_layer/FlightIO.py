@@ -12,7 +12,7 @@ class FlightIO():
 
     def get_flights(self):
         """Return a list of flight instances"""
-        return self.__flightList
+        return self.flightList
 
     def get_flights_from_file(self):
         """Get flight from file in a list of dictionaries"""
@@ -23,6 +23,9 @@ class FlightIO():
             for line in csvReader:
                 returnList.append(line)
         self.__dictList = returnList
+        for dictionary in self.__dictList:
+            flight = Flight(dictionary)
+            self.flightList.append(flight)
 
     def write_flight_to_file(self, aList):
         """Method takes in a list of data and writes to file"""
@@ -127,10 +130,10 @@ class FlightIO():
     def create_flight_instances(self):
         """Methood runs through list of dictionaries,
         creates an instance of flight and appends to the list."""
-        self.__flightList = []
+        self.flightList = []
         for dictionary in self.__dictList:
             flight = Flight(dictionary)
-            self.__flightList.append(flight)
+            self.flightList.append(flight)
 
 
 class Flight():
