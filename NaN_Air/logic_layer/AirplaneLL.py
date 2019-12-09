@@ -1,81 +1,72 @@
-import sys
-sys.path.append('..')
 import IOAPI
-# from logic_layer import Airplane
-# import collections
 
 
-class AirplaneLL():
+class AirplaneLL:
+
     def __init__(self):
-        self.IOAPI = IOAPI.IOAPI()
+        self.__IOAPI = IOAPI.IOAPI()  # object for API
+        self.__airplanes = self.get_airplane_list()  # object that holds a list of flights from our csv
 
     def get_airplane_list(self):
-        self.airplane = self.IOAPI.request_airplanes()
-        return self.airplane
+        """Returns a list with all airplanes from the airplane.csv file."""
+        return self.__IOAPI.request_airplanes()
 
     def getCertainAirplane(self, airplaneReg):
-        self.airplanes = self.IOAPI.request_airplanes()
-        for instance in self.airplanes:
-            if instance.getReg == airplaneReg:
+        """checks all current airplanes in the csv file and returns the instance that matches
+            takes in the object instance and the reg of the object you need."""
+        for instance in self.__airplanes:
+            if instance.planeRegistration.lower() == airplaneReg.lower():
                 return instance
         return "Airplane not found!"
 
     def find_airplane_by_reg(self, reg):
-        for instance in self.airplane:
+        """Checks all current airplanes in the csv file and prints all matching instances of the reg."""
+        notFound = True
+        for instance in self.__airplanes:
             if instance.planeRegistration == reg:
+                notFound = False
                 print(instance)
+        if notFound:
+            print("Airplane not found!")
 
+    def createNewAirplane(self, newPlaneList):
+        """ Takes in a list with all values that match the 'airplane.csv' file, sends a request to create the
+            new plane and prints out the result. Also checks if all values are valid"""
+        # airplane.csv constants
+        reg = 0
+        seats = 3
+        odometer = 4
+        # testing all values
+        if "-" not in newPlaneList[reg]:  # testing register
+            return "plane creation unsuccessful, all plane registrations must have a '-'!"
 
+        try:  # testing odometer
+            tester = int(newPlaneList[odometer])
+        except ValueError:
+            return "plane creation unsuccessful, odometer value can only have integers."
 
-# +++++++++ Test Case ++++++++++
-# airplaneLL = AirplaneLL()
-# airplaneLL.find_worker_by_ID("TF-EPG")
+        try:  # testing seats
+            tester = int(newPlaneList[seats])
+        except ValueError:
+            return "plane creation unsuccessful, seats value can only have integers."
 
+        for instance in self.__airplanes:  # testing if reg already exists
+            if instance.planeRegistration == newPlaneList[reg]:
+                return "plane creation unsuccessful, that register already exists in our system."
 
-# class AirplaneLL:
-#     def __init__(self):
-#         """Calling me will create a object for every plane in the plane.csv file"""
-#         self.ioAPI = IOAPI.IOAPI()
-#         self.planeList = self.ioAPI.getPlaneList()
-#         self.instanceList = []
-#         for dict in self.planeList:
-#             airplane = Airplane.CreateAirplane(dict)
-#             self.instanceList.append(airplane)
-#
-#         print(len(self.instanceList), "Airplane objects in our system")
-#
-#     def createNewPlane(self, myList):
-#         for airplane in self.instanceList:
-#             reg = airplane.getReg()
-#             if reg == myList[0]:
-#                 return ["Plane with that register already exists"], "Plane creation failed"
-#         orderedDict = collections.OrderedDict()
-#         orderedDict["plane reg"] = myList[0]
-#         orderedDict["manufacturer"] = myList[1]
-#         orderedDict["model"] = myList[2]
-#         orderedDict["status"] = "Grounded"
-#         orderedDict["seats"] = myList[3]
-#         orderedDict["odometer"] = myList[4]
-#         myList.insert(3, "Grounded")
-#         newAirPlane = Airplane.CreateAirplane(orderedDict)
-#         self.instanceList.append(newAirPlane)
-#         print("now there are", len(self.instanceList), "objects in system")
-#         returnString = self.ioAPI.createPlaneRequest(orderedDict, myList)
-#         return returnString
-#
-#     def getAllFlights(self):
-#         return self.instanceList
-#
-#     def getSpecificFlight(self, regToFind):
-#         for aObject in self.instanceList:
-#             currentReg = aObject.getReg()
-#             if currentReg == regToFind:
-#                 return aObject
-#         return "No flight with that Register"
-#
-#     def getXplane(self, tagToFind):
-#         for object in self.instanceList:
-#             tag = object.getReg()
-#             if tag.lower() == tagToFind.lower():
-#                 return object
-#         return "Flight not found!"
+        newPlaneObject = self.__IOAPI.createNewAirplane(newPlaneList)
+        self.__airplanes = AirplaneLL.get_airplane_list(self)  # update our list of plane objects
+        return newPlaneObject
+
+    def getAllAirplanes(self):
+        return self.__airplanes
+
+    def updateAirplaneStatus(self, airplaneReg, newStatus):
+        """takes in the register of plane that needs to be updated and what the new status is."""
+        # finding the plane reg object
+        for instance in self.__airplanes:
+            if instance.planeRegistration == airplaneReg:
+                updatedObject = self.__IOAPI.updatePlane(instance, newStatus)
+                # herna þarf að replace'a objectið i __airplanes...
+                return updatedObject
+        return "Plane register not found. could not update"
