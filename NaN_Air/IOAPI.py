@@ -56,3 +56,12 @@ class IOAPI:
     # def getHigestFlightID(self):
     #     highestID = self.flights.getHighestID()
     #     return highestID
+
+    def createNewFlightRoute(self, createFlightRouteList):
+        newFlightRouteList = self.flightRoutes.write_flightRoute_to_file(createFlightRouteList)
+        return newFlightRouteList
+
+        
+
+
+
