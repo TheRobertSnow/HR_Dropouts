@@ -40,9 +40,9 @@ class IOAPI:
         flightRouteData = self.flightRouteIO.createNewFlightRoute(flightRouteDict)
         return flightRouteData
     
-    def createNewFlightRouteInstance(self, flightRouteList):
-        flightRouteData = self.flightRouteIO.createNewFlightRouteInstance(flightRouteList)
-        return flightRouteData
+    #def createNewFlightRouteInstance(self, flightRouteList):
+        #flightRouteData = self.flightRouteIO.createNewFlightRouteInstance(flightRouteList)
+        #return flightRouteData
     
     def request_flight_routes(self):
         flightRouteList = self.flightRouteIO.get_flight_routes()
@@ -107,7 +107,7 @@ class IOAPI:
         newFlightRouteList = self.flightRoutes.write_flightRoute_to_file(createFlightRouteList)
         return newFlightRouteList
 
-        
+
 
 
 
