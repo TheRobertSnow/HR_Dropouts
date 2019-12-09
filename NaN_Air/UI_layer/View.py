@@ -189,9 +189,9 @@ class View():
         viewAirplaneInput = input("Input choice (q to Quit, b for Back): ")
         viewAirplaneInput = viewAirplaneInput.lower()
         if viewAirplaneInput == "1":
-            AirplaneReg= input("Please input airplane registration: ")
+            AirplaneReg = input("Please input airplane registration: ")
             Airplane = UIAPI.UIAPI.viewCertainAirplane(self, AirplaneReg) #Ekki alveg búið fæ ekki self.__planereg = dictionary["Plane registration"] til að virka í Airplane.py
-            printObjects(self, Airplane)
+            print(Airplane)
             return viewAirplaneInput
         elif viewAirplaneInput == "2":
             allPlanes = UIAPI.UIAPI.viewAllAirplanes(self)

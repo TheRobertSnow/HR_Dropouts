@@ -1,9 +1,12 @@
 import UIAPI
+
+
+
 class Update:
     def __init__(self):
-        self.uiapi = UIAPI.UIAPI()
+        self.UIAPI = UIAPI.UIAPI()
 
-    def update_Worker(self, ssn):
+    def update_Worker(self, workerSSN):
         print("""1. Update Worker
 --------------------------------------------
   1. Home Address: 
@@ -11,94 +14,69 @@ class Update:
   3. Mobile Phone Number:
   4. E-mail Address
 --------------------------------------------""")
-        workerSSN = input("Input Social Security Number of the worker: ")
-        #If ssn exists:
-        #Else print("This worker does not exist")
         updateWorkerMenuInput = input("Input choice (q to Quit, b for Back, m for Main Menu): ")
         updateWorkerMenuInput = updateWorkerMenuInput.lower()
+
         if updateWorkerMenuInput == "1":
-           # print("Current Home Address: Rasberry Street 1") Flækir töluvert, spurning hvort að þetta sé must eða hvort að það sé nóg að prenta bara tilvikið eftir að því er breytt
-            newhomeAddress = input("Input new home address: ")
-            addressUpdate = UIAPI.UIAPI.updateWorker(workerSSN, "Address", newhomeAddress) 
-            """if addressUpdate != None:"""
-            #Ef við náum að breyta addressunni, chekka í logic layer?
-            #print("Home address succesfully changed!\nNew Home Address: {}".format(newhomeAddress))
-            print("Home address succesfully changed!\n")
-            viewWorkerBySSn(self, workerSSN, pos = "")
-            #Vantar að klára updateWorker function
+            newHomeAddress = input("Input new home address: ")
+            print(UIAPI.UIAPI.updateWorker(self, workerSSN, "Address", newHomeAddress))
             return updateWorkerMenuInput
+
         elif updateWorkerMenuInput == "2":
-            newhphoneNumber = int(input("Input new phone number: "))
-            updatedPhoneNum = UIAPI.UIAPI.updateWorker(self, workerSSN, key, newhphoneNumber)
-            Update.update_Worker(ssn)
-            #print("Current Phone Number: 5812345")
-            print("Phone number succesfully changed!\n")
-            viewWorkerBySSn(self, workerSSN, pos = "")
-            Update.update_Worker(ssn)
+            newPhoneNumber = int(input("Input new phone number: "))
+            print(UIAPI.UIAPI.updateWorker(self, workerSSN, "Phone", newPhoneNumber))
+            return updateWorkerMenuInput
+
         elif updateWorkerMenuInput == "3":
-            #print("Current Mobile Phone Number is: 5812345")
-            newhhomeNumber = int(input("Input new home number: "))
-            print("Phone number succesfully changed!\n")
-            viewWorkerBySSn(self, workerSSN, pos = "")
-            Update.update_Worker(ssn)
+            newCellNumber = int(input("Input new cellphone number: "))
+            print(UIAPI.UIAPI.updateWorker(self, workerSSN, "Cellphone", newCellNumber))
+            return updateWorkerMenuInput
+
         elif updateWorkerMenuInput == "4":
-            #print("Current E-mail Address is: alexanders19@ru.is")
             newEmail = input("Input new E-mail Address: ")
-            print("New E-mail Address is: {}\n".format(newEmail))
-            Update.update_Worker(ssn)
+            print(UIAPI.UIAPI.updateWorker(self, workerSSN, "Email", newEmail))
+            return updateWorkerMenuInput
+
         elif updateWorkerMenuInput == "b":
-            Update.updateMenu()
+            Update.updateMenu(self)
         elif updateWorkerMenuInput == "q":
             print("Forriti lokað!")
             return updateWorkerMenuInput
         else:
             print("WRONG INPUT, TRY AGAIN")
-            Update.update_Worker()
-        # return ssn og key,
+            Update.update_Worker(self, workerSSN)
 
-    def updateairplaneStatus(airplane_reg_num_Input):
-        # airplane_reg_num_Input = input("Input Airplane Registration Number: ")
-        # Þetta ákveðna tilvik af airplane fundið
+    def updateairplaneStatus(self, airplane_reg_num_Input):
         print("""2. Update Airplane Status
-Boeing - {}: Select Airplane Status
+    Select Airplane Status
 --------------------------------------------
-  1. Loading 
-  2. In-Air
-  3. Landed:
-  4. Cancelled
---------------------------------------------""".format(airplane_reg_num_Input))
+  1. Working
+  2. Engine failure
+  3. On Repair
+  4. Needs inspection
+--------------------------------------------""")
         updateairplanestatusMenuInput = input("Input choice (q to Quit, b for Back, m for Main Menu): ")
-        updateairplanestatusMenuInput = updateairplanestatusMenuInput  # Á að taka inn int
-        if updateairplanestatusMenuInput == "1":
-            current_status = "Loading"
-            print("Status succesfully updated!")
-            print("BOEING {} status: {}\n".format(airplane_reg_num_Input,
-                                                  current_status))  # Fundið statusinn í þessu sérstaka tilviki
-        elif updateairplanestatusMenuInput == "2":
-            current_status = "In-Air"
-            print("Status succesfully updated!")
-            print("BOEING {} status: {}\n".format(airplane_reg_num_Input,
-                                                  current_status))  # Fundið statusinn í þessu sérstaka tilviki
-        elif updateairplanestatusMenuInput == "3":
-            current_status = "Landed"
-            print("Status succesfully updated!")
-            print("BOEING {} status: {}\n".format(airplane_reg_num_Input,
-                                                  current_status))  # Fundið statusinn í þessu sérstaka tilviki
-        elif updateairplanestatusMenuInput == "4":
-            current_status = "Cancelled"
-            print("Status succesfully updated!")
-            print("BOEING {} status: {}\n".format(airplane_reg_num_Input,
-                                                  current_status))  # Fundið statusinn í þessu sérstaka tilviki
+        options = ["Working", "Engine failure", "On repair", "Needs inspection"]
+        if updateairplanestatusMenuInput == "1" or "2" or "3" or "4":
+            if updateairplanestatusMenuInput == "1":
+                result = UIAPI.UIAPI.updateAirplaneStatus(self, airplane_reg_num_Input, options[0])
+            elif updateairplanestatusMenuInput == "2":
+                result = UIAPI.UIAPI.updateAirplaneStatus(self, airplane_reg_num_Input, options[1])
+            elif updateairplanestatusMenuInput == "3":
+                result = UIAPI.UIAPI.updateAirplaneStatus(self, airplane_reg_num_Input, options[2])
+            elif updateairplanestatusMenuInput == "4":
+                result = UIAPI.UIAPI.updateAirplaneStatus(self, airplane_reg_num_Input, options[3])
+            print(result)
         elif updateairplanestatusMenuInput == "b":
-            Update.updateMenu()
+            Update.updateMenu(self)
         elif updateairplanestatusMenuInput == "m":
-            Update.updateMenu()
+            Update.updateMenu(self)
         elif updateairplanestatusMenuInput == "q":
             print("Forriti lokað!")
         else:
             print("WRONG INPUT, TRY AGAIN")
-            Update.updateairplaneStatus()
-        Update.updateMenu()
+            Update.updateairplaneStatus(self, airplane_reg_num_Input)
+        Update.updateMenu(self)
         # return airplane reg num og key
 
     def updatecurrentflightRoutes(self):
@@ -152,7 +130,7 @@ Boeing - {}: Select Airplane Status
         print("")
         # Update.updateMenu(Update) HVAÐ Á ÉG AÐ CALLA HÉR???
 
-    def updateVoyage(voyageID):
+    def updateVoyage(self, voyageID):
         print("""Voyage ID: {}
         Flight out ID: NA21x
         Flight back ID:NA21(x+1)
@@ -182,7 +160,8 @@ Boeing - {}: Select Airplane Status
                 print("""
   1. Add Pilot
 --------------------------------------------""")
-                pilottoaddInput = input("Input Social Security Number of Pilot to add: ")  # Bæta við chekki sem kannar hvort að þetta sé main pilot
+                pilottoaddInput = input(
+                    "Input Social Security Number of Pilot to add: ")  # Bæta við chekki sem kannar hvort að þetta sé main pilot
                 print("""Pilot succesfully added!
 Current Pilots: [John - 123456789, Hooper - 2607962249]
 --------------------------------------------\n""")
@@ -327,23 +306,39 @@ Flight - {}: Select Flight Status
         updateMenuInput = updateMenuInput.lower()
 
         if updateMenuInput == "1":
-            ssnInput = int(input("Input the the Social Security Number of the worker you wish to change: "))
-            Update.update_Worker(ssnInput)  # Kallar á update worker function
-            updateMenuInput = Update.updateMenu()
+            ssnInput = Update.confirmSSN(self)
+            if ssnInput:
+                Update.update_Worker(self, ssnInput)
+            else:
+                updateMenuInput = Update.updateMenu(self)
+
         elif updateMenuInput == "2":
-            airplane_reg_num_Input = input("Input Airplane Registration Number: ")
-            Update.updateairplaneStatus(self)  # Kallar á update airplane status function
-            updateMenuInput = Update.updateMenu()
+            airplaneReg = Update.confirmPlaneReg(self)
+            if airplaneReg:
+                Update.updateairplaneStatus(self, airplaneReg)
+            else:
+                updateMenuInput = Update.updateMenu(self)
+
         elif updateMenuInput == "3":
-            Update.updatecurrentflightRoutes()
-            updateMenuInput = Update.updateMenu()
+            flightRouteID = Update.confirmFlightRoute(self)
+            if flightRouteID:
+                Update.update_Worker(self, flightRouteID)
+            else:
+                updateMenuInput = Update.updateMenu(self)
+
         elif updateMenuInput == "4":
-            voyageID = input("Input voyage ID: ")  # Þetta ákveðna tilvik af flight route fundið
-            Update.updateVoyage(voyageID)  # Kallar á update voyage function
-            updateMenuInput = Update.updateMenu()
+            voyageID = Update.confirmVoyageID(self)
+            if voyageID:
+                Update.update_Worker(self, voyageID)
+            else:
+                updateMenuInput = Update.updateMenu(self)
+
         elif updateMenuInput == "5":
-            Update.updateFlights()
-            updateMenuInput = Update.updateMenu()
+            flightID = Update.confirmFlightID(self)
+            if flightID:
+                Update.update_Worker(self, flightID)
+            else:
+                updateMenuInput = Update.updateMenu(self)
         elif updateMenuInput == "b":
             return updateMenuInput
         elif updateMenuInput == "q":
@@ -353,3 +348,62 @@ Flight - {}: Select Flight Status
             updateMenuInput = Update.updateMenu()
         print("")
         return updateMenuInput
+
+    def confirmSSN(self):
+        def validate(ssn):
+            return UIAPI.UIAPI.viewWorkerBySSn(self, ssn)
+
+        ssn = input("Input the the Social Security Number of the worker you wish to change (b to back): ")
+        if ssn.lower() == "b":
+            return False
+        result = validate(ssn)
+        print(result)
+        if result == " not found!":
+            Update.confirmSSN(self)
+        else:
+            return ssn
+
+    def confirmPlaneReg(self):
+        def validate(planeReg):
+            return UIAPI.UIAPI.viewCertainAirplane(self, planeReg)
+
+        planeReg = input("Input the the Register of the plane you wish to change (b to back): ")
+        if planeReg.lower() == "b":
+            return False
+        result = validate(planeReg)
+        print(result)
+        if result == "Airplane not found!":
+            Update.confirmPlaneReg(self)
+        else:
+            return planeReg
+
+    def confirmFlightRoute(self):  # vantar virkni í flightRouteLL
+        def validate(flightRoute):
+            return UIAPI.UIAPI.viewCertainFlightRoute(self, flightRoute)
+
+        flightRouteID = input("Input the the id of the flight route you wish to change (b to back): ")
+        if flightRouteID.lower() == "b":
+            return False
+        result = validate(flightRouteID)
+        print(result)
+        if result == " not found!":
+            Update.confirmPlaneReg(self)
+        else:
+            return flightRouteID
+
+    def confirmVoyageID(self):  # þarf að útfæra VoyageLL
+        print("not yet ready, this is located in Update.py line ~410, ConfirmVoyageID method")
+
+    def confirmFlightID(self):
+        def validate(flightID):
+            return UIAPI.UIAPI.viewCertainFlight(self, flightID)
+
+        flightID = input("Input the the number of the flight you wish to change (b to back): ")
+        if flightID.lower() == "b":
+            return False
+        result = validate(flightID)
+        print(result)
+        if result == "Flight not found!":
+            Update.confirmFlightID(self)
+        else:
+            return flightID

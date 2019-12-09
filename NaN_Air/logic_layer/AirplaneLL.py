@@ -67,6 +67,6 @@ class AirplaneLL:
         for instance in self.__airplanes:
             if instance.planeRegistration == airplaneReg:
                 updatedObject = self.__IOAPI.updatePlane(instance, newStatus)
-                # herna þarf að replace'a objectið i __airplanes...
+                self.__airplanes = AirplaneLL.get_airplane_list(self)  # update our list of plane objects
                 return updatedObject
         return "Plane register not found. could not update"
