@@ -16,14 +16,17 @@ class FlightRouteIO():
         return self.flightRouteList
 
     def get_flight_route_from_file(self):
-        """Get flight routes from file in a list of dictionaries"""
+        """Only use for initializing FlightRouteIO.
+        Get flight routes from file in a list of dictionaries"""
         returnList = []
         with open(FILENAME, 'r', encoding="utf8") as csvFile:
             csvReader = csv.DictReader(csvFile, delimiter=',')
-            # next(csvReader, None)
             for line in csvReader:
                 returnList.append(line)
         self.__dictList = returnList
+        for dictionary in self.__dictList:
+            flightRoute = FlightRoute(dictionary)
+            self.flightRouteList.append(flightRoute)
 
     def write_flight_route_to_file(self, aList):
         """Method takes in a list of data and writes to file"""
@@ -95,8 +98,25 @@ class FlightRouteIO():
             for key, value in dictionary.items():
                 if key == 'Flight route ID':
                     if value == aList[0]:
-                        self.__dictList[index][aList[1]] = aList[2]
-                        self.write_dictList_to_file()
+                        if col != "Flight route ID":
+                            self.__dictList[index][col] = val
+                            self.write_dictList_to_file()
+                            self.get_flight_route_from_file()
+                            self.create_flight_route_instances()
+                            for i in self.flightRouteList:
+                                if i.flightRouteID == aList[0]:
+                                    if col == "Country":
+                                        i.country = val
+                                    elif col == "Airport":
+                                        i.airport = val
+                                    elif col == "Flight distance":
+                                        i.flightDistance = val
+                                    elif col == "Travel time":
+                                        i.travelTime = val
+                                    elif col == "Emergency contact":
+                                        i.emergencyContact = val
+                                    elif col == "Emergency number":
+                                        i.emergencyNumber = val
 
     def create_flight_route_instances(self):
         """Methood runs through list of dictionaries,
@@ -112,7 +132,7 @@ class FlightRoute:
     def __init__(self, dictionary):
         self.__myDictionary = dictionary
         self.flightRouteID = dictionary["Flight route ID"]
-        self.Country = dictionary["Country"]
+        self.country = dictionary["Country"]
         self.airport = dictionary["Airport"]
         self.flightDistance = dictionary["Flight distance"]
         self.travelTime = dictionary["Travel time"]
