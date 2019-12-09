@@ -40,9 +40,6 @@ class IOAPI:
         flightRouteData = self.flightRouteIO.createNewFlightRoute(flightRouteDict)
         return flightRouteData
     
-    #def createNewFlightRouteInstance(self, flightRouteList):
-        #flightRouteData = self.flightRouteIO.createNewFlightRouteInstance(flightRouteList)
-        #return flightRouteData
     
     def request_flight_routes(self):
         flightRouteList = self.flightRouteIO.get_flight_routes()
@@ -66,6 +63,8 @@ class IOAPI:
     def createNewFlight(self, flightDict):
         flightData = self.flightIO.createNewFlight(flightDict)
         return flightData
+
+    
     
     def createNewFlightInstance(self, flightList):
         flightData = self.flightIO.createNewFlightInstance(flightList)
