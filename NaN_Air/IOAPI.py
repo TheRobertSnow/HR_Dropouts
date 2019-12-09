@@ -17,7 +17,7 @@ class IOAPI:
         return self.workerIO.createNewWorker(workerList)
 
     def request_workers(self):
-        return self.workerIO.get_workers_from_file()
+        return self.workerIO.get_workers()
 
     #
     # Airplane

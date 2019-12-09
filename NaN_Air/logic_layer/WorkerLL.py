@@ -32,14 +32,19 @@ class WorkerLL():
         positionList = []
         if position == "Pilot":
             for instance in self.worker:
-                if instance.position == "Captain" or "Copilot":
+                if instance.position == "Captain":
                     positionList.append(instance)
+                elif instance.position == "Copilot":
+                    positionList.append(instance)     
         elif position == "Attendant":
             for instance in self.worker:
-                if instance.position == "Flight Service Manager" or "Flight Attendant":
+                if instance.position == "Flight Service Manager":
+                    positionList.append(instance)
+                elif instance.position == "Flight Attendant":
                     positionList.append(instance)
         if len(positionList) == 0:
             positionList = "No {}'s found!.".format(position)
+        
         return positionList
 
     """def updateWorker(socialSecurityNumber, key, newValue): #Verðum að gera function til þess að taka upp eitt instance!!!
