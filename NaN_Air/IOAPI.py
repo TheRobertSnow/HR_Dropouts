@@ -48,6 +48,9 @@ class IOAPI:
 
     def getAllFlightRouteInstances(self):
         return self.flightRouteIO.get_flightRoutes()
+    
+    def updateFlightRoute(self, flightRouteList):
+        return self.flightRouteIO.update_data_in_file(flightRouteList)
 
     #
     # Voyage

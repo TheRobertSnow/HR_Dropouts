@@ -16,6 +16,10 @@ class FlightRouteLL():
 
     def getAllFlightRoutes(self):
         return self.__flightRouteList
+    
+    def updateFlightRoute(self, flightRouteList):
+        flightRoute = self.ioAPI.updateFlightRoute(flightRouteList)
+        return flightRoute
 
     def createNewFlightRoute(self, flightRouteList):
         "List of strings and ints, information on flight route"

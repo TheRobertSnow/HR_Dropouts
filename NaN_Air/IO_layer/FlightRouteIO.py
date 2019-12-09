@@ -114,10 +114,6 @@ class FlightRouteIO():
                 if key == 'Flight route ID':
                     if value == aList[0]:
                         if col != "Flight route ID":
-                            self.__dictList[index][col] = val
-                            self.write_dictList_to_file()
-                            self.get_flight_route_from_file()
-                            self.create_flight_route_instances()
                             for i in self.flightRouteList:
                                 if i.flightRouteID == aList[0]:
                                     if col == "Country":
@@ -132,6 +128,11 @@ class FlightRouteIO():
                                         i.emergencyContact = val
                                     elif col == "Emergency number":
                                         i.emergencyNumber = val
+                                    self.__dictList[index][col] = val
+                                    self.write_dictList_to_file()
+                                    self.get_flight_route_from_file()
+                                    self.create_flight_route_instances()
+                                    return i
 
     def add_flight_route_instance(self, dict):
         newFlightRoute = FlightRoute(dict)

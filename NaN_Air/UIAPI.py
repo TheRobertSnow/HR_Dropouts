@@ -157,9 +157,9 @@ class UIAPI:
         returnData = self.flightRouteLL.createNewFlightRoute(flightRouteList)
         return returnData
 
-    def updateFlightRoute(self,flightRouteID, key, newValue):
+    def updateFlightRoute(self, flightRouteList):
         """Uses flightRouteID to find the instance and uses the key to update the instance with a new value"""
-        returnData = self.flightRouteLL.updateFlightRoute(flightRouteID, key, newValue)
+        returnData = self.flightRouteLL.updateFlightRoute(flightRouteList)
         return returnData
 
     def viewFlightRoute(self, flightRouteID):
