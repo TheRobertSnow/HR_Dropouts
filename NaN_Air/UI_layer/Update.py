@@ -67,17 +67,16 @@ class Update:
             elif updateairplanestatusMenuInput == "4":
                 result = UIAPI.UIAPI.updateAirplaneStatus(self, airplane_reg_num_Input, options[3])
             print(result)
-        elif updateairplanestatusMenuInput == "b":
+        elif updateairplanestatusMenuInput.lower() == "b":
             Update.updateMenu(self)
-        elif updateairplanestatusMenuInput == "m":
+        elif updateairplanestatusMenuInput.lower() == "m":
             Update.updateMenu(self)
-        elif updateairplanestatusMenuInput == "q":
-            print("Forriti lokað!")
+        elif updateairplanestatusMenuInput.lower() == "q":
+            print("Exiting program!")
         else:
             print("WRONG INPUT, TRY AGAIN")
             Update.updateairplaneStatus(self, airplane_reg_num_Input)
         Update.updateMenu(self)
-        # return airplane reg num og key
 
     def updatecurrentflightRoutes(self):
         flightrouteID = input("Input flight route ID: ")  # Þetta ákveðna tilvik af flight route fundið
