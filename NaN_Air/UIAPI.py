@@ -157,9 +157,9 @@ class UIAPI:
         returnData = self.flightRouteLL.createNewFlightRoute(flightRouteList)
         return returnData
 
-    def updateFlightRoute(self,flightRouteID, key, newValue):
+    def updateFlightRoute(self, flightRouteList):
         """Uses flightRouteID to find the instance and uses the key to update the instance with a new value"""
-        returnData = self.flightRouteLL.updateFlightRoute(flightRouteID, key, newValue)
+        returnData = self.flightRouteLL.updateFlightRoute(flightRouteList)
         return returnData
 
     def viewFlightRoute(self, flightRouteID):
@@ -169,14 +169,16 @@ class UIAPI:
 
     def viewAllFlightRoutes(self):
         """Prints all FLight Routes"""
-        returnData = self.flightRouteLL.viewAllFlightRoutes()
+        returnData = self.flightRouteLL.getAllFlightRoutes()
         return returnData
     
     def viewAllDestinations(self):
         """Listar öll destinations, viljum fá lista eða dict með "Country: Airport", ef það meikar sens"""
         pass
 
-
+    def viewCertainFlightRoute(self, flightRouteID):
+        """ TODO i need to be returned the flight route instance, if it doesn't exist return a the string 'Flight route doesn't exist'"""
+        pass
 
 # ++++++++++ Test Case ++++++++++
 # UIAPI = UIAPI()

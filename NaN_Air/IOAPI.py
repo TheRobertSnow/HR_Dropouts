@@ -7,10 +7,10 @@ class IOAPI:
         self.flightIO = FlightIO.FlightIO()
         self.workerIO = WorkerIO.WorkerIO()
         self.flightRouteIO = FlightRouteIO.FlightRouteIO()
-        """self.voyageIO = VoyageIO.VoyageIO(self.airplaneIO.airplaneList
-                                        , self.flightIO.flightList
-                                        , self.workerIO.workerList
-                                        , self.flightRouteIO.flightRouteList)"""
+        self.voyageIO = VoyageIO.VoyageIO(self.airplaneIO.airplaneList,
+                                          self.flightIO.flightList,
+                                          self.workerIO.workerList,
+                                          self.flightRouteIO.flightRouteList)
         # self.send_instance_to_voyage()
 
     #
@@ -44,12 +44,14 @@ class IOAPI:
 
     def createNewFlightRoute(self, createFlightRouteList):
         # TODO create new flight route method in flightRouteIO
-        newFlightRouteList = self.flightRouteIO.create_new_flight_route(
-            createFlightRouteList)  # sending list of strings and ints
+        newFlightRouteList = self.flightRouteIO.create_new_flight_route(createFlightRouteList)  # sending list of strings and ints
         return newFlightRouteList
 
-    def request_flight_routes(self):
-        return self.flightRouteIO.get_flight_routes()
+    def getAllFlightRouteInstances(self):
+        return self.flightRouteIO.get_flightRoutes()
+    
+    def updateFlightRoute(self, flightRouteList):
+        return self.flightRouteIO.update_data_in_file(flightRouteList)
 
     #
     # Voyage
@@ -71,7 +73,7 @@ class IOAPI:
     def createNewFlight(self, flightList):
         return self.flightIO.createNewFlight(flightList)
 
-    def getHigestFlightID(self):
+    def getHighestFlightID(self):
         return self.workerIO.getNextID()
 
     def getTravelTime(self, flightRouteID):
