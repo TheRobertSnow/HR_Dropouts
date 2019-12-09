@@ -1,22 +1,23 @@
 import csv
 FILENAME = 'DataFiles/flight.csv'
-
+from datetime import datetime  
+from datetime import timedelta  
 
 class FlightIO():
 
     def __init__(self):
         self.__dictList = []
-        self.__flightList = []
+        self.flightList = []
         self.get_flights_from_file()
         self.create_flight_instances()
 
     def get_flights(self):
         """Return a list of flight instances"""
-        return self.__flightList
+        return self.flightList
 
-    
     def get_flights_from_file(self):
-        """Get flight from file in a list of dictionaries"""
+        """Only use for initializing FlightIO.
+        Get flight from file in a list of dictionaries"""
         returnList = []
         with open(FILENAME, 'r', encoding="utf8") as csvFile:
             csvReader = csv.DictReader(csvFile, delimiter=',')
@@ -24,6 +25,9 @@ class FlightIO():
             for line in csvReader:
                 returnList.append(line)
         self.__dictList = returnList
+        for dictionary in self.__dictList:
+            flight = Flight(dictionary)
+            self.flightList.append(flight)
 
     def write_flight_to_file(self, aList):
         """Method takes in a list of data and writes to file"""
@@ -31,10 +35,12 @@ class FlightIO():
             csvWriter = csv.writer(csvFile)
             orderedDict = self.convert_to_dict_with_id(aList)
             self.__dictList.append(orderedDict)
+            self.add_flight_instance(orderedDict)
             newList = []
             newList.append(orderedDict['Flight ID'])
             [newList.append(i) for i in aList]
             csvWriter.writerow(newList)
+        return orderedDict
 
     def write_dictList_to_file(self):
         """Method overwrites file with data from dictList"""
@@ -99,20 +105,44 @@ class FlightIO():
     def update_data_in_file(self, aList):
         """Method takes in list of data, updates the dictionary list
         and writes the changes to file"""
+        col, val = aList[1], aList[2] # The column of the desired value and the value
         for index, dictionary in enumerate(self.__dictList):
             for key, value in dictionary.items():
-                if key == 'Flight ID':
+                if key == 'Flight number':
                     if value == aList[0]:
-                        self.__dictList[index][aList[1]] = aList[2]
-                        self.write_dictList_to_file()
+                        if col != "Flight ID" or col != "Flight number":
+                            for i in self.flightList:
+                                if i.flightNumber == aList[0]:
+                                    if col == "Flight status":
+                                        i.flightStatus = val
+                                    elif col == "Departure time":
+                                        i.departureTime = val
+                                        travelHours, travelMinutes = map(int, i.travelTime.split(':'))
+                                        i.arrivalTime = val + timedelta(hours = travelHours, minutes = travelMinutes)
+                                        self.__dictList[index]["Arrival time"] = val + timedelta(hours = travelHours, minutes = travelMinutes)
+                                    self.__dictList[index][col] = val
+                                    self.write_dictList_to_file()
+                                    self.get_flights_from_file()
+                                    self.create_flight_instances()
+                                    return i
+
+    def add_flight_instance(self, dict):
+        flight = Flight(dict)
+        self.flightList.append(flight)
 
     def create_flight_instances(self):
         """Methood runs through list of dictionaries,
         creates an instance of flight and appends to the list."""
-        self.__flightList = []
+        self.flightList = []
         for dictionary in self.__dictList:
             flight = Flight(dictionary)
-            self.__flightList.append(flight)
+            self.flightList.append(flight)
+            
+    def createNewFlight(self, flightList):
+        """creates a new airplane instance and writes the airplane to the csv, then it returns the new
+            airplane object"""
+        flight = self.write_flight_to_file(flightList)
+        return flight  # returns the new object
 
 
 class Flight():
@@ -132,7 +162,7 @@ class Flight():
     def __str__(self):
         returnString = []
         for key, val in self.myDictionary.items():
-            returnString.append((key + ": " + val))
+            returnString.append((key + ": " + str(val)))
         return "\n".join(returnString)
 
 

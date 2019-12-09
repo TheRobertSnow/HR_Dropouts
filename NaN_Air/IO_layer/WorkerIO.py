@@ -7,16 +7,25 @@ class WorkerIO():
 
     def __init__(self):
         self.__dictList = []
-        self.__workerList = []
+        self.workerList = []
         self.get_workers_from_file()
         self.create_worker_instances()
 
     def get_workers(self):
         """Return a list of worker instances"""
-        return self.__workerList
+        return self.workerList
+
+    def create_new_worker(self, newWorker):
+        """Takes in list and creates a new worker"""
+        try:
+            self.write_worker_to_file(newWorker)
+            return "New worker created."
+        except Exception as e:
+            return "Unable to create worker."
 
     def get_workers_from_file(self):
-        """Get workers from file in a list of dictionaries"""
+        """Only use for initializing WorkerIO.
+        Get workers from file in a list of dictionaries"""
         dictList = []
         with open(FILENAME, 'r', encoding="utf8") as csvFile:
             csvReader = csv.DictReader(csvFile, delimiter=',')
@@ -25,8 +34,7 @@ class WorkerIO():
         self.__dictList = dictList
         for dictionary in self.__dictList:
             worker = Worker(dictionary)
-            self.__workerList.append(worker)
-        return self.__workerList
+            self.workerList.append(worker)
 
     #def get_specific_Worker(self, SSN):
     #Verðum að gera function til þess að taka upp eitt instance!!!
@@ -39,6 +47,7 @@ class WorkerIO():
             csvWriter = csv.writer(csvFile)
             orderedDict = self.convert_to_dict_with_id(aList)
             self.__dictList.append(orderedDict)
+            self.add_worker_instance(orderedDict)
             newList = []
             newList.append(orderedDict['Worker ID'])
             [newList.append(i) for i in aList]
@@ -122,6 +131,8 @@ class WorkerIO():
                         if col != "Worker ID" or col != "Social security number" or col != "Name":
                             self.__dictList[index][col] = val
                             self.write_dictList_to_file()
+                            self.get_workers_from_file()
+                            self.create_worker_instances()
                             for i in self.__workerList:
                                 if i.workerID == aList[0]:
                                     if col == "Position":
@@ -140,6 +151,10 @@ class WorkerIO():
                                         i.active = val
                                     elif col == "Available":
                                         i.available = val
+
+    def add_worker_instance(self, dict):
+        newWorker = Worker(dict)
+        self.workerList.append(newWorkers)
 
     def create_worker_instances(self):
         """Methood runs through list of dictionaries,

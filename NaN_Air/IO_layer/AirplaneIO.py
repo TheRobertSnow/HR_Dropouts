@@ -19,16 +19,17 @@ class AirplaneIO:
 
     def __init__(self):
         self.__dictList = []
-        self.__airplaneList = []
+        self.airplaneList = []
         self.get_airplanes_from_file()
         self.create_airplane_instances()
 
     def get_airplanes(self):
         """Return a list of plane instances"""
-        return self.__airplaneList
+        return self.airplaneList
 
     def get_airplanes_from_file(self):
-        """Get airplanes from file in a list of dictionaries"""
+        """Only use for initializing AirplaneIO.
+        Get airplanes from file in a list of dictionaries"""
         dictList = []
 
         with open(FILENAME, 'r', encoding="utf8") as csvFile:
@@ -38,8 +39,8 @@ class AirplaneIO:
         self.__dictList = dictList
         for dictionary in self.__dictList:
             airplane = Airplane(dictionary)
-            self.__airplaneList.append(airplane)
-        return self.__airplaneList
+            self.airplaneList.append(airplane)
+        return self.airplaneList
 
     def write_airplane_to_file(self, aList):
         """Method takes in a list of data and writes to file"""
@@ -68,22 +69,42 @@ class AirplaneIO:
     def update_data_in_file(self, aList):
         """Method takes in list of data, updates the dictionary list
         and writes the changes to file"""
+        col, val = aList[1], aList[2] # The column of the desired value and the value
         for index, dictionary in enumerate(self.__dictList):
             for key, value in dictionary.items():
                 if key == 'Plane registration':
                     if value == aList[0]:
-                        self.__dictList[index][aList[1]] = aList[2]
-                        self.write_dictList_to_file()
-                        self.get_airplanes_from_file()
-                        self.create_airplane_instances()
+                        if col != "Plane registration":
+                            self.__dictList[index][col] = val
+                            self.write_dictList_to_file()
+                            self.get_airplanes_from_file()
+                            self.create_airplane_instances()
+                            for i in self.airplaneList:
+                                if i.planeRegistration == aList[0]:
+                                    if col == "Manufacturer":
+                                        i.manufacturer = val
+                                    elif col == "Model":
+                                        i.model = val
+                                    elif col == "Status":
+                                        i.status = val
+                                    elif col == "Seats":
+                                        i.seats = val
+                                    elif col == "Odometer":
+                                        i.odometer = val
+                                    elif col == "Email":
+                                        i.email = val
+                                    elif col == "Active":
+                                        i.active = val
+                                    elif col == "Available":
+                                        i.available = val
 
     def create_airplane_instances(self):
         """Method runs through list of dictionaries,
         creates an instance of worker and appends to the list."""
-        self.__airplaneList = []
+        self.airplaneList = []
         for dictionary in self.__dictList:
             airplane = Airplane(dictionary)
-            self.__airplaneList.append(airplane)
+            self.airplaneList.append(airplane)
 
     def createNewAirplane(self, airplaneList):
         """creates a new airplane instance and writes the airplane to the csv, then it returns the new
@@ -93,7 +114,7 @@ class AirplaneIO:
         # create instance
         theDict = convert_to_dict(airplaneList)
         airplane = Airplane(theDict)
-        self.__airplaneList.append(airplane)  # add the new object to our list
+        self.airplaneList.append(airplane)  # add the new object to our list
 
         # write to file
         self.write_airplane_to_file(airplaneList)

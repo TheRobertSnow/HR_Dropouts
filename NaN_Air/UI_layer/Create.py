@@ -1,4 +1,5 @@
 import UIAPI
+import datetime
 class Create():
     def __init__(self):
         self.uiapi = UIAPI.UIAPI()
@@ -15,8 +16,10 @@ class Create():
             destination = input("  - Destination ID: ")
         flightList.append(destination)
         departureTime = input("  - Departure time from {}(f.x. 12:30): ".format(origin))
+        hour, minute = map(int, departureTime.split(':'))
         departureDate = input("  - Departure date from {}(f.x. 24/12/2019): ".format(origin))
-        departureDateTime = departureDate + "T" + departureTime + ":00"
+        day, month, year = map(int, departureDate.split('/'))
+        departureDateTime = datetime.datetime(year,month, day, hour, minute, 00)
         flightList.append(departureDateTime)
         return flightList
 
@@ -225,9 +228,9 @@ Please input the following information:''')
 --------------------------------------------
 Please input the following information:''')
             flightList = Create.createFlight(self)
-            print("Request sent in ...\n")
             result = UIAPI.UIAPI.createNewFlight(self, flightList)
             print(result)
+            #print(result)
             #print("Flight successfully created!")
             #print(flightList)
             # Prints the created flight
