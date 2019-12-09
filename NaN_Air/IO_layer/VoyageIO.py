@@ -4,9 +4,9 @@ FILENAME = 'DataFiles/voyage.csv'
 
 class VoyageIO():
 
-    def __init__(self):
-        self.__dictList = []
-        self.__voyageList = []
+    def __init__(self, airplaneList, flightList, workerList, flightRouteList):
+        self.dictList = []
+        self.voyageList = []
         self.get_voyages_from_file()
         self.create_voyage_instances()
 
@@ -15,7 +15,8 @@ class VoyageIO():
         return self.__voyageList
 
     def get_voyages_from_file(self):
-        """Get voyages from file in a list of dictionaries"""
+        """Only use for initializing VoyageIO.
+        Get voyages from file in a list of dictionaries"""
         returnList = []
         with open(FILENAME, 'r', encoding="utf8") as csvFile:
             csvReader = csv.DictReader(csvFile, delimiter=',')
@@ -23,6 +24,9 @@ class VoyageIO():
             for line in csvReader:
                 returnList.append(line)
         self.__dictList = returnList
+        for dictionary in self.__dictList:
+            voyage = Voyage(dictionary)
+            self.voyageList.append(voyage)
 
     def write_voyage_to_file(self, aList):
         """Method takes in a list of data and writes to file"""
@@ -101,12 +105,32 @@ class VoyageIO():
     def update_data_in_file(self, aList):
         """Method takes in list of data, updates the dictionary list
         and writes the changes to file"""
+        col, val = aList[1], aList[2] # The column of the desired value and the value
         for index, dictionary in enumerate(self.__dictList):
             for key, value in dictionary.items():
                 if key == 'Voyage ID':
                     if value == aList[0]:
-                        self.__dictList[index][aList[1]] = aList[2]
-                        self.write_dictList_to_file()
+                        if col != "Voyage ID" or col != "Flight out ID" or col != "Flight back ID":
+                            self.__dictList[index][col] = val
+                            self.write_dictList_to_file()
+                            self.get_voyages_from_file()
+                            self.create_voyage_instances()
+                            for i in self.__workerList:
+                                if i.voyageID == aList[0]:
+                                    if col == "Main pilot":
+                                        i.mainPilot = val
+                                    elif col == "Assisting pilot":
+                                        i.assistingPilot = val
+                                    elif col == "Main flight attendant":
+                                        i.mainFlightAttendant = val
+                                    elif col == "Flight attendants":
+                                        i.flightAttendants = val
+                                    elif col == "Flight route ID":
+                                        i.flightRouteID = val
+                                    elif col == "Departure from IS":
+                                        i.departureFromIS = val
+                                    elif col == "Departure to IS":
+                                        i.departureToIS = val
 
     def create_voyage_instances(self):
         """Methood runs through list of dictionaries,

@@ -7,16 +7,17 @@ class WorkerIO():
 
     def __init__(self):
         self.__dictList = []
-        self.__workerList = []
+        self.workerList = []
         self.get_workers_from_file()
         self.create_worker_instances()
 
     def get_workers(self):
         """Return a list of worker instances"""
-        return self.__workerList
+        return self.workerList
 
     def get_workers_from_file(self):
-        """Get workers from file in a list of dictionaries"""
+        """Only use for initializing WorkerIO.
+        Get workers from file in a list of dictionaries"""
         dictList = []
         with open(FILENAME, 'r', encoding="utf8") as csvFile:
             csvReader = csv.DictReader(csvFile, delimiter=',')
@@ -25,8 +26,7 @@ class WorkerIO():
         self.__dictList = dictList
         for dictionary in self.__dictList:
             worker = Worker(dictionary)
-            self.__workerList.append(worker)
-        return self.__workerList
+            self.workerList.append(worker)
 
     #def get_specific_Worker(self, SSN):
     #Verðum að gera function til þess að taka upp eitt instance!!!
@@ -122,6 +122,8 @@ class WorkerIO():
                         if col != "Worker ID" or col != "Social security number" or col != "Name":
                             self.__dictList[index][col] = val
                             self.write_dictList_to_file()
+                            self.get_workers_from_file()
+                            self.create_worker_instances()
                             for i in self.__workerList:
                                 if i.workerID == aList[0]:
                                     if col == "Position":
