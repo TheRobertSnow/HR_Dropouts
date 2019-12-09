@@ -1,7 +1,7 @@
 import UIAPI
 class Create():
     def __init__(self):
-        self.object = UIAPI.UIAPI()
+        self.uiapi = UIAPI.UIAPI()
 
     def createFlight(self, airplane=None, origin=None, destination=None):
         flightList = []
@@ -38,8 +38,8 @@ class Create():
     def createVoyageMenu(self):
         print('''4. Create voyage
 --------------------------------------------
-1. Create voyage using existing flights
-2. Create voyage by creating 2 flights
+  1. Create voyage using existing flights
+  2. Create voyage by creating 2 flights
 --------------------------------------------''')
         createVoyageMenuInput = input("Input choice(q to Quit, b for Back): ")
         createVoyageMenuInput = createVoyageMenuInput.lower()
@@ -48,9 +48,9 @@ class Create():
 --------------------------------------------
 Please input the following information:''')
             voyageList = []
-            flightOutId = int(input("  - Flight from Iceland id: "))
+            flightOutId = int(input("  - Flight from Iceland ID: "))
             voyageList.append(flightOutId)
-            flightBackId = int(input("  - Flight to Iceland id: "))
+            flightBackId = int(input("  - Flight to Iceland ID: "))
             voyageList.append(flightBackId)
             # gets the flights and validates  that they exist
             captain, copilot, flightServiceManager, flightAttendants = Create.addCrew(self)
@@ -132,7 +132,7 @@ Please input the following information:''')
             ssn = int(input("  - Social security number: "))
             createWorkerList.append(ssn)
             name = input("  - Name: ")
-            createWorkerList.append(name)            
+            createWorkerList.append(name)
             print('''\n  Select worker position\n
     1. Captain
     2. Copilot
@@ -153,6 +153,8 @@ Please input the following information:''')
                 createWorkerList.append("Staff manager")
             elif position == "6":
                 createWorkerList.append("Trip manager")
+            planeLicence = input("  - Plane licence: ")
+            createWorkerList.append(planeLicence)
             address = input("  - Address: ")
             createWorkerList.append(address)
             phone = int(input("  - Phone: "))
@@ -161,10 +163,8 @@ Please input the following information:''')
             createWorkerList.append(cellphone)
             email = input("  - Email: ")
             createWorkerList.append(email)
-            planeLicence = input("  - Plane licence: ")
-            createWorkerList.append(planeLicence)
-            print("Worker successfully created!")
-            print(createWorkerList)
+            result = UIAPI.UIAPI.createNewWorker(self, createWorkerList)
+            print(result)
             # Prints out info on the created worker
             print("--------------------------------------------")
             createMenuInput = Create.createMenu(self)
@@ -184,7 +184,7 @@ Please input the following information:''')
             odometer = int(input("  - Odometer(number of km the airplane has travelled): "))
             createAirplaneList.append(odometer)
             print("Request sent in ...\n")
-            result = UIAPI.UIAPI.newPlaneRequest(self, createAirplaneList)
+            result = UIAPI.UIAPI.createNewAirplane(self, createAirplaneList)
             print(result)
 
             # Prints info on the created airplane
@@ -207,8 +207,8 @@ Please input the following information:''')
             createFlightRouteList.append(emergencyContact)
             emergencyNumber = int(input("  - Emergency contact phonenumber: "))
             createFlightRouteList.append(emergencyNumber)
-            print("Flight Route successfully created!")
-            print(createFlightRouteList)
+            result = UIAPI.UIAPI.createNewFlightRoute(self, createFlightRouteList)
+            print(result)
             # Prints the created flight route
             print("--------------------------------------------")
             createMenuInput = Create.createMenu(self)
@@ -226,7 +226,7 @@ Please input the following information:''')
 Please input the following information:''')
             flightList = Create.createFlight(self)
             print("Request sent in ...\n")
-            result = UIAPI.UIAPI.newFlightRequest(self, flightList)
+            result = UIAPI.UIAPI.createNewFlight(self, flightList)
             print(result)
             #print("Flight successfully created!")
             #print(flightList)
