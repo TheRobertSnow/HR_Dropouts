@@ -25,7 +25,7 @@ class AirplaneIO:
 
     def get_airplanes(self):
         """Return a list of plane instances"""
-        return self.__airplaneList
+        return self.airplaneList
 
     def get_airplanes_from_file(self):
         """Only use for initializing AirplaneIO.
@@ -69,6 +69,7 @@ class AirplaneIO:
     def update_data_in_file(self, aList):
         """Method takes in list of data, updates the dictionary list
         and writes the changes to file"""
+        col, val = aList[1], aList[2] # The column of the desired value and the value
         for index, dictionary in enumerate(self.__dictList):
             for key, value in dictionary.items():
                 if key == 'Plane registration':
@@ -111,7 +112,7 @@ class AirplaneIO:
         # create instance
         theDict = convert_to_dict(airplaneList)
         airplane = Airplane(theDict)
-        self.__airplaneList.append(airplane)  # add the new object to our list
+        self.airplaneList.append(airplane)  # add the new object to our list
 
         # write to file
         self.write_airplane_to_file(airplaneList)

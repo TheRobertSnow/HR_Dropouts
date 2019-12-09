@@ -94,6 +94,7 @@ class FlightRouteIO():
     def update_data_in_file(self, aList):
         """Method takes in list of data, updates the dictionary list
         and writes the changes to file"""
+        col, val = aList[1], aList[2] # The column of the desired value and the value
         for index, dictionary in enumerate(self.__dictList):
             for key, value in dictionary.items():
                 if key == 'Flight route ID':
@@ -125,7 +126,7 @@ class FlightRouteIO():
         for dictionary in self.__dictList:
             flightRoute = FlightRoute(dictionary)
             self.flightRouteList.append(flightRoute)
-       
+
 
 
 class FlightRoute:
