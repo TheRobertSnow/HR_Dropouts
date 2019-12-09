@@ -1,6 +1,7 @@
 import csv
 FILENAME = 'DataFiles/flight.csv'
-
+from datetime import datetime  
+from datetime import timedelta  
 
 class FlightIO():
 
@@ -13,6 +14,13 @@ class FlightIO():
     def get_flights(self):
         """Return a list of flight instances"""
         return self.flightList
+
+    def create_new_flight(self, newFilght):
+        try:
+            self.write_flight_to_file(newFilght)
+            return "New flight created."
+        except Exception as e:
+            return "Unable to create flight."
 
     def get_flights_from_file(self):
         """Only use for initializing FlightIO.
@@ -34,6 +42,7 @@ class FlightIO():
             csvWriter = csv.writer(csvFile)
             orderedDict = self.convert_to_dict_with_id(aList)
             self.__dictList.append(orderedDict)
+            self.add_flight_instance(orderedDict)
             newList = []
             newList.append(orderedDict['Flight ID'])
             [newList.append(i) for i in aList]
@@ -105,29 +114,27 @@ class FlightIO():
         col, val = aList[1], aList[2] # The column of the desired value and the value
         for index, dictionary in enumerate(self.__dictList):
             for key, value in dictionary.items():
-                if key == 'Flight ID':
+                if key == 'Flight number':
                     if value == aList[0]:
                         if col != "Flight ID" or col != "Flight number":
-                            self.__dictList[index][col] = val
-                            self.write_dictList_to_file()
-                            self.get_flights_from_file()
-                            self.create_flight_instances()
                             for i in self.flightList:
-                                if i.flightID == aList[0]:
-                                    if col == "Airplane registration number":
-                                        i.airplaneRegistrationNumber = val
-                                    elif col == "Origin ID":
-                                        i.originID = val
-                                    elif col == "Destination ID":
-                                        i.destinationID = val
-                                    elif col == "Flight status":
+                                if i.flightNumber == aList[0]:
+                                    if col == "Flight status":
                                         i.flightStatus = val
-                                    elif col == "Travel time":
-                                        i.travelTime = val
                                     elif col == "Departure time":
                                         i.departureTime = val
-                                    elif col == "Arrival time":
-                                        i.arrivalTime = val
+                                        travelHours, travelMinutes = map(int, i.travelTime.split(':'))
+                                        i.arrivalTime = val + timedelta(hours = travelHours, minutes = travelMinutes)
+                                        self.__dictList[index]["Arrival time"] = val + timedelta(hours = travelHours, minutes = travelMinutes)
+                                    self.__dictList[index][col] = val
+                                    self.write_dictList_to_file()
+                                    self.get_flights_from_file()
+                                    self.create_flight_instances()
+                                    return i
+
+    def add_flight_instance(self, dict):
+        flight = Flight(dict)
+        self.flightList.append(flight)
 
     def create_flight_instances(self):
         """Methood runs through list of dictionaries,
@@ -136,6 +143,18 @@ class FlightIO():
         for dictionary in self.__dictList:
             flight = Flight(dictionary)
             self.flightList.append(flight)
+            
+    def createNewFlight(self, flightList):
+        """creates a new airplane instance and writes the airplane to the csv, then it returns the new
+            airplane object"""
+        # create instance
+        theDict = FlightIO.convert_to_dict_with_id(self, flightList)
+        flight = Flight(theDict)
+        self.flightList.append(flight)  # add the new object to our list
+
+        # write to file
+        self.write_flight_to_file(flightList)
+        return flight  # returns the new object
 
 
 class Flight():
@@ -155,7 +174,7 @@ class Flight():
     def __str__(self):
         returnString = []
         for key, val in self.myDictionary.items():
-            returnString.append((key + ": " + val))
+            returnString.append((key + ": " + str(val)))
         return "\n".join(returnString)
 
 

@@ -1,4 +1,5 @@
 import UIAPI
+import datetime
 class Update:
     def __init__(self):
         self.uiapi = UIAPI.UIAPI()
@@ -261,36 +262,37 @@ Current Pilots: [John - 123456789]
 --------------------------------------------""")
         updateflightMenuInput = input("Input choice (q to Quit, b for Back, m for Main Menu): ")
         if updateflightMenuInput == "1":
-            flightID = input("Input the ID of the Flight you wish to change: ")
+            flightNumber = input("Input the Flight number of the Flight you wish to change: ")
             print("""1. Update Flight Status
 Flight - {}: Select Flight Status
 --------------------------------------------
   1. Loading 
   2. In-Air
-  3. Landed:
+  3. Landed
   4. Cancelled
---------------------------------------------""".format(flightID))
+--------------------------------------------""".format(flightNumber))
             updateflightstatusMenuInput = input("Input choice (q to Quit, b for Back, m for Main Menu): ")
+            flightlist = [flightNumber, "Flight status"]
             if updateflightstatusMenuInput == "1":
-                currentStatus = "Loading"
-                print("Status succesfully updated!")
-                print("Flight {} status: {}\n".format(flightID,
-                                                      currentStatus))  # Fundið statusinn í þessu sérstaka tilviki
+                flightlist.append("Loading")
+                flight = UIAPI.UIAPI.updateFlightStatus(self, flightlist)
+                print(flight)
+                flightlist.pop()
             elif updateflightstatusMenuInput == "2":
-                currentStatus = "In-Air"
-                print("Status succesfully updated!")
-                print("Flight {} status: {}\n".format(flightID,
-                                                      currentStatus))  # Fundið statusinn í þessu sérstaka tilviki
+                flightlist.append("In-Air")
+                flight = UIAPI.UIAPI.updateFlightStatus(self, flightlist)
+                print(flight)
+                flightlist.pop()
             elif updateflightstatusMenuInput == "3":
-                currentStatus = "Landed"
-                print("Status succesfully updated!")
-                print("Flight {} status: {}\n".format(flightID,
-                                                      currentStatus))  # Fundið statusinn í þessu sérstaka tilviki
+                flightlist.append("Landed")
+                flight = UIAPI.UIAPI.updateFlightStatus(self, flightlist)
+                print(flight)
+                flightlist.pop()
             elif updateflightstatusMenuInput == "4":
-                currentStatus = "Cancelled"
-                print("Status succesfully updated!")
-                print("Flight {} status: {}\n".format(flightID,
-                                                      currentStatus))  # Fundið statusinn í þessu sérstaka tilviki
+                flightlist.append("Cancelled")
+                flight = UIAPI.UIAPI.updateFlightStatus(self, flightlist)
+                print(flight)
+                flightlist.pop()
             elif updateairplanestatusMenuInput == "b":
                 Update.updateFlights()
             elif updateairplanestatusMenuInput == "q":
@@ -300,12 +302,17 @@ Flight - {}: Select Flight Status
                 Update.updateFlights()
 
         elif updateflightMenuInput == "2":
-            print("""2. Update Departure from #Destination
+            print("""2. Update Departure time
 --------------------------------------------""")
-            print("""Current departure time: 01/01/2015 01:50""")
-            departuretimeInput = input("Input new departure time with slashes in between: ")
-            print("Departure time succesfully changed!\nNew Departure time: {}\n".format(departuretimeInput))
-
+            flightNumber = input("Input the Flight number of the Flight you wish to change: ")
+            departureTime = input("  - Updated departure time(f.x. 12:30): ")
+            hour, minute = map(int, departureTime.split(':'))
+            departureDate = input("  - Updated departure date(f.x. 24/12/2019): ")
+            day, month, year = map(int, departureDate.split('/'))
+            departureDateTime = datetime.datetime(year,month, day, hour, minute, 00)
+            departureTimeList = [flightNumber, "Departure time", departureDateTime]
+            flight = UIAPI.UIAPI.updateFlightDepartureTime(self, departureTimeList)
+            print(flight)
         elif updateflightMenuInput == "b":
             Update.updateFlights()
         elif updateflightMenuInput == "q":
@@ -342,8 +349,8 @@ Flight - {}: Select Flight Status
             Update.updateVoyage(voyageID)  # Kallar á update voyage function
             updateMenuInput = Update.updateMenu()
         elif updateMenuInput == "5":
-            Update.updateFlights()
-            updateMenuInput = Update.updateMenu()
+            Update.updateFlights(self)
+            updateMenuInput = Update.updateMenu(self)
         elif updateMenuInput == "b":
             return updateMenuInput
         elif updateMenuInput == "q":

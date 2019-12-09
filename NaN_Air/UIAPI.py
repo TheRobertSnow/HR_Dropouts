@@ -109,21 +109,21 @@ class UIAPI:
         returnData = self.flightLL.viewFlightsByStatus(status)
         return returnData
 
-    def updateFlightStatus(self, flightID, newStatus):
+    def updateFlightStatus(self, flightlist):
         """we give you a new status of a certain flight and you update the instance and the csv file according to that"""
-        returnData = self.flightLL.updateFlightStatus(flightID, newStatus)
+        returnData = self.flightLL.updateFlightStatus(flightlist)
         return returnData
 
     def updateFlightDepartureTime(self, newDepartureTime):
         """we give you a new departure time and you update the instance and the csv file according to that"""
-        returnData = self.flightLL.updateFlightDepartureTime()
+        returnData = self.flightLL.updateFlightDepartureTime(newDepartureTime)
         return returnData
     #
     # voyage related
     #
     def viewVoyage(self, voyageID):
         """Uses voyageID to view a certain voyage"""
-        returnData = self.flightRouteLL.viewFlightRoute(flightRouteID)
+        returnData = self.flightRouteLL.viewFlightRoute(voyageID)
         return returnData
     
     def viewallVoyages(self):

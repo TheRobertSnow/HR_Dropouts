@@ -230,6 +230,7 @@ Please input the following information:''')
             flightList = Create.createFlight(self)
             result = UIAPI.UIAPI.createNewFlight(self, flightList)
             print(result)
+            #print(result)
             #print("Flight successfully created!")
             #print(flightList)
             # Prints the created flight
