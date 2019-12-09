@@ -265,14 +265,14 @@ class View():
         viewFlightInput = viewFlightInput.lower()
         if viewFlightInput == "1":
             flightNumber = input("Input flight number: ")
-            viewFlight = View.uiapi.viewXflight(self, flightNumber)
+            viewFlight = UIAPI.UIAPI.viewCertainFlight(self, flightNumber)
             print(viewFlight)
             viewFlightInput = View.viewFlight(self)
         if viewFlightInput == "2":
-            allFlights = UIAPI.UIAPI.viewAllFlights()
-            print(str(allStaff) + "\n")
+            allFlights = UIAPI.UIAPI.viewAllFlights(self)
+            #print(str(allStaff) + "\n")
             for count, flight in enumerate(allFlights):
-                if len(viewAllFlights) > 4:
+                if len(allFlights) > 4:
                     if count >= 4:
                         if count % 4 == 0:
                             input("\nPress enter to see next")
@@ -280,7 +280,7 @@ class View():
                 print()
             viewFlightInput = View.viewFlight(self)
         if viewFlightInput == "3":
-            viewActiveFlights = UIAPI.UIAPI.viewActiveFlights(self)
+            viewActiveFlights = UIAPI.UIAPI.viewFlightsByStatus(self, "Active")
             for count, flight in enumerate(viewActiveFlights):
                 if len(viewActiveFlights) > 4:
                     if count >= 4:
@@ -290,7 +290,7 @@ class View():
                 print()
             viewFlightInput = View.viewFlight(self)
         if viewFlightInput == "4":
-            viewCancelledFlights = View.uiapi.viewCancelledFlights(self)
+            viewCancelledFlights = UIAPI.UIAPI.viewFlightsByStatus(self, "Cancelled")
             for count, flight in enumerate(viewCancelledFlights):
                 if len(viewCancelledFlights) > 4:
                     if count >= 4:
