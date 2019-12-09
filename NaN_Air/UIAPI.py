@@ -72,11 +72,13 @@ class UIAPI:
         """We give you a date and you return to us all workers who are not active and available on that date.
         Can also take in position to filter staff type we want to return"""
         returnData = self.workerLL.listAvailableWorkersbydate(date, pos)
+        return returnData
 
     def listUnavailableWorkersbydate(self, date, pos = ""):
         """We give you a date and you return to us all workers who are active on that date.
         Can also take in position to filter staff type we want to return"""
         returnData = self.workerLL.listUnavailableWorkersbydate(date, pos)
+        return returnData
         
     #
     # flight related
@@ -115,7 +117,11 @@ class UIAPI:
     #
     def viewVoyage(self, voyageID):
         """Uses voyageID to view a certain voyage"""
-        returnData = self.flightRouteLL.viewFlightRoute(flightRouteID)
+        returnData = self.voyageLL.viewFlightRoute(voyageID)
+        return returnData
+
+    def viewallVoyages(self):
+        returnData = self.voyageLL.viewallVoyages()
         return returnData
 
     #

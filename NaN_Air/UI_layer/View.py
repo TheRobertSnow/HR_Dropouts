@@ -188,9 +188,10 @@ class View():
                 if len(viewAirplaneInput) > 4:
                     if count >= 4:
                         if count % 4 == 0:
-                            input("\nPress enter to see next") #HVERNIG LÍTUR ENTER ÚT????? 
-                print(plane)
-                print()
+                            input("\nPress any key to see next 4 flights, q to quit") #HVERNIG LÍTUR ENTER ÚT????? 
+                if nextFour != "q":
+                    print(plane)
+                    print()
             return viewAirplaneInput
         elif viewAirplaneInput == "b":
             return viewAirplaneInput
@@ -239,17 +240,18 @@ class View():
             voyageID = input("Input Voyage ID: ")
             Voyage = UIAPI.UIAPI.viewVoyage((self, voyageID))
             print("\n" + str(Voyage) + "\n")
-            viewVoyagesInput = View.viewVoyages(self)
+            return viewVoyagesInput
         elif viewVoyagesInput == "2":
-            print("")
-            viewVoyagesInput = View.viewVoyages(self)
+            allVoyages = UIAPI.UIAPI.viewallVoyages(self)
+            for instances in allVoyages:
+                print("\n" + str(instances) + "\n")
+            return viewVoyagesInput
         elif viewVoyagesInput == "b":
             return viewVoyagesInput
         elif viewVoyagesInput == "q":
             return viewVoyagesInput
         else:
             print("Wrong input, try again!")
-            viewVoyagesInput = View.viewVoyages(self)
         return viewVoyagesInput
 
     def viewFlight(self):
@@ -265,39 +267,45 @@ class View():
         viewFlightInput = viewFlightInput.lower()
         if viewFlightInput == "1":
             flightNumber = input("Input flight number: ")
-            viewFlight = View.uiapi.viewXflight(self, flightNumber)
+            viewFlight = UIAPI.UIAPI.viewCertainFlight(self, flightNumber)
             print(viewFlight)
-            viewFlightInput = View.viewFlight(self)
+            return viewFlightInput
         if viewFlightInput == "2":
             allFlights = UIAPI.UIAPI.viewAllFlights()
             print(str(allStaff) + "\n")
-            for count, flight in enumerate(allFlights):
+            """for count, flight in enumerate(allFlights):
                 if len(viewAllFlights) > 4:
                     if count >= 4:
                         if count % 4 == 0:
-                            input("\nPress enter to see next")
-                print(flight)
-                print()
+                            nextFour = input("\nPress any key to see next 4 flights, q to quit")
+                if nextFour != "q":
+                    print(flight)
+                    print()"""
+                return viewFlightInput
             viewFlightInput = View.viewFlight(self)
         if viewFlightInput == "3":
-            viewActiveFlights = UIAPI.UIAPI.viewActiveFlights(self)
-            for count, flight in enumerate(viewActiveFlights):
+            ActiveFlights = UIAPI.UIAPI.viewActiveFlights(self)
+            print(str(ActiveFlights) + "\n")
+            """for count, flight in enumerate(viewActiveFlights):
                 if len(viewActiveFlights) > 4:
                     if count >= 4:
                         if count % 4 == 0:
-                            input("\nPress enter to see next")
-                print(flight)
-                print()
-            viewFlightInput = View.viewFlight(self)
+                            nextFour = input("\nPress any key to see next 4 flights, q to quit")
+                if nextFour != "q":
+                    print(flight)
+                    print()"""
+            return viewFlightInput
         if viewFlightInput == "4":
-            viewCancelledFlights = View.uiapi.viewCancelledFlights(self)
-            for count, flight in enumerate(viewCancelledFlights):
+            CancelledFlights = View.uiapi.viewCancelledFlights(self)
+            print(str(CancelledFlights) + "\n")
+            """for count, flight in enumerate(viewCancelledFlights):
                 if len(viewCancelledFlights) > 4:
                     if count >= 4:
                         if count % 4 == 0:
-                            input("\nPress enter to see next")
-                print(flight)
-                print()
+                            input("\nPress any key to see next 4 flights, q to quit")
+                if nextFour != "q":
+                    print(flight)
+                    print()"""
             viewFlightInput = View.viewFlight(self)
         elif viewFlightInput == "b":
             return viewFlightInput
@@ -305,5 +313,4 @@ class View():
             return viewFlightInput
         else:
             print("Wrong input, try again!")
-            viewFlightInput = View.viewFlight(self)
         return viewFlightInput
