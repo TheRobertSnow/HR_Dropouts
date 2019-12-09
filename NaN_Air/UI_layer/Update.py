@@ -6,15 +6,15 @@ class Update:
     def update_Worker(self, ssn):
         print("""1. Update Worker
 --------------------------------------------
-1. Home Address: 
-2. Home Phone Number:
-3. Mobile Phone Number:
-4. E-mail Address
+  1. Home Address: 
+  2. Home Phone Number:
+  3. Mobile Phone Number:
+  4. E-mail Address
 --------------------------------------------""")
         workerSSN = input("Input Social Security Number of the worker: ")
         #If ssn exists:
         #Else print("This worker does not exist")
-        updateWorkerMenuInput = input("Input choice(q to Quit, b for Back, m for Main Menu): ")
+        updateWorkerMenuInput = input("Input choice (q to Quit, b for Back, m for Main Menu): ")
         updateWorkerMenuInput = updateWorkerMenuInput.lower()
         if updateWorkerMenuInput == "1":
            # print("Current Home Address: Rasberry Street 1") Flækir töluvert, spurning hvort að þetta sé must eða hvort að það sé nóg að prenta bara tilvikið eftir að því er breytt
@@ -62,12 +62,12 @@ class Update:
         print("""2. Update Airplane Status
 Boeing - {}: Select Airplane Status
 --------------------------------------------
-1. Loading 
-2. In-Air
-3. Landed:
-4. Cancelled
+  1. Loading 
+  2. In-Air
+  3. Landed:
+  4. Cancelled
 --------------------------------------------""".format(airplane_reg_num_Input))
-        updateairplanestatusMenuInput = input("Input choice(q to Quit, b for Back, m for Main Menu): ")
+        updateairplanestatusMenuInput = input("Input choice (q to Quit, b for Back, m for Main Menu): ")
         updateairplanestatusMenuInput = updateairplanestatusMenuInput  # Á að taka inn int
         if updateairplanestatusMenuInput == "1":
             current_status = "Loading"
@@ -106,15 +106,15 @@ Boeing - {}: Select Airplane Status
         print("Country: Iceland\nAirport: Keflavik\nFlight Distance: 700 km\nTravel time: 75 minutes\n")
         print("""3. Update Current Flights Routes
 --------------------------------------------
-1. Update Country
-2. Update Airport
-3. Update Flight Distance
-4. Update Travel time
-5. Update Emergency contact 
-6. Update Emergency contact number
+  1. Update Country
+  2. Update Airport
+  3. Update Flight Distance
+  4. Update Travel time
+  5. Update Emergency contact 
+  6. Update Emergency contact number
 --------------------------------------------""")
         updateflightrouteMenuInput = input(
-            "Input choice(q to Quit, b for Back, m for Main Menu): ")  # Á að taka inn int
+            "Input choice (q to Quit, b for Back, m for Main Menu): ")  # Á að taka inn int
         if updateflightrouteMenuInput == "1":
             print("Current country: Greece ")
             countryInput = input("Input new country: ")
@@ -169,7 +169,7 @@ Boeing - {}: Select Airplane Status
   4. Update Departure to Iceland
   5. Cancel Voyage
 --------------------------------------------""")
-        updatevoyageMenuInput = input("Input choice(q to Quit, b for Back, m for Main Menu): ")  # Á að taka inn int
+        updatevoyageMenuInput = input("Input choice (q to Quit, b for Back, m for Main Menu): ")  # Á að taka inn int
         if updatevoyageMenuInput == "1":
             print("Current Pilots: [John - 123456789, Hooper - 2607962249]\n")
             print("""1. Update Pilots 
@@ -177,7 +177,7 @@ Boeing - {}: Select Airplane Status
   1. Add Pilot(s)
   2. Remove Pilot(s)
 --------------------------------------------""")
-            updatepilotMenuInput = input("Input choice(q to Quit, b for Back, m for Main Menu): ")
+            updatepilotMenuInput = input("Input choice (q to Quit, b for Back, m for Main Menu): ")
             if updatepilotMenuInput == "1":
                 print("""
   1. Add Pilot
@@ -200,8 +200,8 @@ Current Pilots: [John - 123456789]
             print("Current Crew members: [Sansa - 123456789, Bertha - 2607962249]\n")
             print("""1. Update Cew 
 --------------------------------------------
-1. Add Crew member
-2. Remove Crew member
+  1. Add Crew member
+  2. Remove Crew member
 --------------------------------------------""")
             updatecrewMenuInput = input("Input choice(q to Quit, b for Back, m for Main Menu): ")
             if updatecrewMenuInput == "1":
@@ -256,21 +256,21 @@ Current Pilots: [John - 123456789]
     def updateFlights(self):
         print("""5. Update Flights 
 --------------------------------------------
-1. Update Flight Status
-2. Update Departure Time
+  1. Update Flight Status
+  2. Update Departure Time
 --------------------------------------------""")
-        updateflightMenuInput = input("Input choice(q to Quit, b for Back, m for Main Menu): ")
+        updateflightMenuInput = input("Input choice (q to Quit, b for Back, m for Main Menu): ")
         if updateflightMenuInput == "1":
             flightID = input("Input the ID of the Flight you wish to change: ")
             print("""1. Update Flight Status
 Flight - {}: Select Flight Status
 --------------------------------------------
-1. Loading 
-2. In-Air
-3. Landed:
-4. Cancelled
+  1. Loading 
+  2. In-Air
+  3. Landed:
+  4. Cancelled
 --------------------------------------------""".format(flightID))
-            updateflightstatusMenuInput = input("Input choice(q to Quit, b for Back, m for Main Menu): ")
+            updateflightstatusMenuInput = input("Input choice (q to Quit, b for Back, m for Main Menu): ")
             if updateflightstatusMenuInput == "1":
                 currentStatus = "Loading"
                 print("Status succesfully updated!")
@@ -323,7 +323,7 @@ Flight - {}: Select Flight Status
   4. Update Voyages
   5. Update Flights
 --------------------------------------------''')
-        updateMenuInput = input("Input choice(q to Quit, b for Back): ")
+        updateMenuInput = input("Input choice (q to Quit, b for Back): ")
         updateMenuInput = updateMenuInput.lower()
 
         if updateMenuInput == "1":
@@ -332,7 +332,7 @@ Flight - {}: Select Flight Status
             updateMenuInput = Update.updateMenu()
         elif updateMenuInput == "2":
             airplane_reg_num_Input = input("Input Airplane Registration Number: ")
-            Update.updateairplaneStatus(self.object)  # Kallar á update airplane status function
+            Update.updateairplaneStatus(self)  # Kallar á update airplane status function
             updateMenuInput = Update.updateMenu()
         elif updateMenuInput == "3":
             Update.updatecurrentflightRoutes()

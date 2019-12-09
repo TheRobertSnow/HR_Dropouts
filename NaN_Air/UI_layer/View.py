@@ -95,6 +95,8 @@ class View():
   2. View all pilots
   3. View all pilots who are not working on 
      specific date
+  4. View all pilots who are working on 
+     specific date
 --------------------------------------------''')
         viewPilotsInput = input("Input choice (q to Quit, b for Back): ")
         viewPilotsInput = viewPilotsInput.lower()
@@ -111,6 +113,11 @@ class View():
         elif viewPilotsInput == "3":
             pilotDate = input("Input date: ")
             availablePilots = UIAPI.UIAPI.listAvailableWorkersbydate(self, pilotDate, "Pilot")
+            return viewPilotsInput
+        elif viewPilotsInput == "4":
+            pilotDate = input("Input date: ")
+            unavailableAttendants = UIAPI.UIAPI.listUnavailableWorkersbydate(self, pilotDate, "Attendant")
+            return viewAttendantsInput
         elif viewPilotsInput == "b":
             return viewPilotsInput
         elif viewPilotsInput == "q":
@@ -173,20 +180,17 @@ class View():
             AirplaneReg= input("Please input airplane registration: ")
             Airplane = UIAPI.UIAPI.viewCertainAirplane(self, AirplaneReg) #Ekki alveg búið fæ ekki self.__planereg = dictionary["Plane registration"] til að virka í Airplane.py
             print("\n" + str(Airplane) + "\n")
-            viewAirplaneInput = self.uiapi.viewXplane(self, AirplaneID)
-            print(viewAirplaneInput)
-            viewAirplaneInput = self.viewAirplane()
+            return viewAirplaneInput
         elif viewAirplaneInput == "2":
-            viewAirplaneInput = GFSDGSFDGSDGSDGSDGDS
-            print(viewAirplaneInput)
-            for count, plane in enumerate(viewAirplaneInput):
+            allPlanes = UIAPI.UIAPI.viewAllAirplanes(self)
+            for count, plane in enumerate(allPlanes):
                 if len(viewAirplaneInput) > 4:
                     if count >= 4:
                         if count % 4 == 0:
-                            input("\nPress enter to see next") #HVERNIG LÍTUR ENTER ÚT?????
+                            input("\nPress enter to see next") #HVERNIG LÍTUR ENTER ÚT????? 
                 print(plane)
                 print()
-            viewAirplaneInput = View.viewAirplane(self)
+            return viewAirplaneInput
         elif viewAirplaneInput == "b":
             return viewAirplaneInput
         elif viewAirplaneInput == "q":
@@ -266,11 +270,8 @@ class View():
             flightNumber = input("Input flight number: ")
             viewFlight = View.uiapi.viewXflight(self, flightNumber)
             print(viewFlight)
-            #FlightInfo = getSpecificFlight(SSN)
-            #print(FlightInfo)
             viewFlightInput = View.viewFlight(self)
         if viewFlightInput == "2":
-            # print(getAllFlights())
             allFlights = UIAPI.UIAPI.viewAllFlights()
             print(str(allStaff) + "\n")
             for count, flight in enumerate(allFlights):
@@ -282,7 +283,7 @@ class View():
                 print()
             viewFlightInput = View.viewFlight(self)
         if viewFlightInput == "3":
-            viewActiveFlights = View.uiapi.viewActiveFlights(self)
+            viewActiveFlights = UIAPI.UIAPI.viewActiveFlights(self)
             for count, flight in enumerate(viewActiveFlights):
                 if len(viewActiveFlights) > 4:
                     if count >= 4:

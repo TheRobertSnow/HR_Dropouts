@@ -26,7 +26,7 @@ class UIAPI:
         returnData = self.airplaneLL.getCertainAirplane(airplaneReg)
         return returnData
 
-    def viewAllAirlanes(self):
+    def viewAllAirplanes(self):
         """give us all airplane instances, would be nice if we can get 5 at a time or something instead of all at once"""
         returnData = self.airplaneLL.getAllAirplanes()
         return returnData
