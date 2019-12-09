@@ -1,5 +1,6 @@
 import csv
 FILENAME = 'DataFiles/worker.csv'
+#fieldnames = ['Social Security Number', 'Name', 'Position', 'Plane License', 'Address', 'Phone', 'Cellphone', 'Email', 'Active', 'Available']
 
 
 class WorkerIO():
@@ -19,7 +20,6 @@ class WorkerIO():
         dictList = []
         with open(FILENAME, 'r', encoding="utf8") as csvFile:
             csvReader = csv.DictReader(csvFile, delimiter=',')
-            # next(csvReader, None)
             for line in csvReader:
                 dictList.append(line)
         self.__dictList = dictList
@@ -30,9 +30,10 @@ class WorkerIO():
 
     #def get_specific_Worker(self, SSN):
     #Verðum að gera function til þess að taka upp eitt instance!!!
-        
 
-    def write_worker_to_file(self, aList):
+
+
+    def write_worker_to_file(self, objectDict, aList):
         """Method takes in a list of data and writes to file"""
         with open(FILENAME, 'a', encoding="utf8", newline='') as csvFile:
             csvWriter = csv.writer(csvFile)
@@ -42,6 +43,7 @@ class WorkerIO():
             newList.append(orderedDict['Worker ID'])
             [newList.append(i) for i in aList]
             csvWriter.writerow(newList)
+        return aList, "Worker successfully created!"
 
     def write_dictList_to_file(self):
         """Method overwrites file with data from dictList"""

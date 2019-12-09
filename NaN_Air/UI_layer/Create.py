@@ -132,7 +132,7 @@ Please input the following information:''')
             ssn = int(input("  - Social security number: "))
             createWorkerList.append(ssn)
             name = input("  - Name: ")
-            createWorkerList.append(name)            
+            createWorkerList.append(name)
             print('''\n  Select worker position\n
     1. Captain
     2. Copilot
@@ -161,10 +161,10 @@ Please input the following information:''')
             createWorkerList.append(cellphone)
             email = input("  - Email: ")
             createWorkerList.append(email)
-            planeLicence = input("  - Plane licence: ")
-            createWorkerList.append(planeLicence)
-            print("Worker successfully created!")
-            print(createWorkerList)
+            result = UIAPI.UIAPI.newWorkerRequest(self, createWorkerList)
+            print(result)
+            #print("Worker successfully created!")
+            #print(createWorkerList)
             # Prints out info on the created worker
             print("--------------------------------------------")
             createMenuInput = Create.createMenu(self)
