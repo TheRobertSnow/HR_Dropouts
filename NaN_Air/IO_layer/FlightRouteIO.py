@@ -133,4 +133,8 @@ class FlightRoute:
 # newline = ["Denmark","Reykjavik","0","0:00", "Áslaug Steingrímsdóttir", "3547745010"]
 # # # print(newline)
 # flightroutes.write_flight_route_to_file(newline)
+<<<<<<< HEAD
 # flightroutes.update_data_in_file(updateline)
+=======
+# flightroutes.update_data_in_file(updateline)
+>>>>>>> development
