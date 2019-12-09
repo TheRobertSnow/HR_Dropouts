@@ -261,36 +261,37 @@ Current Pilots: [John - 123456789]
 --------------------------------------------""")
         updateflightMenuInput = input("Input choice (q to Quit, b for Back, m for Main Menu): ")
         if updateflightMenuInput == "1":
-            flightID = input("Input the ID of the Flight you wish to change: ")
+            flightNumber = input("Input the Flight number of the Flight you wish to change: ")
             print("""1. Update Flight Status
 Flight - {}: Select Flight Status
 --------------------------------------------
   1. Loading 
   2. In-Air
-  3. Landed:
+  3. Landed
   4. Cancelled
---------------------------------------------""".format(flightID))
+--------------------------------------------""".format(flightNumber))
             updateflightstatusMenuInput = input("Input choice (q to Quit, b for Back, m for Main Menu): ")
+            flightlist = [flightNumber, "Flight status"]
             if updateflightstatusMenuInput == "1":
-                currentStatus = "Loading"
-                print("Status succesfully updated!")
-                print("Flight {} status: {}\n".format(flightID,
-                                                      currentStatus))  # Fundið statusinn í þessu sérstaka tilviki
+                flightlist.append("Loading")
+                flight = UIAPI.UIAPI.updateFlightStatus(self, flightlist)
+                print(flight)
+                flightlist.pop()
             elif updateflightstatusMenuInput == "2":
-                currentStatus = "In-Air"
-                print("Status succesfully updated!")
-                print("Flight {} status: {}\n".format(flightID,
-                                                      currentStatus))  # Fundið statusinn í þessu sérstaka tilviki
+                flightlist.append("In-Air")
+                flight = UIAPI.UIAPI.updateFlightStatus(self, flightlist)
+                print(flight)
+                flightlist.pop()
             elif updateflightstatusMenuInput == "3":
-                currentStatus = "Landed"
-                print("Status succesfully updated!")
-                print("Flight {} status: {}\n".format(flightID,
-                                                      currentStatus))  # Fundið statusinn í þessu sérstaka tilviki
+                flightlist.append("Landed")
+                flight = UIAPI.UIAPI.updateFlightStatus(self, flightlist)
+                print(flight)
+                flightlist.pop()
             elif updateflightstatusMenuInput == "4":
-                currentStatus = "Cancelled"
-                print("Status succesfully updated!")
-                print("Flight {} status: {}\n".format(flightID,
-                                                      currentStatus))  # Fundið statusinn í þessu sérstaka tilviki
+                flightlist.append("Cancelled")
+                flight = UIAPI.UIAPI.updateFlightStatus(self, flightlist)
+                print(flight)
+                flightlist.pop()
             elif updateairplanestatusMenuInput == "b":
                 Update.updateFlights()
             elif updateairplanestatusMenuInput == "q":
@@ -342,8 +343,8 @@ Flight - {}: Select Flight Status
             Update.updateVoyage(voyageID)  # Kallar á update voyage function
             updateMenuInput = Update.updateMenu()
         elif updateMenuInput == "5":
-            Update.updateFlights()
-            updateMenuInput = Update.updateMenu()
+            Update.updateFlights(self)
+            updateMenuInput = Update.updateMenu(self)
         elif updateMenuInput == "b":
             return updateMenuInput
         elif updateMenuInput == "q":

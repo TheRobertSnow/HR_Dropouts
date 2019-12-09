@@ -102,9 +102,10 @@ class FlightIO():
     def update_data_in_file(self, aList):
         """Method takes in list of data, updates the dictionary list
         and writes the changes to file"""
+        col, val = aList[1], aList[2]
         for index, dictionary in enumerate(self.__dictList):
             for key, value in dictionary.items():
-                if key == 'Flight ID':
+                if key == 'Flight number':
                     if value == aList[0]:
                         if col != "Flight ID" or col != "Flight number":
                             self.__dictList[index][col] = val
@@ -112,7 +113,7 @@ class FlightIO():
                             self.get_flights_from_file()
                             self.create_flight_instances()
                             for i in self.flightList:
-                                if i.flightID == aList[0]:
+                                if i.flightNumber == aList[0]:
                                     if col == "Airplane registration number":
                                         i.airplaneRegistrationNumber = val
                                     elif col == "Origin ID":
@@ -127,6 +128,7 @@ class FlightIO():
                                         i.departureTime = val
                                     elif col == "Arrival time":
                                         i.arrivalTime = val
+                                    return i
 
     def create_flight_instances(self):
         """Methood runs through list of dictionaries,

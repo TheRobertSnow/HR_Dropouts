@@ -70,9 +70,7 @@ class FlightRouteIO():
             for key, value in dictionary.items():
                 if key == "Flight route ID":
                     if value == flightRouteID:
-                        print(dictionary['Travel time'])
                         travelTime = dictionary['Travel time']
-                        print(travelTime)
                         return travelTime
 
     def convert_to_dict_with_id(self, aList):

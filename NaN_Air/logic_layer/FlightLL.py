@@ -5,22 +5,15 @@ from datetime import timedelta
 sys.path.append('..')
 import IOAPI
 
-def getFlightNumber(self, flightList):
-    company = "NA"
-    if flightList[1] == "0":
-        lastNumber = "0"
-    else:
-        lastNumber = "1"
-    flightNumber = company + "0" + flightList[1] + lastNumber
-    return flightNumber
-
 class FlightLL():
     def __init__(self):
         self.flightIO = IOAPI.IOAPI()
         self.__flightList = self.flightIO.getAllFlightInstances()
     
     def createNewFlight(self, flightList):
-       flightNumber = getFlightNumber(self, flightList)
+       self.flightIO.getFlightNumber(flightList[2], flightList[3])
+       print(flightList)
+       flightNumber = "NA031"
        flightList.insert(0, flightNumber)
        flightList.insert(4, "On schedule")
        if flightList[3] == "1":
@@ -32,7 +25,7 @@ class FlightLL():
        arrivalTime = flightList[6] + timedelta(hours = travelHours, minutes = travelMinutes)
        flightList.insert(7, arrivalTime)
        flight = self.flightIO.createNewFlight(flightList)
-       print("Now there are", len(self.__flightList), "Flight objects in system")
+       print("\nNow there are", len(self.__flightList), "Flight objects in system\n")
        return flight
     
     def get_flight_list(self):
@@ -55,3 +48,8 @@ class FlightLL():
             if flightStatus == status:                
                 statusFlightList.append(instance)     
         return statusFlightList
+    
+    def updateFlightStatus(self, flightlist):
+        flight = self.flightIO.updateFlightStatus(flightlist)
+        return flight
+        

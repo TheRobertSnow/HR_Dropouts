@@ -61,6 +61,9 @@ class IOAPI:
     # Flight
     #
 
+    def getFlightNumber(self, destinationID, departureTime):
+        return self.flightIO.getFlightNumber(destinationID, departureTime)
+    
     def createNewFlight(self, flightList):
         return self.flightIO.createNewFlight(flightList)
 
@@ -69,6 +72,9 @@ class IOAPI:
    
     def getTravelTime(self, flightRouteID):
         return self.flightRouteIO.getFlightRouteTravelTime(flightRouteID)
+    
+    def updateFlightStatus(self, flightlist):
+        return self.flightIO.update_data_in_file(flightlist)
     
     def getAllFlightInstances(self):
         return self.flightIO.get_flights()
