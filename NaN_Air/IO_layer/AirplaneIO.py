@@ -6,7 +6,7 @@ class AirplaneIO():
 
     def __init__(self):
         self.__dictList = []
-        self.__airplaneList = []
+        self.airplaneList = []
         self.get_airplanes_from_file()
         self.create_airplane_instances()
 

@@ -6,7 +6,7 @@ class FlightIO():
 
     def __init__(self):
         self.__dictList = []
-        self.__flightList = []
+        self.flightList = []
         self.get_flights_from_file()
         self.create_flight_instances()
 
@@ -14,7 +14,7 @@ class FlightIO():
         """Return a list of flight instances"""
         return self.__flightList
 
-    
+
 
     def get_flights_from_file(self):
         """Get flight from file in a list of dictionaries"""

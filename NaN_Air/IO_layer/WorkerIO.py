@@ -7,7 +7,7 @@ class WorkerIO():
 
     def __init__(self):
         self.__dictList = []
-        self.__workerList = []
+        self.workerList = []
         self.get_workers_from_file()
         self.create_worker_instances()
 

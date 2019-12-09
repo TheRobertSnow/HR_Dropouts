@@ -4,9 +4,9 @@ FILENAME = 'DataFiles/voyage.csv'
 
 class VoyageIO():
 
-    def __init__(self):
-        self.__dictList = []
-        self.__voyageList = []
+    def __init__(self, airplaneList, flightList, workerList, flightRouteList):
+        self.dictList = []
+        self.voyageList = []
         self.get_voyages_from_file()
         self.create_voyage_instances()
 
