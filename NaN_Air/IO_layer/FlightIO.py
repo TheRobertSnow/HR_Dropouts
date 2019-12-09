@@ -15,13 +15,6 @@ class FlightIO():
         """Return a list of flight instances"""
         return self.flightList
 
-    def create_new_flight(self, newFilght):
-        try:
-            self.write_flight_to_file(newFilght)
-            return "New flight created."
-        except Exception as e:
-            return "Unable to create flight."
-
     def get_flights_from_file(self):
         """Only use for initializing FlightIO.
         Get flight from file in a list of dictionaries"""
@@ -47,6 +40,7 @@ class FlightIO():
             newList.append(orderedDict['Flight ID'])
             [newList.append(i) for i in aList]
             csvWriter.writerow(newList)
+        return orderedDict
 
     def write_dictList_to_file(self):
         """Method overwrites file with data from dictList"""
@@ -147,13 +141,7 @@ class FlightIO():
     def createNewFlight(self, flightList):
         """creates a new airplane instance and writes the airplane to the csv, then it returns the new
             airplane object"""
-        # create instance
-        theDict = FlightIO.convert_to_dict_with_id(self, flightList)
-        flight = Flight(theDict)
-        self.flightList.append(flight)  # add the new object to our list
-
-        # write to file
-        self.write_flight_to_file(flightList)
+        flight = self.write_flight_to_file(flightList)
         return flight  # returns the new object
 
 

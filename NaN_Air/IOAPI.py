@@ -43,12 +43,14 @@ class IOAPI:
 
     def createNewFlightRoute(self, createFlightRouteList):
         # TODO create new flight route method in flightRouteIO
-        newFlightRouteList = self.flightRouteIO.create_new_flight_route(
-            createFlightRouteList)  # sending list of strings and ints
+        newFlightRouteList = self.flightRouteIO.create_new_flight_route(createFlightRouteList)  # sending list of strings and ints
         return newFlightRouteList
 
-    def request_flight_routes(self):
-        return self.flightRouteIO.get_flight_routes()
+    def getAllFlightRouteInstances(self):
+        return self.flightRouteIO.get_flightRoutes()
+    
+    def updateFlightRoute(self, flightRouteList):
+        return self.flightRouteIO.update_data_in_file(flightRouteList)
 
     #
     # Voyage

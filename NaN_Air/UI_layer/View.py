@@ -131,13 +131,13 @@ class View():
             return viewPilotsInput
         elif viewPilotsInput == "4":
             pilotDate = input("Input date: ")
-            unavailableAttendants = UIAPI.UIAPI.listUnavailableWorkersbydate(self, pilotDate, "Attendant")
+            unavailableAttendants = UIAPI.UIAPI.listUnavailableWorkersbydate(self, pilotDate, "Pilot")
             printObjects(self,unavailableAttendants)
             return viewPilotsInput
         elif viewPilotsInput == "5":
             pilotSSN = input("Input SSN: ")
             pilotWeek = input("Input week ")
-            pilotWeeklyVoyages = UIAPI.UIAPI.viewallVoyagesInWeek(self, pilotSSN, week, pos = "Pilot")
+            pilotWeeklyVoyages = UIAPI.UIAPI.viewallVoyagesInWeek(self, pilotSSN, pilotWeek, pos = "Pilot")
             printObjects(self, pilotWeeklyVoyages)
             return viewPilotsInput
         elif viewPilotsInput == "b":
@@ -184,7 +184,7 @@ class View():
         elif viewAttendantsInput == "5":
             attendantSSN = input("Input SSN: ")
             attendantWeek = input("Input week: ")
-            attendantWeeklyVoyages = UIAPI.UIAPI.viewallVoyagesInWeek(self, attendantSSN, week, pos = "Attendant")
+            attendantWeeklyVoyages = UIAPI.UIAPI.viewallVoyagesInWeek(self, attendantSSN, attendantWeek, pos = "Attendant")
             printObjects(self, attendantWeeklyVoyages)
             return viewAttendantsInput
         elif viewAttendantsInput == "b":
@@ -208,11 +208,11 @@ class View():
             AirplaneReg= input("Please input airplane registration: ")
             Airplane = UIAPI.UIAPI.viewCertainAirplane(self, AirplaneReg) #Ekki alveg búið fæ ekki self.__planereg = dictionary["Plane registration"] til að virka í Airplane.py
             print(Airplane)
-            return viewAirplaneInput
+            viewAirplaneInput = View.viewAirplane(self)
         elif viewAirplaneInput == "2":
             allPlanes = UIAPI.UIAPI.viewAllAirplanes(self)
             printObjects(self, allPlanes)
-            return viewAirplaneInput
+            viewAirplaneInput = View.viewAirplane(self)
         elif viewAirplaneInput == "b":
             return viewAirplaneInput
         elif viewAirplaneInput == "q":
@@ -237,9 +237,7 @@ class View():
             viewFlightRoutesInput = View.viewFlightRoutes(self)
         elif viewFlightRoutesInput == "2":
             allFlightRoutes = UIAPI.UIAPI.viewAllFlightRoutes(self)
-            for flightRoute in allFlightRoutes:
-                print(flightRoute)
-                print("")
+            printObjects(self, allFlightRoutes)
             viewFlightRoutesInput = View.viewFlightRoutes(self)
         elif viewFlightRoutesInput == "b":
             return viewFlightRoutesInput
