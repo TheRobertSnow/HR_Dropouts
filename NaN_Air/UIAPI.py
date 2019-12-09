@@ -113,6 +113,10 @@ class UIAPI:
     #
     # voyage related
     #
+    def viewVoyage(self, voyageID):
+        """Uses voyageID to view a certain voyage"""
+        returnData = self.flightRouteLL.viewFlightRoute(flightRouteID)
+        return returnData
 
     #
     # flight route related
