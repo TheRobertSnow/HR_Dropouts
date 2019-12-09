@@ -1,18 +1,39 @@
 import sys
+#import collections
 sys.path.append('..')
 import IOAPI
 
+def getFlightNumber(self, flightList):
+    company = "NA"
+    if flightList[1] == "0":
+        lastNumber = "0"
+    else:
+        lastNumber = "1"
+    flightNumber = company + "0" + flightList[1] + lastNumber
+    return flightNumber
 
 class FlightLL():
     def __init__(self):
-        self.IOAPI = IOAPI.IOAPI()
-
+        self.flightIO = IOAPI.IOAPI()
+        self.__flightList = self.flightIO.getAllFlightInstances()
+    
+    def createNewFlight(self, flightList):
+       newID = self.flightIO.getHigestFlightID()
+       flightNumber = getFlightNumber(self, flightList)
+       flightList.insert(0, newID)
+       flightList.insert(1, flightNumber)
+       flightList.insert(5, "On Air")
+       flightList.insert(6, "TravelTIMEisGOnnaBEHEre")
+       flightList.insert(8, "ArrivalTIMEISgonnaBEhere")
+       print("Now there are", len(self.__flightList), "Flight objects in system")
+       returnString = self.flightIO.createNewFlight(flightList)
+       return returnString
+    
     def get_flight_list(self):
-        self.flight = self.IOAPI.request_flights()
-        return self.flight
+        return self.__flightList
 
     def find_flight_by_id(self, id):
-        for instance in self.flight:
+        for instance in self.__flightList:
             if instance.flightID == id:
                 print(instance)
 
