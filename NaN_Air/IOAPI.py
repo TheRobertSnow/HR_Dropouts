@@ -13,12 +13,8 @@ class IOAPI:
     #
     # Worker
     #
-
-    def createNewWorker(self, workerDict):
-        return self.workerIO.createNewWorker(workerDict)
-
-    def createNewWorkerInstance(self, workerList):
-        return self.workerIO.createNewWorkerInstance(workerList)
+    def createNewWorker(self, workerList):
+        return self.workerIO.createNewWorker(workerList)
 
     def request_workers(self):
         return self.workerIO.get_workers_from_file()
@@ -38,16 +34,15 @@ class IOAPI:
     def updatePlane(self, planeInstance, newStatus):
         """takes in the instance of the plane and the new status and sends it back, returns the updated object"""
         return self.airplaneIO.UpdateCertainAirplane(planeInstance, newStatus)
-
     #
     # Flight Route
     #
 
-    def createNewFlightRoute(self, flightRouteDict):
-        return self.flightRouteIO.createNewFlightRoute(flightRouteDict)
-
-    def createNewFlightRouteInstance(self, flightRouteList):
-        return self.flightRouteIO.createNewFlightRouteInstance(flightRouteList)
+    def createNewFlightRoute(self, createFlightRouteList):
+        # TODO create new flight route method in flightRouteIO
+        newFlightRouteList = self.flightRouteIO.create_new_flight_route(
+            createFlightRouteList)  # sending list of strings and ints
+        return newFlightRouteList
 
     def request_flight_routes(self):
         return self.flightRouteIO.get_flight_routes()
@@ -56,23 +51,23 @@ class IOAPI:
     # Voyage
     #
 
-    def createNewVoyage(self, voyageDict):
-        return self.voyageIO.createNewVoyage(voyageDict)
-
-    def createNewVoyageInstance(self, voyageList):
-        return self.voyageIO.createNewVoyageInstance(voyageList)
+    def createNewVoyage(self, voyageList):
+        return self.voyageIO.createNewVoyage(voyageList)
 
     def request_voyages(self):
         return self.voyageIO.get_voyages()
 
+    #
     # Flight
-    def createNewFlight(self, flightDict):
-        return self.flightIO.createNewFlight(flightDict)
+    #
 
-    def createNewFlightInstance(self, flightList):
-        return self.flightIO.createNewFlightInstance(flightList)
+    def createNewFlight(self, flightList):
+        return self.flightIO.write_flight_to_file(flightList)
 
-    def requestFlights(self):
+    def getHigestFlightID(self):
+        return self.workerIO.getNextID()
+
+    def getAllFlightInstances(self):
         return self.flightIO.get_flights()
 
     def send_instance_to_voyage(self):
@@ -80,4 +75,4 @@ class IOAPI:
         workers, flights, airplanes and flight routes to voyage."""
         # self.voyages.get_other_class_instances(self.request_airplanes()
         # , self.request_flights(), self.request_workers(), self.request_flight_routes())
-        pass
+        print("")
