@@ -26,7 +26,7 @@ class UIAPI:
         returnData = self.airplaneLL.getCertainAirplane(airplaneReg)
         return returnData
 
-    def viewAllAirlanes(self):
+    def viewAllAirplanes(self):
         """give us all airplane instances, would be nice if we can get 5 at a time or something instead of all at once"""
         returnData = self.airplaneLL.getAllAirplanes()
         return returnData
@@ -68,6 +68,17 @@ class UIAPI:
         returnData = self.workerLL.updateWorker(socialSecurityNumber, key, newValue)
         return returnData
 
+    def listAvailableWorkersbydate(self, date, pos = ""):
+        """We give you a date and you return to us all workers who are not active and available on that date.
+        Can also take in position to filter staff type we want to return"""
+        returnData = self.workerLL.listAvailableWorkersbydate(date, pos)
+        return returnData
+
+    def listUnavailableWorkersbydate(self, date, pos = ""):
+        """We give you a date and you return to us all workers who are active on that date.
+        Can also take in position to filter staff type we want to return"""
+        returnData = self.workerLL.listUnavailableWorkersbydate(date, pos)
+        return returnData
     #
     # flight related
     #
@@ -103,6 +114,10 @@ class UIAPI:
     #
     # voyage related
     #
+    def viewVoyage(self, voyageID):
+        """Uses voyageID to view a certain voyage"""
+        returnData = self.flightRouteLL.viewFlightRoute(flightRouteID)
+        return returnData
 
     #
     # flight route related
