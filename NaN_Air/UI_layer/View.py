@@ -13,7 +13,7 @@ class View():
   5. View Flight
 --------------------------------------------''')
 
-        viewMenuInput = input("Input choice(q to Quit, b for Back): ")
+        viewMenuInput = input("Input choice (q to Quit, b for Back): ")
         viewMenuInput = viewMenuInput.lower()
         if viewMenuInput == "1":
             viewWorkerOutput = View.viewWorker(self)
@@ -41,7 +41,7 @@ class View():
         elif viewMenuInput == "q":
             return viewMenuInput
         else:
-            print("Wrong input, try again")
+            print("Wrong input, try again!")
             viewMenuInput = View.viewMenu(self)
         return viewMenuInput
 
@@ -54,7 +54,7 @@ class View():
   4. View All Staff
 --------------------------------------------''')
 
-        viewWorkerInput = input("Input choice(q to Quit, b for Back): ")
+        viewWorkerInput = input("Input choice (q to Quit, b for Back): ")
         viewWorkerInput = viewWorkerInput.lower()
         if viewWorkerInput == "1":
             viewPilotsOutput = View.viewPilots(self)
@@ -73,9 +73,6 @@ class View():
             else:
                 viewWorkerInput = View.viewWorker(self)
         elif viewWorkerInput == "3":
-            # BossInfo = getAllBosses()
-            # print(BossInfo)
-            print("")
             viewWorkerInput = View.viewWorker(self)
         elif viewWorkerInput == "4":
             allStaff = UIAPI.UIAPI.viewAllWorkers(self)
@@ -96,11 +93,15 @@ class View():
 --------------------------------------------
   1. View specific pilot
   2. View all pilots
+  3. View all pilots who are not working on 
+     specific date
+  4. View all pilots who are working on 
+     specific date
 --------------------------------------------''')
-        viewPilotsInput = input("Input choice(q to Quit, b for Back): ")
+        viewPilotsInput = input("Input choice (q to Quit, b for Back): ")
         viewPilotsInput = viewPilotsInput.lower()
         if viewPilotsInput == "1":
-            pilotSSN = input("  - Please input SSN: ")
+            pilotSSN = input("Input SSN: ")
             Pilot = UIAPI.UIAPI.viewWorkerBySSn(self, pilotSSN, "Pilot")
             print("\n" + str(Pilot) + "\n")
             return viewPilotsInput
@@ -109,26 +110,38 @@ class View():
             for instances in allPilots:
                 print("\n" + str(instances) + "\n")
             return viewPilotsInput
+        elif viewPilotsInput == "3":
+            pilotDate = input("Input date: ")
+            availablePilots = UIAPI.UIAPI.listAvailableWorkersbydate(self, pilotDate, "Pilot")
+            for instances in availablePilots:
+                print("\n" + str(instances) + "\n")
+            return viewPilotsInput
+        elif viewPilotsInput == "4":
+            pilotDate = input("Input date: ")
+            unavailableAttendants = UIAPI.UIAPI.listUnavailableWorkersbydate(self, pilotDate, "Attendant")
+            return viewAttendantsInput
         elif viewPilotsInput == "b":
             return viewPilotsInput
         elif viewPilotsInput == "q":
             return viewPilotsInput
         else:
             print("Wrong input, try again")
-            viewPilotsInput = self.viewPilots()
         return viewPilotsInput
 
-#Attendants
     def viewAttendants(self):
         print('''1.2. View Attendants
 --------------------------------------------
   1. View specific attendant
   2. View all attendants
+  3. View all attendants who are not working on 
+     specific date
+  4. View all attendants who are working on 
+     specific date
 --------------------------------------------''')
-        viewAttendantsInput = input("Input choice(q to Quit, b for Back): ")
+        viewAttendantsInput = input("Input choice (q to Quit, b for Back): ")
         viewAttendantsInput = viewAttendantsInput.lower()
         if viewAttendantsInput == "1":
-            attendantSSN = input("  - Please input SSN: ")
+            attendantSSN = input("Input SSN: ")
             Attendant = UIAPI.UIAPI.viewWorkerBySSn(self, attendantSSN, "Attendant")
             print("\n" + str(Attendant) + "\n")
             return viewAttendantsInput
@@ -137,13 +150,22 @@ class View():
             for instances in allAttendants:
                 print("\n" + str(instances) + "\n")
             return viewAttendantsInput
+        elif viewAttendantsInput == "3":
+            attendantDate = input("Input date: ")
+            availableAttendants = UIAPI.UIAPI.listAvailableWorkersbydate(self, attendantDate, "Attendant")
+            print("\n" + str(availableAttendants) + "\n")
+            return viewAttendantsInput
+        elif viewAttendantsInput == "4":
+            attendantDate = input("Input date: ")
+            unavailableAttendants = UIAPI.UIAPI.listUnavailableWorkersbydate(self, attendantDate, "Attendant")
+            print("\n" + str(unavailableAttendants) + "\n")
+            return viewAttendantsInput
         elif viewAttendantsInput == "b":
             return viewAttendantsInput
         elif viewAttendantsInput == "q":
             return viewAttendantsInput
         else:
-            print("Wrong input, try again")
-            viewAttendantsInput = View.viewAttendants(self)
+            print("Wrong input, try again!")
         return viewAttendantsInput
 
     def viewAirplane(self):
@@ -153,62 +175,55 @@ class View():
   2. View all airplanes
 --------------------------------------------''')
 
-        viewAirplaneInput = input("Input choice(q to Quit, b for Back): ")
+        viewAirplaneInput = input("Input choice (q to Quit, b for Back): ")
         viewAirplaneInput = viewAirplaneInput.lower()
         if viewAirplaneInput == "1":
-            AirplaneReg= input("  - Please input airplane registration: ")
+            AirplaneReg= input("Please input airplane registration: ")
             Airplane = UIAPI.UIAPI.viewCertainAirplane(self, AirplaneReg) #Ekki alveg búið fæ ekki self.__planereg = dictionary["Plane registration"] til að virka í Airplane.py
-            
-            print("\n" + str(Pilot) + "\n")
-            
-            viewAirplaneInput = self.uiapi.viewXplane(self, AirplaneID)
-            print(viewAirplaneInput)
-            viewAirplaneInput = self.viewAirplane()
+            print("\n" + str(Airplane) + "\n")
+            return viewAirplaneInput
         elif viewAirplaneInput == "2":
-            viewAirplaneInput = GFSDGSFDGSDGSDGSDGDS
-            print(viewAirplaneInput)
-            for count, plane in enumerate(viewAirplaneInput):
+            allPlanes = UIAPI.UIAPI.viewAllAirplanes(self)
+            for count, plane in enumerate(allPlanes):
                 if len(viewAirplaneInput) > 4:
                     if count >= 4:
                         if count % 4 == 0:
-                            input("\nPress enter to see next")
+                            input("\nPress enter to see next") #HVERNIG LÍTUR ENTER ÚT????? 
                 print(plane)
-            viewAirplaneInput = self.viewAirplane()
+                print()
+            return viewAirplaneInput
         elif viewAirplaneInput == "b":
             return viewAirplaneInput
         elif viewAirplaneInput == "q":
             return viewAirplaneInput
         else:
-            print("Wrong input, try again")
-            viewAirplaneInput = self.viewAirplane()
+            print("Wrong input, try again!")
         return viewAirplaneInput
 
     def viewFlightRoutes(self):
         print('''3. View Flight Routes
 --------------------------------------------
-  1. Specific route
-  2. All flight routes
+  1. View specific route
+  2. View all flight routes
 --------------------------------------------''')
 
-        viewFlightRoutesInput = input("Input choice(q to Quit, b for Back): ")
+        viewFlightRoutesInput = input("Input choice (q to Quit, b for Back): ")
         viewFlightRoutesInput = viewFlightRoutesInput.lower()
         if viewFlightRoutesInput == "1":
-            FlightRouteID = input("  - Please input Flight Route ID: ")
-            print(FlightRouteID)
-            #FlightRoute = getFlightRoute(FlightRouteID)
-            #print(FlightRoute)
-            viewFlightRoutesInput = self.viewFlightRoutes()
+            FlightRouteID = input("Input Flight Route ID: ")
+            flightRoute = UIAPI.UIAPI.viewFlightRoute(self, flightRouteID)
+            print(flightRoute)
+            viewFlightRoutesInput = View.viewFlightRoutes(self)
         elif viewFlightRoutesInput == "2":
-            #print(getAllFlightRoutes)
-            print("")
-            viewFlightRoutesInput = self.viewFlightRoutes()
+            allFlightRoutes = UIAPI.UIAPI.viewAllFlightRoutes(self)
+            print(str(allFlightRoutes) + "\n")
+            viewFlightRoutesInput = View.viewFlightRoutes(self)
         elif viewFlightRoutesInput == "b":
             return viewFlightRoutesInput
         elif viewFlightRoutesInput == "q":
             return viewFlightRoutesInput
         else:
-            print("Wrong input, try again")
-            viewFlightRoutesInput = self.viewFlightRoutes()
+            print("Wrong input, try again!")
         return viewFlightRoutesInput
 
     def viewVoyages(self):
@@ -218,25 +233,23 @@ class View():
   2. View all voyages
 --------------------------------------------''')
 
-        viewVoyagesInput = input("Input choice(q to Quit, b for Back): ")
+        viewVoyagesInput = input("Input choice (q to Quit, b for Back): ")
         viewVoyagesInput = viewVoyagesInput.lower()
         if viewVoyagesInput == "1":
-            SSN = input('  - Please input Voyage ID: ')
-            # VoyageInfo = getVoyageInfo(SSN)
-            # print(VoyageInfo)
-            print(SSN)
-            viewVoyagesInput = self.viewVoyages()
+            voyageID = input("Input Voyage ID: ")
+            Voyage = UIAPI.UIAPI.viewVoyage((self, voyageID))
+            print("\n" + str(Voyage) + "\n")
+            viewVoyagesInput = View.viewVoyages(self)
         elif viewVoyagesInput == "2":
             print("")
-            #print(getAllVoyages())
-            viewVoyagesInput = self.viewVoyages()
+            viewVoyagesInput = View.viewVoyages(self)
         elif viewVoyagesInput == "b":
             return viewVoyagesInput
         elif viewVoyagesInput == "q":
             return viewVoyagesInput
         else:
-            print("Wrong input, try again")
-            viewVoyagesInput = self.viewVoyages()
+            print("Wrong input, try again!")
+            viewVoyagesInput = View.viewVoyages(self)
         return viewVoyagesInput
 
     def viewFlight(self):
@@ -248,17 +261,14 @@ class View():
   4. View cancelled flights
 --------------------------------------------''')
 
-        viewFlightInput = input("Input choice(q to Quit, b for Back): ")
+        viewFlightInput = input("Input choice (q to Quit, b for Back): ")
         viewFlightInput = viewFlightInput.lower()
         if viewFlightInput == "1":
-            flightNumber = input('  - Please input flight number: ')
-            viewFlight = self.uiapi.viewXflight(self, flightNumber)
+            flightNumber = input("Input flight number: ")
+            viewFlight = View.uiapi.viewXflight(self, flightNumber)
             print(viewFlight)
-            #FlightInfo = getSpecificFlight(SSN)
-            #print(FlightInfo)
-            viewFlightInput = self.viewFlight()
+            viewFlightInput = View.viewFlight(self)
         if viewFlightInput == "2":
-            # print(getAllFlights())
             allFlights = UIAPI.UIAPI.viewAllFlights()
             print(str(allStaff) + "\n")
             for count, flight in enumerate(allFlights):
@@ -268,9 +278,9 @@ class View():
                             input("\nPress enter to see next")
                 print(flight)
                 print()
-            viewFlightInput = self.viewFlight()
+            viewFlightInput = View.viewFlight(self)
         if viewFlightInput == "3":
-            viewActiveFlights = self.uiapi.viewActiveFlights(self)
+            viewActiveFlights = UIAPI.UIAPI.viewActiveFlights(self)
             for count, flight in enumerate(viewActiveFlights):
                 if len(viewActiveFlights) > 4:
                     if count >= 4:
@@ -278,9 +288,9 @@ class View():
                             input("\nPress enter to see next")
                 print(flight)
                 print()
-            viewFlightInput = self.viewFlight()
+            viewFlightInput = View.viewFlight(self)
         if viewFlightInput == "4":
-            viewCancelledFlights = self.uiapi.viewCancelledFlights(self)
+            viewCancelledFlights = View.uiapi.viewCancelledFlights(self)
             for count, flight in enumerate(viewCancelledFlights):
                 if len(viewCancelledFlights) > 4:
                     if count >= 4:
@@ -288,12 +298,12 @@ class View():
                             input("\nPress enter to see next")
                 print(flight)
                 print()
-            viewFlightInput = self.viewFlight()
+            viewFlightInput = View.viewFlight(self)
         elif viewFlightInput == "b":
             return viewFlightInput
         elif viewFlightInput == "q":
             return viewFlightInput
         else:
-            print("Wrong input, try again")
-            viewFlightInput = self.viewFlight()
+            print("Wrong input, try again!")
+            viewFlightInput = View.viewFlight(self)
         return viewFlightInput
