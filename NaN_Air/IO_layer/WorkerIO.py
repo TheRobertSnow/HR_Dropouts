@@ -15,6 +15,14 @@ class WorkerIO():
         """Return a list of worker instances"""
         return self.workerList
 
+    def create_new_worker(self, newWorker):
+        """Takes in list and creates a new worker"""
+        try:
+            self.write_worker_to_file(newWorker)
+            return "New worker created."
+        except Exception as e:
+            return "Unable to create worker."
+
     def get_workers_from_file(self):
         """Only use for initializing WorkerIO.
         Get workers from file in a list of dictionaries"""
@@ -39,6 +47,7 @@ class WorkerIO():
             csvWriter = csv.writer(csvFile)
             orderedDict = self.convert_to_dict_with_id(aList)
             self.__dictList.append(orderedDict)
+            self.add_worker_instance(orderedDict)
             newList = []
             newList.append(orderedDict['Worker ID'])
             [newList.append(i) for i in aList]
@@ -142,6 +151,10 @@ class WorkerIO():
                                         i.active = val
                                     elif col == "Available":
                                         i.available = val
+
+    def add_worker_instance(self, dict):
+        newWorker = Worker(dict)
+        self.workerList.append(newWorkers)
 
     def create_worker_instances(self):
         """Methood runs through list of dictionaries,

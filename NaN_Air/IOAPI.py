@@ -7,10 +7,10 @@ class IOAPI:
         self.flightIO = FlightIO.FlightIO()
         self.workerIO = WorkerIO.WorkerIO()
         self.flightRouteIO = FlightRouteIO.FlightRouteIO()
-        self.voyageIO = VoyageIO.VoyageIO(self.airplaneIO.airplaneList
+        """self.voyageIO = VoyageIO.VoyageIO(self.airplaneIO.airplaneList
                                         , self.flightIO.flightList
                                         , self.workerIO.workerList
-                                        , self.flightRouteIO.flightRouteList)
+                                        , self.flightRouteIO.flightRouteList)"""
         # self.send_instance_to_voyage()
 
     #
@@ -20,7 +20,7 @@ class IOAPI:
         return self.workerIO.createNewWorker(workerList)
 
     def request_workers(self):
-        return self.workerIO.get_workers_from_file()
+        return self.workerIO.get_workers()
 
     #
     # Airplane

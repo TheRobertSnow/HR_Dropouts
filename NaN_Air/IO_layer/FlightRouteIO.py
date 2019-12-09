@@ -15,6 +15,13 @@ class FlightRouteIO():
         """Return a list of flight instances"""
         return self.flightRouteList
 
+    def create_new_flight_route(self, newFilghtRoute):
+        try:
+            self.write_flight_route_to_file(newFilghtRoute)
+            return "New flight route created."
+        except Exception as e:
+            return "Unable to create flight route."
+
     def get_flight_route_from_file(self):
         """Only use for initializing FlightRouteIO.
         Get flight routes from file in a list of dictionaries"""
@@ -34,6 +41,7 @@ class FlightRouteIO():
             csvWriter = csv.writer(csvFile)
             orderedDict = self.convert_to_dict_with_id(aList)
             self.__dictList.append(orderedDict)
+            self.add_flight_route_instance(orderedDict)
             newList = []
             newList.append(orderedDict['Flight route ID'])
             [newList.append(i) for i in aList]
@@ -118,6 +126,10 @@ class FlightRouteIO():
                                         i.emergencyContact = val
                                     elif col == "Emergency number":
                                         i.emergencyNumber = val
+
+    def add_flight_route_instance(self, dict):
+        newFlightRoute = FlightRoute(dict)
+        self.flightRouteList.append(newFlightRoute)
 
     def create_flight_route_instances(self):
         """Methood runs through list of dictionaries,
