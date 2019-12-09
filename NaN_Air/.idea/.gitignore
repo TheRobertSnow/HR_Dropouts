@@ -1,6 +1,0 @@
-# Default ignored files
-/workspace.xml
-__pycache__/
-UI_layer/__pycache__/
-logic_layer/__pycache__/
-IO_layer/__pycache__/
