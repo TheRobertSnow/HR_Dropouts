@@ -110,6 +110,8 @@ class View():
      specific date
   4. View all pilots who are working on 
      specific date
+  5. View all voyages of a pilot in a given 
+     week
 --------------------------------------------''')
         viewPilotsInput = input("Input choice (q to Quit, b for Back): ")
         viewPilotsInput = viewPilotsInput.lower()
@@ -132,6 +134,12 @@ class View():
             unavailableAttendants = UIAPI.UIAPI.listUnavailableWorkersbydate(self, pilotDate, "Attendant")
             printObjects(self,unavailableAttendants)
             return viewPilotsInput
+        elif viewPilotsInput == "5":
+            pilotSSN = input("Input SSN: ")
+            pilotWeek = input("Input week ")
+            pilotWeeklyVoyages = UIAPI.UIAPI.viewallVoyagesInWeek(self, pilotSSN, week, pos = "Pilot")
+            printObjects(self, pilotWeeklyVoyages)
+            return viewPilotsInput
         elif viewPilotsInput == "b":
             return viewPilotsInput
         elif viewPilotsInput == "q":
@@ -149,6 +157,8 @@ class View():
      specific date
   4. View all attendants who are working on 
      specific date
+  5. View all voyages of an attendant in a given 
+     week
 --------------------------------------------''')
         viewAttendantsInput = input("Input choice (q to Quit, b for Back): ")
         viewAttendantsInput = viewAttendantsInput.lower()
@@ -170,6 +180,12 @@ class View():
             attendantDate = input("Input date: ")
             unavailableAttendants = UIAPI.UIAPI.listUnavailableWorkersbydate(self, attendantDate, "Attendant")
             printObjects(self, unavailableAttendants)
+            return viewAttendantsInput
+        elif viewAttendantsInput == "5":
+            attendantSSN = input("Input SSN: ")
+            attendantWeek = input("Input week: ")
+            attendantWeeklyVoyages = UIAPI.UIAPI.viewallVoyagesInWeek(self, attendantSSN, week, pos = "Attendant")
+            printObjects(self, attendantWeeklyVoyages)
             return viewAttendantsInput
         elif viewAttendantsInput == "b":
             return viewAttendantsInput
@@ -238,6 +254,8 @@ class View():
 --------------------------------------------
   1. View a specific voyage
   2. View all voyages
+  3. View all voyages on a given day
+  4. View all voyages in a given week
 --------------------------------------------''')
 
         viewVoyagesInput = input("Input choice (q to Quit, b for Back): ")
@@ -250,6 +268,14 @@ class View():
         elif viewVoyagesInput == "2":
             voyages = UIAPI.UIAPI.viewAllVoyages(self)
             printObjects(self, voyages)
+            viewVoyagesInput = View.viewVoyages(self)
+        elif viewVoyagesInput == "3":
+            allVoyagesDay = UIAPI.UIAPI.viewallVoyagesDay(self, day)
+            printObjects(self, allVoyagesDay)
+            viewVoyagesInput = View.viewVoyages(self)
+        elif viewVoyagesInput == "4":
+            allVoyagesWeek = UIAPI.UIAPI.viewallVoyagesWeek(self, week)
+            printObjects(self, allVoyagesWeek)
             viewVoyagesInput = View.viewVoyages(self)
         elif viewVoyagesInput == "b":
             return viewVoyagesInput
