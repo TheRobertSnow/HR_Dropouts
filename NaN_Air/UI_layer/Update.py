@@ -1,39 +1,48 @@
 import UIAPI
 class Update:
     def __init__(self):
-        self.object = UIAPI.UIAPI()
+        self.uiapi = UIAPI.UIAPI()
 
     def update_Worker(self, ssn):
         print("""1. Update Worker
-John - {}
 --------------------------------------------
 1. Home Address: 
 2. Home Phone Number:
 3. Mobile Phone Number:
 4. E-mail Address
---------------------------------------------""".format(ssn))
+--------------------------------------------""")
+        workerSSN = input("Input Social Security Number of the worker: ")
+        #If ssn exists:
+        #Else print("This worker does not exist")
         updateWorkerMenuInput = input("Input choice(q to Quit, b for Back, m for Main Menu): ")
         updateWorkerMenuInput = updateWorkerMenuInput.lower()
         if updateWorkerMenuInput == "1":
            # print("Current Home Address: Rasberry Street 1") Flækir töluvert, spurning hvort að þetta sé must eða hvort að það sé nóg að prenta bara tilvikið eftir að því er breytt
-            """newhomeAddress = input("Input new home address: ")
-            addressUpdate = UIAPI.UIAPI.updateWorker(socialSecurityNumber, "Address", newhomeAddress) 
-            if addressUpdate != None:
-            print("Home address succesfully changed!\nNew Home Address: {}".format(newhomeAddress))
-            """ #Vantar að klára updateWorker function
-            Update.update_Worker(ssn)
+            newhomeAddress = input("Input new home address: ")
+            addressUpdate = UIAPI.UIAPI.updateWorker(workerSSN, "Address", newhomeAddress) 
+            """if addressUpdate != None:"""
+            #Ef við náum að breyta addressunni, chekka í logic layer?
+            #print("Home address succesfully changed!\nNew Home Address: {}".format(newhomeAddress))
+            print("Home address succesfully changed!\n")
+            viewWorkerBySSn(self, workerSSN, pos = "")
+            #Vantar að klára updateWorker function
+            return updateWorkerMenuInput
         elif updateWorkerMenuInput == "2":
-            print("Current Phone Number: 5812345")
-            newhphoneNumber = int(input("Input Phone Number: "))
-            print("New Phone Number is: {}".format(newhphoneNumber))
+            newhphoneNumber = int(input("Input new phone number: "))
+            updatedPhoneNum = UIAPI.UIAPI.updateWorker(self, workerSSN, key, newhphoneNumber)
+            Update.update_Worker(ssn)
+            #print("Current Phone Number: 5812345")
+            print("Phone number succesfully changed!\n")
+            viewWorkerBySSn(self, workerSSN, pos = "")
             Update.update_Worker(ssn)
         elif updateWorkerMenuInput == "3":
-            print("Current Mobile Phone Number is: 5812345")
-            newhhomeNumber = int(input("Input new Home Number: "))
-            print("New Phone Number is: {}".format(newhhomeNumber))
+            #print("Current Mobile Phone Number is: 5812345")
+            newhhomeNumber = int(input("Input new home number: "))
+            print("Phone number succesfully changed!\n")
+            viewWorkerBySSn(self, workerSSN, pos = "")
             Update.update_Worker(ssn)
         elif updateWorkerMenuInput == "4":
-            print("Current E-mail Address is: alexanders19@ru.is")
+            #print("Current E-mail Address is: alexanders19@ru.is")
             newEmail = input("Input new E-mail Address: ")
             print("New E-mail Address is: {}\n".format(newEmail))
             Update.update_Worker(ssn)
@@ -154,27 +163,26 @@ Boeing - {}: Select Airplane Status
         Departure to Iceland: datetime\n""".format(voyageID))
         print("""4. Update Voyage 
 --------------------------------------------
-1. Update Pilots
-2. Update Crew
-3. Update Departure from Iceland
-4. Update Departure to Iceland
-5. Cancel Voyage
+  1. Update Pilots
+  2. Update Crew
+  3. Update Departure from Iceland
+  4. Update Departure to Iceland
+  5. Cancel Voyage
 --------------------------------------------""")
         updatevoyageMenuInput = input("Input choice(q to Quit, b for Back, m for Main Menu): ")  # Á að taka inn int
         if updatevoyageMenuInput == "1":
             print("Current Pilots: [John - 123456789, Hooper - 2607962249]\n")
             print("""1. Update Pilots 
 --------------------------------------------
-1. Add Pilot(s)
-2. Remove Pilot(s)
+  1. Add Pilot(s)
+  2. Remove Pilot(s)
 --------------------------------------------""")
             updatepilotMenuInput = input("Input choice(q to Quit, b for Back, m for Main Menu): ")
             if updatepilotMenuInput == "1":
                 print("""
-1. Add Pilot
+  1. Add Pilot
 --------------------------------------------""")
-                pilottoaddInput = input(
-                    "Input Social Security Number of Pilot to add: ")  # Bæta við chekki sem kannar hvort að þetta sé main pilot
+                pilottoaddInput = input("Input Social Security Number of Pilot to add: ")  # Bæta við chekki sem kannar hvort að þetta sé main pilot
                 print("""Pilot succesfully added!
 Current Pilots: [John - 123456789, Hooper - 2607962249]
 --------------------------------------------\n""")

@@ -38,8 +38,8 @@ class Create():
     def createVoyageMenu(self):
         print('''4. Create voyage
 --------------------------------------------
-1. Create voyage using existing flights
-2. Create voyage by creating 2 flights
+  1. Create voyage using existing flights
+  2. Create voyage by creating 2 flights
 --------------------------------------------''')
         createVoyageMenuInput = input("Input choice(q to Quit, b for Back): ")
         createVoyageMenuInput = createVoyageMenuInput.lower()
@@ -48,9 +48,9 @@ class Create():
 --------------------------------------------
 Please input the following information:''')
             voyageList = []
-            flightOutId = int(input("  - Flight from Iceland id: "))
+            flightOutId = int(input("Input flight from Iceland id: "))
             voyageList.append(flightOutId)
-            flightBackId = int(input("  - Flight to Iceland id: "))
+            flightBackId = int(input("Input flight to Iceland id: "))
             voyageList.append(flightBackId)
             # gets the flights and validates  that they exist
             captain, copilot, flightServiceManager, flightAttendants = Create.addCrew(self)

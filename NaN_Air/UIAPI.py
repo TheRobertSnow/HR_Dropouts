@@ -67,6 +67,16 @@ class UIAPI:
         """we give you a ssn, the key we want to change and the new value of that key, give us back the worker changed"""
         returnData = self.workerLL.updateWorker(socialSecurityNumber, key, newValue)
         return returnData
+
+    def listAvailableWorkersbydate(self, date, pos = ""):
+        """We give you a date and you return to us all workers who are not active and available on that date.
+        Can also take in position to filter staff type we want to return"""
+        returnData = self.workerLL.listAvailableWorkersbydate(date, pos)
+
+    def listUnavailableWorkersbydate(self, date, pos = ""):
+        """We give you a date and you return to us all workers who are active on that date.
+        Can also take in position to filter staff type we want to return"""
+        returnData = self.workerLL.listUnavailableWorkersbydate(date, pos)
         
     #
     # flight related
