@@ -47,17 +47,29 @@ class WorkerLL():
         
         return positionList
 
-    """def updateWorker(socialSecurityNumber, key, newValue): #Verðum að gera function til þess að taka upp eitt instance!!!
+    def updateWorker(self,socialSecurityNumber, key, newValue): #Verðum að gera function til þess að taka upp eitt instance!!!
         self.worker = self.IOAPI.request_workers()
         for instances in self.worker:
-            if instance.socialSecurityNumber == socialSecurityNumber:
+            if instances.socialSecurityNumber == socialSecurityNumber:
+                
                 workertoUpdate = instances
-                #Svo vantar að uppfæra actually hlutinn"""
+                #Svo vantar að uppfæra actually hlutinn
 
 
     def viewAllWorkers(self):
         self.worker = self.IOAPI.request_workers()
         return self.worker
+
+    def createNewWorker(self,workerInformation):
+        for i in range (2):
+            workerInformation.append("TRUE")
+            #info for rübs
+            #ıπ∆√∫
+        """worker information er listi með information fyrir workers
+        orðrétt eins og stendur í ducking file-unum. Kóngurinn ?"""
+        newWorker = self.IOAPI.createNewWorker(workerInformation) 
+        return newWorker
+        
 
 
 
