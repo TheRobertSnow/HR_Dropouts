@@ -11,16 +11,10 @@ class FlightRouteIO():
         self.get_flight_route_from_file()
         self.create_flight_route_instances()
 
-    def get_flight_routes(self):
+    def get_flightRoutes(self):
         """Return a list of flight instances"""
         return self.flightRouteList
-
-    def create_new_flight_route(self, newFilghtRoute):
-        try:
-            self.write_flight_route_to_file(newFilghtRoute)
-            return "New flight route created."
-        except Exception as e:
-            return "Unable to create flight route."
+    
 
     def get_flight_route_from_file(self):
         """Only use for initializing FlightRouteIO.
@@ -46,6 +40,7 @@ class FlightRouteIO():
             newList.append(orderedDict['Flight route ID'])
             [newList.append(i) for i in aList]
             csvWriter.writerow(newList)
+        return orderedDict
 
     def write_dictList_to_file(self):
         """Method overwrites file with data from dictList"""
@@ -74,12 +69,15 @@ class FlightRouteIO():
         return highestID + 1
     
     def getFlightRouteTravelTime(self, flightRouteID):
+        self.get_flight_route_from_file()
+        self.create_flight_route_instances()
         for dictionary in self.__dictList:
             for key, value in dictionary.items():
                 if key == "Flight route ID":
                     if value == flightRouteID:
                         travelTime = dictionary['Travel time']
                         return travelTime
+                    
 
     def convert_to_dict_with_id(self, aList):
         """Function converts list to dict, generates an ID
@@ -146,12 +144,19 @@ class FlightRouteIO():
         for dictionary in self.__dictList:
             flightRoute = FlightRoute(dictionary)
             self.flightRouteList.append(flightRoute)
+    
+    def create_new_flight_route(self, flightRouteList):
+        """creates a new airplane instance and writes the airplane to the csv, then it returns the new
+            airplane object"""
+        # write to file
+        flightRoute = self.write_flight_route_to_file(flightRouteList)
+        return flightRoute  # returns the new object
 
 
 
 class FlightRoute:
     def __init__(self, dictionary):
-        self.__myDictionary = dictionary
+        self.myDictionary = dictionary
         self.flightRouteID = dictionary["Flight route ID"]
         self.country = dictionary["Country"]
         self.airport = dictionary["Airport"]
@@ -162,8 +167,8 @@ class FlightRoute:
 
     def __str__(self):
         returnString = []
-        for key, val in self.__myDictionary.items():
-            returnString.append((key + ": " + val))
+        for key, val in self.myDictionary.items():
+            returnString.append((key + ": " + str(val)))
         return "\n".join(returnString)
 
     def __repr__(self):

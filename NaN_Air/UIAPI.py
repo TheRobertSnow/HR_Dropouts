@@ -169,7 +169,7 @@ class UIAPI:
 
     def viewAllFlightRoutes(self):
         """Prints all FLight Routes"""
-        returnData = self.flightRouteLL.viewAllFlightRoutes()
+        returnData = self.flightRouteLL.getAllFlightRoutes()
         return returnData
     
     def viewAllDestinations(self):
