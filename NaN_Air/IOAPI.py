@@ -36,9 +36,12 @@ class IOAPI:
         return airplaneList
 
     #Flight Route
-    def createNewFlightRoute(self, flightRouteDict):
-        flightRouteData = self.flightRouteIO.createNewFlightRoute(flightRouteDict)
-        return flightRouteData
+    def createNewFlightRoute(self, createFlightRouteList):
+        # TODO create new flight route method in flightRouteIO
+        newFlightRouteList = self.flightRouteIO.create_new_flight_route(createFlightRouteList) # sending list of strings and ints
+        return newFlightRouteList
+    
+    
     
     
     def request_flight_routes(self):
@@ -102,9 +105,9 @@ class IOAPI:
     #     highestID = self.flights.getHighestID()
     #     return highestID
 
-    def createNewFlightRoute(self, createFlightRouteList):
-        newFlightRouteList = self.flightRoutes.write_flightRoute_to_file(createFlightRouteList)
-        return newFlightRouteList
+    #def createNewFlightRoute(self, createFlightRouteList):
+     #   newFlightRouteList = self.flightRoutes.write_flightRoute_to_file(createFlightRouteList)
+      #  return newFlightRouteList
 
 
 

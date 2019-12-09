@@ -210,13 +210,15 @@ class View():
         viewFlightRoutesInput = input("Input choice (q to Quit, b for Back): ")
         viewFlightRoutesInput = viewFlightRoutesInput.lower()
         if viewFlightRoutesInput == "1":
-            FlightRouteID = input("Input Flight Route ID: ")
+            flightRouteID = input("Input Flight Route ID: ")
             flightRoute = UIAPI.UIAPI.viewFlightRoute(self, flightRouteID)
             print(flightRoute)
             viewFlightRoutesInput = View.viewFlightRoutes(self)
         elif viewFlightRoutesInput == "2":
             allFlightRoutes = UIAPI.UIAPI.viewAllFlightRoutes(self)
-            print(str(allFlightRoutes) + "\n")
+            for flightRoute in allFlightRoutes:
+                print(flightRoute)
+                print("")
             viewFlightRoutesInput = View.viewFlightRoutes(self)
         elif viewFlightRoutesInput == "b":
             return viewFlightRoutesInput

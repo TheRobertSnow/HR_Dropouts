@@ -134,7 +134,7 @@ class UIAPI:
 
     def viewFlightRoute(self, flightRouteID):
         """Uses flightRouteID to view a certain flightRouteID"""
-        returnData = self.flightRouteLL.viewFlightRoute(flightRouteID)
+        returnData = self.flightRouteLL.find_flight_route_by_id(flightRouteID)
         return returnData
 
     def viewAllFlightRoutes(self):
