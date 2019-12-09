@@ -54,6 +54,13 @@ class WorkerLL():
         self.worker = self.IOAPI.request_workers()
         return self.worker
 
+    def createNewWorker(self, createWorkerList):
+        createWorkerList.append("TRUE")
+        createWorkerList.append("TRUE")
+        worker = self.IOAPI.createNewWorker(createWorkerList)
+        return worker
+        
+
 
 
 

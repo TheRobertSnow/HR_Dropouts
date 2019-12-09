@@ -152,9 +152,9 @@ class WorkerIO():
                                     elif col == "Available":
                                         i.available = val
 
-    def add_worker_instance(self, dict):
-        newWorker = Worker(dict)
-        self.workerList.append(newWorkers)
+        def add_worker_instance(self, dict):
+            newWorker = Worker(dict)
+            self.workerList.append(newWorkers)
 
     def create_worker_instances(self):
         """Methood runs through list of dictionaries,
@@ -164,6 +164,13 @@ class WorkerIO():
             worker = Worker(dictionary)
             self.__workerList.append(worker)
         return self.__workerList
+
+    def writeworkertoFile(self, workerList):
+        newWorkerDict = WorkerIO.convert_to_dict_with_id(self, workerList)
+        self.__dictList.append(newWorkerDict)
+        WorkerIO.write_dictList_to_file(self)
+        return "Worker succesfully created!"
+
 
 
 class Worker():

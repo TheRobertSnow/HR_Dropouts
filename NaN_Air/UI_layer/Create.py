@@ -166,6 +166,8 @@ Please input the following information:''')
             createWorkerList.append(cellphone)
             email = input("  - Email: ")
             createWorkerList.append(email)
+            #createWorkerList.append("TRUE")
+            #createWorkerList.append("TRUE")
             result = UIAPI.UIAPI.createNewWorker(self, createWorkerList)
             print(result)
             # Prints out info on the created worker
