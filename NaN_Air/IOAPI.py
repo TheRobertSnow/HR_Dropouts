@@ -7,7 +7,7 @@ class IOAPI:
         self.flightIO = FlightIO.FlightIO()
         self.workerIO = WorkerIO.WorkerIO()
         self.flightRouteIO = FlightRouteIO.FlightRouteIO()
-        self.voyageIO = VoyageIO.VoyageIO()
+        #self.voyageIO = VoyageIO.VoyageIO()
         # self.send_instance_to_voyage()
 
     #
@@ -62,13 +62,13 @@ class IOAPI:
     #
 
     def createNewFlight(self, flightList):
-        return self.flightIO.write_flight_to_file(flightList)
+        return self.flightIO.createNewFlight(flightList)
 
     def getHigestFlightID(self):
         return self.workerIO.getNextID()
    
     def getTravelTime(self, flightRouteID):
-        return self.flightRouteIO.getTravelTime(flightRouteID)
+        return self.flightRouteIO.getFlightRouteTravelTime(flightRouteID)
     
     def getAllFlightInstances(self):
         return self.flightIO.get_flights()

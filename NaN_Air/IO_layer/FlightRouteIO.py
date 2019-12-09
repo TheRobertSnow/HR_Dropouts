@@ -64,6 +64,16 @@ class FlightRouteIO():
                     if int(value) > highestID:
                         highestID = int(value)
         return highestID + 1
+    
+    def getFlightRouteTravelTime(self, flightRouteID):
+        for dictionary in self.__dictList:
+            for key, value in dictionary.items():
+                if key == "Flight route ID":
+                    if value == flightRouteID:
+                        print(dictionary['Travel time'])
+                        travelTime = dictionary['Travel time']
+                        print(travelTime)
+                        return travelTime
 
     def convert_to_dict_with_id(self, aList):
         """Function converts list to dict, generates an ID

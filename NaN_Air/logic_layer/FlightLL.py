@@ -20,23 +20,20 @@ class FlightLL():
         self.__flightList = self.flightIO.getAllFlightInstances()
     
     def createNewFlight(self, flightList):
-       #newID = self.flightIO.getHigestFlightID()
-       #flightList.insert(0, newID)
        flightNumber = getFlightNumber(self, flightList)
        flightList.insert(0, flightNumber)
        flightList.insert(4, "On schedule")
-       """if flightList[3] = "0":
-           travelTime = self.flightIO.getTravelTime(flightList[4])
+       if flightList[3] == "1":
+           travelTime = self.flightIO.getTravelTime(flightList[2])
        else:
-           travelTime = self.flightIO.getTravelTime(flightList[3])"""
-       travelTime = "03:45"
+           travelTime = self.flightIO.getTravelTime(flightList[3])
+       travelHours, travelMinutes = map(int, travelTime.split(':'))
        flightList.insert(5, travelTime)
-       arrivalTime = flightList[6] + timedelta(hours=int(travelTime[:2]), minutes=int(travelTime[3:]))
+       arrivalTime = flightList[6] + timedelta(hours = travelHours, minutes = travelMinutes)
        flightList.insert(7, arrivalTime)
-       newFlight = self.flightIO.createNewFlight(flightList)
-       self.__flightList = self.flightIO.getAllFlightInstances()
+       flight = self.flightIO.createNewFlight(flightList)
        print("Now there are", len(self.__flightList), "Flight objects in system")
-       return newFlight
+       return flight
     
     def get_flight_list(self):
         return self.__flightList

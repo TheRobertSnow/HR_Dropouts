@@ -25,7 +25,7 @@ class AirplaneIO:
 
     def get_airplanes(self):
         """Return a list of plane instances"""
-        return self.__airplaneList
+        return self.airplaneList
 
     def get_airplanes_from_file(self):
         """Only use for initializing AirplaneIO.
@@ -111,7 +111,7 @@ class AirplaneIO:
         # create instance
         theDict = convert_to_dict(airplaneList)
         airplane = Airplane(theDict)
-        self.__airplaneList.append(airplane)  # add the new object to our list
+        self.airplaneList.append(airplane)  # add the new object to our list
 
         # write to file
         self.write_airplane_to_file(airplaneList)

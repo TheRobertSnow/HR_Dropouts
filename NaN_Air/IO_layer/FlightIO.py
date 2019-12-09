@@ -135,6 +135,18 @@ class FlightIO():
         for dictionary in self.__dictList:
             flight = Flight(dictionary)
             self.flightList.append(flight)
+            
+    def createNewFlight(self, flightList):
+        """creates a new airplane instance and writes the airplane to the csv, then it returns the new
+            airplane object"""
+        # create instance
+        theDict = FlightIO.convert_to_dict_with_id(self, flightList)
+        flight = Flight(theDict)
+        self.flightList.append(flight)  # add the new object to our list
+
+        # write to file
+        self.write_flight_to_file(flightList)
+        return flight  # returns the new object
 
 
 class Flight():
@@ -154,7 +166,7 @@ class Flight():
     def __str__(self):
         returnString = []
         for key, val in self.myDictionary.items():
-            returnString.append((key + ": " + val))
+            returnString.append((key + ": " + str(val)))
         return "\n".join(returnString)
 
 
