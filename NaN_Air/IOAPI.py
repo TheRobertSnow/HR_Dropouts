@@ -8,78 +8,76 @@ class IOAPI:
         self.workerIO = WorkerIO.WorkerIO()
         self.flightRouteIO = FlightRouteIO.FlightRouteIO()
         self.voyageIO = VoyageIO.VoyageIO()
-        #self.send_instance_to_voyage()
-        
-    #Worker
+        # self.send_instance_to_voyage()
+
+    #
+    # Worker
+    #
+
     def createNewWorker(self, workerDict):
-        workerData = self.workerIO.createNewWorker(workerDict)
-        return workerData
-    
+        return self.workerIO.createNewWorker(workerDict)
+
     def createNewWorkerInstance(self, workerList):
-        workerData = self.workerIO.createNewWorkerInstance(workerList)
-        return workerData
-    
+        return self.workerIO.createNewWorkerInstance(workerList)
+
     def request_workers(self):
-        workerInstanceList = self.workerIO.get_workers_from_file()
-        return workerInstanceList
-    
-    #Ariplane
-    def createNewAirplane(self, airplaneDict):
-        airplaneData = self.airplaneIO.createNewAirplane(airplaneDict)
-        return airplaneData
-    
-    def createNewAirplaneInstance(self, airplaneList):
-        airplaneData = self.airplaneIO.createNewAirplaneInstance(airplaneList)
-        return airplaneData
-    
+        return self.workerIO.get_workers_from_file()
+
+    #
+    # Airplane
+    #
+
+    def createNewAirplane(self, airplaneList):
+        """takes in a list for the airplane csv file to write to. returns the result"""
+        return self.airplaneIO.createNewAirplane(airplaneList)
+
     def request_airplanes(self):
-        airplaneList = self.airplaneIO.get_airplanes_from_file()
-        return airplaneList
+        """returns a updated list of all plane objects"""
+        return self.airplaneIO.get_airplanes()
 
-    #Flight Route
+    def updatePlane(self, planeInstance, newStatus):
+        """takes in the instance of the plane and the new status and sends it back, returns the updated object"""
+        return self.airplaneIO.UpdateCertainAirplane(planeInstance, newStatus)
+
+    #
+    # Flight Route
+    #
+
     def createNewFlightRoute(self, flightRouteDict):
-        flightRouteData = self.flightRouteIO.createNewFlightRoute(flightRouteDict)
-        return flightRouteData
-    
-    def createNewFlightRouteInstance(self, flightRouteList):
-        flightRouteData = self.flightRouteIO.createNewFlightRouteInstance(flightRouteList)
-        return flightRouteData
-    
-    def request_flight_routes(self):
-        flightRouteList = self.flightRouteIO.get_flight_routes()
-        # print(flightRouteList)
-        return flightRouteList
+        return self.flightRouteIO.createNewFlightRoute(flightRouteDict)
 
-    #Voyage
+    def createNewFlightRouteInstance(self, flightRouteList):
+        return self.flightRouteIO.createNewFlightRouteInstance(flightRouteList)
+
+    def request_flight_routes(self):
+        return self.flightRouteIO.get_flight_routes()
+
+    #
+    # Voyage
+    #
+
     def createNewVoyage(self, voyageDict):
-        voyageData = self.voyageIO.createNewVoyage(voyageDict)
-        return voyageData
-    
+        return self.voyageIO.createNewVoyage(voyageDict)
+
     def createNewVoyageInstance(self, voyageList):
-        voyageData = self.voyageIO.createNewVoyageInstance(voyageList)
-        return voyageData
-    
+        return self.voyageIO.createNewVoyageInstance(voyageList)
+
     def request_voyages(self):
-        voyageList = self.voyageIO.get_voyages()
-        return voyageList
-    
-    #Flight
+        return self.voyageIO.get_voyages()
+
+    # Flight
     def createNewFlight(self, flightDict):
-        flightData = self.flightIO.createNewFlight(flightDict)
-        return flightData
-    
+        return self.flightIO.createNewFlight(flightDict)
+
     def createNewFlightInstance(self, flightList):
-        flightData = self.flightIO.createNewFlightInstance(flightList)
-        return flightData
-    
-    def request_flights(self):
-        flightList = self.flightIO.get_flights()
-        return flightList
+        return self.flightIO.createNewFlightInstance(flightList)
+
+    def requestFlights(self):
+        return self.flightIO.get_flights()
 
     def send_instance_to_voyage(self):
         """This methood is for sending pointers to the instance lists of
         workers, flights, airplanes and flight routes to voyage."""
-        #self.voyages.get_other_class_instances(self.request_airplanes()
-        #, self.request_flights(), self.request_workers(), self.request_flight_routes())
-        print("")
-
+        # self.voyages.get_other_class_instances(self.request_airplanes()
+        # , self.request_flights(), self.request_workers(), self.request_flight_routes())
+        pass

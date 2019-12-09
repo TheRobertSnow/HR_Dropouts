@@ -11,22 +11,18 @@ class AirplaneLL:
         """Returns a list with all airplanes from the airplane.csv file."""
         return self.__IOAPI.request_airplanes()
 
-
     def getCertainAirplane(self, airplaneReg):
         """checks all current airplanes in the csv file and returns the instance that matches
             takes in the object instance and the reg of the object you need."""
-        self.__airplanes = AirplaneLL.get_airplane_list(self)  # update our list in case there are new planes
         for instance in self.__airplanes:
-            if instance.planeRegistration == airplaneReg:
+            if instance.planeRegistration.lower() == airplaneReg.lower():
                 return instance
         return "Airplane not found!"
 
     def find_airplane_by_reg(self, reg):
         """Checks all current airplanes in the csv file and prints all matching instances of the reg."""
-        self.airplanes = AirplaneLL.get_airplane_list(self)  # update our list in case there are new planes
-        print(len(self.airplanes))
         notFound = True
-        for instance in self.airplanes:
+        for instance in self.__airplanes:
             if instance.planeRegistration == reg:
                 notFound = False
                 print(instance)
@@ -38,8 +34,8 @@ class AirplaneLL:
             new plane and prints out the result. Also checks if all values are valid"""
         # airplane.csv constants
         reg = 0
-        seats = 4
-        odometer = 5
+        seats = 3
+        odometer = 4
         # testing all values
         if "-" not in newPlaneList[reg]:  # testing register
             return "plane creation unsuccessful, all plane registrations must have a '-'!"
@@ -58,24 +54,19 @@ class AirplaneLL:
             if instance.planeRegistration == newPlaneList[reg]:
                 return "plane creation unsuccessful, that register already exists in our system."
 
-        newPlaneObject = self.__IOAPI.newPlaneRequest(newPlaneList)
-        self.__airplanes.append(newPlaneObject)
+        newPlaneObject = self.__IOAPI.createNewAirplane(newPlaneList)
+        self.__airplanes = AirplaneLL.get_airplane_list(self)  # update our list of plane objects
         return newPlaneObject
 
     def getAllAirplanes(self):
-        pass
+        return self.__airplanes
 
     def updateAirplaneStatus(self, airplaneReg, newStatus):
         """takes in the register of plane that needs to be updated and what the new status is."""
         # finding the plane reg object
         for instance in self.__airplanes:
             if instance.planeRegistration == airplaneReg:
-                updatedObject = self.__IOAPI.updateAirplaneStatus(newStatus)
+                updatedObject = self.__IOAPI.updatePlane(instance, newStatus)
+                # herna þarf að replace'a objectið i __airplanes...
                 return updatedObject
         return "Plane register not found. could not update"
-
-
-# +++++++++ Test Case ++++++++++
-# testing is done from a file at the root, similar to run.py
-# testCase = AirplaneLL()
-# testCase.get_airplane_list()
