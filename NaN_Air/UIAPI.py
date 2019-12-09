@@ -79,6 +79,13 @@ class UIAPI:
         Can also take in position to filter staff type we want to return"""
         returnData = self.workerLL.listUnavailableWorkersbydate(date, pos)
         return returnData
+
+    def viewallVoyagesInWeek(self, week, pos):
+        """We give you a week and position, either "Pilot" or "Attendant" and you return all
+        voyages of that pilot or attendant in a given week. If the """
+        pass
+
+
         
     #
     # flight related

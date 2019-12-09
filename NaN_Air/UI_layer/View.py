@@ -97,7 +97,8 @@ class View():
      specific date
   4. View all pilots who are working on 
      specific date
-  5. View
+  5. View all voyages of a pilot in a given 
+     week
 --------------------------------------------''')
         viewPilotsInput = input("Input choice (q to Quit, b for Back): ")
         viewPilotsInput = viewPilotsInput.lower()
@@ -121,6 +122,12 @@ class View():
             pilotDate = input("Input date: ")
             unavailableAttendants = UIAPI.UIAPI.listUnavailableWorkersbydate(self, pilotDate, "Attendant")
             return viewAttendantsInput
+        elif viewPilotsInput == "5":
+            pilotSSN = input("Input SSN: ")
+            pilotWeek = input("Input week ")
+            pilotWeeklyVoyages = UIAPI.UIAPI.viewallVoyagesInWeek(self, pilotSSN, week, pos = "Pilot")
+            #Setja inn print, fall??
+            return viewAttendantsInput
         elif viewPilotsInput == "b":
             return viewPilotsInput
         elif viewPilotsInput == "q":
@@ -138,6 +145,8 @@ class View():
      specific date
   4. View all attendants who are working on 
      specific date
+  5. View all voyages of an attendant in a given 
+     week
 --------------------------------------------''')
         viewAttendantsInput = input("Input choice (q to Quit, b for Back): ")
         viewAttendantsInput = viewAttendantsInput.lower()
@@ -160,6 +169,12 @@ class View():
             attendantDate = input("Input date: ")
             unavailableAttendants = UIAPI.UIAPI.listUnavailableWorkersbydate(self, attendantDate, "Attendant")
             print("\n" + str(unavailableAttendants) + "\n")
+            return viewAttendantsInput
+        elif viewAttendantsInput == "5":
+            attendantSSN = input("Input SSN: ")
+            attendantWeek = input("Input week ")
+            attendantWeeklyVoyages = UIAPI.UIAPI.viewallVoyagesInWeek(self, attendantSSN, week, pos = "Attendant")
+            #Setja inn print, fall??
             return viewAttendantsInput
         elif viewAttendantsInput == "b":
             return viewAttendantsInput
