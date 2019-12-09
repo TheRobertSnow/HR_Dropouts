@@ -1,37 +1,6 @@
 import csv
 import sys
-import os
 FILENAME = 'DataFiles/flightRoutes.csv'
-FIELDNAMES = ["flight route id", "country", "airport", "flight distance",
-              "travel time", "emergency contact", "emergency number"]
-
-
-def readFile():
-    returnList = []
-    with open(FILENAME, encoding="utf8") as csvFile:
-        csvReader = csv.DictReader(csvFile, delimiter=",")
-        for line in csvReader:
-            returnList.append(line)
-    return returnList
-
-
-def writeToFile(FRouteList):
-    """takes in a list and creates a new row in the airplane.csv file"""
-    with open(FILENAME, "a", encoding="utf8", newline="") as csvFile:
-        csvWriter = csv.writer(csvFile)
-        csvWriter.writerow(FRouteList)
-
-
-def updateRow(dictList):
-    """Rewrites the whole csv file with the new and updated object list"""
-    with open(FILENAME, "w", encoding="utf8", newline="") as csvFile:
-        csvWriter = csv.writer(csvFile)
-        csvWriter.writerow(FIELDNAMES)
-        for dictionary in dictList:
-            writeList = []
-            for value in dictionary.values():
-                writeList.append(value)
-            csvWriter.writerow(writeList)
 
 
 class FlightRouteIO():
@@ -56,21 +25,8 @@ class FlightRouteIO():
                 returnList.append(line)
         self.__dictList = returnList
 
-    def __str__(self):
-        returnList = []
-        for i in self.__dictList:
-            for key, value in i.items():
-                returnList.append((key + ": " + value))
-            returnList.append("\n")
-        return "\n".join(returnList)
-
-    def newFlightRoutes(self, FRouteDict, FRouteList):
-        self.__dictList.append(FRouteDict)
-        writeToFile(FRouteList)
-        return "Flight Route added successfully"
-
     def write_flight_route_to_file(self, aList):
-        #Method takes in a list of data and writes to file
+        """Method takes in a list of data and writes to file"""
         with open(FILENAME, 'a', encoding="utf8", newline='') as csvFile:
             csvWriter = csv.writer(csvFile)
             orderedDict = self.convert_to_dict_with_id(aList)
@@ -80,10 +36,9 @@ class FlightRouteIO():
             [newList.append(i) for i in aList]
             csvWriter.writerow(newList)
 
-    def write_dictList_to_file(self, aList):
-        #Method overwrites file with data from dictList
+    def write_dictList_to_file(self):
+        """Method overwrites file with data from dictList"""
         with open(FILENAME, 'w', newline='', encoding='utf8') as csvfile:
-<<<<<<< HEAD
             fieldnames = ['Flight route ID'
                         ,'Country'
                         ,'Airport'
@@ -92,10 +47,6 @@ class FlightRouteIO():
                         ,'Emergency contact'
                         ,'Emergency number']
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-=======
-
-            writer = csv.DictWriter(csvfile, fieldnames=FIELDNAMES)
->>>>>>> f3a24c4abd588ca045a0274347cc25c0d1d9e5c7
             writer.writeheader()
             for dictionary in self.__dictList:
                 writer.writerow(dictionary)
@@ -142,15 +93,9 @@ class FlightRouteIO():
         and writes the changes to file"""
         for index, dictionary in enumerate(self.__dictList):
             for key, value in dictionary.items():
-<<<<<<< HEAD
                 if key == 'Flight route ID':
-=======
-                if key == 'flight route id':
-                    print("We here bro")
->>>>>>> f3a24c4abd588ca045a0274347cc25c0d1d9e5c7
                     if value == aList[0]:
                         self.__dictList[index][aList[1]] = aList[2]
-<<<<<<< HEAD
                         self.write_dictList_to_file()
 
     def create_flight_route_instances(self):
@@ -189,17 +134,3 @@ class FlightRoute:
 # # # print(newline)
 # flightroutes.write_flight_route_to_file(newline)
 # flightroutes.update_data_in_file(updateline)
-=======
-                        print(self.__dictList)
-                        self.write_dictList_to_file(aList)
-
-
-'''
-created = ["Færeyjar", "Þórshöfn", "795", "0:45", "Abel", "985581234"]
-
-updatedList = ["4","country", "Kúkur"]
-www = FlightRoute()
-www.write_flight_route_to_file(created)
-www.update_data_in_file(updatedList)
-'''
->>>>>>> f3a24c4abd588ca045a0274347cc25c0d1d9e5c7

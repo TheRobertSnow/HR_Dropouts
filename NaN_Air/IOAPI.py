@@ -7,7 +7,7 @@ class IOAPI:
         self.workers = WorkerIO.WorkerIO()
         self.flightRoutes = FlightRouteIO.FlightRouteIO()
         self.voyages = VoyageIO.VoyageIO()
-        self.send_instance_to_voyage()
+        #self.send_instance_to_voyage()
 
     def request_airplanes(self):
         airplaneList = self.airplanes.get_airplanes_from_file()
@@ -33,8 +33,8 @@ class IOAPI:
     def send_instance_to_voyage(self):
         """This methood is for sending pointers to the instance lists of
         workers, flights, airplanes and flight routes to voyage."""
-        self.voyages.get_other_class_instances(self.request_airplanes()
-        , self.request_flights(), self.request_workers(), self.request_flight_routes())
+        #self.voyages.get_other_class_instances(self.request_airplanes()
+        #, self.request_flights(), self.request_workers(), self.request_flight_routes())
 
 
     # def createPlaneRequest(self, dictionary, myList):

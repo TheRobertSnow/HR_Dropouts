@@ -119,28 +119,27 @@ class WorkerIO():
             for key, value in dictionary.items():
                 if key == 'Worker ID':
                     if value == aList[0]:
-                        if col != "Worker ID" or col != "Social security number"
-                            or col != "Name":
-                        self.__dictList[index][col] = val
-                        self.write_dictList_to_file()
-                        for i in self.__workerList:
-                            if i.workerID == aList[0]:
-                                if col == "Position":
-                                    i.position = val
-                                elif col == "Plane licence":
-                                    i.planeLicence = val
-                                elif col == "Address":
-                                    i.address = val
-                                elif col == "Phone":
-                                    i.phone = val
-                                elif col == "Cellphone":
-                                    i.cellphone = val
-                                elif col == "Email":
-                                    i.email = val
-                                elif col == "Active":
-                                    i.active = val
-                                elif col == "Available":
-                                    i.available = val
+                        if col != "Worker ID" or col != "Social security number" or col != "Name":
+                            self.__dictList[index][col] = val
+                            self.write_dictList_to_file()
+                            for i in self.__workerList:
+                                if i.workerID == aList[0]:
+                                    if col == "Position":
+                                        i.position = val
+                                    elif col == "Plane licence":
+                                        i.planeLicence = val
+                                    elif col == "Address":
+                                        i.address = val
+                                    elif col == "Phone":
+                                        i.phone = val
+                                    elif col == "Cellphone":
+                                        i.cellphone = val
+                                    elif col == "Email":
+                                        i.email = val
+                                    elif col == "Active":
+                                        i.active = val
+                                    elif col == "Available":
+                                        i.available = val
 
     def create_worker_instances(self):
         """Methood runs through list of dictionaries,
