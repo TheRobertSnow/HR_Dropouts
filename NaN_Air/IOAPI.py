@@ -10,30 +10,18 @@ class IOAPI:
         #self.send_instance_to_voyage()
         
     #Worker
-    def createNewWorker(self, workerDict):
-        workerData = self.workerIO.createNewWorker(workerDict)
-        return workerData
-    
-    def createNewWorkerInstance(self, workerList):
-        workerData = self.workerIO.createNewWorkerInstance(workerList)
-        return workerData
+    def createNewWorker(self, workerList):
+        return self.workerIO.createNewWorker(workerList)
     
     def request_workers(self):
-        workerInstanceList = self.workerIO.get_workers_from_file()
-        return workerInstanceList
+        return self.workerIO.get_workers_from_file()
     
     #Ariplane
-    def createNewAirplane(self, airplaneDict):
-        airplaneData = self.airplaneIO.createNewAirplane(airplaneDict)
-        return airplaneData
-    
-    def createNewAirplaneInstance(self, airplaneList):
-        airplaneData = self.airplaneIO.createNewAirplaneInstance(airplaneList)
-        return airplaneData
+    def createNewAirplane(self, airplaneList):
+        return self.airplaneIO.createNewAirplane(airplaneList)
     
     def request_airplanes(self):
-        airplaneList = self.airplaneIO.get_airplanes_from_file()
-        return airplaneList
+        return self.airplaneIO.get_airplanes_from_file()
 
     #Flight Route
     def createNewFlightRoute(self, createFlightRouteList):
@@ -45,37 +33,24 @@ class IOAPI:
     
     
     def request_flight_routes(self):
-        flightRouteList = self.flightRouteIO.get_flight_routes()
-        # print(flightRouteList)
-        return flightRouteList
+        return self.flightRouteIO.get_flight_routes()
 
     #Voyage
-    def createNewVoyage(self, voyageDict):
-        voyageData = self.voyageIO.createNewVoyage(voyageDict)
-        return voyageData
-    
-    def createNewVoyageInstance(self, voyageList):
-        voyageData = self.voyageIO.createNewVoyageInstance(voyageList)
-        return voyageData
+    def createNewVoyage(self, voyageList):
+        return self.voyageIO.createNewVoyage(voyageList)
     
     def request_voyages(self):
-        voyageList = self.voyageIO.get_voyages()
-        return voyageList
+        return self.voyageIO.get_voyages()
     
     #Flight
-    def createNewFlight(self, flightDict):
-        flightData = self.flightIO.createNewFlight(flightDict)
-        return flightData
-
+    def createNewFlight(self, flightList):
+        return self.flightIO.write_flight_to_file(flightList)
     
+    def getHigestFlightID(self):
+        return self.workerIO.getNextID()
     
-    def createNewFlightInstance(self, flightList):
-        flightData = self.flightIO.createNewFlightInstance(flightList)
-        return flightData
-    
-    def request_flights(self):
-        flightList = self.flightIO.get_flights()
-        return flightList
+    def getAllFlightInstances(self):
+        return self.flightIO.get_flights()
 
     def send_instance_to_voyage(self):
         """This methood is for sending pointers to the instance lists of
