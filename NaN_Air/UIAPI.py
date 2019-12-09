@@ -124,6 +124,20 @@ class UIAPI:
         returnData = self.voyageLL.viewallVoyages()
         return returnData
 
+    def viewallVoyagesDay(self, day):
+        """Listar öll voyages á ákveðnum degi og hvort að þau séu fullmönnuð, svo
+        við þurfum að fá lista eða dict með hverju voyage tilviki og svo upplýsingum 
+        um hvort að það sé fullmannað á þeim degi"""
+        returnData = self.voyageLL.viewallVoyagesDay(day)
+        return returnData
+
+    def viewallVoyagesWeek(self, week):
+        """Listar öll voyages í ákveðinni viku og hvort að þau séu fullmönnuð, svo
+        við þurfum að fá lista eða dict með hverju voyage tilviki og svo upplýsingum 
+        um hvort að það sé fullmannað í þeirri viku"""
+        returnData = self.voyageLL.viewallVoyagesWeek(week)
+        return returnData
+
     #
     # flight route related
     #

@@ -97,6 +97,7 @@ class View():
      specific date
   4. View all pilots who are working on 
      specific date
+  5. View
 --------------------------------------------''')
         viewPilotsInput = input("Input choice (q to Quit, b for Back): ")
         viewPilotsInput = viewPilotsInput.lower()
@@ -184,14 +185,16 @@ class View():
             return viewAirplaneInput
         elif viewAirplaneInput == "2":
             allPlanes = UIAPI.UIAPI.viewAllAirplanes(self)
-            for count, plane in enumerate(allPlanes):
+            for instances in allPlanes:
+                print("\n" + str(instances) + "\n")
+            """for count, plane in enumerate(allPlanes):
                 if len(viewAirplaneInput) > 4:
                     if count >= 4:
                         if count % 4 == 0:
                             input("\nPress any key to see next 4 flights, q to quit") #HVERNIG LÍTUR ENTER ÚT????? 
                 if nextFour != "q":
                     print(plane)
-                    print()
+                    print()"""
             return viewAirplaneInput
         elif viewAirplaneInput == "b":
             return viewAirplaneInput
@@ -228,11 +231,13 @@ class View():
         return viewFlightRoutesInput
 
     def viewVoyages(self):
-        print('''4. View Voyages
+        print("""4. View Voyages
 --------------------------------------------
   1. View a specific voyage
   2. View all voyages
---------------------------------------------''')
+  3. View all voyages on a given day
+  4. View all voyages in a given week
+--------------------------------------------""")
 
         viewVoyagesInput = input("Input choice (q to Quit, b for Back): ")
         viewVoyagesInput = viewVoyagesInput.lower()
@@ -244,6 +249,16 @@ class View():
         elif viewVoyagesInput == "2":
             allVoyages = UIAPI.UIAPI.viewallVoyages(self)
             for instances in allVoyages:
+                print("\n" + str(instances) + "\n")
+            return viewVoyagesInput
+        elif viewVoyagesInput == "3":
+            allVoyagesDay = UIAPI.UIAPI.viewallVoyagesDay(self, day)
+            for instances in allVoyagesDay:
+                print("\n" + str(instances) + "\n")
+            return viewVoyagesInput
+        elif viewVoyagesInput == "4":
+            allVoyagesWeek = UIAPI.UIAPI.viewallVoyagesWeek(self, week)
+            for instances in allVoyagesWeek:
                 print("\n" + str(instances) + "\n")
             return viewVoyagesInput
         elif viewVoyagesInput == "b":
@@ -281,7 +296,7 @@ class View():
                 if nextFour != "q":
                     print(flight)
                     print()"""
-                return viewFlightInput
+                #return viewFlightInput
             viewFlightInput = View.viewFlight(self)
         if viewFlightInput == "3":
             ActiveFlights = UIAPI.UIAPI.viewActiveFlights(self)
