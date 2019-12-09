@@ -104,8 +104,27 @@ class FlightIO():
             for key, value in dictionary.items():
                 if key == 'Flight ID':
                     if value == aList[0]:
-                        self.__dictList[index][aList[1]] = aList[2]
-                        self.write_dictList_to_file()
+                        if col != "Flight ID" or col != "Flight number":
+                            self.__dictList[index][col] = val
+                            self.write_dictList_to_file()
+                            self.get_flights_from_file()
+                            self.create_flight_instances()
+                            for i in self.flightList:
+                                if i.flightID == aList[0]:
+                                    if col == "Airplane registration number":
+                                        i.airplaneRegistrationNumber = val
+                                    elif col == "Origin ID":
+                                        i.originID = val
+                                    elif col == "Destination ID":
+                                        i.destinationID = val
+                                    elif col == "Flight status":
+                                        i.flightStatus = val
+                                    elif col == "Travel time":
+                                        i.travelTime = val
+                                    elif col == "Departure time":
+                                        i.departureTime = val
+                                    elif col == "Arrival time":
+                                        i.arrivalTime = val
 
     def create_flight_instances(self):
         """Methood runs through list of dictionaries,

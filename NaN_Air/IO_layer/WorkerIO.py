@@ -122,6 +122,8 @@ class WorkerIO():
                         if col != "Worker ID" or col != "Social security number" or col != "Name":
                             self.__dictList[index][col] = val
                             self.write_dictList_to_file()
+                            self.get_workers_from_file()
+                            self.create_worker_instances()
                             for i in self.__workerList:
                                 if i.workerID == aList[0]:
                                     if col == "Position":

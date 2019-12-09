@@ -17,6 +17,7 @@ class AirplaneIO():
     def get_airplanes_from_file(self):
         """Get airplanes from file in a list of dictionaries"""
         dictList = []
+        self.airplaneList = []
         with open(FILENAME, 'r', encoding="utf8") as csvFile:
             csvReader = csv.DictReader(csvFile, delimiter=',')
             # next(csvReader, None)
@@ -71,10 +72,29 @@ class AirplaneIO():
             for key, value in dictionary.items():
                 if key == 'Plane registration':
                     if value == aList[0]:
-                        self.__dictList[index][aList[1]] = aList[2]
-                        self.write_dictList_to_file()
-                        self.get_airplanes_from_file()
-                        self.create_airplane_instances()
+                        if col != "Plane registration":
+                            self.__dictList[index][col] = val
+                            self.write_dictList_to_file()
+                            self.get_airplanes_from_file()
+                            self.create_airplane_instances()
+                            for i in self.__workerList:
+                                if i.planeRegistration == aList[0]:
+                                    if col == "Manufacturer":
+                                        i.manufacturer = val
+                                    elif col == "Model":
+                                        i.model = val
+                                    elif col == "Status":
+                                        i.status = val
+                                    elif col == "Seats":
+                                        i.seats = val
+                                    elif col == "Odometer":
+                                        i.odometer = val
+                                    elif col == "Email":
+                                        i.email = val
+                                    elif col == "Active":
+                                        i.active = val
+                                    elif col == "Available":
+                                        i.available = val
 
     def create_airplane_instances(self):
         """Methood runs through list of dictionaries,

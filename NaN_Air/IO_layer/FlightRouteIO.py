@@ -95,8 +95,25 @@ class FlightRouteIO():
             for key, value in dictionary.items():
                 if key == 'Flight route ID':
                     if value == aList[0]:
-                        self.__dictList[index][aList[1]] = aList[2]
-                        self.write_dictList_to_file()
+                        if col != "Flight route ID":
+                            self.__dictList[index][col] = val
+                            self.write_dictList_to_file()
+                            self.get_flight_route_from_file()
+                            self.create_flight_route_instances()
+                            for i in self.flightRouteList:
+                                if i.flightRouteID == aList[0]:
+                                    if col == "Country":
+                                        i.country = val
+                                    elif col == "Airport":
+                                        i.airport = val
+                                    elif col == "Flight distance":
+                                        i.flightDistance = val
+                                    elif col == "Travel time":
+                                        i.travelTime = val
+                                    elif col == "Emergency contact":
+                                        i.emergencyContact = val
+                                    elif col == "Emergency number":
+                                        i.emergencyNumber = val
 
     def create_flight_route_instances(self):
         """Methood runs through list of dictionaries,
@@ -111,7 +128,7 @@ class FlightRoute:
     def __init__(self, dictionary):
         self.__myDictionary = dictionary
         self.flightRouteID = dictionary["Flight route ID"]
-        self.Country = dictionary["Country"]
+        self.country = dictionary["Country"]
         self.airport = dictionary["Airport"]
         self.flightDistance = dictionary["Flight distance"]
         self.travelTime = dictionary["Travel time"]
@@ -133,8 +150,4 @@ class FlightRoute:
 # newline = ["Denmark","Reykjavik","0","0:00", "Áslaug Steingrímsdóttir", "3547745010"]
 # # # print(newline)
 # flightroutes.write_flight_route_to_file(newline)
-<<<<<<< HEAD
 # flightroutes.update_data_in_file(updateline)
-=======
-# flightroutes.update_data_in_file(updateline)
->>>>>>> development
