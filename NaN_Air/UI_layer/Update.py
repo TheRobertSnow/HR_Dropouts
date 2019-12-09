@@ -15,9 +15,12 @@ John - {}
         updateWorkerMenuInput = input("Input choice(q to Quit, b for Back, m for Main Menu): ")
         updateWorkerMenuInput = updateWorkerMenuInput.lower()
         if updateWorkerMenuInput == "1":
-            print("Current Home Address: Rasberry Street 1")
-            newhomeAddress = input("Input new value: ")
-            print("New Home Address: {}".format(newhomeAddress))
+           # print("Current Home Address: Rasberry Street 1") Flækir töluvert, spurning hvort að þetta sé must eða hvort að það sé nóg að prenta bara tilvikið eftir að því er breytt
+            """newhomeAddress = input("Input new home address: ")
+            addressUpdate = UIAPI.UIAPI.updateWorker(socialSecurityNumber, "Address", newhomeAddress) 
+            if addressUpdate != None:
+            print("Home address succesfully changed!\nNew Home Address: {}".format(newhomeAddress))
+            """ #Vantar að klára updateWorker function
             Update.update_Worker(ssn)
         elif updateWorkerMenuInput == "2":
             print("Current Phone Number: 5812345")

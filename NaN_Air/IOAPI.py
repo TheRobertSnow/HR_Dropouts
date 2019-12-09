@@ -9,7 +9,7 @@ class IOAPI:
         self.voyages = VoyageIO.VoyageIO()
 
     def request_airplanes(self):
-        airplaneList = self.airplanes.get_airplanes()
+        airplaneList = self.airplanes.get_airplanes_from_file()
         return airplaneList
 
     def request_flights(self):
@@ -17,10 +17,8 @@ class IOAPI:
         return flightList
 
     def request_workers(self):
-        workerList = self.workers.get_workers()
-        return workerList
-
-    
+        workerInstanceList = self.workers.get_workers_from_file()
+        return workerInstanceList
 
     def request_flight_routes(self):
         flightRouteList = self.flightRoutes.get_flight_routes()

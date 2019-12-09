@@ -44,15 +44,24 @@ class UIAPI:
         returnData = self.workerLL.createNewWorker(workerList)
         return returnData
     
-    def viewWorkerByPosOrSSn(self, positionWeWantToPrint = "", ssn = ""):
-        """give us all workers that have a certain position"""
-        returnData = self.workerLL.viewWorkerByPosOrSSn(ssn, positionWeWantToPrint)
+    def viewWorkerBySSn(self, ssn, pos = ""):
+        """Finds an instance of a worker, can take position to check if that instance is of that position"""
+        returnData = self.workerLL.findWorkerBySSN(ssn, pos)
         return returnData
+
+    def viewWorkerByPOS(self, positionWeWantToPrint):
+        """give us all workers that have a certain position"""
+        returnData = self.workerLL.findWorkerByPOS(positionWeWantToPrint) 
+        return returnData
+    
     
     def viewAllWorkers(self):
         """give us all worker instances, would be nice if we can get 5 at a time or something instead of all at once"""
         returnData = self.workerLL.viewAllWorkers()
-        return returnData
+        for instance in returnData:
+            print(str(instance) + "\n")
+        returnstring = "\n"
+        return returnstring
     
     def updateWorker(self, socialSecurityNumber, key, newValue):
         """we give you a ssn, the key we want to change and the new value of that key, give us back the worker changed"""
@@ -119,6 +128,7 @@ class UIAPI:
         return returnData
     
 
+    
 # ++++++++++ Test Case ++++++++++
 # UIAPI = UIAPI()
 # UIAPI.get_airplanes()

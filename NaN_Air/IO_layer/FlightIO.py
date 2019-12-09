@@ -14,6 +14,8 @@ class FlightIO():
         """Return a list of flight instances"""
         return self.__flightList
 
+    
+
     def get_flights_from_file(self):
         """Get flight from file in a list of dictionaries"""
         returnList = []

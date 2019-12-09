@@ -10,10 +10,50 @@ class WorkerLL():
         self.worker = self.IOAPI.request_workers()
         return self.worker
 
-    def findWorkerByPosOrSSN(self, id):
+    def findWorkerBySSN(self, ssn, pos):
+        self.worker = self.IOAPI.request_workers()
         for instance in self.worker:
-            if instance.workerID == id:
-                print(instance)
+            if pos == "":
+                if instance.socialSecurityNumber == ssn:
+                    return instance
+            elif pos == "Pilot":
+                if instance.position == "Captain" or instance.position == "Copilot":
+                    if instance.socialSecurityNumber == ssn:  
+                        return instance
+            elif pos == "Attendant":
+                if instance.position == "Flight Attendant" or instance.position == "Flight Service Manager":
+                    if instance.socialSecurityNumber == ssn:  
+                        return instance
+        notFoundString = "{} not found!".format(pos)
+        return notFoundString
+
+    def findWorkerByPOS(self, position):
+        self.worker = self.IOAPI.request_workers()
+        positionList = []
+        if position == "Pilot":
+            for instance in self.worker:
+                if instance.position == "Captain" or "Copilot":
+                    positionList.append(instance)
+        elif position == "Attendant":
+            for instance in self.worker:
+                if instance.position == "Flight Service Manager" or "Flight Attendant":
+                    positionList.append(instance)
+        if len(positionList) == 0:
+            positionList = "No {}'s found!.".format(position)
+        return positionList
+
+    """def updateWorker(socialSecurityNumber, key, newValue): #Verðum að gera function til þess að taka upp eitt instance!!!
+        self.worker = self.IOAPI.request_workers()
+        for instances in self.worker:
+            if instance.socialSecurityNumber == socialSecurityNumber:        
+                workertoUpdate = instances
+                #Svo vantar að uppfæra actually hlutinn"""
+       
+
+    def viewAllWorkers(self):
+        self.worker = self.IOAPI.request_workers()
+        return self.worker
+
 
     
     

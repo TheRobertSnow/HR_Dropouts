@@ -15,14 +15,22 @@ class WorkerIO():
         return self.__workerList
 
     def get_workers_from_file(self):
-        """Get worker from file in a list of dictionaries"""
-        returnList = []
+        """Get workers from file in a list of dictionaries"""
+        dictList = []
         with open(FILENAME, 'r', encoding="utf8") as csvFile:
             csvReader = csv.DictReader(csvFile, delimiter=',')
             # next(csvReader, None)
             for line in csvReader:
-                returnList.append(line)
-        self.__dictList = returnList
+                dictList.append(line)
+        self.__dictList = dictList
+        for dictionary in self.__dictList:
+            worker = Worker(dictionary)
+            self.__workerList.append(worker)
+        return self.__workerList
+
+    #def get_specific_Worker(self, SSN):
+    #Verðum að gera function til þess að taka upp eitt instance!!!
+        
 
     def write_worker_to_file(self, aList):
         """Method takes in a list of data and writes to file"""
@@ -139,6 +147,7 @@ class WorkerIO():
         for dictionary in self.__dictList:
             worker = Worker(dictionary)
             self.__workerList.append(worker)
+        return self.__workerList
 
 
 class Worker():
