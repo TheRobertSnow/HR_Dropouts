@@ -19,7 +19,7 @@ class Create():
         hour, minute = map(int, departureTime.split(':'))
         departureDate = input("  - Departure date from {}(f.x. 24/12/2019): ".format(origin))
         day, month, year = map(int, departureDate.split('/'))
-        departureDateTime = datetime.datetime(year,month, day, hour, minute, 00)
+        departureDateTime = datetime.datetime(year, month, day, hour, minute, 00)
         flightList.append(departureDateTime)
         return flightList
 
