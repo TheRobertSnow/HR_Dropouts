@@ -12,12 +12,7 @@ class AirplaneLL:
         return self.__IOAPI.request_airplanes()
 
     def getCertainAirplane(self, airplaneReg):
-        """checks all current airplanes in the csv file and returns the instance that matches
-            takes in the object instance and the reg of the object you need."""
-        for instance in self.__airplanes:
-            if instance.planeRegistration.lower() == airplaneReg.lower():
-                return instance
-        return "Airplane not found!"
+        return self.__IOAPI.getCertainAirplane(airplaneReg)
 
     def find_airplane_by_reg(self, reg):
         """Checks all current airplanes in the csv file and prints all matching instances of the reg."""

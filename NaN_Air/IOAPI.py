@@ -29,7 +29,10 @@ class IOAPI:
     def createNewAirplane(self, airplaneList):
         """takes in a list for the airplane csv file to write to. returns the result"""
         return self.airplaneIO.createNewAirplane(airplaneList)
-
+    
+    def getCertainAirplane(self, airplaneReg):
+        return self.airplaneIO.getCertainAirplane(airplaneReg)
+    
     def request_airplanes(self):
         """returns a updated list of all plane objects"""
         return self.airplaneIO.get_airplanes()

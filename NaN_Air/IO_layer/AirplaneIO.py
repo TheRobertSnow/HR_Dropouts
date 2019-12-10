@@ -22,7 +22,15 @@ class AirplaneIO:
         self.airplaneList = []
         self.get_airplanes_from_file()
         self.create_airplane_instances()
-
+    
+    def getCertainAirplane(self, airplaneReg):
+        """checks all current airplanes in the csv file and returns the instance that matches
+            takes in the object instance and the reg of the object you need."""
+        for instance in self.airplaneList:
+            if instance.planeRegistration.lower() == airplaneReg.lower():
+                return instance
+        return "Airplane with registration number {} not found!".format(airplaneReg)
+    
     def get_airplanes(self):
         """Return a list of plane instances"""
         return self.airplaneList
