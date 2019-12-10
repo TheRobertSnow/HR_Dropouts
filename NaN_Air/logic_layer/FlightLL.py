@@ -18,13 +18,14 @@ class FlightLL():
             return airplane
         flightList.insert(0, flightNumber)
         flightList.insert(4, "On schedule")
+        flightrouteInstances = self.flightIO.getAllFlightRouteInstances()
         if flightList[3] == "1":
-            if int(flightList[2]) <= len(self.__flightList):
+            if int(flightList[2]) <= len(flightrouteInstances):
                 travelTime = self.flightIO.getTravelTime(flightList[2])
             else:
-                return "There does not exist a flight with the id {}".format(flightList[2])
+                return "There does not exist a flight route with the id {}".format(flightList[2])
         elif flightList[2] == "1":
-            if int(flightList[3]) <= len(self.__flightList):
+            if int(flightList[3]) <= len(flightrouteInstances):
                 travelTime = self.flightIO.getTravelTime(flightList[3])
                 timeFrameStart = flightList[5] - timedelta(minutes = 5)
                 timeFrameEnd = flightList[5] + timedelta(minutes = 5)
@@ -34,7 +35,7 @@ class FlightLL():
                         if departureTime >= timeFrameStart and departureTime <= timeFrameEnd:
                             return "There is another flight from iceland at {} so the departure time you input is not valid".format(instance.departureTime)
             else:
-                return "There does not exist a flight with the id {}".format(flightList[3])
+                return "There does not exist a flight route with the id {}".format(flightList[3])
         else:
             return "You can not create a flight that does not have Iceland as the departure nor the destination country"
         travelHours, travelMinutes = map(int, travelTime.split(':'))

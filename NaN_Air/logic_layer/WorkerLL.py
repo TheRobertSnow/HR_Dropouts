@@ -51,12 +51,16 @@ class WorkerLL():
             positionList = "No {}'s found!.".format(position)
         return positionList
 
-    """def updateWorker(socialSecurityNumber, key, newValue): #Verðum að gera function til þess að taka upp eitt instance!!!
-        self.worker = self.IOAPI.request_workers()
-        for instances in self.worker:
+    def updateWorker(self, socialSecurityNumber, key, newValue): 
+        #self.worker = IOAPI.request_workers()
+        self.worker = WorkerLL.get_worker_list(self)
+        for instance in self.worker:
             if instance.socialSecurityNumber == socialSecurityNumber:
-                workertoUpdate = instances
-                #Svo vantar að uppfæra actually hlutinn"""
+                updatedWorker = self.IOAPI.updateWorker(instance, key, newValue)
+                self.worker = WorkerLL.get_worker_list(self)
+                print("Worker succesfully updated!\n")
+                return updatedWorker
+        return "Worker could not be updated"
 
 
     def viewAllWorkers(self):
