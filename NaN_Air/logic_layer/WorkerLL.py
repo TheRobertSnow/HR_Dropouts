@@ -24,7 +24,12 @@ class WorkerLL():
                 if instance.position == "Flight Attendant" or instance.position == "Flight Service Manager":
                     if instance.socialSecurityNumber == ssn:
                         return instance
-        notFoundString = "{} not found!".format(pos)
+            elif pos == "Manager":
+                if instance.position == "Staff manager" or instance.position == "Trip manager":
+                    if instance.socialSecurityNumber == ssn:
+                        return instance
+
+        notFoundString = "{} not found!\n".format(pos)
         return notFoundString
 
     def findWorkerByPOS(self, position):
@@ -32,11 +37,15 @@ class WorkerLL():
         positionList = []
         if position == "Pilot":
             for instance in self.worker:
-                if instance.position == "Captain" or "Copilot":
+                if instance.position == "Captain" or instance.position == "Copilot":
                     positionList.append(instance)
         elif position == "Attendant":
             for instance in self.worker:
-                if instance.position == "Flight Service Manager" or "Flight Attendant":
+                if instance.position == "Flight Service Manager" or instance.position == "Flight Attendant":
+                    positionList.append(instance)
+        elif position == "Manager":
+            for instance in self.worker:
+                if instance.position == "Staff manager" or instance.position == "Trip manager":
                     positionList.append(instance)
         if len(positionList) == 0:
             positionList = "No {}'s found!.".format(position)
@@ -68,6 +77,9 @@ class WorkerLL():
 
     def updateWorker(self, socialSecurityNumber, key, newValue):
         pass
+
+
+
 
 # +++++++++ Test Case ++++++++++
 # workerLL = WorkerLL()

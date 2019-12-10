@@ -2,11 +2,12 @@ import UIAPI
 
 
 def printObjects(name):
+    print("\n")
     for count, theObject in enumerate(name):
         if len(name) > 4:
             if count >= 4:
                 if count % 4 == 0:
-                    printNext = input("\nPress any key to see next(q to quit)")
+                    printNext = input("\nPress enter to see next (q to quit):")
                     printNext = printNext.lower()
                     if printNext == "q":
                         return None
@@ -62,12 +63,12 @@ class View():
             viewMenuInput = View.viewMenu(self)
         return viewMenuInput
 
-    def viewWorker(self):  # Pæling hvort að við sleppum view all Bosses??
+    def viewWorker(self):  
         print('''1. View Worker
 --------------------------------------------
   1. View Pilots
   2. View Attendants
-  3. View Bosses
+  3. View Managers
   4. View All Staff
 --------------------------------------------''')
 
@@ -83,13 +84,14 @@ class View():
                 viewWorkerInput = View.viewWorker(self)
         elif viewWorkerInput == "2":
             viewAttendantsOutput = View.viewAttendants(self)
-            if viewAttendantsOutput == "b":
+            if viewWorkerInput == "b":
                 viewWorkerInput = View.viewWorker(self)
             elif viewAttendantsOutput == "q":
                 return viewWorkerInput
             else:
                 viewWorkerInput = View.viewWorker(self)
         elif viewWorkerInput == "3":
+            viewManagersInput = View.viewManagers(self)
             viewWorkerInput = View.viewWorker(self)
         elif viewWorkerInput == "4":
             allStaff = UIAPI.UIAPI.viewAllWorkers(self)
@@ -199,6 +201,31 @@ class View():
         else:
             print("Wrong input, try again!")
         return viewAttendantsInput
+
+    def viewManagers(self):
+        print('''1.2. View Managers
+--------------------------------------------
+  1. View specific manager
+  2. View all managers
+--------------------------------------------''')
+        viewManagersInput = input("Input choice (q to Quit, b for Back): ")
+        viewManagersInput = viewManagersInput.lower()
+        if viewManagersInput == "1":
+            managerSSN = input("Input SSN: ")
+            Manager = UIAPI.UIAPI.viewWorkerBySSn(self, managerSSN, "Manager")
+            print(Manager)
+            return viewManagersInput
+        elif viewManagersInput == "2":
+            allManagers = UIAPI.UIAPI.viewWorkerByPOS(self, "Manager")
+            printObjects(allManagers)
+            return viewManagersInput
+        elif viewManagersInput == "b":
+            return viewManagersInput
+        elif viewManagersInput == "q":
+            return viewManagersInput
+        else:
+            print("Wrong input, try again!")
+        return viewManagersInput
 
     def viewAirplane(self):
         print('''2. View Airplane
