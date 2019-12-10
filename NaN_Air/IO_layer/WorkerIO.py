@@ -36,6 +36,7 @@ class WorkerIO():
             worker = Worker(dictionary)
             self.workerList.append(worker)
 
+
     #def get_specific_Worker(self, SSN):
     #Verðum að gera function til þess að taka upp eitt instance!!!
 
@@ -171,6 +172,10 @@ class WorkerIO():
         WorkerIO.write_dictList_to_file(self)
         return "Worker succesfully created!"
 
+    def updateCertainWorker(self, instance, key, newValue):
+        instance.updateValue(key, newValue) 
+        self.write_dictList_to_file()  
+        return instance 
 
 
 class Worker():
@@ -188,6 +193,8 @@ class Worker():
         self.active = dictionary["Active"]
         self.available = dictionary["Available"]
 
+    def updateValue(self, key, newValue):
+        self.myDictionary[key] = newValue
 
     def __str__(self):
         returnString = []
