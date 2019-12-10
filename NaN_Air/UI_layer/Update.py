@@ -234,8 +234,7 @@ Current Pilots: [John - 123456789]
             updatecurrentflightRoutes()
         # Update.updateMenu(Update) HVAÐ Á ÉG AÐ CALLA HÉR???
 
-    def updateFlights(self, flightID):
-        print("functionality not yet completed here, you might crash! - Arnar, Update.py line ~245")
+    def updateFlights(self, flightNumber):
         print("""5. Update Flights 
 --------------------------------------------
   1. Update Flight Status
@@ -243,64 +242,46 @@ Current Pilots: [John - 123456789]
 --------------------------------------------""")
         updateflightMenuInput = input("Input choice (q to Quit, b for Back, m for Main Menu): ")
         if updateflightMenuInput == "1":
-            flightNumber = input("Input the Flight number of the Flight you wish to change: ")
             print("""1. Update Flight Status
-Flight - {}: Select Flight Status
+    Select Flight Status
 --------------------------------------------
   1. Loading 
   2. In-Air
   3. Landed
   4. Cancelled
---------------------------------------------""".format(flightNumber))
+--------------------------------------------""")
             updateflightstatusMenuInput = input("Input choice (q to Quit, b for Back, m for Main Menu): ")
-            flightlist = [flightNumber, "Flight status"]
-            if updateflightstatusMenuInput == "1":
-                flightlist.append("Loading")
-                flight = UIAPI.UIAPI.updateFlightStatus(self, flightlist)
+            options = ["Loading", "In-Air", "Landed", "Cancelled"]
+            if updateflightstatusMenuInput == "1" or "2" or "3" or "4":
+                flight = UIAPI.UIAPI.updateFlightStatus(self, [flightNumber, options[int(updateflightstatusMenuInput)-1]])
                 print(flight)
-                flightlist.pop()
-            elif updateflightstatusMenuInput == "2":
-                flightlist.append("In-Air")
-                flight = UIAPI.UIAPI.updateFlightStatus(self, flightlist)
-                print(flight)
-                flightlist.pop()
-            elif updateflightstatusMenuInput == "3":
-                flightlist.append("Landed")
-                flight = UIAPI.UIAPI.updateFlightStatus(self, flightlist)
-                print(flight)
-                flightlist.pop()
-            elif updateflightstatusMenuInput == "4":
-                flightlist.append("Cancelled")
-                flight = UIAPI.UIAPI.updateFlightStatus(self, flightlist)
-                print(flight)
-                flightlist.pop()
+                self.updateFlights(flightNumber)
             elif updateflightstatusMenuInput == "b":
-                Update.updateFlights(self)
+                Update.updateFlights(self, flightNumber)
             elif updateflightstatusMenuInput == "q":
-                print("Forriti lokað!")
+                print("exiting program!")
             else:
                 print("WRONG INPUT, TRY AGAIN")
-                Update.updateFlights()
+                Update.updateFlights(self, flightNumber)
 
         elif updateflightMenuInput == "2":
             print("""2. Update Departure time
 --------------------------------------------""")
-            flightNumber = input("Input the Flight number of the Flight you wish to change: ")
             departureTime = input("  - Updated departure time(f.x. 12:30): ")
             hour, minute = map(int, departureTime.split(':'))
             departureDate = input("  - Updated departure date(f.x. 24/12/2019): ")
             day, month, year = map(int, departureDate.split('/'))
-            departureDateTime = datetime.datetime(year,month, day, hour, minute, 00)
+            departureDateTime = datetime.datetime(year, month, day, hour, minute, 00)
             departureTimeList = [flightNumber, "Departure time", departureDateTime]
             flight = UIAPI.UIAPI.updateFlightDepartureTime(self, departureTimeList)
             print(flight)
         elif updateflightMenuInput == "b":
-            Update.updateFlights()
+            Update.updateFlights(self, flightNumber)
         elif updateflightMenuInput == "q":
-            print("Forriti lokað!")
+            print("exiting program!")
         else:
             print("WRONG INPUT, TRY AGAIN")
-            Update.updateFlights()
+            Update.updateFlights(self, flightNumber)
 
     def updateMenu(self):
         print('''Update Data
@@ -343,9 +324,9 @@ Flight - {}: Select Flight Status
                 updateMenuInput = Update.updateMenu(self)
 
         elif updateMenuInput == "5":
-            flightID = Update.confirmFlightID(self)
-            if flightID:
-                Update.updateFlights(self, flightID)
+            flightNumb = Update.confirmFlightID(self)
+            if flightNumb:
+                Update.updateFlights(self, flightNumb)
             else:
                 updateMenuInput = Update.updateMenu(self)
 
