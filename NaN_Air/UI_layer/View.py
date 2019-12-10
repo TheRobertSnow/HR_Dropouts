@@ -35,7 +35,6 @@ class View():
             viewWorkerOutput = View.viewWorker(self)
             if viewWorkerOutput == "b":
                 viewMenuInput = View.viewMenu(self)
-                pass
         elif viewMenuInput == "2":
             viewAirplaneOutput = View.viewAirplane(self)
             if viewAirplaneOutput == "b":
@@ -92,6 +91,10 @@ class View():
                 viewWorkerInput = View.viewWorker(self)
         elif viewWorkerInput == "3":
             viewManagersInput = View.viewManagers(self)
+            if viewManagersInput == "b":
+                viewWorkerInput = View.viewWorker(self)
+            elif viewManagersInput == "q":
+                return viewWorkerInput
             viewWorkerInput = View.viewWorker(self)
         elif viewWorkerInput == "4":
             allStaff = UIAPI.UIAPI.viewAllWorkers(self)

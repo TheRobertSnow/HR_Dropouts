@@ -163,7 +163,7 @@ class Voyage:
         returnString = []
         for key, val in self.myDictionary.items():
             returnString.append((key + ": " + str(val)))
-        return " | ".join(returnString)
+        return "\n".join(returnString)
 
 # writeList = ['35','1107951952','Elizabeth Mcfadden','Cabincrew','Flight Attendant','N/A','Fellsmúli 35','8998835','8998835','test@test.com','True','True']
 # updateList = ['35', 'Position', 'Looser']
