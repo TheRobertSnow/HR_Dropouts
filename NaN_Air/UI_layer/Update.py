@@ -246,7 +246,7 @@ class Update:
             updateflightstatusMenuInput = input("Input choice (q to Quit, b for Back, m for Main Menu): ")
             options = ["Loading", "In-Air", "Landed", "Cancelled"]
             if updateflightstatusMenuInput == "1" or "2" or "3" or "4":
-                flight = UIAPI.UIAPI.updateFlightStatus(self, [flightNumber, options[int(updateflightstatusMenuInput)-1]])
+                flight = UIAPI.UIAPI.updateFlightStatus(self, [flightNumber, "Flight status", options[int(updateflightstatusMenuInput)-1]])
                 print(flight)
                 self.updateFlights(flightNumber)
             elif updateflightstatusMenuInput == "b":
