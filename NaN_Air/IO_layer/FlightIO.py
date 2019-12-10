@@ -1,4 +1,5 @@
 import csv
+from datetime import datetime
 FILENAME = 'DataFiles/flight.csv'
 
 
@@ -46,6 +47,47 @@ class FlightIO():
             newList.append(orderedDict['Flight ID'])
             [newList.append(i) for i in aList]
             csvWriter.writerow(newList)
+
+    def get_flight_number(self, originID, destinationID, departureTime):
+        """Method takes in destinationID and departureTime and generates a
+        flight number to return"""
+        flightsOnDate = []# List of flights to the same destination on the same date
+        flightsOnDateFrom = []# List of flights from the same destination on the same date
+        departureDate = datetime.date(departureTime)
+        numOfFlight = 0 # The last digit in the flight number
+        flightNumber = "NA"
+        if int(destinationID) < 10:
+            flightNumber = flightNumber + "0" + destinationID
+        else:
+            flightNumber = flightNumber + destinationID
+        for flight in self.flightList:
+            flightDT = flight.departureTime
+            instanceDepartureDate = datetime.date(flightDT)
+            # If the date of the instance matches the given date and destination
+            if instanceDepartureDate == departureDate:
+                if flight.destinationID == destinationID and flight.originID == originID:
+                    flightsOnDate.append(flight)
+        if destinationID != "1":    # If the Flight is not going back to iceland
+            if len(flightsOnDate) == 0:   # If there are no flights for the day
+                flightNumber = flightNumber + str(numOfFlight)
+                return flightNumber
+            else:
+                for f in flightsOnDate:
+                    numOfFlight += 2
+                flightNumber = flightNumber + str(numOfFlight)
+                return flightNumber
+        elif destinationID == "1":  # If the flight is going back to iceland
+            numOfFlight += 1
+            if len(flightsOnDate) == 0:
+                flightNumber = flightNumber + str(numOfFlight)
+                return flightNumber
+            else:
+                for f in flightsOnDate:
+                    numOfFlight += 2
+                flightNumber = flightNumber + str(numOfFlight)
+                return flightNumber
+
+
 
     def write_dictList_to_file(self):
         """Method overwrites file with data from dictList"""
@@ -149,7 +191,7 @@ class FlightIO():
         for dictionary in self.__dictList:
             flight = Flight(dictionary)
             self.flightList.append(flight)
-            
+
     def createNewFlight(self, flightList):
         """creates a new airplane instance and writes the airplane to the csv, then it returns the new
             airplane object"""
