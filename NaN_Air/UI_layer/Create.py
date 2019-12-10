@@ -75,7 +75,7 @@ Please input the following information:''')
 Please input the following information:''')
             voyageList2 = []
             print("\nFlight from Iceland")
-            flightList = Create.createFlight(None, "Reykjavíkurflugvöllur")
+            flightList = Create.createFlight(None, "1") #   Sends in the id of Reykjavik airport
             # creates flight1
             # finds id of created flight
             voyageList2.append("123")
@@ -98,7 +98,7 @@ Please input the following information:''')
             # prints out crew info
             print(captain, copilot, flightServiceManager, flightAttendants)
             voyageList2.append(captain)
-            voyageList2.append(copilot)
+            voyageList2.append(copilots)
             voyageList2.append(flightServiceManager)
             voyageList2.append(flightAttendants)
             print("Voyage successfully created!")

@@ -7,6 +7,10 @@ class VoyageIO:
     def __init__(self, airplaneList, flightList, workerList, flightRouteList):
         self.dictList = []
         self.voyageList = []
+        self.airplaneList = airplaneList
+        self.flightList = flightList
+        self.workerList = workerList
+        self.flightRouteList = flightRouteList
         self.get_voyages_from_file()
         self.create_voyage_instances()
 
