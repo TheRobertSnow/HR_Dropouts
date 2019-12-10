@@ -1,5 +1,5 @@
 import UIAPI
-
+import datetime
 
 def printObjects(name):
     print("\n")
@@ -331,7 +331,10 @@ class View():
         viewFlightInput = viewFlightInput.lower()
         if viewFlightInput == "1":
             flightNumber = input("Input flight number: ")
-            viewFlight = UIAPI.UIAPI.viewCertainFlight(self, flightNumber)
+            flightDay = input("Input the day of the flight you want to view(f.x. 31/12/2019): ")
+            day, month, year = map(int, flightDay.split('/'))
+            flightDate = datetime.datetime(year, month, day)
+            viewFlight = UIAPI.UIAPI.viewCertainFlight(self, flightNumber, flightDate)
             print(viewFlight)
             viewFlightInput = View.viewFlight(self)
         if viewFlightInput == "2":

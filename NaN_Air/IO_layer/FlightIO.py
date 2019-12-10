@@ -152,7 +152,7 @@ class FlightIO():
     def update_data_in_file(self, aList):
         """Method takes in list of data, updates the dictionary list
         and writes the changes to file"""
-        col, val = aList[1], aList[2] # The column of the desired value and the value
+        col, val = aList[2], aList[3] # The column of the desired value and the value
         for index, dictionary in enumerate(self.__dictList):
             for key, value in dictionary.items():
                 if key == 'Flight number':
@@ -160,18 +160,20 @@ class FlightIO():
                         if col != "Flight ID" or col != "Flight number":
                             for i in self.flightList:
                                 if i.flightNumber == aList[0]:
-                                    if col == "Flight status":
-                                        i.flightStatus = val
-                                    elif col == "Departure time":
-                                        i.departureTime = val
-                                        travelHours, travelMinutes = map(int, i.travelTime.split(':'))
-                                        i.arrivalTime = val + timedelta(hours = travelHours, minutes = travelMinutes)
-                                        self.__dictList[index]["Arrival time"] = val + timedelta(hours = travelHours, minutes = travelMinutes)
-                                    self.__dictList[index][col] = val
-                                    self.write_dictList_to_file()
-                                    self.get_flights_from_file()
-                                    self.create_flight_instances()
-                                    return i
+                                    departureTime = datetime.strptime(i.departureTime, '%Y-%m-%d %H:%M:%S')
+                                    if departureTime.date() == aList[1].date():
+                                        if col == "Flight status":
+                                            i.flightStatus = val
+                                        elif col == "Departure time":
+                                            i.departureTime = val
+                                            travelHours, travelMinutes = map(int, i.travelTime.split(':'))
+                                            i.arrivalTime = val + timedelta(hours = travelHours, minutes = travelMinutes)
+                                            self.__dictList[index]["Arrival time"] = val + timedelta(hours = travelHours, minutes = travelMinutes)
+                                        self.__dictList[index][col] = val
+                                        self.write_dictList_to_file()
+                                        self.get_flights_from_file()
+                                        self.create_flight_instances()
+                                        return i
 
     def add_flight_instance(self, dict):
         flight = Flight(dict)

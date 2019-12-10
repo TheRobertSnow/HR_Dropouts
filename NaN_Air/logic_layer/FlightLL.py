@@ -11,7 +11,6 @@ class FlightLL():
 
     def createNewFlight(self, flightList):
         flightNumber = self.flightIO.getFlightNumber(flightList[1], flightList[2], flightList[3])
-        print(flightNumber)
         airplaneReg = flightList[0]
         airplane = self.flightIO.getCertainAirplane(airplaneReg)
         if type(airplane) == str:
@@ -45,12 +44,19 @@ class FlightLL():
         flight = self.flightIO.createNewFlight(flightList)
         print("\nNow there are", len(self.__flightList), "Flight objects in system\n")
         return flight
+<<<<<<< HEAD
 
     def getCertainflight(self, flightNumber):
+=======
+                
+    def getCertainflight(self, flightNumber, flightDate):
+>>>>>>> daniel_cool
         for instance in self.__flightList:
             flightNumbers = instance.flightNumber
-            if flightNumbers.lower() == flightNumber.lower():
-                return instance
+            departureTime = datetime.strptime(instance.departureTime, '%Y-%m-%d %H:%M:%S')
+            if departureTime.date() == flightDate.date():
+                if flightNumbers.lower() == flightNumber.lower():
+                    return instance
         return "Flight not found!"
 
     def getAllFlights(self):

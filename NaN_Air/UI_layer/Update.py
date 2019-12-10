@@ -227,7 +227,7 @@ class Update:
             Update.updateVoyage(self, voyageID)
         Update.updateVoyage(self, voyageID)
 
-    def updateFlights(self, flightNumber):
+    def updateFlights(self, flightNumber, flightDay):
         print("""5. Update Flights 
 --------------------------------------------
   1. Update Flight Status
@@ -238,24 +238,25 @@ class Update:
             print("""1. Update Flight Status
     Select Flight Status
 --------------------------------------------
-  1. Loading 
-  2. In-Air
-  3. Landed
-  4. Cancelled
+  1. On schedule
+  2. Loading 
+  3. In-Air
+  4. Landed
+  5. Cancelled
 --------------------------------------------""")
             updateflightstatusMenuInput = input("Input choice (q to Quit, b for Back, m for Main Menu): ")
-            options = ["Loading", "In-Air", "Landed", "Cancelled"]
-            if updateflightstatusMenuInput == "1" or "2" or "3" or "4":
-                flight = UIAPI.UIAPI.updateFlightStatus(self, [flightNumber, "Flight status", options[int(updateflightstatusMenuInput)-1]])
+            options = ["On schedule", "Loading", "In-Air", "Landed", "Cancelled"]
+            if updateflightstatusMenuInput == "1" or "2" or "3" or "4" or "5":
+                flight = UIAPI.UIAPI.updateFlightStatus(self, [flightNumber, flightDay, "Flight status", options[int(updateflightstatusMenuInput)-1]])
                 print(flight)
-                self.updateFlights(flightNumber)
+                Update.updateFlights(self, flightNumber, flightDay)
             elif updateflightstatusMenuInput == "b":
-                Update.updateFlights(self, flightNumber)
+                Update.updateFlights(self, flightNumber, flightDay)
             elif updateflightstatusMenuInput == "q":
                 print("exiting program!")
             else:
                 print("WRONG INPUT, TRY AGAIN")
-                Update.updateFlights(self, flightNumber)
+                Update.updateFlights(self, flightNumber, flightDay)
 
         elif updateflightMenuInput == "2":
             print("""2. Update Departure time
@@ -265,7 +266,7 @@ class Update:
             departureDate = input("  - Updated departure date(f.x. 24/12/2019): ")
             day, month, year = map(int, departureDate.split('/'))
             departureDateTime = datetime.datetime(year, month, day, hour, minute, 00)
-            departureTimeList = [flightNumber, "Departure time", departureDateTime]
+            departureTimeList = [flightNumber, flightDay, "Departure time", departureDateTime]
             flight = UIAPI.UIAPI.updateFlightDepartureTime(self, departureTimeList)
             print(flight)
         elif updateflightMenuInput == "b":
@@ -317,9 +318,9 @@ class Update:
                 updateMenuInput = Update.updateMenu(self)
 
         elif updateMenuInput == "5":
-            flightNumb = Update.confirmFlightID(self)
-            if flightNumb:
-                Update.updateFlights(self, flightNumb)
+            flightNum, flightDay = Update.confirmFlightNumOnDay(self)
+            if flightNum:
+                Update.updateFlights(self, flightNum, flightDay)
             else:
                 updateMenuInput = Update.updateMenu(self)
 
@@ -378,16 +379,19 @@ class Update:
     def confirmVoyageID(self):  # þarf að útfæra VoyageLL
         print("not yet ready, this is located in Update.py line ~410, ConfirmVoyageID method")
 
-    def confirmFlightID(self):
-        def validate(flightID):
-            return UIAPI.UIAPI.viewCertainFlight(self, flightID)
+    def confirmFlightNumOnDay(self):
+        #def validate(flightNum):
+            #return UIAPI.UIAPI.viewCertainFlight(self, flightNum)
 
-        flightID = input("Input the the number of the flight you wish to change (b to back): ")
-        if flightID.lower() == "b":
+        flightNum = input("Input the the number of the flight you wish to change (b to back): ")
+        flightDay = input("Input the day of the flight you want to update(f.x. 31/12/2019): ")
+        day, month, year = map(int, flightDay.split('/'))
+        flightDate = datetime.datetime(year, month, day)
+        if flightNum.lower() == "b":
             return False
-        result = validate(flightID)
-        print(result)
-        if result == "Flight not found!":
-            Update.confirmFlightID(self)
-        else:
-            return flightID
+        #result = validate(flightNum)
+        #print(result)
+        #if result == "Flight not found!":
+            #Update.confirmFlightID(self)
+        #else:
+        return flightNum, flightDate
