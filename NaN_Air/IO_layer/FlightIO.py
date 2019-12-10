@@ -1,8 +1,8 @@
 import csv
-from datetime import datetime
+# import datetime
 FILENAME = 'DataFiles/flight.csv'
-from datetime import datetime  
-from datetime import timedelta  
+from datetime import datetime
+from datetime import timedelta
 
 class FlightIO():
 
@@ -48,16 +48,21 @@ class FlightIO():
         flight number to return"""
         flightsOnDate = []# List of flights to the same destination on the same date
         flightsOnDateFrom = []# List of flights from the same destination on the same date
-        departureDate = datetime.date(departureTime)
+        departureDate = departureTime.date()
         numOfFlight = 0 # The last digit in the flight number
         flightNumber = "NA"
-        if int(destinationID) < 10:
+        if int(destinationID) < 10 and int(destinationID) > 1:
             flightNumber = flightNumber + "0" + destinationID
+        elif int(destinationID) == 1:
+            if int(originID) < 10:
+                flightNumber = flightNumber + "0" + originID
+            else:
+                flightNumber = flightNumber + originID
         else:
             flightNumber = flightNumber + destinationID
         for flight in self.flightList:
             flightDT = flight.departureTime
-            instanceDepartureDate = datetime.date(flightDT)
+            instanceDepartureDate = departureTime.date()
             # If the date of the instance matches the given date and destination
             if instanceDepartureDate == departureDate:
                 if flight.destinationID == destinationID and flight.originID == originID:
