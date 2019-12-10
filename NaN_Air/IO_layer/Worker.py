@@ -14,6 +14,9 @@ class Worker():
         self.__active = dictionary["Active"]
         self.__available = dictionary["Available"]
 
+    def updateValue(self, key, newValue):
+        self.myDictionary[key] = newValue
+
 
     def __str__(self):
         returnString = []

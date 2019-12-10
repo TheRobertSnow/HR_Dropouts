@@ -23,6 +23,14 @@ class IOAPI:
     def request_workers(self):
         return self.workerIO.get_workers()
 
+    def updateWorker(self, instance, key, newValue):
+        return self.workerIO.updateCertainWorker(instance, key, newValue)
+
+    def updatePlane(self, planeInstance, newStatus):
+        """takes in the instance of the plane and the new status and sends it back, returns the updated object"""
+        return self.airplaneIO.UpdateCertainAirplane(planeInstance, newStatus)
+
+
     #
     # Airplane
     #
