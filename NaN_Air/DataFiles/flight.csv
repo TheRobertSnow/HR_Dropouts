@@ -27,3 +27,6 @@ Flight ID,Flight number,Airplane registration number,Origin ID,Destination ID,Fl
 26,NA031,ABCDEF,1,5,On schedule,3:54,2016-12-10 10:00:00,2016-12-10 13:54:00
 27,NA031,EADASFIEF,2,1,On schedule,2:00,2012-12-12 12:30:00,2012-12-12 14:30:00
 28,NA031,te-sting,4,1,On schedule,5:00,2020-12-10 08:00:00,2020-12-10 13:00:00
+29,NA031,TF-lnq,1,4,On schedule,5:00,2005-05-05 12:30:00,2005-05-05 17:30:00
+30,NA031,TF-lnq,3,1,On schedule,0:45,2015-10-20 12:30:00,2015-10-20 13:15:00
+31,NA031,TF-lnq,3,1,On schedule,0:45,2017-12-23 05:15:00,2017-12-23 06:00:00
