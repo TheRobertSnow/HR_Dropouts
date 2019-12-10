@@ -201,20 +201,20 @@ class Update:
 --------------------------------------------""")
             flightNumber = UIAPI.UIAPI.requestFromIceFlightNumb(self, voyageID)
             departuretimeInput = input("Input new departure time with slashes in between: ")
-            updateList = [flightNumber, "Departure time"]
-            print(UIAPI.UIAPI.updateFlightDepartureTime(self, flightNumber, departuretimeInput))
+            updateList = [flightNumber, "Departure time", departuretimeInput]
+            print(UIAPI.UIAPI.updateFlightDepartureTime(self, updateList))
 
         elif updatevoyageMenuInput == "4":
             print("""4. Update Departure to Iceland
 --------------------------------------------""")
-            print("""Current departure time: 05/29/2015 11:20""")
+            flightNumber = UIAPI.UIAPI.requestToIceFlightNumb(self, voyageID)
             departuretimeInput = input("Input new departure time with slashes in between: ")
-            print("Departure time succesfully changed!\nNew Departure time: {}\n".format(departuretimeInput))
+            updateList = [flightNumber, "Departure time", departuretimeInput]
+            print(UIAPI.UIAPI.updateFlightDepartureTime(self, updateList))
 
         elif updatevoyageMenuInput == "5":
             voyageID = input("Input voyage ID of the voyage you wish to cancel: ")
-            # Route cancelled, return nauðsynlegu info
-            print("Voyage succesfully cancelled!\n")
+            print(UIAPI.UIAPI.cancelVoyage(self, voyageID))
 
         elif updatevoyageMenuInput == "b":
             Update.updateVoyage(self, voyageID)

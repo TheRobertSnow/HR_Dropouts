@@ -184,6 +184,16 @@ class UIAPI:
         # TODO
         pass
 
+    def requestToIceFlightNumb(self, voyageID):
+        """requests to be returned the flight number that departs TO iceland"""
+        # TODO
+        pass
+
+    def cancelVoyage(self, voyageID):
+        """requests to cancel a voyage with the given ID, returns the result"""
+        # TODO
+        pass
+
     #
     # flight route related
     #
@@ -215,7 +225,6 @@ class UIAPI:
     def viewCertainFlightRoute(self, flightRouteID):
         """ TODO i need to be returned the flight route instance, if it doesn't exist return a the string 'Flight route doesn't exist'"""
         pass
-
 
 
 # ++++++++++ Test Case ++++++++++
