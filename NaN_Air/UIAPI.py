@@ -94,9 +94,9 @@ class UIAPI:
         returnData = self.flightLL.createNewFlight(flightList)
         return returnData
 
-    def viewCertainFlight(self, flightNumber):
+    def viewCertainFlight(self, flightNumber, flightDate):
         """we give you a flightnumber and you need to return a error if it does not exist, otherwise you return the instance"""
-        returnData = self.flightLL.getCertainflight(flightNumber)
+        returnData = self.flightLL.getCertainflight(flightNumber, flightDate)
         return returnData
 
     def viewAllFlights(self):
