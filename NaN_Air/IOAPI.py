@@ -38,7 +38,10 @@ class IOAPI:
     def createNewAirplane(self, airplaneList):
         """takes in a list for the airplane csv file to write to. returns the result"""
         return self.airplaneIO.createNewAirplane(airplaneList)
-
+    
+    def getCertainAirplane(self, airplaneReg):
+        return self.airplaneIO.getCertainAirplane(airplaneReg)
+    
     def request_airplanes(self):
         """returns a updated list of all plane objects"""
         return self.airplaneIO.get_airplanes()
@@ -74,9 +77,8 @@ class IOAPI:
     #
     # Flight
     #
-
-    def getFlightNumber(self, destinationID, departureTime):
-        return self.flightIO.getFlightNumber(destinationID, departureTime)
+    def getFlightNumber(self, originID, destinationID, departureTime):
+        return self.flightIO.getFlightNumber(originID, destinationID, departureTime)
     
     def createNewFlight(self, flightList):
         return self.flightIO.createNewFlight(flightList)

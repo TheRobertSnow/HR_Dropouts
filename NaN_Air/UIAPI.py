@@ -147,11 +147,47 @@ class UIAPI:
     def copyPreviousVoyage(self, voyageID):
         """afrita skráningu á vinnuferð fyrir sama áfangastað og tíma yfir á marga daga sem gerast með reglulegu millibili"""
         #returnData = self.voyageLL.copyPreviousVoyage(self, voyagedID)
+        # TODO
+        pass
+
+    def requestVoyagePilots(self, voyageID):
+        """asks to be returned the instances of pilots related to the ID i send"""
+        return self.voyageLL.requestPilots(voyageID)
+
+    def addPilotVoyage(self, voyageID, pilotToAddInput):
+        """requests to add a new pilot to in the voyageID sent, return the updated Voyage instance"""
+        # TODO
+        pass
+
+    def removePilotVoyage(self, voyageID, pilotToRemoveInput):
+        """requests to remove a pilot from a Voyage, return the updated voyage instance"""
+        # TODO
+        pass
+
+    def requestVoyageCrew(self, voyageID):
+        """requests to be returned all instances of crew members on a specific voyageID"""
+        # TODO
+        pass
+
+    def addCrewVoyage(self, voyageID, crewToAddInput):
+        """requests to add a new crew member in the voyageID, returns the updated voyage instance"""
+        # TODO
+        pass
+
+    def removeCrewVoyage(self, voyageID, crewToRemoveInput):
+        """requests to remove crew member"""
+        # TODO
+        pass
+
+    def requestFromIceFlightNumb(self, voyageID):
+        """requests to be returned the flight Number that departures from Iceland"""
+        # TODO
         pass
 
     #
     # flight route related
     #
+
     def createNewFlightRoute(self, flightRouteList):
         """Takes in list with flight route ID, country, airport, flight distance, travel time, emergecy contact and emergency number and creates Flight Route """
         returnData = self.flightRouteLL.createNewFlightRoute(flightRouteList)
@@ -179,6 +215,8 @@ class UIAPI:
     def viewCertainFlightRoute(self, flightRouteID):
         """ TODO i need to be returned the flight route instance, if it doesn't exist return a the string 'Flight route doesn't exist'"""
         pass
+
+
 
 # ++++++++++ Test Case ++++++++++
 # UIAPI = UIAPI()

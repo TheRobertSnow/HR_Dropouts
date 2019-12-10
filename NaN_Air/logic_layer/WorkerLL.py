@@ -73,6 +73,14 @@ class WorkerLL():
         worker = self.IOAPI.createNewWorker(createWorkerList)
         return worker
 
+    def listUnavailableWorkersbydate(self, date, pos):
+        pass
+
+    def listAvailableWorkersbydate(self, date, pos):
+        pass
+
+    def updateWorker(self, socialSecurityNumber, key, newValue):
+        pass
 
 
 
