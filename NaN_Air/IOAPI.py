@@ -17,7 +17,8 @@ class IOAPI:
     # Worker
     #
     def createNewWorker(self, workerList):
-        return self.workerIO.createNewWorker(workerList)
+        self.workerIO.writeworkertoFile(workerList)
+        return "Worker succesfully created!"
 
     def request_workers(self):
         return self.workerIO.get_workers()

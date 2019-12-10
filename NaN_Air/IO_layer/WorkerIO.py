@@ -165,8 +165,12 @@ class WorkerIO():
             self.__workerList.append(worker)
         return self.__workerList
 
-    def createNewWorker(self, workerList):
-        pass
+    def writeworkertoFile(self, workerList):
+        newWorkerDict = WorkerIO.convert_to_dict_with_id(self, workerList)
+        self.__dictList.append(newWorkerDict)
+        WorkerIO.write_dictList_to_file(self)
+        return "Worker succesfully created!"
+
 
 
 class Worker():
