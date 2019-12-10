@@ -68,7 +68,6 @@ class WorkerLL():
         createWorkerList.append("TRUE")
         worker = self.IOAPI.createNewWorker(createWorkerList)
         return worker
-        
 
 
 
