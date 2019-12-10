@@ -11,7 +11,6 @@ class FlightLL():
     
     def createNewFlight(self, flightList):
         flightNumber = self.flightIO.getFlightNumber(flightList[1], flightList[2], flightList[3])
-        print(flightNumber)
         airplaneReg = flightList[0]
         airplane = self.flightIO.getCertainAirplane(airplaneReg)
         if type(airplane) == str:
