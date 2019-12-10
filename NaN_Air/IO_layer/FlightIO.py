@@ -186,8 +186,8 @@ class FlightIO():
         flight = self.write_flight_to_file(flightList)
         return flight  # returns the new object
 
-    def getFlightNumber(self, destinationID, departureTime):
-        pass
+    def getFlightNumber(self, originID, destinationID, departureTime):
+        return "NA031"
 
 
 class Flight:
