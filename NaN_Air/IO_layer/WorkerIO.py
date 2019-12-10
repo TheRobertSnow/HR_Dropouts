@@ -199,8 +199,8 @@ class Worker():
     def __str__(self):
         returnString = []
         for key, val in self.myDictionary.items():
-            returnString.append((key + ": " + val))
-        return "\n".join(returnString)
+            returnString.append((key + ": " + str(val)))
+        return " | ".join(returnString)
 
 # writeList = ['1107951952','Elizabeth Mcfadden','Flight Attendant','N/A','Fellsmúli 35','8998835','8998835','test@test.com','True','True']
 # updateList = ['35', 'Position', 'Homosexual']

@@ -51,12 +51,12 @@ class WorkerLL():
             positionList = "No {}'s found!.".format(position)
         return positionList
 
-    def updateWorker(self, socialSecurityNumber, key, newValue): 
-        #self.worker = IOAPI.request_workers()
+    def updateWorker(self, socialSecurityNumber, theKey, newValue):
+        print("LL worker")
         self.worker = WorkerLL.get_worker_list(self)
         for instance in self.worker:
             if instance.socialSecurityNumber == socialSecurityNumber:
-                updatedWorker = self.IOAPI.updateWorker(instance, key, newValue)
+                updatedWorker = self.IOAPI.updateWorker(instance, theKey, newValue)
                 self.worker = WorkerLL.get_worker_list(self)
                 print("Worker succesfully updated!\n")
                 return updatedWorker
@@ -74,15 +74,10 @@ class WorkerLL():
         return worker
 
     def listUnavailableWorkersbydate(self, date, pos):
-        pass
+        return "this method isnt ready in workerLL"
 
     def listAvailableWorkersbydate(self, date, pos):
-        pass
-
-    def updateWorker(self, socialSecurityNumber, key, newValue):
-        pass
-
-
+        return "this method isnt ready in workerLL"
 
 
 # +++++++++ Test Case ++++++++++

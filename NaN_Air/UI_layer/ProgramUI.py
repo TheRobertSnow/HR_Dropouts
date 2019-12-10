@@ -27,20 +27,22 @@ Input your ID to login''')
         mainMenuInput = input("Input choice(q to Quit): ")
         mainMenuInput = mainMenuInput.lower()
         if mainMenuInput == "1":
-            viewMenuOutput = View.View.viewMenu(self.object)
-            if viewMenuOutput == "b":
+            outPut = View.View.viewMenu(self.object)
+            if outPut == "b":
                 ProgramUI.mainMenu(self)
         elif mainMenuInput == "2":
-            createMenuOutput = Create.Create.createMenu(self.object)
-            if createMenuOutput == "b":
+            outPut = Create.Create.createMenu(self.object)
+            if outPut == "b":
                 ProgramUI.mainMenu(self)
         elif mainMenuInput == "3":
-            updateMenuOutput = Update.Update.updateMenu(self.object)
-            if updateMenuOutput == "b":
+            outPut = Update.Update.updateMenu(self.object)
+            if outPut == "b":
                 ProgramUI.mainMenu(self)
         elif mainMenuInput == "q":
             return mainMenuInput
         else:
             print("Wrong input, try again")
             ProgramUI.mainMenu(self)
-        return mainMenuInput
+        if outPut == "q":
+            return mainMenuInput
+        ProgramUI.mainMenu(self)

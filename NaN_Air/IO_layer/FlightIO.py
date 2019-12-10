@@ -215,7 +215,7 @@ class Flight:
         returnString = []
         for key, val in self.myDictionary.items():
             returnString.append((key + ": " + str(val)))
-        return "\n".join(returnString)
+        return " | ".join(returnString)
 
 
 # +++++++++ Test Case ++++++++++++

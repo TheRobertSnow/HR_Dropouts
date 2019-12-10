@@ -63,9 +63,9 @@ class UIAPI:
         returnstring = "\n"
         return returnstring
 
-    def updateWorker(self, socialSecurityNumber, key, newValue):
+    def updateWorker(self, socialSecurityNumber, akey, newValue):
         """we give you a ssn, the key we want to change and the new value of that key, give us back the worker changed"""
-        returnData = self.workerLL.updateWorker(socialSecurityNumber, key, newValue)
+        returnData = self.workerLL.updateWorker(socialSecurityNumber, akey, newValue)
         return returnData
 
     def listAvailableWorkersbydate(self, date, pos = ""):

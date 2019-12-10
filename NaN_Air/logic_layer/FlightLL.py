@@ -44,13 +44,8 @@ class FlightLL():
         flight = self.flightIO.createNewFlight(flightList)
         print("\nNow there are", len(self.__flightList), "Flight objects in system\n")
         return flight
-<<<<<<< HEAD
 
-    def getCertainflight(self, flightNumber):
-=======
-                
     def getCertainflight(self, flightNumber, flightDate):
->>>>>>> daniel_cool
         for instance in self.__flightList:
             flightNumbers = instance.flightNumber
             departureTime = datetime.strptime(instance.departureTime, '%Y-%m-%d %H:%M:%S')

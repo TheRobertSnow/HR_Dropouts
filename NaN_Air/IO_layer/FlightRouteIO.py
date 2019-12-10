@@ -170,7 +170,7 @@ class FlightRoute:
         returnString = []
         for key, val in self.myDictionary.items():
             returnString.append((key + ": " + str(val)))
-        return "\n".join(returnString)
+        return " | ".join(returnString)
 
     def __repr__(self):
         return f"< Flight route ID: {self.flightRouteID} \n>"

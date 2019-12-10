@@ -162,7 +162,7 @@ class Voyage:
     def __str__(self):
         returnString = []
         for key, val in self.myDictionary.items():
-            returnString.append((key + ": " + val))
+            returnString.append((key + ": " + str(val)))
         return " | ".join(returnString)
 
 # writeList = ['35','1107951952','Elizabeth Mcfadden','Cabincrew','Flight Attendant','N/A','Fellsmúli 35','8998835','8998835','test@test.com','True','True']
