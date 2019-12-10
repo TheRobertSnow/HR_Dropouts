@@ -17,4 +17,17 @@ class VoyageLL():
         """creates a empty voyage from 2 flights"""
         pass
 
+    def requestPilots(self, voyageID):
+        """returns pilots related to the voyage ID you send."""
+        pass
+
+    def viewallVoyagesWeek(self, week):
+        pass
+
+    def viewallVoyagesDay(self, day):
+        pass
+
+    def viewallVoyages(self):
+        pass
+
 
