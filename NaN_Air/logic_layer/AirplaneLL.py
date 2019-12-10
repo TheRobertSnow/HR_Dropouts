@@ -12,12 +12,7 @@ class AirplaneLL:
         return self.__IOAPI.request_airplanes()
 
     def getCertainAirplane(self, airplaneReg):
-        """checks all current airplanes in the csv file and returns the instance that matches
-            takes in the object instance and the reg of the object you need."""
-        for instance in self.__airplanes:
-            if instance.planeRegistration.lower() == airplaneReg.lower():
-                return instance
-        return "Airplane not found!"
+        return self.__IOAPI.getCertainAirplane(airplaneReg)
 
     def find_airplane_by_reg(self, reg):
         """Checks all current airplanes in the csv file and prints all matching instances of the reg."""
@@ -67,6 +62,6 @@ class AirplaneLL:
         for instance in self.__airplanes:
             if instance.planeRegistration == airplaneReg:
                 updatedObject = self.__IOAPI.updatePlane(instance, newStatus)
-                # herna þarf að replace'a objectið i __airplanes...
+                self.__airplanes = AirplaneLL.get_airplane_list(self)  # update our list of plane objects
                 return updatedObject
         return "Plane register not found. could not update"

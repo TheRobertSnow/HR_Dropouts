@@ -19,7 +19,7 @@ class Create():
         hour, minute = map(int, departureTime.split(':'))
         departureDate = input("  - Departure date from {}(f.x. 24/12/2019): ".format(origin))
         day, month, year = map(int, departureDate.split('/'))
-        departureDateTime = datetime.datetime(year,month, day, hour, minute, 00)
+        departureDateTime = datetime.datetime(year, month, day, hour, minute, 00)
         flightList.append(departureDateTime)
         return flightList
 
@@ -166,6 +166,8 @@ Please input the following information:''')
             createWorkerList.append(cellphone)
             email = input("  - Email: ")
             createWorkerList.append(email)
+            #createWorkerList.append("TRUE")
+            #createWorkerList.append("TRUE")
             result = UIAPI.UIAPI.createNewWorker(self, createWorkerList)
             print(result)
             # Prints out info on the created worker

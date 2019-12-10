@@ -94,9 +94,9 @@ class UIAPI:
         returnData = self.flightLL.createNewFlight(flightList)
         return returnData
 
-    def viewCertainFlight(self, flightNumber):
+    def viewCertainFlight(self, flightNumber, flightDate):
         """we give you a flightnumber and you need to return a error if it does not exist, otherwise you return the instance"""
-        returnData = self.flightLL.getCertainflight(flightNumber)
+        returnData = self.flightLL.getCertainflight(flightNumber, flightDate)
         return returnData
 
     def viewAllFlights(self):
@@ -147,11 +147,57 @@ class UIAPI:
     def copyPreviousVoyage(self, voyageID):
         """afrita skráningu á vinnuferð fyrir sama áfangastað og tíma yfir á marga daga sem gerast með reglulegu millibili"""
         #returnData = self.voyageLL.copyPreviousVoyage(self, voyagedID)
+        # TODO
+        pass
+
+    def requestVoyagePilots(self, voyageID):
+        """asks to be returned the instances of pilots related to the ID i send"""
+        return self.voyageLL.requestPilots(voyageID)
+
+    def addPilotVoyage(self, voyageID, pilotToAddInput):
+        """requests to add a new pilot to in the voyageID sent, return the updated Voyage instance"""
+        # TODO
+        pass
+
+    def removePilotVoyage(self, voyageID, pilotToRemoveInput):
+        """requests to remove a pilot from a Voyage, return the updated voyage instance"""
+        # TODO
+        pass
+
+    def requestVoyageCrew(self, voyageID):
+        """requests to be returned all instances of crew members on a specific voyageID"""
+        # TODO
+        pass
+
+    def addCrewVoyage(self, voyageID, crewToAddInput):
+        """requests to add a new crew member in the voyageID, returns the updated voyage instance"""
+        # TODO
+        pass
+
+    def removeCrewVoyage(self, voyageID, crewToRemoveInput):
+        """requests to remove crew member"""
+        # TODO
+        pass
+
+    def requestFromIceFlightNumb(self, voyageID):
+        """requests to be returned the flight Number that departures from Iceland"""
+        # TODO
+        pass
+
+    def requestToIceFlightNumb(self, voyageID):
+        """requests to be returned the flight number that departs TO iceland"""
+        # TODO
+        pass
+
+    def cancelVoyage(self, voyageID):
+        """requests to cancel a voyage with the given ID, returns the result"""
+        # TODO
         pass
 
     #
     # flight route related
     #
+
     def createNewFlightRoute(self, flightRouteList):
         """Takes in list with flight route ID, country, airport, flight distance, travel time, emergecy contact and emergency number and creates Flight Route """
         returnData = self.flightRouteLL.createNewFlightRoute(flightRouteList)
@@ -176,6 +222,9 @@ class UIAPI:
         """Listar öll destinations, viljum fá lista eða dict með "Country: Airport", ef það meikar sens"""
         pass
 
+    def viewCertainFlightRoute(self, flightRouteID):
+        """ TODO i need to be returned the flight route instance, if it doesn't exist return a the string 'Flight route doesn't exist'"""
+        pass
 
 
 # ++++++++++ Test Case ++++++++++

@@ -1,7 +1,8 @@
 import csv
+# import datetime
 FILENAME = 'DataFiles/flight.csv'
-from datetime import datetime  
-from datetime import timedelta  
+from datetime import datetime
+from datetime import timedelta
 
 class FlightIO():
 
@@ -41,6 +42,52 @@ class FlightIO():
             [newList.append(i) for i in aList]
             csvWriter.writerow(newList)
         return orderedDict
+
+    def get_flight_number(self, originID, destinationID, departureTime):
+        """Method takes in destinationID and departureTime and generates a
+        flight number to return"""
+        flightsOnDate = []# List of flights to the same destination on the same date
+        flightsOnDateFrom = []# List of flights from the same destination on the same date
+        departureDate = departureTime.date()
+        numOfFlight = 0 # The last digit in the flight number
+        flightNumber = "NA"
+        if int(destinationID) < 10 and int(destinationID) > 1:
+            flightNumber = flightNumber + "0" + destinationID
+        elif int(destinationID) == 1:
+            if int(originID) < 10:
+                flightNumber = flightNumber + "0" + originID
+            else:
+                flightNumber = flightNumber + originID
+        else:
+            flightNumber = flightNumber + destinationID
+        for flight in self.flightList:
+            flightDT = flight.departureTime
+            instanceDepartureDate = departureTime.date()
+            # If the date of the instance matches the given date and destination
+            if instanceDepartureDate == departureDate:
+                if flight.destinationID == destinationID and flight.originID == originID:
+                    flightsOnDate.append(flight)
+        if destinationID != "1":    # If the Flight is not going back to iceland
+            if len(flightsOnDate) == 0:   # If there are no flights for the day
+                flightNumber = flightNumber + str(numOfFlight)
+                return flightNumber
+            else:
+                for f in flightsOnDate:
+                    numOfFlight += 2
+                flightNumber = flightNumber + str(numOfFlight)
+                return flightNumber
+        elif destinationID == "1":  # If the flight is going back to iceland
+            numOfFlight += 1
+            if len(flightsOnDate) == 0:
+                flightNumber = flightNumber + str(numOfFlight)
+                return flightNumber
+            else:
+                for f in flightsOnDate:
+                    numOfFlight += 2
+                flightNumber = flightNumber + str(numOfFlight)
+                return flightNumber
+
+
 
     def write_dictList_to_file(self):
         """Method overwrites file with data from dictList"""
@@ -105,7 +152,7 @@ class FlightIO():
     def update_data_in_file(self, aList):
         """Method takes in list of data, updates the dictionary list
         and writes the changes to file"""
-        col, val = aList[1], aList[2] # The column of the desired value and the value
+        col, val = aList[2], aList[3] # The column of the desired value and the value
         for index, dictionary in enumerate(self.__dictList):
             for key, value in dictionary.items():
                 if key == 'Flight number':
@@ -113,18 +160,20 @@ class FlightIO():
                         if col != "Flight ID" or col != "Flight number":
                             for i in self.flightList:
                                 if i.flightNumber == aList[0]:
-                                    if col == "Flight status":
-                                        i.flightStatus = val
-                                    elif col == "Departure time":
-                                        i.departureTime = val
-                                        travelHours, travelMinutes = map(int, i.travelTime.split(':'))
-                                        i.arrivalTime = val + timedelta(hours = travelHours, minutes = travelMinutes)
-                                        self.__dictList[index]["Arrival time"] = val + timedelta(hours = travelHours, minutes = travelMinutes)
-                                    self.__dictList[index][col] = val
-                                    self.write_dictList_to_file()
-                                    self.get_flights_from_file()
-                                    self.create_flight_instances()
-                                    return i
+                                    departureTime = datetime.strptime(i.departureTime, '%Y-%m-%d %H:%M:%S')
+                                    if departureTime.date() == aList[1].date():
+                                        if col == "Flight status":
+                                            i.flightStatus = val
+                                        elif col == "Departure time":
+                                            i.departureTime = val
+                                            travelHours, travelMinutes = map(int, i.travelTime.split(':'))
+                                            i.arrivalTime = val + timedelta(hours = travelHours, minutes = travelMinutes)
+                                            self.__dictList[index]["Arrival time"] = val + timedelta(hours = travelHours, minutes = travelMinutes)
+                                        self.__dictList[index][col] = val
+                                        self.write_dictList_to_file()
+                                        self.get_flights_from_file()
+                                        self.create_flight_instances()
+                                        return i
 
     def add_flight_instance(self, dict):
         flight = Flight(dict)
@@ -137,15 +186,18 @@ class FlightIO():
         for dictionary in self.__dictList:
             flight = Flight(dictionary)
             self.flightList.append(flight)
-            
+
     def createNewFlight(self, flightList):
         """creates a new airplane instance and writes the airplane to the csv, then it returns the new
             airplane object"""
         flight = self.write_flight_to_file(flightList)
         return flight  # returns the new object
 
+    def getFlightNumber(self, originID, destinationID, departureTime):
+        return "NA031"
 
-class Flight():
+
+class Flight:
     def __init__(self, dictionary):
         self.myDictionary = dictionary
         self.flightID = dictionary['Flight ID']

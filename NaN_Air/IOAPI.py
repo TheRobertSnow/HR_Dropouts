@@ -7,20 +7,29 @@ class IOAPI:
         self.flightIO = FlightIO.FlightIO()
         self.workerIO = WorkerIO.WorkerIO()
         self.flightRouteIO = FlightRouteIO.FlightRouteIO()
-        """self.voyageIO = VoyageIO.VoyageIO(self.airplaneIO.airplaneList
-                                        , self.flightIO.flightList
-                                        , self.workerIO.workerList
-                                        , self.flightRouteIO.flightRouteList)"""
+        self.voyageIO = VoyageIO.VoyageIO(self.airplaneIO.airplaneList,
+                                          self.flightIO.flightList,
+                                          self.workerIO.workerList,
+                                          self.flightRouteIO.flightRouteList)
         # self.send_instance_to_voyage()
 
     #
     # Worker
     #
     def createNewWorker(self, workerList):
-        return self.workerIO.createNewWorker(workerList)
+        self.workerIO.writeworkertoFile(workerList)
+        return "Worker succesfully created!"
 
     def request_workers(self):
         return self.workerIO.get_workers()
+
+    def updateWorker(self, instance, key, newValue):
+        return self.workerIO.updateCertainWorker(instance, key, newValue)
+
+    def updatePlane(self, planeInstance, newStatus):
+        """takes in the instance of the plane and the new status and sends it back, returns the updated object"""
+        return self.airplaneIO.UpdateCertainAirplane(planeInstance, newStatus)
+
 
     #
     # Airplane
@@ -29,6 +38,9 @@ class IOAPI:
     def createNewAirplane(self, airplaneList):
         """takes in a list for the airplane csv file to write to. returns the result"""
         return self.airplaneIO.createNewAirplane(airplaneList)
+
+    def getCertainAirplane(self, airplaneReg):
+        return self.airplaneIO.getCertainAirplane(airplaneReg)
 
     def request_airplanes(self):
         """returns a updated list of all plane objects"""
@@ -48,7 +60,7 @@ class IOAPI:
 
     def getAllFlightRouteInstances(self):
         return self.flightRouteIO.get_flightRoutes()
-    
+
     def updateFlightRoute(self, flightRouteList):
         return self.flightRouteIO.update_data_in_file(flightRouteList)
 
@@ -66,24 +78,25 @@ class IOAPI:
     # Flight
     #
 
-    def getFlightNumber(self, destinationID, departureTime):
-        return self.flightIO.getFlightNumber(destinationID, departureTime)
-    
+    def getFlightNumber(self, originID, destinationID, departureTime):
+        """Send request to FlightIO to get flight number"""
+        return self.flightIO.get_flight_number(originID, destinationID, departureTime)
+
     def createNewFlight(self, flightList):
         return self.flightIO.createNewFlight(flightList)
 
-    def getHigestFlightID(self):
+    def getHighestFlightID(self):
         return self.workerIO.getNextID()
 
     def getTravelTime(self, flightRouteID):
         return self.flightRouteIO.getFlightRouteTravelTime(flightRouteID)
-    
+
     def updateFlightStatus(self, flightlist):
         return self.flightIO.update_data_in_file(flightlist)
-    
+
     def updateFlightDepartureTime(self, newDepartureTime):
         return self.flightIO.update_data_in_file(newDepartureTime)
-    
+
     def getAllFlightInstances(self):
         return self.flightIO.get_flights()
 

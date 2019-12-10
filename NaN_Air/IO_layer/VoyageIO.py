@@ -2,7 +2,7 @@ import csv
 FILENAME = 'DataFiles/voyage.csv'
 
 
-class VoyageIO():
+class VoyageIO:
 
     def __init__(self, airplaneList, flightList, workerList, flightRouteList):
         self.dictList = []
@@ -140,8 +140,11 @@ class VoyageIO():
             voyage = Voyage(dictionary)
             self.__voyageList.append(voyage)
 
+    def createNewVoyage(self, voyageList):
+        return "were working on this method"
 
-class Voyage():
+
+class Voyage:
     def __init__(self, dictionary):
         self.myDictionary = dictionary
         self.voyageID = dictionary['Voyage ID']
@@ -160,7 +163,7 @@ class Voyage():
         returnString = []
         for key, val in self.myDictionary.items():
             returnString.append((key + ": " + val))
-        return "\n".join(returnString)
+        return " | ".join(returnString)
 
 # writeList = ['35','1107951952','Elizabeth Mcfadden','Cabincrew','Flight Attendant','N/A','Fellsmúli 35','8998835','8998835','test@test.com','True','True']
 # updateList = ['35', 'Position', 'Looser']
