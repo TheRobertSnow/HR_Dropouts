@@ -226,9 +226,7 @@ class UIAPI:
         """Listar öll destinations, viljum fá lista eða dict með "Country: Airport", ef það meikar sens"""
         pass
 
-    def viewCertainFlightRoute(self, flightRouteID):
-        """ TODO i need to be returned the flight route instance, if it doesn't exist return a the string 'Flight route doesn't exist'"""
-        pass
+    
 
 
 # ++++++++++ Test Case ++++++++++
