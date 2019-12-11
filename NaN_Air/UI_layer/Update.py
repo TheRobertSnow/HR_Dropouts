@@ -312,7 +312,7 @@ class Update:
             instance = ""
             while type(instance) == str:
                 flightrouteID = input("Input the ID of the Flight Route you wish to change properties: ")
-                instance = UIAPI.UIAPI.viewCertainFlightRoute(self, flightrouteID)
+                instance = UIAPI.UIAPI.viewFlightRoute(self, flightrouteID)
                 print(instance)
             outPut = Update.updatecurrentflightRoutes(self, flightrouteID)
 
