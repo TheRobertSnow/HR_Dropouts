@@ -121,6 +121,7 @@ class View():
      specific date
   5. View all voyages of a pilot in a given 
      week
+  6. View all Pilots by Plane Licence
 --------------------------------------------''')
         viewPilotsInput = input("Input choice (q to Quit, b for Back): ")
         viewPilotsInput = viewPilotsInput.lower()
@@ -149,6 +150,10 @@ class View():
             pilotWeeklyVoyages = UIAPI.UIAPI.viewallVoyagesInWeek(self, pilotSSN, pilotWeek, pos="Pilot")
             printObjects(pilotWeeklyVoyages)
             return viewPilotsInput
+        elif viewPilotsInput == "6":
+            pilotLicence = input("Input Plane Licence: ")
+            planePilots = UIAPI.UIAPI.viewWorkersByPlaneLicence(self,pilotLicence)
+            printObjects(planePilots)
         elif viewPilotsInput == "b":
             return viewPilotsInput
         elif viewPilotsInput == "q":

@@ -51,6 +51,18 @@ class WorkerLL():
             positionList = "No {}'s found!.".format(position)
         return positionList
 
+    def findWorkerByPlaneLicence(self, plane_Licence):
+        workerList = []
+        worker = self.get_worker_list()
+        for instance in worker:
+            if instance.planeLicence == plane_Licence:
+                workerList.append(instance)
+        if len(workerList) == 0:
+            print("No pilot has licence for {}".format(plane_Licence))
+        return workerList
+
+
+
     def updateWorker(self, socialSecurityNumber, theKey, newValue):
         print("LL worker")
         self.worker = WorkerLL.get_worker_list(self)

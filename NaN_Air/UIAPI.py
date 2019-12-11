@@ -54,6 +54,10 @@ class UIAPI:
         returnData = self.workerLL.findWorkerByPOS(positionWeWantToPrint)
         return returnData
 
+    def viewWorkersByPlaneLicence(self, planeLicence):
+        returnData = self.workerLL.findWorkerByPlaneLicence(planeLicence)
+        return returnData
+
 
     def viewAllWorkers(self):
         """give us all worker instances, would be nice if we can get 5 at a time or something instead of all at once"""
