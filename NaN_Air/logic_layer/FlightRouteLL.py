@@ -25,6 +25,15 @@ class FlightRouteLL():
     def createNewFlightRoute(self, flightRouteList):
         "List of strings and ints, information on flight route"
         "flight route list = str fx (Flight route succesfully created)"
+        try:
+            flightRouteList[2] = int(flightRouteList[2])
+        except ValueError:
+            return "Error: Flight distance must be a whole number! "
+        
         flightRoute = self.ioAPI.createNewFlightRoute(flightRouteList)
         print("\nNow there are", len(self.__flightRouteList), "Flight Route objects in system\n")
         return flightRoute
+
+    def viewFlightRoute(self, voyageID):
+        pass
+

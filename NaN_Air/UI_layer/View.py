@@ -209,8 +209,7 @@ class View():
         elif viewAttendantsInput == "5":
             attendantSSN = input("Input SSN with no spaces in between: ")
             attendantWeek = input("Input week: ")
-            attendantWeeklyVoyages = UIAPI.UIAPI.viewallVoyagesInWeek(self, attendantSSN, attendantWeek,
-                                                                      pos="Attendant")
+            attendantWeeklyVoyages = UIAPI.UIAPI.viewallVoyagesInWeek(self, attendantSSN, attendantWeek, pos="Attendant")
             printObjects(attendantWeeklyVoyages)
             return viewAttendantsInput
         elif viewAttendantsInput == "b":
@@ -257,8 +256,8 @@ class View():
         viewAirplaneInput = viewAirplaneInput.lower()
         if viewAirplaneInput == "1":
             AirplaneReg = input("Please input airplane registration: ")
-            Airplane = UIAPI.UIAPI.viewCertainAirplane(self,
-                                                       AirplaneReg)  # Ekki alveg búið fæ ekki self.__planereg = dictionary["Plane registration"] til að virka í Airplane.py
+            # Ekki alveg búið fæ ekki self.__planereg = dictionary["Plane registration"] til að virka í Airplane.py
+            Airplane = UIAPI.UIAPI.viewCertainAirplane(self, AirplaneReg)  
             print(Airplane)
             viewAirplaneInput = View.viewAirplane(self)
 

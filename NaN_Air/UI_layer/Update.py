@@ -313,7 +313,10 @@ class Update:
 
         elif updateMenuInput == "2":
             instance = ""
-            print(UIAPI.UIAPI.viewAllAirplanes(self))
+            allAirplanes = UIAPI.UIAPI.viewAllAirplanes(self)
+            for i in allAirplanes:
+                print(i, "\n")
+
             while type(instance) == str:
                 regInput = input("Input the Register of the Plane you wish to change properties: ")
                 instance = UIAPI.UIAPI.viewCertainAirplane(self, regInput)
@@ -326,7 +329,7 @@ class Update:
 
         elif updateMenuInput == "3":
             instance = ""
-            routes = (UIAPI.UIAPI.viewAllFlightRoutes(self))
+            routes = UIAPI.UIAPI.viewAllFlightRoutes(self)
             for route in routes:
                 print(route, "\n")
             while type(instance) == str:
@@ -337,9 +340,9 @@ class Update:
 
         elif updateMenuInput == "4":
             instance = ""
-            voyages = UIAPI.UIAPI.viewallVoyages(self)
-            for voyage in voyages:
-                print(voyage, "\n")
+            allVoyages = UIAPI.UIAPI.viewallVoyages(self)
+            for i in allVoyages:
+                print(i)
             while type(instance) == str:
                 voyageID = input("Input the ID of the Voyage you wish to change properties: ")
                 instance = UIAPI.UIAPI.viewVoyage(self, voyageID)
@@ -351,7 +354,10 @@ class Update:
                 return output
 
         elif updateMenuInput == "5":
-            print(UIAPI.UIAPI.viewAllFlights(self))
+            Test = (UIAPI.UIAPI.viewAllFlights(self))
+            for i in Test:
+                print(i)
+                print("")
             flightNum, flightDay = Update.confirmFlightNumOnDay(self)
             if flightNum:
                 output = Update.updateFlights(self, flightNum, flightDay)
