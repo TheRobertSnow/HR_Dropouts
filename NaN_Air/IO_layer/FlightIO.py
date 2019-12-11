@@ -36,18 +36,18 @@ class FlightIO():
             csvWriter = csv.writer(csvFile)
             orderedDict = self.convert_to_dict_with_id(aList)
             self.__dictList.append(orderedDict)
-            self.add_flight_instance(orderedDict)
+            flightInstance = self.add_flight_instance(orderedDict)
             newList = []
             newList.append(orderedDict['Flight ID'])
             [newList.append(i) for i in aList]
             csvWriter.writerow(newList)
-        return orderedDict
+        return flightInstance
 
     def get_flight_number(self, originID, destinationID, departureTime):
         """Method takes in destinationID and departureTime and generates a
         flight number to return"""
         flightsOnDate = []# List of flights to the same destination on the same date
-        flightsOnDateFrom = []# List of flights from the same destination on the same date
+        #flightsOnDateFrom = []# List of flights from the same destination on the same date
         departureDate = departureTime.date()
         numOfFlight = 0 # The last digit in the flight number
         flightNumber = "NA"
@@ -61,7 +61,7 @@ class FlightIO():
         else:
             flightNumber = flightNumber + destinationID
         for flight in self.flightList:
-            flightDT = flight.departureTime
+            #flightDT = flight.departureTime
             instanceDepartureDate = departureTime.date()
             # If the date of the instance matches the given date and destination
             if instanceDepartureDate == departureDate:
@@ -178,6 +178,7 @@ class FlightIO():
     def add_flight_instance(self, dict):
         flight = Flight(dict)
         self.flightList.append(flight)
+        return flight
 
     def create_flight_instances(self):
         """Methood runs through list of dictionaries,
@@ -186,15 +187,6 @@ class FlightIO():
         for dictionary in self.__dictList:
             flight = Flight(dictionary)
             self.flightList.append(flight)
-
-    def createNewFlight(self, flightList):
-        """creates a new airplane instance and writes the airplane to the csv, then it returns the new
-            airplane object"""
-        flight = self.write_flight_to_file(flightList)
-        return flight  # returns the new object
-
-    def getFlightNumber(self, originID, destinationID, departureTime):
-        return "NA031"
 
 
 class Flight:

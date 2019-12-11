@@ -83,7 +83,7 @@ class IOAPI:
         return self.flightIO.get_flight_number(originID, destinationID, departureTime)
 
     def createNewFlight(self, flightList):
-        return self.flightIO.createNewFlight(flightList)
+        return self.flightIO.write_flight_to_file(flightList)
 
     def getHighestFlightID(self):
         return self.workerIO.getNextID()
