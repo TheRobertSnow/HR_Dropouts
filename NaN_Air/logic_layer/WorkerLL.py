@@ -119,11 +119,13 @@ class WorkerLL():
                             toAddList.append(worker)
                             toAddList.append("Worker is going to " + str(destinationName) + " on " + str(date) + "!")
                             unavailableList.append(toAddList) #Bæta við destinationName
-                        elif voyage.socialSecurityNumber in voyage.getflightAttendants():
+                        elif worker.socialSecurityNumber in voyage.getflightAttendants():
                             toAddList = []
                             toAddList.append(worker)
                             toAddList.append("Worker is going to " + str(destinationName) + " on " + str(date) + "!")
                             unavailableList.append(toAddList) #Bæta við destinationName
+        if len(unavailableList) == 0:
+            unavailableList = "There are no workers working on that date."
         return unavailableList
 
     def listAvailableWorkersbydate(self, pos, unavailableList):  
