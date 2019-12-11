@@ -1,2 +1,5 @@
 Voyage ID,Flight out ID,Flight back ID,Main pilot,Assisting pilot,Main flight attendant,Flight attendants,Flight route ID,Departure from IS,Departure to IS
 1,4,5,232414124,312312312,2131231231,['2312312323'],2,2019-12-12 13:50:00,2019-12-12 16:30:00
+2,2,3,,,,,1,2020-01-22 11:15:00,2020-01-22 08:00:00
+3,12,13,,,,
+4,14,15,,,,,3,1999-11-23 15:59:00,1999-11-23 18:00:00

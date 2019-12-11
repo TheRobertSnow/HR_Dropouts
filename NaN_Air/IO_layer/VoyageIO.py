@@ -37,13 +37,13 @@ class VoyageIO:
         voyage = None
         with open(FILENAME, 'a', encoding="utf8", newline='') as csvFile:
             csvWriter = csv.writer(csvFile)
-            updatedList = self.fillList(aList)
-            orderedDict = self.convert_to_dict_with_id(updatedList)
+            aList = self.fillList(aList)
+            orderedDict = self.convert_to_dict_with_id(aList)
             self.__dictList.append(orderedDict)
             voyage = self.create_voyage_instance(orderedDict)
             newList = []
             newList.append(orderedDict['Voyage ID'])
-            [newList.append(i) for i in updatedList]
+            [newList.append(i) for i in aList]
             csvWriter.writerow(newList)
         return voyage
 
@@ -78,19 +78,16 @@ class VoyageIO:
                         highestID = int(value)
         return highestID + 1
 
-    def fillList(self, updatedList):
-        returnList = []
-        for i in updatedList:
-            returnList.append(i)
+    def fillList(self, aList):
+        testing = FlightIO.FlightIO()
+        self.flightList = FlightIO.FlightIO.get_flights(testing)
         for flight in self.flightList:
-            print(flight)
-            if int(flight.flightID) == int(returnList[0]):
-                returnList.append(flight.destinationID)
-                returnList.append(flight.departureTime)
-            elif int(flight.flightID) == int(returnList[1]):
-                returnList.append(flight.departureTime)
-        print(returnList)
-        return returnList
+            if int(flight.flightID) == int(aList[0]):
+                aList.append(flight.destinationID)
+                aList.append(flight.departureTime)
+            elif int(flight.flightID) == int(aList[1]):
+                aList.append(flight.departureTime)
+        return aList
 
     def convert_to_dict_with_id(self, aList):
         """Function takes in a list of arguments,
@@ -185,7 +182,6 @@ class Voyage:
         self.flightRouteID = dictionary["Flight route ID"]
         self.departureFromIS = dictionary["Departure from IS"]
         self.departureToIS = dictionary["Departure to IS"]
-
 
     def __str__(self):
         returnString = []
