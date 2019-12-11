@@ -72,16 +72,8 @@ class UIAPI:
         returnData = self.workerLL.updateWorker(socialSecurityNumber, akey, newValue)
         return returnData
 
-    def listAvailableWorkersbydate(self, date, pos = ""):
-        """We give you a date and you return to us all workers who are not active and available on that date.
-        Can also take in position to filter staff type we want to return"""
-        returnData = self.workerLL.listAvailableWorkersbydate(date, pos)
-        return returnData
-
-    def listUnavailableWorkersbydate(self, date, pos = ""):
-        """We give you a date and you return to us all workers who are active on that date.
-        Can also take in position to filter staff type we want to return"""
-        returnData = self.workerLL.listUnavailableWorkersbydate(date, pos)
+    def listWorkersbydate(self, date, pos, status):
+        returnData = self.workerLL.listWorkersbydate(date, pos, status)
         return returnData
 
     def viewallVoyagesInWeek(self, week, pos):

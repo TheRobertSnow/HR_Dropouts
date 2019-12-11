@@ -136,22 +136,14 @@ class View():
             return viewPilotsInput
         elif viewPilotsInput == "3":
             pilotDate = input("Input year-month-day, f.x. 2020-01-22: ")
-            unavailablePilots = UIAPI.UIAPI.listUnavailableWorkersbydate(self, pilotDate, "Pilot")
-            availablePilots = UIAPI.UIAPI.listAvailableWorkersbydate(self, "Pilot", unavailablePilots)
-            printObjects(availablePilots)
+            #unavailablePilots = UIAPI.UIAPI.listUnavailableWorkersbydate(self, pilotDate, "Pilot")
+            availablePilots = UIAPI.UIAPI.listWorkersbydate(self, pilotDate, "Pilot", "Available")
+            print(availablePilots)
             return viewPilotsInput
         elif viewPilotsInput == "4":
             pilotDate = input("Input year-month-day, f.x. 2020-01-22: ")
-            unavailablePilots = UIAPI.UIAPI.listUnavailableWorkersbydate(self, pilotDate, "Pilot")
-            print("")
-            for lists in unavailablePilots:
-                print(lists)
-                #print(lists[0])
-                #print(lists[1]+ "\n")
-            #printObjects(unavailablePilots)
-            #pilotDate = input("Input date: ")
-            #unavailableAttendants = UIAPI.UIAPI.listUnavailableWorkersbydate(self, pilotDate, "Pilot")
-            #printObjects(unavailableAttendants)
+            unavailablePilots = UIAPI.UIAPI.listWorkersbydate(self, pilotDate, "Pilot", "Unavailable")
+            print(unavailablePilots)
             return viewPilotsInput
         elif viewPilotsInput == "5":
             pilotSSN = input("Input SSN with no spaces in between: ")
@@ -196,16 +188,13 @@ class View():
             return viewAttendantsInput
         elif viewAttendantsInput == "3":
             attendantDate = input("Input year-month-day, f.x. 2020-01-22: ")
-            availableAttendants = UIAPI.UIAPI.listAvailableWorkersbydate(self, attendantDate, "Attendant")
-            printObjects(availableAttendants)
+            availableAttendants = UIAPI.UIAPI.listWorkersbydate(self, attendantDate, "Attendant", "Available")
+            print(availableAttendants)
             return viewAttendantsInput
         elif viewAttendantsInput == "4":
             attendantDate = input("Input year-month-day, f.x. 2020-01-22: ")
-            unavailableAttendants = UIAPI.UIAPI.listUnavailableWorkersbydate(self, attendantDate, "Attendant")
-            print("")
-            for lists in unavailableAttendants:
-                print(lists[0])
-                print(lists[1]+ "\n")
+            unavailableAttendants = UIAPI.UIAPI.listWorkersbydate(self, attendantDate, "Attendant", "Unavailable")
+            print(unavailableAttendants)
             return viewAttendantsInput
         elif viewAttendantsInput == "5":
             attendantSSN = input("Input SSN with no spaces in between: ")
