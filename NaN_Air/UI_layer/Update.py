@@ -333,7 +333,9 @@ class Update:
 
         elif updateMenuInput == "3":
             instance = ""
-            print((UIAPI.UIAPI.viewAllFlightRoutes(self)))
+            routes = (UIAPI.UIAPI.viewAllFlightRoutes(self))
+            for route in routes:
+                print(route, "\n")
             while type(instance) == str:
                 flightrouteID = input("Input the ID of the Flight Route you wish to change properties: ")
                 instance = UIAPI.UIAPI.viewFlightRoute(self, flightrouteID)
