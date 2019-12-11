@@ -126,7 +126,7 @@ class View():
         viewPilotsInput = input("Input choice (q to Quit, b for Back): ")
         viewPilotsInput = viewPilotsInput.lower()
         if viewPilotsInput == "1":
-            pilotSSN = input("Input SSN: ")
+            pilotSSN = input("Input SSN with no spaces in between: ")
             pilot = UIAPI.UIAPI.viewWorkerBySSn(self, pilotSSN, "Pilot")
             print(pilot)
             return viewPilotsInput
@@ -154,7 +154,7 @@ class View():
             #printObjects(unavailableAttendants)
             return viewPilotsInput
         elif viewPilotsInput == "5":
-            pilotSSN = input("Input SSN: ")
+            pilotSSN = input("Input SSN with no spaces in between: ")
             pilotWeek = input("Input week ")
             pilotWeeklyVoyages = UIAPI.UIAPI.viewallVoyagesInWeek(self, pilotSSN, pilotWeek, pos="Pilot")
             printObjects(pilotWeeklyVoyages)
@@ -186,7 +186,7 @@ class View():
         viewAttendantsInput = input("Input choice (q to Quit, b for Back): ")
         viewAttendantsInput = viewAttendantsInput.lower()
         if viewAttendantsInput == "1":
-            attendantSSN = input("Input SSN: ")
+            attendantSSN = input("Input SSN with no spaces in between: ")
             Attendant = UIAPI.UIAPI.viewWorkerBySSn(self, attendantSSN, "Attendant")
             print(Attendant)
             return viewAttendantsInput
@@ -208,7 +208,7 @@ class View():
                 print(lists[1]+ "\n")
             return viewAttendantsInput
         elif viewAttendantsInput == "5":
-            attendantSSN = input("Input SSN: ")
+            attendantSSN = input("Input SSN with no spaces in between: ")
             attendantWeek = input("Input week: ")
             attendantWeeklyVoyages = UIAPI.UIAPI.viewallVoyagesInWeek(self, attendantSSN, attendantWeek,
                                                                       pos="Attendant")
@@ -231,7 +231,7 @@ class View():
         viewManagersInput = input("Input choice (q to Quit, b for Back): ")
         viewManagersInput = viewManagersInput.lower()
         if viewManagersInput == "1":
-            managerSSN = input("Input SSN: ")
+            managerSSN = input("Input SSN with no spaces in between: ")
             Manager = UIAPI.UIAPI.viewWorkerBySSn(self, managerSSN, "Manager")
             print(Manager)
             return viewManagersInput
@@ -244,7 +244,7 @@ class View():
         elif viewManagersInput == "q":
             return viewManagersInput
         else:
-            print("Wrong input, try again!")
+            print("Wrong input, try again!\n")
         return viewManagersInput
 
     def viewAirplane(self):
