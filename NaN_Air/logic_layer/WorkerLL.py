@@ -64,7 +64,11 @@ class WorkerLL():
 
 
     def updateWorker(self, socialSecurityNumber, theKey, newValue):
-        print("LL worker")
+        if theKey == "Cellphone" or theKey == "Phone":
+            try:
+                newValue = int(newValue)
+            except ValueError:
+                return "Error. Number can only have integers."
         self.worker = WorkerLL.get_worker_list(self)
         for instance in self.worker:
             if instance.socialSecurityNumber == socialSecurityNumber:
@@ -73,7 +77,6 @@ class WorkerLL():
                 print("Worker succesfully updated!\n")
                 return updatedWorker
         return "Worker could not be updated"
-
 
     def viewAllWorkers(self):
         self.worker = self.IOAPI.request_workers()

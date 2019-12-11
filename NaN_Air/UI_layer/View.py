@@ -285,8 +285,8 @@ class View():
         viewFlightRoutesInput = viewFlightRoutesInput.lower()
         if viewFlightRoutesInput == "1":
             flightRouteID = input("Input Flight Route ID: ")
-            flightRoute = UIAPI.UIAPI.viewFlightRoute(self, flightRouteID)
-            print(flightRoute)
+            print(UIAPI.UIAPI.viewFlightRoute(self, flightRouteID))
+
             viewFlightRoutesInput = View.viewFlightRoutes(self)
         elif viewFlightRoutesInput == "2":
             allFlightRoutes = UIAPI.UIAPI.viewAllFlightRoutes(self)
