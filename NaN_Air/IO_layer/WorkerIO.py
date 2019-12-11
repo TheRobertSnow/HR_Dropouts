@@ -155,7 +155,7 @@ class WorkerIO():
 
     def add_worker_instance(self, dict):
         newWorker = Worker(dict)
-        self.workerList.append(newWorkers)
+        self.workerList.append(newWorker)
 
     def create_worker_instances(self):
         """Methood runs through list of dictionaries,
@@ -199,7 +199,8 @@ class Worker():
     def __str__(self):
         returnString = []
         for key, val in self.myDictionary.items():
-            returnString.append((key + ": " + str(val)))
+            if key != "Active" and key != "Available": #We do not want to print active and available status
+                returnString.append((key + ": " + val))
         return "\n".join(returnString)
 
 # writeList = ['1107951952','Elizabeth Mcfadden','Flight Attendant','N/A','Fellsmúli 35','8998835','8998835','test@test.com','True','True']

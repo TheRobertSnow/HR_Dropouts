@@ -13,6 +13,7 @@ class FlightRouteLL():
         for instance in self.flightRoute:
             if flightID == instance.flightRouteID:
                 return instance
+        return "Flight route not found !"
 
     def getAllFlightRoutes(self):
         return self.__flightRouteList

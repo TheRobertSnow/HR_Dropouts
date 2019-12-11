@@ -121,6 +121,7 @@ class View():
      specific date
   5. View all voyages of a pilot in a given 
      week
+  6. View all Pilots by Plane Licence
 --------------------------------------------''')
         viewPilotsInput = input("Input choice (q to Quit, b for Back): ")
         viewPilotsInput = viewPilotsInput.lower()
@@ -134,14 +135,22 @@ class View():
             printObjects(allPilots)
             return viewPilotsInput
         elif viewPilotsInput == "3":
-            pilotDate = input("Input date: ")
-            availablePilots = UIAPI.UIAPI.listAvailableWorkersbydate(self, pilotDate, "Pilot")
+            pilotDate = input("Input year-month-day, f.x. 2020-01-22: ")
+            unavailablePilots = UIAPI.UIAPI.listUnavailableWorkersbydate(self, pilotDate, "Pilot")
+            availablePilots = UIAPI.UIAPI.listAvailableWorkersbydate(self, "Pilot", unavailablePilots)
             printObjects(availablePilots)
             return viewPilotsInput
         elif viewPilotsInput == "4":
-            pilotDate = input("Input date: ")
-            unavailableAttendants = UIAPI.UIAPI.listUnavailableWorkersbydate(self, pilotDate, "Pilot")
-            printObjects(unavailableAttendants)
+            pilotDate = input("Input year-month-day, f.x. 2020-01-22: ")
+            unavailablePilots = UIAPI.UIAPI.listUnavailableWorkersbydate(self, pilotDate, "Pilot")
+            print("")
+            for lists in unavailablePilots:
+                print(lists[0])
+                print(lists[1]+ "\n")
+            #printObjects(unavailablePilots)
+            #pilotDate = input("Input date: ")
+            #unavailableAttendants = UIAPI.UIAPI.listUnavailableWorkersbydate(self, pilotDate, "Pilot")
+            #printObjects(unavailableAttendants)
             return viewPilotsInput
         elif viewPilotsInput == "5":
             pilotSSN = input("Input SSN: ")
@@ -149,6 +158,10 @@ class View():
             pilotWeeklyVoyages = UIAPI.UIAPI.viewallVoyagesInWeek(self, pilotSSN, pilotWeek, pos="Pilot")
             printObjects(pilotWeeklyVoyages)
             return viewPilotsInput
+        elif viewPilotsInput == "6":
+            pilotLicence = input("Input Plane Licence: ")
+            planePilots = UIAPI.UIAPI.viewWorkersByPlaneLicence(self,pilotLicence)
+            printObjects(planePilots)
         elif viewPilotsInput == "b":
             return viewPilotsInput
         elif viewPilotsInput == "q":
@@ -181,14 +194,17 @@ class View():
             printObjects(allAttendants)
             return viewAttendantsInput
         elif viewAttendantsInput == "3":
-            attendantDate = input("Input date: ")
+            attendantDate = input("Input year-month-day, f.x. 2020-01-22: ")
             availableAttendants = UIAPI.UIAPI.listAvailableWorkersbydate(self, attendantDate, "Attendant")
             printObjects(availableAttendants)
             return viewAttendantsInput
         elif viewAttendantsInput == "4":
-            attendantDate = input("Input date: ")
+            attendantDate = input("Input year-month-day, f.x. 2020-01-22: ")
             unavailableAttendants = UIAPI.UIAPI.listUnavailableWorkersbydate(self, attendantDate, "Attendant")
-            printObjects(unavailableAttendants)
+            print("")
+            for lists in unavailableAttendants:
+                print(lists[0])
+                print(lists[1]+ "\n")
             return viewAttendantsInput
         elif viewAttendantsInput == "5":
             attendantSSN = input("Input SSN: ")
@@ -269,8 +285,8 @@ class View():
         viewFlightRoutesInput = viewFlightRoutesInput.lower()
         if viewFlightRoutesInput == "1":
             flightRouteID = input("Input Flight Route ID: ")
-            flightRoute = UIAPI.UIAPI.viewFlightRoute(self, flightRouteID)
-            print(flightRoute)
+            print(UIAPI.UIAPI.viewFlightRoute(self, flightRouteID))
+
             viewFlightRoutesInput = View.viewFlightRoutes(self)
         elif viewFlightRoutesInput == "2":
             allFlightRoutes = UIAPI.UIAPI.viewAllFlightRoutes(self)

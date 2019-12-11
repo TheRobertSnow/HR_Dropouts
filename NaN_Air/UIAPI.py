@@ -54,6 +54,10 @@ class UIAPI:
         returnData = self.workerLL.findWorkerByPOS(positionWeWantToPrint)
         return returnData
 
+    def viewWorkersByPlaneLicence(self, planeLicence):
+        returnData = self.workerLL.findWorkerByPlaneLicence(planeLicence)
+        return returnData
+
 
     def viewAllWorkers(self):
         """give us all worker instances, would be nice if we can get 5 at a time or something instead of all at once"""
@@ -222,9 +226,7 @@ class UIAPI:
         """Listar öll destinations, viljum fá lista eða dict með "Country: Airport", ef það meikar sens"""
         pass
 
-    def viewCertainFlightRoute(self, flightRouteID):
-        """ TODO i need to be returned the flight route instance, if it doesn't exist return a the string 'Flight route doesn't exist'"""
-        pass
+    
 
 
 # ++++++++++ Test Case ++++++++++
