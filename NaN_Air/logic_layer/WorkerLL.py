@@ -15,6 +15,7 @@ class WorkerLL():
         It then returns the ssn if it is correct and an error if it is not."""
         if len(ssn) != 10:
             ssn = "\nThat social security number is not correct, try again!"
+            
         try:
             intCheck = int(ssn)
         except ValueError:
@@ -58,7 +59,7 @@ class WorkerLL():
         """Takes social security number and position and returns an instance of a worker in that position 
         with that ssn if it exists."""
         ssn = WorkerLL.checkSSN(self, ssn)
-        if ssn != "\nThat social security number is not correct, try again!":
+        if ssn != "\nThat social security number is not correct, try again!!":
             self.worker = self.IOAPI.request_workers()
             for instance in self.worker:
                 if pos == "":
@@ -76,8 +77,8 @@ class WorkerLL():
                     if instance.position == "Staff manager" or instance.position == "Trip manager":
                         if instance.socialSecurityNumber == ssn:
                             return instance
-        if ssn != "\nThat social security number is not correct, try again!":
-            ssn = "\n{} not found!\n".format(pos)
+        if ssn != "\nSocial security numbers are shown above!":
+            ssn = "\n{} Social security numbers are shown above!\n".format(pos)
         return ssn
 
     def findWorkerByPOS(self, position):
@@ -88,6 +89,8 @@ class WorkerLL():
             for instance in self.worker:
                 if instance.position == "Captain" or instance.position == "Copilot":
                     positionList.append(instance)
+            
+
         elif position == "Attendant":
             for instance in self.worker:
                 if instance.position == "Flight Service Manager" or instance.position == "Flight Attendant":
@@ -119,7 +122,7 @@ class WorkerLL():
         validValue = True
         error = ""
         if ssn != "\nThat social security number is not correct, try again!":
-            validValue, error = checkNewValue(self, theKey, newValue)          
+            validValue, error = self.checkNewValue(theKey, newValue)          
         if validValue != False:
             self.worker = WorkerLL.get_worker_list(self)
             for instance in self.worker:
@@ -139,6 +142,28 @@ class WorkerLL():
         """Takes in a list of worker qualities and creates an instance of that worker and retuns the worker"""
         createWorkerList.append("TRUE")
         createWorkerList.append("TRUE")
+        #0 check social security number
+        try:
+            int(createWorkerList[0])
+        except ValueError:
+            return "Error!: SSN should be a whole number!"
+        #2 checking position
+        
+        if createWorkerList[2] == "Stupid User":
+            return "Error!: Position not picked"
+        
+
+        #5 Phone
+        try:
+            int(createWorkerList[5])
+        except ValueError:
+            return "Error!: Phone number should be a numbers"
+        #6 Cellphone
+        try:
+            int(createWorkerList[6])
+        except ValueError:
+            return "Error!: Phone number should be a number"
+        
         worker = self.IOAPI.createNewWorker(createWorkerList)
         return worker
 
@@ -219,8 +244,3 @@ class WorkerLL():
                 return "All workers seem to be unavailable at this date!"
             else:
                 return printString + avaialbleWorkerString + "\n"
-
-
-   
-
-

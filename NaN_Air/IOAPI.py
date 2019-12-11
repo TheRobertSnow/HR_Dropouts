@@ -29,7 +29,6 @@ class IOAPI:
     def request_voyagestoWorker(self):
         return self.voyageIO.get_voyages()
 
-
     #
     # Airplane
     #
@@ -72,6 +71,10 @@ class IOAPI:
 
     def request_voyages(self):
         return self.voyageIO.get_voyages()
+
+    def updateVoyage(self, theObject, theKey, newValue):
+        return self.voyageIO.updateCertainVoyage(theObject, theKey, newValue)
+
 
     #
     # Flight
