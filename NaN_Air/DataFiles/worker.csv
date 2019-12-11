@@ -1,5 +1,5 @@
 Worker ID,Social security number,Name,Position,Plane licence,Address,Phone,Cellphone,Email,Active,Available
-1,3009907461,William Carillo,Captain,FokkerF100,Fellsmúli 1,8998801,8998801,test@test.com,TRUE,TRUE
+1,3009907461,William Carillo,Captain,FokkerF100,JonasRimi42,1234567876,876545678,kukur@gmail.com,TRUE,TRUE
 2,2910858778,Virginia Ho,Captain,BAE146,Fellsmúli 2,8998802,8998802,test@test.com,TRUE,TRUE
 3,2706838569,Gerard Nelson,Captain,FokkerF100,Fellsmúli 3,8998803,8998803,test@test.com,TRUE,TRUE
 4,2209955782,Allen Ley,Captain,BAE146,Fellsmúli 4,8998804,8998804,test@test.com,TRUE,TRUE
@@ -34,3 +34,4 @@ Worker ID,Social security number,Name,Position,Plane licence,Address,Phone,Cellp
 33,1110732819,Arthur Karr,Flight Attendant,N/A,Fellsmúli 33,8998833,8998833,test@test.com,TRUE,TRUE
 34,2602806942,Teresa Thruman,Flight Attendant,N/A,Fellsmúli 34,8998834,8998834,test@test.com,TRUE,TRUE
 35,1107951952,Elizabeth Mcfadden,Flight Attendant,N/A,iAmTesting,8998835,5566655,test@test.com,TRUE,TRUE
+36,848429298383,yeet,Captain,jdjdi84584,haah 41,696969696,883882,dfjdfjq@33ff,TRUE,TRUE
