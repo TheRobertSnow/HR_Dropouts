@@ -15,6 +15,7 @@ class WorkerLL():
         It then returns the ssn if it is correct and an error if it is not."""
         if len(ssn) != 10:
             ssn = "\nThat social security number is not correct, try again!"
+            
         try:
             intCheck = int(ssn)
         except ValueError:
@@ -57,7 +58,7 @@ class WorkerLL():
         """Takes social security number and position and returns an instance of a worker in that position 
         with that ssn if it exists."""
         ssn = WorkerLL.checkSSN(self, ssn)
-        if ssn != "\nThat social security number is not correct, try again!":
+        if ssn != "\nThat social security number is not correct, try again!!":
             self.worker = self.IOAPI.request_workers()
             for instance in self.worker:
                 if pos == "":
@@ -75,8 +76,8 @@ class WorkerLL():
                     if instance.position == "Staff manager" or instance.position == "Trip manager":
                         if instance.socialSecurityNumber == ssn:
                             return instance
-        if ssn != "\nThat social security number is not correct, try again!":
-            ssn = "\n{} not found!\n".format(pos)
+        if ssn != "\nSocial security numbers are shown above!":
+            ssn = "\n{} Social security numbers are shown above!\n".format(pos)
         return ssn
 
     def findWorkerByPOS(self, position):
@@ -120,7 +121,7 @@ class WorkerLL():
         validValue = True
         error = ""
         if ssn != "\nThat social security number is not correct, try again!":
-            validValue, error = checkNewValue(self, theKey, newValue)          
+            validValue, error = self.checkNewValue(theKey, newValue)          
         if validValue != False:
             self.worker = WorkerLL.get_worker_list(self)
             for instance in self.worker:
@@ -150,7 +151,7 @@ class WorkerLL():
         if createWorkerList[2] == "Stupid User":
             return "Error!: Position not picked"
         
-        
+
         #5 Phone
         try:
             int(createWorkerList[5])
@@ -220,7 +221,3 @@ class WorkerLL():
                 if instance.position == "Flight Service Manager" or instance.position == "Flight Attendant" and instance not in unavailableList:
                     availableList.append(instance)
         return availableList
-
-   
-
-
