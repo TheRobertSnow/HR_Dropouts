@@ -39,6 +39,8 @@ class WorkerLL():
             for instance in self.worker:
                 if instance.position == "Captain" or instance.position == "Copilot":
                     positionList.append(instance)
+            
+
         elif position == "Attendant":
             for instance in self.worker:
                 if instance.position == "Flight Service Manager" or instance.position == "Flight Attendant":

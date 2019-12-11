@@ -37,7 +37,7 @@ class UIAPI:
         return returnData
 
     #
-    # worker related
+    # worker retard
     #
     def createNewWorker(self, workerList):
         """takes in workerList, but ID, Active and Available are not in this list so they have to be automatically filled by you guys"""
