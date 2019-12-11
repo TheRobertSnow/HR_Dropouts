@@ -307,6 +307,7 @@ class Update:
 
         if updateMenuInput == "1":
             instance = ""
+            print(UIAPI.UIAPI.viewAllWorkers(self))
             while type(instance) == str:
                 ssnInput = input("Input the SSN of the Worker you wish to change properties: ")
                 instance = UIAPI.UIAPI.viewWorkerBySSn(self, ssnInput)
@@ -319,6 +320,7 @@ class Update:
 
         elif updateMenuInput == "2":
             instance = ""
+            print(UIAPI.UIAPI.viewAllAirplanes(self))
             while type(instance) == str:
                 regInput = input("Input the Register of the Plane you wish to change properties: ")
                 instance = UIAPI.UIAPI.viewCertainAirplane(self, regInput)
@@ -331,14 +333,16 @@ class Update:
 
         elif updateMenuInput == "3":
             instance = ""
+            print((UIAPI.UIAPI.viewAllFlightRoutes(self)))
             while type(instance) == str:
                 flightrouteID = input("Input the ID of the Flight Route you wish to change properties: ")
-                instance = UIAPI.UIAPI.viewCertainFlightRoute(self, flightrouteID)
+                instance = UIAPI.UIAPI.viewFlightRoute(self, flightrouteID)
                 print(instance)
             output = Update.updatecurrentflightRoutes(self, flightrouteID)
 
         elif updateMenuInput == "4":
             instance = ""
+            print(UIAPI.UIAPI.viewallVoyages(self))
             while type(instance) == str:
                 voyageID = input("Input the ID of the Voyage you wish to change properties: ")
                 instance = UIAPI.UIAPI.viewWorkerBySSn(self, voyageID)
@@ -350,6 +354,7 @@ class Update:
                 return output
 
         elif updateMenuInput == "5":
+            print(UIAPI.UIAPI.viewAllFlights(self))
             flightNum, flightDay = Update.confirmFlightNumOnDay(self)
             if flightNum:
                 output = Update.updateFlights(self, flightNum, flightDay)
