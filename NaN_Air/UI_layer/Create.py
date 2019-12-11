@@ -133,7 +133,7 @@ Please input the following information:''')
 --------------------------------------------
 Please input the following information:''')
             createWorkerList = []
-            ssn = int(input("  - Social security number: "))
+            ssn = input("  - Social security number: ")
             createWorkerList.append(ssn)
             name = input("  - Name: ")
             createWorkerList.append(name)
@@ -157,14 +157,20 @@ Please input the following information:''')
                 createWorkerList.append("Staff manager")
             elif position == "6":
                 createWorkerList.append("Trip manager")
+            else:
+                createWorkerList.append("Stupid User")
+                
             planeLicence = input("  - Plane licence: ")
             createWorkerList.append(planeLicence)
             address = input("  - Address: ")
             createWorkerList.append(address)
-            phone = int(input("  - Phone: "))
+            #ekki int
+            phone = input("  - Phone: ")
             createWorkerList.append(phone)
-            cellphone = int(input("  - Cellphone: "))
+            #ekki int
+            cellphone = input("  - Cellphone: ")
             createWorkerList.append(cellphone)
+            #email error checka ?
             email = input("  - Email: ")
             createWorkerList.append(email)
             result = UIAPI.UIAPI.createNewWorker(self, createWorkerList)

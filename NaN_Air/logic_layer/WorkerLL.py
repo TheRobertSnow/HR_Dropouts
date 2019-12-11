@@ -84,6 +84,28 @@ class WorkerLL():
     def createNewWorker(self, createWorkerList):
         createWorkerList.append("TRUE")
         createWorkerList.append("TRUE")
+        #0 check social security number
+        try:
+            int(createWorkerList[0])
+        except ValueError:
+            return "Error!: SSN should be a whole number!"
+        #2 checking position
+        
+        if createWorkerList[2] == "Stupid User":
+            return "Error!: Position not picked"
+        
+        
+        #5 Phone
+        try:
+            int(createWorkerList[5])
+        except ValueError:
+            return "Error!: Phone number should be a numbers"
+        #6 Cellphone
+        try:
+            int(createWorkerList[6])
+        except ValueError:
+            return "Error!: Phone number should be a number"
+        
         worker = self.IOAPI.createNewWorker(createWorkerList)
         return worker
 
