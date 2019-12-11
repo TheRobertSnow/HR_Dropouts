@@ -313,7 +313,7 @@ class Update:
         elif updateMenuInput == "4":
             voyageID = Update.confirmVoyageID(self)
             if voyageID:
-                Update.update_Worker(self, voyageID)
+                Update.updateVoyage(self, voyageID)
             else:
                 updateMenuInput = Update.updateMenu(self)
 
