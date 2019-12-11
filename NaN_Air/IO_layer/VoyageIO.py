@@ -1,7 +1,6 @@
 import csv
 FILENAME = 'DataFiles/voyage.csv'
 from IO_layer import FlightIO
-
 class VoyageIO:
 
     def __init__(self, airplaneList, flightList, workerList, flightRouteList):
@@ -80,6 +79,8 @@ class VoyageIO:
 
     def fillList(self, updatedList):
         returnList = []
+        updateFlightList = FlightIO.FlightIO()
+        self.flightList = FlightIO.FlightIO.get_flights(updateFlightList)
         for i in updatedList:
             returnList.append(i)
         for flight in self.flightList:
