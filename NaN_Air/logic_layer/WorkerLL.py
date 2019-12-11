@@ -129,7 +129,6 @@ class WorkerLL():
                     return updatedWorker
         return "{} could not be updated, please try again!".format(error)
 
-
     def viewAllWorkers(self):
         """Returns all workers"""
         self.worker = self.IOAPI.request_workers()
