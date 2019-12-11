@@ -9,9 +9,9 @@ class Update:
     def update_Worker(self, workerSSN):
         print("""1. Update Worker
 --------------------------------------------
-  1. Home Address: 
-  2. Home Phone Number:
-  3. Mobile Phone Number:
+  1. Home Address
+  2. Home Phone Number
+  3. Mobile Phone Number
   4. E-mail Address
 --------------------------------------------""")
         updateWorkerMenuInput = input("Input choice (q to Quit, b for Back, m for Main Menu): ")
