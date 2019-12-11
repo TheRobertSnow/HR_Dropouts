@@ -135,13 +135,13 @@ class View():
             printObjects(allPilots)
             return viewPilotsInput
         elif viewPilotsInput == "3":
-            pilotDate = input("Input month/day/year, f.x. 1/01/2001: ")
+            pilotDate = input("Input year-month-day, f.x. 2020-01-22: ")
             unavailablePilots = UIAPI.UIAPI.listUnavailableWorkersbydate(self, pilotDate, "Pilot")
             availablePilots = UIAPI.UIAPI.listAvailableWorkersbydate(self, "Pilot", unavailablePilots)
             printObjects(availablePilots)
             return viewPilotsInput
         elif viewPilotsInput == "4":
-            pilotDate = input("Input month/day/year, f.x. 1/01/2001: ")
+            pilotDate = input("Input year-month-day, f.x. 2020-01-22: ")
             unavailablePilots = UIAPI.UIAPI.listUnavailableWorkersbydate(self, pilotDate, "Pilot")
             print("")
             for lists in unavailablePilots:
@@ -194,12 +194,12 @@ class View():
             printObjects(allAttendants)
             return viewAttendantsInput
         elif viewAttendantsInput == "3":
-            attendantDate = input("Input month/day/year, f.x. 1/01/2001: ")
+            attendantDate = input("Input year-month-day, f.x. 2020-01-22: ")
             availableAttendants = UIAPI.UIAPI.listAvailableWorkersbydate(self, attendantDate, "Attendant")
             printObjects(availableAttendants)
             return viewAttendantsInput
         elif viewAttendantsInput == "4":
-            attendantDate = input("Input month/day/year, f.x. 1/01/2001: ")
+            attendantDate = input("Input year-month-day, f.x. 2020-01-22: ")
             unavailableAttendants = UIAPI.UIAPI.listUnavailableWorkersbydate(self, attendantDate, "Attendant")
             print("")
             for lists in unavailableAttendants:
