@@ -130,7 +130,7 @@ class UIAPI:
 
     def viewVoyage(self, voyageID):
         """Uses voyageID to view a certain voyage"""
-        returnData = self.flightRouteLL.viewFlightRoute(voyageID)
+        returnData = self.voyageLL.viewVoyage(voyageID)
         return returnData
 
     def viewallVoyages(self):
@@ -161,31 +161,6 @@ class UIAPI:
         """asks to be returned the instances of pilots related to the ID i send"""
         return self.voyageLL.requestPilots(voyageID)
 
-    def addPilotVoyage(self, voyageID, pilotToAddInput):
-        """requests to add a new pilot to in the voyageID sent, return the updated Voyage instance"""
-        # TODO
-        pass
-
-    def removePilotVoyage(self, voyageID, pilotToRemoveInput):
-        """requests to remove a pilot from a Voyage, return the updated voyage instance"""
-        # TODO
-        pass
-
-    def requestVoyageCrew(self, voyageID):
-        """requests to be returned all instances of crew members on a specific voyageID"""
-        # TODO
-        pass
-
-    def addCrewVoyage(self, voyageID, crewToAddInput):
-        """requests to add a new crew member in the voyageID, returns the updated voyage instance"""
-        # TODO
-        pass
-
-    def removeCrewVoyage(self, voyageID, crewToRemoveInput):
-        """requests to remove crew member"""
-        # TODO
-        pass
-
     def requestFromIceFlightNumb(self, voyageID):
         """requests to be returned the flight Number that departures from Iceland"""
         # TODO
@@ -201,6 +176,17 @@ class UIAPI:
         # TODO
         pass
 
+    def addFlightAttendantVoyage(self, voyageID, pilotToAddInput):
+        return self.voyageLL.addFlightAttendantToVoyage(voyageID, pilotToAddInput)
+
+    def addMainFlightAttendantVoyage(self, voyageID, pilotToAddInput):
+        return self.voyageLL.addMainFlightAttendantToVoyage(voyageID, pilotToAddInput)
+
+    def addCoPilotVoyage(self, voyageID, pilotToAddInput):
+        return self.voyageLL.addCopilotToVoyage(voyageID, pilotToAddInput)
+
+    def addCaptainVoyage(self, voyageID, pilotToAddInput):
+        return self.voyageLL.addCaptainToVoyage(voyageID, pilotToAddInput)
     #
     # flight route related
     #
@@ -229,7 +215,6 @@ class UIAPI:
         """Listar öll destinations, viljum fá lista eða dict með "Country: Airport", ef það meikar sens"""
         pass
 
-    
 
 
 # ++++++++++ Test Case ++++++++++

@@ -172,6 +172,20 @@ class VoyageIO:
         voyage = self.write_voyage_to_file(voyageList)
         return voyage
 
+    def updateCertainVoyage(self, voyageInstance, keyToChange, newValue):
+        """takes in the instance of a plane and the new status, updates the instance and the file then returns
+            the updated instance"""
+        if keyToChange == "Flight attendants":
+            # update the instance
+            voyageInstance.addFlightAttendant(newValue)
+        else:
+            # update the instance
+            voyageInstance.updateValue(keyToChange, newValue)
+
+        # update the csv file
+        self.write_dictList_to_file()
+        return voyageInstance
+
 
 class Voyage:
     def __init__(self, dictionary):
@@ -200,10 +214,12 @@ class Voyage:
     def getflightIDS(self):
         return self.flightOutID, self.flightBackID
 
+    def updateValue(self, key, newStatus):
+        self.myDictionary[key] = newStatus
 
-# writeList = ['35','1107951952','Elizabeth Mcfadden','Cabincrew','Flight Attendant','N/A','Fellsmúli 35','8998835','8998835','test@test.com','True','True']
-# updateList = ['35', 'Position', 'Looser']
-# worker = WorkerIO()
-# # print(newline)
-# worker.write_worker_to_file(writeList)
-# worker.update_data_in_file(updateList)
+    def addFlightAttendant(self, newValue):
+        valueChecker = self.myDictionary["Flight attendants"]
+        if len(valueChecker) == 0:
+            self.myDictionary["Flight attendants"] = newValue
+        else:
+            self.myDictionary["Flight attendants"] += "/" + newValue
