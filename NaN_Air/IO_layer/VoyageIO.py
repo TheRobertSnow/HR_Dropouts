@@ -12,7 +12,7 @@ class VoyageIO:
 
     def get_voyages(self):
         """Return a list of voyage instances"""
-        return self.__voyageList
+        return self.voyageList
 
     def get_voyages_from_file(self):
         """Only use for initializing VoyageIO.
@@ -164,6 +164,13 @@ class Voyage:
         for key, val in self.myDictionary.items():
             returnString.append((key + ": " + str(val)))
         return "\n".join(returnString)
+
+    def getflightAttendants(self):
+        return self.flightAttendants
+
+    def getflightIDS(self):
+        return self.flightOutID, self.flightBackID
+
 
 # writeList = ['35','1107951952','Elizabeth Mcfadden','Cabincrew','Flight Attendant','N/A','Fellsmúli 35','8998835','8998835','test@test.com','True','True']
 # updateList = ['35', 'Position', 'Looser']
