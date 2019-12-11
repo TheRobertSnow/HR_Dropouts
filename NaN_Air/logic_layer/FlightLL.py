@@ -9,7 +9,10 @@ class FlightLL():
         self.flightIO = IOAPI.IOAPI()
         self.__flightList = self.flightIO.getAllFlightInstances()
 
-    def createNewFlight(self, flightList):
+    def createNewFlight(self, flightList1):
+        flightList = []
+        for i in flightList1:
+            flightList.append(i)
         flightNumber = self.flightIO.getFlightNumber(flightList[1], flightList[2], flightList[3])
         airplaneReg = flightList[0]
         airplane = self.flightIO.getCertainAirplane(airplaneReg)
