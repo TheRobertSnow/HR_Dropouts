@@ -35,7 +35,6 @@ class View():
             viewWorkerOutput = View.viewWorker(self)
             if viewWorkerOutput == "b":
                 viewMenuInput = View.viewMenu(self)
-                pass
         elif viewMenuInput == "2":
             viewAirplaneOutput = View.viewAirplane(self)
             if viewAirplaneOutput == "b":
@@ -92,6 +91,10 @@ class View():
                 viewWorkerInput = View.viewWorker(self)
         elif viewWorkerInput == "3":
             viewManagersInput = View.viewManagers(self)
+            if viewManagersInput == "b":
+                viewWorkerInput = View.viewWorker(self)
+            elif viewManagersInput == "q":
+                return viewWorkerInput
             viewWorkerInput = View.viewWorker(self)
         elif viewWorkerInput == "4":
             allStaff = UIAPI.UIAPI.viewAllWorkers(self)
@@ -118,6 +121,7 @@ class View():
      specific date
   5. View all voyages of a pilot in a given 
      week
+  6. View all Pilots by Plane Licence
 --------------------------------------------''')
         viewPilotsInput = input("Input choice (q to Quit, b for Back): ")
         viewPilotsInput = viewPilotsInput.lower()
@@ -131,7 +135,7 @@ class View():
             printObjects(allPilots)
             return viewPilotsInput
         elif viewPilotsInput == "3":
-            pilotDate = input("Input day/month/year, f.x. 01/01/2001: ")
+            pilotDate = input("Input day-month-year, f.x. 01/01/2001: ")
             unavailablePilots = UIAPI.UIAPI.listUnavailableWorkersbydate(self, pilotDate, "Pilot")
             availablePilots = UIAPI.UIAPI.listAvailableWorkersbydate(self, "Pilot", unavailablePilots)
             printObjects(availablePilots)
@@ -154,6 +158,10 @@ class View():
             pilotWeeklyVoyages = UIAPI.UIAPI.viewallVoyagesInWeek(self, pilotSSN, pilotWeek, pos="Pilot")
             printObjects(pilotWeeklyVoyages)
             return viewPilotsInput
+        elif viewPilotsInput == "6":
+            pilotLicence = input("Input Plane Licence: ")
+            planePilots = UIAPI.UIAPI.viewWorkersByPlaneLicence(self,pilotLicence)
+            printObjects(planePilots)
         elif viewPilotsInput == "b":
             return viewPilotsInput
         elif viewPilotsInput == "q":

@@ -162,8 +162,8 @@ class Voyage:
     def __str__(self):
         returnString = []
         for key, val in self.myDictionary.items():
-            returnString.append((key + ": " + val))
-        return " | ".join(returnString)
+            returnString.append((key + ": " + str(val)))
+        return "\n".join(returnString)
 
     def getflightAttendants(self):
         return self.flightAttendants

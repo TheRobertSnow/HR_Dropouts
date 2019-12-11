@@ -156,7 +156,7 @@ class Airplane:
         returnString = []
         for key, val in self.myDictionary.items():
             returnString.append((key + ": " + str(val)))
-        return " | ".join(returnString)
+        return "\n".join(returnString)
 
 # +++++++++++ Test Case +++++++++++++++
 # writeList = ['TF-EPG','Fokker','F100','Grounded','110','0']

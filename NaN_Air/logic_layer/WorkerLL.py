@@ -51,12 +51,24 @@ class WorkerLL():
             positionList = "No {}'s found!.".format(position)
         return positionList
 
-    def updateWorker(self, socialSecurityNumber, key, newValue): 
-        #self.worker = IOAPI.request_workers()
+    def findWorkerByPlaneLicence(self, plane_Licence):
+        workerList = []
+        worker = self.get_worker_list()
+        for instance in worker:
+            if instance.planeLicence == plane_Licence:
+                workerList.append(instance)
+        if len(workerList) == 0:
+            print("No pilot has licence for {}".format(plane_Licence))
+        return workerList
+
+
+
+    def updateWorker(self, socialSecurityNumber, theKey, newValue):
+        print("LL worker")
         self.worker = WorkerLL.get_worker_list(self)
         for instance in self.worker:
             if instance.socialSecurityNumber == socialSecurityNumber:
-                updatedWorker = self.IOAPI.updateWorker(instance, key, newValue)
+                updatedWorker = self.IOAPI.updateWorker(instance, theKey, newValue)
                 self.worker = WorkerLL.get_worker_list(self)
                 print("Worker succesfully updated!\n")
                 return updatedWorker
@@ -118,6 +130,7 @@ class WorkerLL():
         availableList = []
         workerList = WorkerLL.get_worker_list(self)
         voyages = self.IOAPI.request_voyagestoWorker()
+        print(voyages)
         for instance in workerList:
             if pos == "Pilot":
                 if instance.position == "Captain" or instance.position == "Copilot" and instance not in unavailableList:

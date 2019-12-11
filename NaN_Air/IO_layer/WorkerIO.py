@@ -155,7 +155,7 @@ class WorkerIO():
 
     def add_worker_instance(self, dict):
         newWorker = Worker(dict)
-        self.workerList.append(newWorkers)
+        self.workerList.append(newWorker)
 
     def create_worker_instances(self):
         """Methood runs through list of dictionaries,

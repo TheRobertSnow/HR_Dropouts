@@ -1,5 +1,6 @@
 import UIAPI
 import datetime
+
 class Create():
     def __init__(self):
         self.uiapi = UIAPI.UIAPI()
@@ -166,11 +167,8 @@ Please input the following information:''')
             createWorkerList.append(cellphone)
             email = input("  - Email: ")
             createWorkerList.append(email)
-            #createWorkerList.append("TRUE")
-            #createWorkerList.append("TRUE")
             result = UIAPI.UIAPI.createNewWorker(self, createWorkerList)
             print(result)
-            # Prints out info on the created worker
             print("--------------------------------------------")
             createMenuInput = Create.createMenu(self)
         elif createMenuInput == "2":
@@ -191,8 +189,6 @@ Please input the following information:''')
             print("Request sent in ...\n")
             result = UIAPI.UIAPI.createNewAirplane(self, createAirplaneList)
             print(result)
-
-            # Prints info on the created airplane
             print("--------------------------------------------")
             createMenuInput = Create.createMenu(self)
         elif createMenuInput == "3":
@@ -232,10 +228,6 @@ Please input the following information:''')
             flightList = Create.createFlight(self)
             result = UIAPI.UIAPI.createNewFlight(self, flightList)
             print(result)
-            #print(result)
-            #print("Flight successfully created!")
-            #print(flightList)
-            # Prints the created flight
             print("--------------------------------------------")
             createMenuInput = Create.createMenu(self)
         elif createMenuInput == "b":
