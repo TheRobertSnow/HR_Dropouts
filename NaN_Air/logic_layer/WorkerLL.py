@@ -10,29 +10,77 @@ class WorkerLL():
         self.worker = self.IOAPI.request_workers()
         return self.worker
 
-    def findWorkerBySSN(self, ssn, pos):
-        self.worker = self.IOAPI.request_workers()
-        for instance in self.worker:
-            if pos == "":
-                if instance.socialSecurityNumber == ssn:
-                    return instance
-            elif pos == "Pilot":
-                if instance.position == "Captain" or instance.position == "Copilot":
-                    if instance.socialSecurityNumber == ssn:
-                        return instance
-            elif pos == "Attendant":
-                if instance.position == "Flight Attendant" or instance.position == "Flight Service Manager":
-                    if instance.socialSecurityNumber == ssn:
-                        return instance
-            elif pos == "Manager":
-                if instance.position == "Staff manager" or instance.position == "Trip manager":
-                    if instance.socialSecurityNumber == ssn:
-                        return instance
+    def checkSSN(self, ssn):
+        """Takes in a social security and checks if it is of the right length and the correct format.
+        It then returns the ssn if it is correct and an error if it is not."""
+        if len(ssn) != 10:
+            ssn = "\nThat social security number is not correct, try again!"
+        try:
+            intCheck = int(ssn)
+        except ValueError:
+            ssn = "\nThat social security number is not correct, try again!"
+        return ssn 
 
-        notFoundString = "{} not found!\n".format(pos)
-        return notFoundString
+    def checkNewValue(self, theKey, newValue):
+        if theKey == "Address":
+            try:
+                testValue = newValue.split(" ")
+            except ValueError:
+                validValue = False
+                error = "Home address"
+            try:
+                testValue = int(testValue[1])
+            except ValueError:
+                validValue = False
+                error = "Home address"
+        if theKey == "Phone":
+            try:
+                testValue = int(newValue)
+            except ValueError:
+                validValue = False
+                error = "Phone number"
+        if theKey == "Cellphone":
+            try:
+                testValue = int(newValue)
+            except ValueError:
+                validValue = False
+                error = "Cellphone number"
+        if theKey == "Email":
+            try:
+                testValue = testValue.split('@')
+            except ValueError:
+                validValue = False
+                error = "Email" 
+        return validValue, error
+
+    def findWorkerBySSN(self, ssn, pos):
+        """Takes social security number and position and returns an instance of a worker in that position 
+        with that ssn if it exists."""
+        ssn = WorkerLL.checkSSN(self, ssn)
+        if ssn != "\nThat social security number is not correct, try again!":
+            self.worker = self.IOAPI.request_workers()
+            for instance in self.worker:
+                if pos == "":
+                    if instance.socialSecurityNumber == ssn:
+                        return instance
+                elif pos == "Pilot":
+                    if instance.position == "Captain" or instance.position == "Copilot":
+                        if instance.socialSecurityNumber == ssn:
+                            return instance
+                elif pos == "Attendant":
+                    if instance.position == "Flight Attendant" or instance.position == "Flight Service Manager":
+                        if instance.socialSecurityNumber == ssn:
+                            return instance
+                elif pos == "Manager":
+                    if instance.position == "Staff manager" or instance.position == "Trip manager":
+                        if instance.socialSecurityNumber == ssn:
+                            return instance
+        if ssn != "\nThat social security number is not correct, try again!":
+            ssn = "\n{} not found!\n".format(pos)
+        return ssn
 
     def findWorkerByPOS(self, position):
+        """Takes in a position and return a list of all workers in that position."""
         self.worker = self.IOAPI.request_workers()
         positionList = []
         if position == "Pilot":
@@ -52,6 +100,7 @@ class WorkerLL():
         return positionList
 
     def findWorkerByPlaneLicence(self, plane_Licence):
+        """Takes in a plane license and returns a list with all Pilots with that specific license."""
         workerList = []
         worker = self.get_worker_list()
         for instance in worker:
@@ -61,78 +110,85 @@ class WorkerLL():
             print("No pilot has licence for {}".format(plane_Licence))
         return workerList
 
-
-
     def updateWorker(self, socialSecurityNumber, theKey, newValue):
-        print("LL worker")
-        self.worker = WorkerLL.get_worker_list(self)
-        for instance in self.worker:
-            if instance.socialSecurityNumber == socialSecurityNumber:
-                updatedWorker = self.IOAPI.updateWorker(instance, theKey, newValue)
-                self.worker = WorkerLL.get_worker_list(self)
-                print("Worker succesfully updated!\n")
-                return updatedWorker
-        return "Worker could not be updated"
+        """Takes in a social security number, key and value, finds a worker instance and
+        then uses key and value and to update the values of that worker instance if it exists. 
+        It then returns that instance (if it exists)""" 
+        ssn = WorkerLL.checkSSN(self, socialSecurityNumber)
+        validValue = True
+        error = ""
+        if ssn != "\nThat social security number is not correct, try again!":
+            validValue, error = checkNewValue(self, theKey, newValue)          
+        if validValue != False:
+            self.worker = WorkerLL.get_worker_list(self)
+            for instance in self.worker:
+                if instance.socialSecurityNumber == socialSecurityNumber:
+                    updatedWorker = self.IOAPI.updateWorker(instance, theKey, newValue)
+                    self.worker = WorkerLL.get_worker_list(self)
+                    print("Worker succesfully updated!\n")
+                    return updatedWorker
+        return "{} could not be updated, please try again!".format(error)
 
 
     def viewAllWorkers(self):
+        """Returns all workers"""
         self.worker = self.IOAPI.request_workers()
         return self.worker
 
     def createNewWorker(self, createWorkerList):
+        """Takes in a list of worker qualities and creates an instance of that worker and retuns the worker"""
         createWorkerList.append("TRUE")
         createWorkerList.append("TRUE")
         worker = self.IOAPI.createNewWorker(createWorkerList)
         return worker
 
-    def listUnavailableWorkersbydate(self, date, pos): #Galli að ef að worker eru alltaf skráðir available, spurning
-        #um að TAKA ACTIVE OG AVAILABLE ÚT ÞEGAR ER VERIÐ AÐ PRENTA WORKER INSTANCE????
-        #BÆTA VIÐ TIL HVAÐA ÁFANGASTAÐAR ÞEIR ERU AÐ FARA!!!!!!
+    def listUnavailableWorkersbydate(self, date, pos): 
+        """Takes in a date and position and returns a list with each worker who is working on that date
+         and the worker's destination."""
         unavailableList = []
         destinationName = ""
         workerList = WorkerLL.get_worker_list(self) #All workers
         voyages = self.IOAPI.request_voyagestoWorker() #All voyages
         flightRoutes = self.IOAPI.getAllFlightRouteInstances() #All flight Routes
-        #flights = self.IOAPI.getAllFlightInstances()
         for voyage in voyages:
             destinationID = voyage.flightRouteID 
             for flightroute in flightRoutes:
                 if flightroute.flightRouteID == destinationID:
                     destinationName = flightroute.country
-                #Finna flight route id í flight route og skila flight route country
             if date in voyage.departureFromIS or date in voyage.departureToIS:
                 for worker in workerList:
                     if pos == "Pilot":
                         if voyage.mainPilot == worker.socialSecurityNumber:
                             toAddList = []
                             toAddList.append(worker)
-                            toAddList.append("Worker is going to " + str(destinationName) + " on " + str(date) + "!")
-                            unavailableList.append(toAddList) #Bæta við destinationName
+                            toAddList.append(str(worker.name) + " is going to " + str(destinationName) + " on " + str(date) + "!")
+                            unavailableList.append(toAddList)
                         elif voyage.assistingPilot == worker.socialSecurityNumber:
                             toAddList = []
                             toAddList.append(worker)
-                            toAddList.append("Worker is going to " + str(destinationName) + " on " + str(date) + "!")
-                            unavailableList.append(toAddList) #Bæta við destinationName
+                            toAddList.append(str(worker.name) + " is going to " + str(destinationName) + " on " + str(date) + "!")
+                            unavailableList.append(toAddList)
                     elif pos == "Attendant":
                         if voyage.mainFlightAttendant == worker.socialSecurityNumber:
                             toAddList = []
                             toAddList.append(worker)
-                            toAddList.append("Worker is going to " + str(destinationName) + " on " + str(date) + "!")
-                            unavailableList.append(toAddList) #Bæta við destinationName
+                            toAddList.append(str(worker.name) + " is going to " + str(destinationName) + " on " + str(date) + "!")
+                            unavailableList.append(toAddList) 
                         elif worker.socialSecurityNumber in voyage.getflightAttendants():
                             toAddList = []
                             toAddList.append(worker)
-                            toAddList.append("Worker is going to " + str(destinationName) + " on " + str(date) + "!")
-                            unavailableList.append(toAddList) #Bæta við destinationName
+                            toAddList.append(str(worker.name) + " is going to " + str(destinationName) + " on " + str(date) + "!")
+                            unavailableList.append(toAddList) 
         if len(unavailableList) == 0:
             unavailableList = "There are no workers working on that date."
         return unavailableList
 
     def listAvailableWorkersbydate(self, pos, unavailableList):  
+        """Takes in a position and a list of workers who are unavailable on that date from 
+        the "listUnavailableWorkersbydate" function"""
         availableList = []
         workerList = WorkerLL.get_worker_list(self)
         voyages = self.IOAPI.request_voyagestoWorker()
-        print(voyages)
         for instance in workerList:
             if pos == "Pilot":
                 if instance.position == "Captain" or instance.position == "Copilot" and instance not in unavailableList:
@@ -142,62 +198,6 @@ class WorkerLL():
                     availableList.append(instance)
         return availableList
 
-        """def listUnavailableWorkersbydate(self, date, pos): #Galli að ef að worker eru alltaf skráðir available, spurning
-        #um að TAKA ACTIVE OG AVAILABLE ÚT ÞEGAR ER VERIÐ AÐ PRENTA WORKER INSTANCE????
-        #BÆTA VIÐ TIL HVAÐA ÁFANGASTAÐAR ÞEIR ERU AÐ FARA!!!!!!
-        unavailableList = []
-        destinationName = ""
-        workerList = WorkerLL.get_worker_list(self)
-        voyages = self.IOAPI.request_voyagestoWorker()
-        flightRoutes = self.IOAPI.getAllFlightRouteInstances()
-        print(flightRoutes)
-        #flights = self.IOAPI.getAllFlightInstances()
-        for voyage in voyages:
-            destinationID = voyage.flightRouteID 
-            for flightroute in flightRoutes:
-                if flightroute.flightRouteID == destinationID:
-                    destinationName = flightroute.country
-                #Finna flight route id í flight route og skila flight route country
-            if date in voyage.departureFromIS or date in voyage.departureToIS:
-                for worker in workerList:
-                    if pos == "Pilot":
-                        if voyage.mainPilot == worker.socialSecurityNumber:
-                            toAddList = []
-                            toAddList.append(worker)
-                            toAddList.append("\n is going to " + str(destinationName))
-                            unavailableList.append([str(worker) + "\n is going to " + str(destinationName)]) #Bæta við destinationName
-                        elif voyage.assistingPilot == worker.socialSecurityNumber:
-                            unavailableList.append([str(worker) + "\n is going to " + str(destinationName)])
-                    elif pos == "Attendant":
-                        if voyage.mainFlightAttendant == worker.socialSecurityNumber:
-                            unavailableList.append([str(worker) + "\n is going to " + str(destinationName)]) #Bæta við destinationName
-                        elif voyage.socialSecurityNumber in voyage.getflightAttendants():
-                            unavailableList.append([str(worker) + "\n is going to " + str(destinationName)])
-        return unavailableList"""
-        
-     
-    """def listAvailableWorkersbydate(self, date, pos, unavailableList):
-        availableList = []
-        workerList = WorkerLL.get_worker_list(self)
-        voyages = self.IOAPI.request_voyagestoWorker()
-        for instance in voyages:
-            if date not in instance.departureFromIS or date not in instance.departureToIS:
-                    for worker in workerList:
-                        if pos == "Pilot":
-                            if instance.mainPilot == worker.socialSecurityNumber:
-                                availableList.append(worker)
-                            elif instance.assistingPilot == worker.socialSecurityNumber:
-                                availableList.append(worker)
-                        elif pos == "Attendant":
-                            if instance.mainFlightAttendant == worker.socialSecurityNumber:
-                                availableList.append(worker)
-                            elif worker.socialSecurityNumber in instance.getflightAttendants():
-                                availableList.append(worker)
-        return availableList"""
+   
 
 
-
-
-# +++++++++ Test Case ++++++++++
-# workerLL = WorkerLL()
-# workerLL.find_worker_by_ID("1")

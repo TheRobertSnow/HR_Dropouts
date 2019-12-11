@@ -17,7 +17,7 @@ class UIAPI:
     # plane related
     #
     def createNewAirplane(self, airplaneList):
-        """takes in airplaneList, and you return us the created instance"""
+        """Takes in a list of airplane qualities and creates an instance of that airplane and returns."""
         returnString = self.airplaneLL.createNewAirplane(airplaneList)
         return returnString
 
