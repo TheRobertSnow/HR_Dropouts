@@ -5,7 +5,7 @@ class Create():
     def __init__(self):
         self.uiapi = UIAPI.UIAPI()
 
-    def createFlight(self, airplane=None, origin=None, destination=None):
+    def createFlight(airplane=None, origin=None, destination=None):
         flightList = []
         if airplane == None:
             airplane = input("  - Airplane registration number: ")
@@ -57,14 +57,19 @@ Please input the following information:''')
             flightBackId = int(input("  - Flight to Iceland ID: "))
             voyageList.append(flightBackId)
             # gets the flights and validates  that they exist
-            captain, copilot, flightServiceManager, flightAttendants = Create.addCrew(self)
+            addCrewInput = input("Do you want to add a crew to the voyage? (y/n)")
+            if addCrewInput.lower() == "y":
+                captain, copilot, flightServiceManager, flightAttendants = Create.addCrew(self)
+            elif addCrewInput.lower() == "n":
+                captain, copilot, flightServiceManager, flightAttendants = "", "", "", ""
             print("Crew successfully Added!")
             # prints out crew info
             print(captain, copilot, flightServiceManager, flightAttendants)
-            voyageList.append(captain)
-            voyageList.append(copilot)
-            voyageList.append(flightServiceManager)
-            voyageList.append(flightAttendants)
+            voyageList.insert(2, captain)
+            voyageList.insert(3, copilot)
+            voyageList.insert(4, flightServiceManager)
+            voyageList.insert(5, flightAttendants)
+            voyageInstance = UIAPI.UIAPI.createNewVoyage(self, voyageList)
             print("Voyage successfully created!")
             # Prints out Voyage info
             print(voyageList)
@@ -76,35 +81,42 @@ Please input the following information:''')
 Please input the following information:''')
             voyageList2 = []
             print("\nFlight from Iceland")
-            flightList = Create.createFlight(None, "Reykjavíkurflugvöllur")
+            # Get a list of information for the flight
+            flightList = Create.createFlight(None, "1") #   Sends in the id of Reykjavik airport
             # creates flight1
+            flightInstance1 = UIAPI.UIAPI.createNewFlight(self, flightList)
+            print(flightInstance1)
             # finds id of created flight
-            voyageList2.append("123")
+            voyageList2.append(flightInstance1.flightID)
             # voyageList2.append(flightOutId)
-            print("Flight 1 successfully created!")
-            print(flightList)
+            #print("Flight 1 successfully created!")
 
             print("\nFlight to Iceland")
-            flightList = Create.createFlight(self, flightList[0], flightList[2], flightList[1])
+            # Get a list of information for the flight
+            flightList2 = Create.createFlight(flightList[0], flightList[2], flightList[1])
             # creates flight2
+            flightInstance2 = UIAPI.UIAPI.createNewFlight(self, flightList2)
+            print(flightInstance2)
             # finds id of created flight
-            voyageList2.append("124")
+            voyageList2.append(flightInstance2.flightID)
             # voyageList2.append(flightBackId)
-            print("Flight 2 successfully created!")
-            print(flightList)
+            #print("Flight 2 successfully created!")
             # print(flightBackList)
-
-            captain, copilot, flightServiceManager, flightAttendants = Create.addCrew(self)
+            addCrewInput = input("Do you want to add a crew to the voyage? (y/n)")
+            if addCrewInput.lower() == "y":
+                captain, copilot, flightServiceManager, flightAttendants = Create.addCrew(self)
+            elif addCrewInput.lower() == "n":
+                captain, copilot, flightServiceManager, flightAttendants = "", "", "", ""
             print("Crew successfully Added!")
             # prints out crew info
             print(captain, copilot, flightServiceManager, flightAttendants)
-            voyageList2.append(captain)
-            voyageList2.append(copilot)
-            voyageList2.append(flightServiceManager)
-            voyageList2.append(flightAttendants)
-            print("Voyage successfully created!")
+            voyageList2.insert(2, captain)
+            voyageList2.insert(3, copilot)
+            voyageList2.insert(4, flightServiceManager)
+            voyageList2.insert(5, flightAttendants)
+            voyageInstance = UIAPI.UIAPI.createNewVoyage(self, voyageList2)
             # Prints out Voyage info
-            print(voyageList2)
+            print(voyageInstance)
             print("--------------------------------------------")
             return createVoyageMenuInput
         elif createVoyageMenuInput == "b":
@@ -225,7 +237,7 @@ Please input the following information:''')
             print('''5. Create Flight
 --------------------------------------------
 Please input the following information:''')
-            flightList = Create.createFlight(self)
+            flightList = Create.createFlight()  # Creates a list for createNewFlight
             result = UIAPI.UIAPI.createNewFlight(self, flightList)
             print(result)
             print("--------------------------------------------")

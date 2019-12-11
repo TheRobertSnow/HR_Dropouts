@@ -60,6 +60,7 @@ class FlightIO():
                 flightNumber = flightNumber + originID
         else:
             flightNumber = flightNumber + destinationID
+
         for flight in self.flightList:
             #flightDT = flight.departureTime
             instanceDepartureDate = departureTime.date()
@@ -187,7 +188,6 @@ class FlightIO():
         for dictionary in self.__dictList:
             flight = Flight(dictionary)
             self.flightList.append(flight)
-
 
 class Flight:
     def __init__(self, dictionary):
