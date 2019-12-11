@@ -1,11 +1,11 @@
 import csv
 FILENAME = 'DataFiles/voyage.csv'
-
+from IO_layer import FlightIO
 
 class VoyageIO:
 
     def __init__(self, airplaneList, flightList, workerList, flightRouteList):
-        self.dictList = []
+        self.__dictList = []
         self.voyageList = []
         self.airplaneList = airplaneList
         self.flightList = flightList
@@ -34,14 +34,18 @@ class VoyageIO:
 
     def write_voyage_to_file(self, aList):
         """Method takes in a list of data and writes to file"""
+        voyage = None
         with open(FILENAME, 'a', encoding="utf8", newline='') as csvFile:
             csvWriter = csv.writer(csvFile)
-            orderedDict = self.convert_to_dict_with_id(aList)
+            updatedList = self.fillList(aList)
+            orderedDict = self.convert_to_dict_with_id(updatedList)
             self.__dictList.append(orderedDict)
+            voyage = self.create_voyage_instance(orderedDict)
             newList = []
             newList.append(orderedDict['Voyage ID'])
-            [newList.append(i) for i in aList]
+            [newList.append(i) for i in updatedList]
             csvWriter.writerow(newList)
+        return voyage
 
     def write_dictList_to_file(self):
         """Method overwrites file with data from dictList"""
@@ -73,6 +77,20 @@ class VoyageIO:
                     if int(value) > highestID:
                         highestID = int(value)
         return highestID + 1
+
+    def fillList(self, updatedList):
+        returnList = []
+        for i in updatedList:
+            returnList.append(i)
+        for flight in self.flightList:
+            print(flight)
+            if int(flight.flightID) == int(returnList[0]):
+                returnList.append(flight.destinationID)
+                returnList.append(flight.departureTime)
+            elif int(flight.flightID) == int(returnList[1]):
+                returnList.append(flight.departureTime)
+        print(returnList)
+        return returnList
 
     def convert_to_dict_with_id(self, aList):
         """Function takes in a list of arguments,
@@ -144,8 +162,14 @@ class VoyageIO:
             voyage = Voyage(dictionary)
             self.__voyageList.append(voyage)
 
+    def create_voyage_instance(self, orderedDict):
+        voyage = Voyage(orderedDict)
+        self.voyageList.append(voyage)
+        return voyage
+
     def createNewVoyage(self, voyageList):
-        return "were working on this method"
+        voyage = self.write_voyage_to_file(voyageList)
+        return voyage
 
 
 class Voyage:

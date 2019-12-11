@@ -8,6 +8,9 @@ class VoyageLL():
     def get_voyage_list(self):
         return self.voyage
 
+    def createNewVoyage(self, dataList):
+        return self.IOAPI.createNewVoyage(dataList)
+
     def find_voyage_by_ID(self, id):
         for instance in self.voyage:
             if instance.voyageID == id:
@@ -29,5 +32,3 @@ class VoyageLL():
 
     def viewallVoyages(self):
         pass
-
-
