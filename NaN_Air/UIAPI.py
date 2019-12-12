@@ -137,11 +137,11 @@ class UIAPI:
         returnData = self.voyageLL.viewallVoyagesDay(day)
         return returnData
 
-    def viewallVoyagesWeek(self, week):
+    def viewallVoyagesWeek(self, year, week):
         """Listar öll voyages í ákveðinni viku og hvort að þau séu fullmönnuð, svo
         við þurfum að fá lista eða dict með hverju voyage tilviki og svo upplýsingum
         um hvort að það sé fullmannað í þeirri viku"""
-        returnData = self.voyageLL.viewallVoyagesWeek(week)
+        returnData = self.voyageLL.viewallVoyagesWeek(year, week)
         return returnData
 
     def copyPreviousVoyage(self, voyageID):

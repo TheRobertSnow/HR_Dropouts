@@ -180,13 +180,8 @@ class WorkerLL():
         destinationNameList = []
         avaialbleWorkerString = ""
         unAvaialbleWorkerString = ""
-        departureTimeFromISList = []
-        departureTimeToISList = []
-        #departureTimeFromISList2 = []
-        #departureTimeToISList2 = []
-        weekWorkerString = ""
         workerList = WorkerLL.get_worker_list(self) #All workers
-        voyages = self.IOAPI.request_voyagestoWorker() #All voyages
+        voyages = self.IOAPI.request_voyages() #All voyages
         flightRoutes = self.IOAPI.getAllFlightRouteInstances()
         printString = "\n{} {}s on date: {}".format(status, pos, date)
         if status == "Available":
@@ -195,22 +190,13 @@ class WorkerLL():
             printString += "\n\n{:^10s} | {:^20s} | {:^22s}\n".format("SSN", "NAME", "FLIGHT DESTINATION")
         printString += dashString * 60
         for voyage in voyages:
-            departureTimeFromIS = datetime.strptime(voyage.departureFromIS, '%Y-%m-%d %H:%M:%S')
-            departureTimeFromISList.append(departureTimeFromIS)
-            #departureTimeFromISList2.append(departureTimeFromIS.date())
-            departureTimeToIS = datetime.strptime(voyage.departureToIS, '%Y-%m-%d %H:%M:%S')
-            departureTimeToISList.append(departureTimeToIS)
-            #departureTimeToISList2.append(departureTimeToIS.date())
-        
-        for voyage in voyages:
             destinationID = voyage.flightRouteID 
-            departureTimeFromIS2 = datetime.strptime(voyage.departureFromIS, '%Y-%m-%d %H:%M:%S')
-            departureTimeToIS2 = datetime.strptime(voyage.departureToIS, '%Y-%m-%d %H:%M:%S')
+            departureFromIS = datetime.strptime(voyage.departureFromIS, '%Y-%m-%d %H:%M:%S')
+            #departureToIS = datetime.strptime(voyage.departureToIS, '%Y-%m-%d %H:%M:%S')
             for flightroute in flightRoutes:
                 if flightroute.flightRouteID == destinationID:
                     destinationNameList.append(flightroute.country)
-            #if date.date() in [i.date() for i in departureTimeFromISList] or date.date() in [i.date() for i in departureTimeToISList]:
-            if date.date() == departureTimeFromIS2.date() or date.date() == departureTimeToIS2.date():
+            if date.date() == departureFromIS.date():
                 mainPilotList.append(voyage.mainPilot)
                 assistingPilotList.append(voyage.assistingPilot)
                 mainFlightAttendantList.append(voyage.mainFlightAttendant)
@@ -224,9 +210,7 @@ class WorkerLL():
             flightattendant = flightattendant.replace(" ", "")
             newflightAttendant = flightattendant.split(",")
             newFlightAttendantList.append(newflightAttendant)
-
-        print(departureTimeFromISList,departureTimeToISList)
-
+        
         for worker in workerList:
             if pos == "Pilot":  
                 if worker.position == "Captain" and worker.socialSecurityNumber not in mainPilotList:
@@ -235,22 +219,12 @@ class WorkerLL():
                     for i in range(len(mainPilotList)):
                         if mainPilotList[i] == worker.socialSecurityNumber:  
                             unAvaialbleWorkerString += "\n{:10s} | {:20s} | {:22s}".format(worker.socialSecurityNumber,worker.name,destinationNameList[i])
-                            if date.date() in [j.date() for j in departureTimeFromISList]:
-                                for j in range(len(departureTimeFromISList)):
-                                    if date.date() == departureTimeFromISList[j].date():
-                                        weekWorkerString += "\n{:10s} | {:20s} | {} | {} | {}".format(worker.socialSecurityNumber,worker.name,destinationNameList[i],departureTimeFromISList[j],departureTimeToISList[j])
                 elif worker.position == "Copilot" and worker.socialSecurityNumber not in assistingPilotList:
                     avaialbleWorkerString += "\n{:10s} | {:20s} | {:22s}".format(worker.socialSecurityNumber,worker.name,worker.position)
                 elif worker.position == "Copilot" and worker.socialSecurityNumber in assistingPilotList:
                     for i in range(len(assistingPilotList)):
                         if assistingPilotList[i] == worker.socialSecurityNumber: 
                             unAvaialbleWorkerString += "\n{:10s} | {:20s} | {:22s}".format(worker.socialSecurityNumber,worker.name,destinationNameList[i])
-                    for i in range(len(mainPilotList)):
-                        print(mainPilotList[i])
-                        for j in range(len(departureTimeFromISList)):
-                            print(departureTimeFromISList[j])
-                            if departureTimeFromISList[j] == departureTimeFromIS2 and assistingPilotList[i] == worker.socialSecurityNumber:
-                                weekWorkerString += "\n{:10s} | {:20s} | {} | {} | {}".format(worker.socialSecurityNumber,worker.name,destinationNameList[i],departureTimeFromISList[j],departureTimeToISList[j])
             elif pos == "Attendant":
                 if worker.position == "Flight Service Manager" and worker.socialSecurityNumber not in mainFlightAttendantList:
                     avaialbleWorkerString += "\n{:10s} | {:20s} | {:22s}".format(worker.socialSecurityNumber,worker.name,worker.position)
@@ -274,11 +248,39 @@ class WorkerLL():
                 return "All workers seem to be unavailable at this date!"
             else:
                 return printString + avaialbleWorkerString + "\n"
-        elif status == "WEEK":
-            return weekWorkerString
+    
+    """def listWorkerVoyagesByWeek(self, ssn, year, week, pos): 
+        weekdays = []
+        day = "{}-W{}".format(year, week)
+        firstWeekday = datetime.strptime(day + '-1', "%Y-W%W-%w")
+        for i in range(7):
+            weekdays.append(firstWeekday + timedelta(days = i))
+        workerList = WorkerLL.get_worker_list(self) #All workers
+        voyageList = self.IOAPI.request_voyages() #All voyages
+        flightRouteList = self.IOAPI.getAllFlightRouteInstances()
+        for voyage in voyageList:
+            destinationID = voyage.flightRouteID 
+            for flightroute in flightRouteList:
+                if flightroute.flightRouteID == destinationID:
+                    print(flightroute.country)
+            departureFromIS = datetime.strptime(voyage.departureFromIS, '%Y-%m-%d %H:%M:%S')
+            if departureFromIS.date() in weekdays:
+                print(voyage)
+                for worker in workerList:
+                    if pos == "Pilot":
+                        if worker.position == "Captain" and worker.socialSecurityNumber == ssn:
+                            print(worker)
+                        elif worker.position == "Copilot" and worker.socialSecurityNumber == ssn:
+                            print(worker)
+                    elif pos == "Attendant":
+                        if worker.position == "Flight Service Manager" and worker.socialSecurityNumber == ssn:
+                            print(worker)
+                        elif worker.position == "Flight Attendant" and worker.socialSecurityNumber == ssn:
+                            print(worker)
+        return "HALLO" """
 
     
-    def listWorkerVoyagesByWeek(self, ssn, year, week, pos): 
+    """def listWorkerVoyagesByWeek(self, ssn, year, week, pos): 
         pass
         #Fá user til þess að velja ssn
         #Fá user til þess að velja ár
@@ -290,6 +292,8 @@ class WorkerLL():
         for i in range(7):
             weekday = firstWeekday + timedelta(days = i)
             string += WorkerLL.listWorkersbydate(self, weekday, pos, "WEEK")
-        return "\n\n{:^10s} | {:^20s} | {:^22s}".format("SSN", "NAME", "FLIGHT DESTINATION") + string
+        return "\n\n{:^10s} | {:^20s} | {:^22s}".format("SSN", "NAME", "FLIGHT DESTINATION") + string"""
+
+        
        
 

@@ -44,8 +44,8 @@ class View():
             if viewFlightRoutesOutput == "b":
                 viewMenuInput = View.viewMenu(self)
         elif viewMenuInput == "4":
-            # viewVoyagesOutput = View.viewVoyages(self)
-            print("voyages functionality isnt there yet :(. this print is found in view.py")
+            viewVoyagesOutput = View.viewVoyages(self)
+            #print("voyages functionality isnt there yet :(. this print is found in view.py")
             viewVoyagesOutput = "b"  # delete this line and the line above and un-comment the line above that when rdy
             if viewVoyagesOutput == "b":
                 viewMenuInput = View.viewMenu(self)
@@ -313,16 +313,21 @@ class View():
             print(voyage)
             viewVoyagesInput = View.viewVoyages(self)
         elif viewVoyagesInput == "2":
-            voyages = UIAPI.UIAPI.viewAllVoyages(self)
+            voyages = UIAPI.UIAPI.viewallVoyages(self)
             printObjects(voyages)
             viewVoyagesInput = View.viewVoyages(self)
         elif viewVoyagesInput == "3":
-            allVoyagesDay = UIAPI.UIAPI.viewallVoyagesDay(self, day)
-            printObjects(allVoyagesDay)
+            voyageDate = input("  - Input date (f.x. 24/12/2019): ")
+            day, month, year = map(int, voyageDate.split('/'))
+            voyageDate = datetime.datetime(year, month, day)
+            allVoyagesDay = UIAPI.UIAPI.viewallVoyagesDay(self, voyageDate)
+            print(allVoyagesDay)
             viewVoyagesInput = View.viewVoyages(self)
         elif viewVoyagesInput == "4":
-            allVoyagesWeek = UIAPI.UIAPI.viewallVoyagesWeek(self, week)
-            printObjects(allVoyagesWeek)
+            voyageYear = input("Input year: ")
+            voyagetWeek = input("Input week of the year: ")
+            allVoyagesWeek = UIAPI.UIAPI.viewallVoyagesWeek(self, voyageYear, voyagetWeek)
+            print(allVoyagesWeek)
             viewVoyagesInput = View.viewVoyages(self)
         elif viewVoyagesInput == "b":
             return viewVoyagesInput
