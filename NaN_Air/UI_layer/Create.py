@@ -24,19 +24,44 @@ class Create():
         flightList.append(departureDateTime)
         return flightList
 
-    def addCrew(self):
+    def addCrew(self, flightID, secondFlightID):
+        # get date of both flights.
+        dateOut = UIAPI.UIAPI.getDateFromFlightID(self, flightID)
+        dateBack = UIAPI.UIAPI.getDateFromFlightID(self, secondFlightID)
         print("\nAdd Crew")
-        captain = int(input("  - Captains social security number: "))
-        copilot = int(input("  - Copilots social security number: "))
-        flightServiceManager = int(input("  - Flight service managers social security number: "))
-        flightAttendants = []
+        captain = input("  - Captains social security number: ")
+        results = UIAPI.UIAPI.verifyStaffForVoyage(self, "Captain", captain, dateOut, dateBack)
+        if type(results) == str:
+            print(results)
+            print("You can try adding a captain later in the update menu, for now the captain is empty")
+            captain = ""
+        copilot = input("  - Copilots social security number: ")
+        results = UIAPI.UIAPI.verifyStaffForVoyage(self, "Copilot", copilot, dateOut, dateBack)
+        if type(results) == str:
+            print(results)
+            print("You can try adding a Copilot later in the update menu, for now the captain is empty")
+            copilot = ""
+        flightServiceManager = input("  - Flight service managers social security number: ")
+        results = UIAPI.UIAPI.verifyStaffForVoyage(self, "Flight Service Manager", flightServiceManager, dateOut, dateBack)
+        if type(results) == str:
+            print(results)
+            print("You can try adding a Manager later in the update menu, for now the captain is empty")
+            flightServiceManager = ""
+        flightAttendants = ""
         while True:
             flightAttendant = input("  - Flight attendants social security number(q to stop adding attendants): ")
             flightAttendant = flightAttendant.lower()
             if flightAttendant == "q":
                 break
             else:
-                flightAttendants.append(flightAttendant)
+                results = UIAPI.UIAPI.verifyStaffForVoyage(self, "Flight Attendant", flightAttendant, dateOut, dateBack)
+                if type(results) == str:
+                    print(results)
+                else:
+                    if len(flightAttendants) == 0:
+                        flightAttendants = flightAttendant
+                    else:
+                        flightAttendants += "/" + flightAttendant
         return captain, copilot, flightServiceManager, flightAttendants
 
     def createVoyageMenu(self):
@@ -52,14 +77,34 @@ class Create():
 --------------------------------------------
 Please input the following information:''')
             voyageList = []
-            flightOutId = int(input("  - Flight from Iceland ID: "))
+            flightOutId = input("  - Flight from Iceland ID: ")
+            # validate flight out id exists and isn't being used
+            validID = UIAPI.UIAPI.viewCertainFlightByID(self, flightOutId)
+            if type(validID) == str:
+                print("Error! that flight ID doesn't exist.")
+                return createVoyageMenuInput
+            usedID = UIAPI.UIAPI.checkIfAlreadyUsed(self, flightOutId)
+            if usedID:
+                print("Error! that flight ID is already being used by another voyage.")
+                return createVoyageMenuInput
             voyageList.append(flightOutId)
-            flightBackId = int(input("  - Flight to Iceland ID: "))
+            flightBackId = input("  - Flight to Iceland ID: ")
+            # validate flight back id exists and isn't being used
+            validID = UIAPI.UIAPI.viewCertainFlightByID(self, flightBackId)
+            if type(validID) == str:
+                print("Error! that flight ID doesn't exist.")
+                return createVoyageMenuInput
+            usedID = UIAPI.UIAPI.checkIfAlreadyUsed(self, flightBackId)
+            if usedID:
+                print("Error! that flight ID is already being used by another voyage.")
+                return createVoyageMenuInput
             voyageList.append(flightBackId)
-            # gets the flights and validates  that they exist
+
+
+            # adds crew
             addCrewInput = input("Do you want to add a crew to the voyage? (y/n)")
             if addCrewInput.lower() == "y":
-                captain, copilot, flightServiceManager, flightAttendants = Create.addCrew(self)
+                captain, copilot, flightServiceManager, flightAttendants = Create.addCrew(self, flightOutId, flightBackId)
             elif addCrewInput.lower() == "n":
                 captain, copilot, flightServiceManager, flightAttendants = "", "", "", ""
             print("Crew successfully Added!")
@@ -72,9 +117,10 @@ Please input the following information:''')
             voyageInstance = UIAPI.UIAPI.createNewVoyage(self, voyageList)
             print("Voyage successfully created!")
             # Prints out Voyage info
-            print(voyageList)
+            print(voyageInstance)
             print("--------------------------------------------")
             return createVoyageMenuInput
+
         elif createVoyageMenuInput == "2":
             print('''4.2. Create voyage by creating 2 flights
 --------------------------------------------
@@ -104,7 +150,11 @@ Please input the following information:''')
             # print(flightBackList)
             addCrewInput = input("Do you want to add a crew to the voyage? (y/n)")
             if addCrewInput.lower() == "y":
-                captain, copilot, flightServiceManager, flightAttendants = Create.addCrew(self)
+                # get flight ids
+                supposedNextID = UIAPI.UIAPI.nextFlightID(self)
+                flight1ID = int(supposedNextID)-1
+                flight2ID = int(supposedNextID)-2
+                captain, copilot, flightServiceManager, flightAttendants = Create.addCrew(self, flight1ID, flight2ID)
             elif addCrewInput.lower() == "n":
                 captain, copilot, flightServiceManager, flightAttendants = "", "", "", ""
             print("Crew successfully Added!")

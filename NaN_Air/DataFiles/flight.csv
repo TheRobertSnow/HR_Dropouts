@@ -26,3 +26,11 @@ Flight ID,Flight number,Airplane registration number,Origin ID,Destination ID,Fl
 25,NA0217,test-test,2,1,On schedule,2:00,2020-01-28 12:30:00,2020-01-28 14:30:00
 26,NA0218,test-test,1,2,On schedule,2:00,2020-03-03 04:23:00,2020-03-03 06:23:00
 27,NA0219,test-test,2,1,On schedule,2:00,2020-03-07 23:40:00,2020-03-08 01:40:00
+28,NA0220,test-test,1,2,On schedule,2:00,2020-08-25 12:30:00,2020-08-25 14:30:00
+29,NA0221,test-test,2,1,On schedule,2:00,2020-08-25 15:55:00,2020-08-25 17:55:00
+30,NA0222,test-test,1,2,On schedule,2:00,2020-08-25 10:15:00,2020-08-25 12:15:00
+31,NA0223,test-test,2,1,On schedule,2:00,2020-08-25 22:15:00,2020-08-26 00:15:00
+32,NA0224,test-test,1,2,On schedule,2:00,2022-08-08 15:55:00,2022-08-08 17:55:00
+33,NA0225,test-test,2,1,On schedule,2:00,2022-08-15 12:30:00,2022-08-15 14:30:00
+34,NA0226,test-test,1,2,On schedule,2:00,2020-07-07 14:30:00,2020-07-07 16:30:00
+35,NA0227,test-test,2,1,On schedule,2:00,2020-07-08 22:40:00,2020-07-09 00:40:00

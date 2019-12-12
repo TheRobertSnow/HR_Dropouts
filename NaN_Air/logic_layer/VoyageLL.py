@@ -144,7 +144,7 @@ class VoyageLL():
             dateCompare = dateCompare.split(" ")[0]
             if dateCompare == date:
                 if i.mainFlightAttendant == pilotToAddInput:  # check if already main pilot
-                    return "Error! that pilot is booked for that day."
+                    return "Error! that Main Flight attendant is booked for that day."
         # verify if he has the correct license(B Krafa geyma fyrir ef tími er)
         if type(instance) == str:
             return "Voyage was not found"
@@ -185,9 +185,57 @@ class VoyageLL():
                 except ValueError:
                     pass
                 if pilotToAddInput in flightAttendantList:  # check if already main pilot
-                    return "Error! that pilot is booked for that day."
+                    return "Error! that flight attendant is booked for that day."
         # verify if he has the correct license(B Krafa geyma fyrir ef tími er)
         if type(instance) == str:
             return "Voyage was not found"
         # request to update the file and instance.
         return self.IOAPI.updateVoyage(instance, "Flight attendants", pilotToAddInput)
+
+    def checkIfIdUsed(self, flightID):
+        voyageList = self.IOAPI.request_voyages()
+        for voyage in voyageList:
+            if voyage.flightBackID == flightID:
+                return True
+            elif voyage.flightOutID == flightID:
+                return True
+        return False
+
+    def verifyStaff(self, theKey, SSN, dateOut, dateBack):
+        """checks if a worker is eligible for the voyage you are trying to add him to, returns a string with
+            a error message if it doesnt, otherwise we return None"""
+        # check if staff member has the correct position
+        doesntExist = True
+        workerList = self.IOAPI.request_workers()
+        for worker in workerList:
+            if worker.socialSecurityNumber == SSN:
+                doesntExist = False
+                if str(worker.position) != str(theKey):
+                    return "Error! that worker doesn't have the correct position."
+        if doesntExist:
+            return "Error! we couldn't find any worker with that SSN."
+        # check if the staff member is already booked for those days
+        voyageList = self.IOAPI.request_voyages()
+        # check if the dates overlap for the same pilot
+        for i in voyageList:
+            dateCompare = i.departureFromIS
+            dateCompare = dateCompare.split(" ")[0]
+            if dateCompare == dateOut or dateCompare == dateBack:
+                if theKey == "Captain":
+                    if i.mainPilot == SSN:  # check if already booked
+                        return "Error! that pilot is booked for that day."
+                elif theKey == "Copilot":
+                    if i.assistingPilot == SSN:  # check if already booked
+                        return "Error! that pilot is booked for that day."
+                elif theKey == "Flight Service Manager":
+                    if i.mainFlightAttendant == SSN:  # check if already main pilot
+                        return "Error! that Flight Service Manager is booked for that day."
+                elif theKey == "Flight Attendant":
+                    flightAttendantList = i.flightAttendants
+                    try:
+                        flightAttendantList = flightAttendantList.split("/")
+                    except ValueError:
+                        pass
+                    if SSN in flightAttendantList:  # check if already main pilot
+                        return "Error! that pilot is booked for that day."
+        return None

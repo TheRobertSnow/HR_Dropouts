@@ -89,3 +89,23 @@ class FlightLL():
         flight = self.flightIO.updateFlightDepartureTime(newDepartureTime)
         self.automatically_change_flight_status()
         return flight
+
+    def getCertainFlightFromID(self, flightOutId):
+        self.__flightList = self.flightIO.getAllFlightInstances()
+        for instance in self.__flightList:
+            if str(instance.flightID) == str(flightOutId):
+                return instance
+        return "No flight with that ID found"
+
+    def getNextFlightID(self):
+        return self.flightIO.getNextFlightID()
+
+    def getDate(self, flightID):
+        self.__flightList = self.flightIO.getAllFlightInstances()
+        for instance in self.__flightList:
+            if str(instance.flightID) == str(flightID):
+                date = instance.departureTime
+                date = str(date)
+                date = date.split(" ")[0]
+                return date
+        return "Error! couldn't find a matching ID"
