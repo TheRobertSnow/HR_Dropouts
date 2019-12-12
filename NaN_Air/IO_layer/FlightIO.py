@@ -192,8 +192,8 @@ class FlightIO():
     def createNewFlight(self, flightList):
         """creates a new airplane instance and writes the airplane to the csv, then it returns the new
             airplane object"""
-        orderedDict = self.write_flight_to_file(flightList)
-        return orderedDict
+        flightInstance = self.write_flight_to_file(flightList)
+        return flightInstance
 
 
 class Flight:

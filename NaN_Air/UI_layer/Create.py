@@ -4,7 +4,7 @@ class Create():
     def __init__(self):
         self.uiapi = UIAPI.UIAPI()
 
-    def createFlight(airplane=None, origin=None, destination=None):
+    def createFlight(self,airplane=None, origin=None, destination=None):
         flightList = []
         if airplane == None:
             airplane = input("  - Airplane registration number: ")
@@ -43,6 +43,7 @@ class Create():
 --------------------------------------------
   1. Create voyage using existing flights
   2. Create voyage by creating 2 flights
+  3. Create duplicates of an existing voyage.
 --------------------------------------------''')
         createVoyageMenuInput = input("Input choice(q to Quit, b for Back): ")
         createVoyageMenuInput = createVoyageMenuInput.lower()
@@ -74,6 +75,7 @@ Please input the following information:''')
             print(voyageList)
             print("--------------------------------------------")
             return createVoyageMenuInput
+
         elif createVoyageMenuInput == "2":
             print('''4.2. Create voyage by creating 2 flights
 --------------------------------------------
@@ -118,13 +120,46 @@ Please input the following information:''')
             print(voyageInstance)
             print("--------------------------------------------")
             return createVoyageMenuInput
+
+        elif createVoyageMenuInput == "3":  # Duplicate old voyage.
+            print("""Create duplicate voyage(s) from existing voyages.
+Begin by selecting ID of a existing voyage.
+--------------------------------------------""")
+            userInput = input(" - Input voyage ID: ")
+            while True:
+                voyageExists = UIAPI.UIAPI.checkVoyageExists(self, userInput)
+                if voyageExists == True:
+                    break
+                else:
+                    userInput = input("Voyage does not exist...\n - Input voyage ID: ")
+            dateList = []
+            while True:
+                dateInput = input(" - Input date (e.g. 07/03/2019) (s to stop)\n - Input: ")
+                if dateInput.lower() == "s":
+                    break
+                else:
+                    day, month, year = map(int, dateInput.split('/'))
+                    dateInput = datetime.datetime(year, month, day)
+                    dateList.append(dateInput)
+            argumentList = [userInput, dateList]
+            returnMessage = UIAPI.UIAPI.createDuplicateVoyages(self, argumentList)
+            print(returnMessage)
+
+
+
+
+
+
         elif createVoyageMenuInput == "b":
             return createVoyageMenuInput
+
         elif createVoyageMenuInput == "q":
             return createVoyageMenuInput
+
         else:
             print("Wrong input, try again")
             createVoyageMenuInput = Create.createVoyageMenu(self)
+
         return createVoyageMenuInput
 
     def createMenu(self):
@@ -236,7 +271,7 @@ Please input the following information:''')
             print('''5. Create Flight
 --------------------------------------------
 Please input the following information:''')
-            flightList = Create.createFlight()  # Creates a list for createNewFlight
+            flightList = Create.createFlight(self)  # Creates a list for createNewFlight
             result = UIAPI.UIAPI.createNewFlight(self, flightList)
             print(result)
             print("--------------------------------------------")

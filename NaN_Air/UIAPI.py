@@ -197,6 +197,12 @@ class UIAPI:
         # TODO
         pass
 
+    def checkVoyageExists(self, voyageID):
+        return self.voyageLL.checkVoyageExists(voyageID)
+
+    def createDuplicateVoyages(self, argumentList):
+        return self.voyageLL.createDuplicateVoyages(argumentList)
+
     #
     # flight route related
     #

@@ -84,7 +84,6 @@ class VoyageIO:
         for i in updatedList:
             returnList.append(i)
         for flight in self.flightList:
-            print(flight)
             if int(flight.flightID) == int(returnList[0]):
                 returnList.append(flight.destinationID)
                 returnList.append(flight.departureTime)

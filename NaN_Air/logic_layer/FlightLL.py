@@ -33,7 +33,10 @@ class FlightLL():
                 timeFrameEnd = flightList[5] + timedelta(minutes = 5)
                 for instance in self.__flightList:
                     if instance.originID == "1":
-                        departureTime = datetime.strptime(instance.departureTime, '%Y-%m-%d %H:%M:%S')
+                        dt = instance.departureTime
+                        if type(instance.departureTime) != str:
+                            dt = instance.departureTime.__str__()
+                        departureTime = datetime.strptime(dt, '%Y-%m-%d %H:%M:%S')
                         if departureTime >= timeFrameStart and departureTime <= timeFrameEnd:
                             return "There is another flight from iceland at {} so the departure time you input is not valid".format(instance.departureTime)
             else:
