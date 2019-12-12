@@ -26,10 +26,8 @@ class IOAPI:
     def updateWorker(self, instance, key, newValue):
         return self.workerIO.updateCertainWorker(instance, key, newValue)
 
-    def updatePlane(self, planeInstance, newStatus):
-        """takes in the instance of the plane and the new status and sends it back, returns the updated object"""
-        return self.airplaneIO.UpdateCertainAirplane(planeInstance, newStatus)
-
+    def request_voyagestoWorker(self):
+        return self.voyageIO.get_voyages()
 
     #
     # Airplane
@@ -74,16 +72,22 @@ class IOAPI:
     def request_voyages(self):
         return self.voyageIO.get_voyages()
 
+    def updateVoyage(self, theObject, theKey, newValue):
+        return self.voyageIO.updateCertainVoyage(theObject, theKey, newValue)
+
+
     #
     # Flight
     #
-
+    def automatically_change_flight_status(self):
+        return self.flightIO.automatically_change_flight_status()
+    
     def getFlightNumber(self, originID, destinationID, departureTime):
         """Send request to FlightIO to get flight number"""
         return self.flightIO.get_flight_number(originID, destinationID, departureTime)
 
     def createNewFlight(self, flightList):
-        return self.flightIO.createNewFlight(flightList)
+        return self.flightIO.write_flight_to_file(flightList)
 
     def getHighestFlightID(self):
         return self.workerIO.getNextID()
@@ -100,9 +104,14 @@ class IOAPI:
     def getAllFlightInstances(self):
         return self.flightIO.get_flights()
 
+    def getNextFlightID(self):
+        return self.flightIO.getNextID()
+
     def send_instance_to_voyage(self):
         """This methood is for sending pointers to the instance lists of
         workers, flights, airplanes and flight routes to voyage."""
         # self.voyages.get_other_class_instances(self.request_airplanes()
         # , self.request_flights(), self.request_workers(), self.request_flight_routes())
         print("")
+
+

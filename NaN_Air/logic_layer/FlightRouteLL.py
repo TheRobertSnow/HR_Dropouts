@@ -13,6 +13,7 @@ class FlightRouteLL():
         for instance in self.flightRoute:
             if flightID == instance.flightRouteID:
                 return instance
+        return "Flight route not found !"
 
     def getAllFlightRoutes(self):
         return self.__flightRouteList
@@ -24,6 +25,11 @@ class FlightRouteLL():
     def createNewFlightRoute(self, flightRouteList):
         "List of strings and ints, information on flight route"
         "flight route list = str fx (Flight route succesfully created)"
+        try:
+            flightRouteList[2] = int(flightRouteList[2])
+        except ValueError:
+            return "Error: Flight distance must be a whole number! "
+        
         flightRoute = self.ioAPI.createNewFlightRoute(flightRouteList)
         print("\nNow there are", len(self.__flightRouteList), "Flight Route objects in system\n")
         return flightRoute
@@ -31,4 +37,3 @@ class FlightRouteLL():
     def viewFlightRoute(self, voyageID):
         pass
 
-    

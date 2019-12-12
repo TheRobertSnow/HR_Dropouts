@@ -17,7 +17,7 @@ class UIAPI:
     # plane related
     #
     def createNewAirplane(self, airplaneList):
-        """takes in airplaneList, and you return us the created instance"""
+        """Takes in a list of airplane qualities and creates an instance of that airplane and returns."""
         returnString = self.airplaneLL.createNewAirplane(airplaneList)
         return returnString
 
@@ -37,7 +37,7 @@ class UIAPI:
         return returnData
 
     #
-    # worker related
+    # worker retard
     #
     def createNewWorker(self, workerList):
         """takes in workerList, but ID, Active and Available are not in this list so they have to be automatically filled by you guys"""
@@ -54,6 +54,10 @@ class UIAPI:
         returnData = self.workerLL.findWorkerByPOS(positionWeWantToPrint)
         return returnData
 
+    def viewWorkersByPlaneLicence(self, planeLicence):
+        returnData = self.workerLL.findWorkerByPlaneLicence(planeLicence)
+        return returnData
+
 
     def viewAllWorkers(self):
         """give us all worker instances, would be nice if we can get 5 at a time or something instead of all at once"""
@@ -68,16 +72,8 @@ class UIAPI:
         returnData = self.workerLL.updateWorker(socialSecurityNumber, akey, newValue)
         return returnData
 
-    def listAvailableWorkersbydate(self, date, pos = ""):
-        """We give you a date and you return to us all workers who are not active and available on that date.
-        Can also take in position to filter staff type we want to return"""
-        returnData = self.workerLL.listAvailableWorkersbydate(date, pos)
-        return returnData
-
-    def listUnavailableWorkersbydate(self, date, pos = ""):
-        """We give you a date and you return to us all workers who are active on that date.
-        Can also take in position to filter staff type we want to return"""
-        returnData = self.workerLL.listUnavailableWorkersbydate(date, pos)
+    def listWorkersbydate(self, date, pos, status):
+        returnData = self.workerLL.listWorkersbydate(date, pos, status)
         return returnData
 
     def viewallVoyagesInWeek(self, week, pos):
@@ -104,13 +100,13 @@ class UIAPI:
         returnData = self.flightLL.getAllFlights()
         return returnData
 
-    def viewFlightsByStatus(self, status):
+    def viewFlightsByStatuses(self, statuses):
         """give us all flight instances that dont have a certain status"""
-        returnData = self.flightLL.viewFlightsByStatus(status)
+        returnData = self.flightLL.viewFlightsByStatuses(statuses)
         return returnData
 
     def updateFlightStatus(self, flightlist):
-        """we give you a new status of a certain flight and you update the instance and the csv file according to that"""
+        """we give you a new status of a certain flight and you update the instance and the csv file accordingly"""
         returnData = self.flightLL.updateFlightStatus(flightlist)
         return returnData
 
@@ -118,6 +114,17 @@ class UIAPI:
         """we give you a new departure time and you update the instance and the csv file according to that"""
         returnData = self.flightLL.updateFlightDepartureTime(newDepartureTime)
         return returnData
+
+    def viewCertainFlightByID(self, flightID):
+        return self.flightLL.getCertainFlightFromID(flightID)
+
+    def nextFlightID(self):
+        """returns the id that will be used in the next flight created"""
+        return self.flightLL.getNextFlightID()
+
+    def getDateFromFlightID(self, flightID):
+        """returns the Date of a flight that matches the ID this method receives"""
+        return self.flightLL.getDate(flightID)
     #
     # voyage related
     #
@@ -126,7 +133,7 @@ class UIAPI:
 
     def viewVoyage(self, voyageID):
         """Uses voyageID to view a certain voyage"""
-        returnData = self.flightRouteLL.viewFlightRoute(voyageID)
+        returnData = self.voyageLL.viewVoyage(voyageID)
         return returnData
 
     def viewallVoyages(self):
@@ -139,6 +146,9 @@ class UIAPI:
         um hvort að það sé fullmannað á þeim degi"""
         returnData = self.voyageLL.viewallVoyagesDay(day)
         return returnData
+
+    def verifyStaffForVoyage(self, theKey, SSN, dateOut, dateBack):
+        return self.voyageLL.verifyStaff(theKey, SSN, dateOut, dateBack)
 
     def viewallVoyagesWeek(self, week):
         """Listar öll voyages í ákveðinni viku og hvort að þau séu fullmönnuð, svo
@@ -156,31 +166,6 @@ class UIAPI:
     def requestVoyagePilots(self, voyageID):
         """asks to be returned the instances of pilots related to the ID i send"""
         return self.voyageLL.requestPilots(voyageID)
-
-    def addPilotVoyage(self, voyageID, pilotToAddInput):
-        """requests to add a new pilot to in the voyageID sent, return the updated Voyage instance"""
-        # TODO
-        pass
-
-    def removePilotVoyage(self, voyageID, pilotToRemoveInput):
-        """requests to remove a pilot from a Voyage, return the updated voyage instance"""
-        # TODO
-        pass
-
-    def requestVoyageCrew(self, voyageID):
-        """requests to be returned all instances of crew members on a specific voyageID"""
-        # TODO
-        pass
-
-    def addCrewVoyage(self, voyageID, crewToAddInput):
-        """requests to add a new crew member in the voyageID, returns the updated voyage instance"""
-        # TODO
-        pass
-
-    def removeCrewVoyage(self, voyageID, crewToRemoveInput):
-        """requests to remove crew member"""
-        # TODO
-        pass
 
     def requestFromIceFlightNumb(self, voyageID):
         """requests to be returned the flight Number that departures from Iceland"""
@@ -203,6 +188,20 @@ class UIAPI:
     def createDuplicateVoyages(self, argumentList):
         return self.voyageLL.createDuplicateVoyages(argumentList)
 
+    def addFlightAttendantVoyage(self, voyageID, pilotToAddInput):
+        return self.voyageLL.addFlightAttendantToVoyage(voyageID, pilotToAddInput)
+
+    def addMainFlightAttendantVoyage(self, voyageID, pilotToAddInput):
+        return self.voyageLL.addMainFlightAttendantToVoyage(voyageID, pilotToAddInput)
+
+    def addCoPilotVoyage(self, voyageID, pilotToAddInput):
+        return self.voyageLL.addCopilotToVoyage(voyageID, pilotToAddInput)
+
+    def addCaptainVoyage(self, voyageID, pilotToAddInput):
+        return self.voyageLL.addCaptainToVoyage(voyageID, pilotToAddInput)
+
+    def checkIfAlreadyUsed(self, flightID):
+        return self.voyageLL.checkIfIdUsed(flightID)
     #
     # flight route related
     #
@@ -231,9 +230,6 @@ class UIAPI:
         """Listar öll destinations, viljum fá lista eða dict með "Country: Airport", ef það meikar sens"""
         pass
 
-    def viewCertainFlightRoute(self, flightRouteID):
-        """ TODO i need to be returned the flight route instance, if it doesn't exist return a the string 'Flight route doesn't exist'"""
-        pass
 
 
 # ++++++++++ Test Case ++++++++++
