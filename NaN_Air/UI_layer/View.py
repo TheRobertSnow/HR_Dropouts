@@ -234,7 +234,10 @@ class View():
             return viewManagersInput
         elif viewManagersInput == "2":
             allManagers = UIAPI.UIAPI.viewWorkerByPOS(self, "Manager")
-            printObjects(allManagers)
+            if type(allManagers) == str:
+                print(allManagers)
+            else:
+                printObjects(allManagers)
             return viewManagersInput
         elif viewManagersInput == "b":
             return viewManagersInput

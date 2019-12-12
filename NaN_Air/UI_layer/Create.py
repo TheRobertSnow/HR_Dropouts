@@ -257,23 +257,23 @@ Please input the following information:''')
             print('''\n  Select worker position
     1. Captain
     2. Copilot
-    3. Flight service manager
-    4. Flight attendant
-    5. Staff manager
-    6. Trip manager''')
+    3. Flight Service Manager
+    4. Flight Attendant
+    5. Staff Manager
+    6. Trip Manager''')
             position = input("  - Input choice: ")
             if position == "1":
                 createWorkerList.append("Captain")
             elif position == "2":
                 createWorkerList.append("Copilot")
             elif position == "3":
-                createWorkerList.append("Flight service manager")
+                createWorkerList.append("Flight Service Manager")
             elif position == "4":
-                createWorkerList.append("Flight attendant")
+                createWorkerList.append("Flight Attendant")
             elif position == "5":
-                createWorkerList.append("Staff manager")
+                createWorkerList.append("Staff Manager")
             elif position == "6":
-                createWorkerList.append("Trip manager")
+                createWorkerList.append("Trip Manager")
             else:
                 createWorkerList.append("Stupid User")
             if position != "1" or position != "2":

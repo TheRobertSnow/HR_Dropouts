@@ -102,7 +102,7 @@ class WorkerLL():
                 if instance.position == "Staff manager" or instance.position == "Trip manager":
                     positionList.append(instance)
         if len(positionList) == 0:
-            positionList = "No {}'s found!.".format(position)
+            positionList = "\nNo {}'s found!\n".format(position)
         return positionList
 
     def findWorkerByPlaneLicence(self, plane_Licence):
@@ -231,12 +231,12 @@ class WorkerLL():
                             unAvaialbleWorkerString += "\n{:10s} | {:20s} | {:22s}".format(worker.socialSecurityNumber,worker.name,destinationNameList[i])
         if status == "Unavailable":
             if len(unAvaialbleWorkerString) == 0:
-                return "There are no workers working on that date!"
+                return "\nThere are no workers working on that date!\n"
             else:
                 return printString + unAvaialbleWorkerString + "\n"
         elif status == "Available":
             if len(avaialbleWorkerString) == 0:
-                return "All workers seem to be unavailable at this date!"
+                return "\nAll workers seem to be unavailable at this date!\n"
             else:
                 return printString + avaialbleWorkerString + "\n"
 
@@ -287,8 +287,8 @@ class WorkerLL():
                                     if worker.socialSecurityNumber == ssn:
                                         workerVoyageString += "\n{}    | {}  | {}".format(departureFromIS, departureToIS, destinationNameList[int(destinationID)-1])
         if len(workerInfo) == 0:
-            return "No worker found with that id!"
+            return "\nNo worker found with that id!\n"
         elif len(workerVoyageString) == 0:
-            return "Worker with that id has no voyages on schedule!"
+            return "\nWorker with that id has no voyages on schedule!\n"
         else:
             return workerInfo + workerVoyageString + "\n"
