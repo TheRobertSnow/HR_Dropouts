@@ -76,10 +76,9 @@ class UIAPI:
         returnData = self.workerLL.listWorkersbydate(date, pos, status)
         return returnData
 
-    def viewallVoyagesInWeek(self, week, pos):
-        """We give you a week and position, either "Pilot" or "Attendant" and you return all
-        voyages of that pilot or attendant in a given week. If the """
-        pass
+    def viewallVoyagesInWeek(self, ssn, year, week, pos):
+        returnData = self.workerLL.listWorkerVoyagesByWeek(ssn, year, week, pos)
+        return returnData
 
     #
     # flight related
