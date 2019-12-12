@@ -295,17 +295,19 @@ class VoyageLL():
                 return True
         return False
 
-    def verifyStaff(self, theKey, SSN, dateOut, dateBack):
+    def verifyStaff(self, theKey, SSN, dateOut, dateBack, flightID):
         """checks if a worker is eligible for the voyage you are trying to add him to, returns a string with
             a error message if it doesnt, otherwise we return None"""
         # check if staff member has the correct position
         doesntExist = True
+        planeLicence = ""  # for checking plane licence
         workerList = self.IOAPI.request_workers()
         for worker in workerList:
             if worker.socialSecurityNumber == SSN:
                 doesntExist = False
                 if str(worker.position) != str(theKey):
                     return "Error! that worker doesn't have the correct position."
+                planeLicence = worker.planeLicence
         if doesntExist:
             return "Error! we couldn't find any worker with that SSN."
         # check if the staff member is already booked for those days
@@ -333,5 +335,18 @@ class VoyageLL():
                     if SSN in flightAttendantList:  # check if already main pilot
                         return "Error! that pilot is booked for that day."
         if theKey == "Captain" or theKey == "Copilot": # checking plane licence
-
+            flightList = self.IOAPI.getAllFlightInstances()
+            requiredLicence = ""
+            planeReg = ""
+            # get the plane reg
+            for i in flightList:
+                if i.flightOutID == flightID:
+                    planeReg = i.planeRegistration
+            # get the plane licence required
+            planeList = self.IOAPI.request_airplanes()
+            for i in planeList:
+                if planeReg == i.planeRegistration:
+                    requiredLicence = str(i.manufacturer) + str(i.model)
+            if requiredLicence != planeLicence:
+                return "Error! pilot doesn't have the required licence"
         return None
