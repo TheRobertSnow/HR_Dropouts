@@ -32,21 +32,21 @@ class AirplaneLL:
         odometer = 4
         # testing all values
         if "-" not in newPlaneList[reg]:  # testing register
-            return "plane creation unsuccessful, all plane registrations must have a '-'!"
+            return "\nAirplane creation unsuccessful, all plane registrations must have a '-'!\n"
 
         try:  # testing odometer
             tester = int(newPlaneList[odometer])
         except ValueError:
-            return "plane creation unsuccessful, odometer value can only have integers."
+            return "\nAirplane creation unsuccessful, odometer value can only have integers.\n"
 
         try:  # testing seats
             tester = int(newPlaneList[seats])
         except ValueError:
-            return "plane creation unsuccessful, seats value can only have integers."
+            return "\nAirplane creation unsuccessful, seats value can only have integers.\n"
 
         for instance in self.__airplanes:  # testing if reg already exists
             if instance.planeRegistration == newPlaneList[reg]:
-                return "plane creation unsuccessful, that register already exists in our system."
+                return "\nAirplane creation unsuccessful, that register already exists in our system.\n"
 
         newPlaneObject = self.__IOAPI.createNewAirplane(newPlaneList)
         self.__airplanes = AirplaneLL.get_airplane_list(self)  # update our list of plane objects
@@ -63,4 +63,4 @@ class AirplaneLL:
                 updatedObject = self.__IOAPI.updatePlane(instance, newStatus)
                 self.__airplanes = AirplaneLL.get_airplane_list(self)  # update our list of plane objects
                 return updatedObject
-        return "Plane register not found. could not update"
+        return "\nAirplane register not found. could not update\n"

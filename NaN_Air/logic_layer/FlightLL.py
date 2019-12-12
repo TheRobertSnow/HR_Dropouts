@@ -25,7 +25,7 @@ class FlightLL():
             if int(flightList[2]) <= len(flightrouteInstances):
                 travelTime = self.flightIO.getTravelTime(flightList[2])
             else:
-                return "There does not exist a flight route with the id {}".format(flightList[2])
+                return "\nThere does not exist a flight route with the id {}\n".format(flightList[2])
         elif flightList[2] == "1":
             if int(flightList[3]) <= len(flightrouteInstances):
                 travelTime = self.flightIO.getTravelTime(flightList[3])
@@ -40,9 +40,9 @@ class FlightLL():
                         if departureTime >= timeFrameStart and departureTime <= timeFrameEnd:
                             return "There is another flight from iceland at {} so the departure time you input is not valid".format(instance.departureTime)
             else:
-                return "There does not exist a flight route with the id {}".format(flightList[3])
+                return "\nThere does not exist a flight route with the id {}\n".format(flightList[3])
         else:
-            return "You can not create a flight that does not have Iceland as the departure nor the destination country"
+            return "\nYou can not create a flight that does not have Iceland as the departure nor the destination country\n"
         travelHours, travelMinutes = map(int, travelTime.split(':'))
         flightList.insert(5, travelTime)
         arrivalTime = flightList[6] + timedelta(hours = travelHours, minutes = travelMinutes)
@@ -76,7 +76,7 @@ class FlightLL():
                 if flightStatus == status:
                     statusFlightList.append(instance)
         if len(statusFlightList) == 0:
-            return "There are no flights with the statuses given!"
+            return "\nThere are no flights with the statuses given!\n"
         else:
             return statusFlightList
 
@@ -99,7 +99,7 @@ class FlightLL():
         for instance in self.__flightList:
             if str(instance.flightID) == str(flightOutId):
                 return instance
-        return "No flight with that ID found"
+        return "\nNo flight with that ID found\n"
 
     def getNextFlightID(self):
         return self.flightIO.getNextFlightID()
@@ -112,4 +112,4 @@ class FlightLL():
                 date = str(date)
                 date = date.split(" ")[0]
                 return date
-        return "Error! couldn't find a matching ID"
+        return "\nError! couldn't find a matching ID\n"

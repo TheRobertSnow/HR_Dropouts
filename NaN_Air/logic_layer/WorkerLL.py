@@ -79,8 +79,8 @@ class WorkerLL():
                     if instance.position == "Staff manager" or instance.position == "Trip manager":
                         if instance.socialSecurityNumber == ssn:
                             return instance
-        if ssn != "\nSocial security numbers are shown above!":
-            ssn = "\n{} Social security numbers are shown above!\n".format(pos)
+        #if ssn != "\nSocial security numbers are shown above!":
+            #ssn = "\n{} Social security numbers are shown above!\n".format(pos)
         return ssn
 
     def findWorkerByPOS(self, position):
@@ -133,7 +133,7 @@ class WorkerLL():
                     self.worker = WorkerLL.get_worker_list(self)
                     print("Worker succesfully updated!\n")
                     return updatedWorker
-        return "{} could not be updated, please try again!".format(error)
+        return "\n{} could not be updated, please try again!\n".format(error)
 
     def viewAllWorkers(self):
         """Returns all workers"""
@@ -148,21 +148,21 @@ class WorkerLL():
         try:
             self.checkSSN(createWorkerList[0])
         except ValueError:
-            return "Error!: SSN should be a whole number!"
+            return "\nError!: SSN should be a whole number!\n"
         #2 checking position
 
         if createWorkerList[2] == "Stupid User":
-            return "Error!: Position not picked"
+            return "\nError!: Position not picked\n"
         #5 Phone
         try:
             int(createWorkerList[5])
         except ValueError:
-            return "Error!: Phone number should be a numbers"
+            return "\nError!: Phone number should be a numbers\n"
         #6 Cellphone
         try:
             int(createWorkerList[6])
         except ValueError:
-            return "Error!: Phone number should be a number"
+            return "\nError!: Phone number should be a number\n"
 
         worker = self.IOAPI.createNewWorker(createWorkerList)
         return worker
