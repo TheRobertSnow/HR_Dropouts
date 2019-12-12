@@ -76,7 +76,7 @@ class FlightLL():
                 if flightStatus == status:
                     statusFlightList.append(instance)
         if len(statusFlightList) == 0:
-            return "There are no flights with the statuses given"
+            return "There are no flights with the statuses given!"
         else:
             return statusFlightList
 

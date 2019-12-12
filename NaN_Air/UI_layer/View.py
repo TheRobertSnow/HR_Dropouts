@@ -2,7 +2,7 @@ import UIAPI
 import datetime
 
 def printObjects(name):
-    print("\n")
+    print("")
     for count, theObject in enumerate(name):
         if len(name) > 4:
             if count >= 4:
@@ -12,7 +12,7 @@ def printObjects(name):
                     if printNext == "q":
                         return None
         print(theObject)
-        print()
+        print("")
 
 
 class View():
@@ -123,7 +123,7 @@ class View():
      week
   6. View all Pilots by Plane Licence
 --------------------------------------------''')
-        viewPilotsInput = input("Input choice (q to Quit, b for Back): ")
+        viewPilotsInput = input("  - Input choice (q to Quit, b for Back): ")
         viewPilotsInput = viewPilotsInput.lower()
         if viewPilotsInput == "1":
             pilotSSN = input("Input SSN with no spaces in between: ")
@@ -149,15 +149,15 @@ class View():
             print(unavailablePilots)
             return viewPilotsInput
         elif viewPilotsInput == "5":
-            pilotSSN = input("Input SSN with no spaces in between: ")
-            pilotYear = input("Input year: ")
-            pilotWeek = input("Input week of the year: ")
+            pilotSSN = input("  - Input SSN with no spaces in between: ")
+            pilotYear = input("  - Input year: ")
+            pilotWeek = input("  - Input week of the year: ")
             pilotWeeklyVoyages = UIAPI.UIAPI.viewallVoyagesInWeek(self, pilotSSN, pilotYear, pilotWeek, "Pilot")
             print(pilotWeeklyVoyages)
             return viewPilotsInput
         elif viewPilotsInput == "6":
-            pilotLicence = input("Input Plane Licence: ")
-            planePilots = UIAPI.UIAPI.viewWorkersByPlaneLicence(self,pilotLicence)
+            pilotLicence = input(" - Input Plane Licence: ")
+            planePilots = UIAPI.UIAPI.viewWorkersByPlaneLicence(self, pilotLicence)
             printObjects(planePilots)
         elif viewPilotsInput == "b":
             return viewPilotsInput
@@ -182,7 +182,7 @@ class View():
         viewAttendantsInput = input("Input choice (q to Quit, b for Back): ")
         viewAttendantsInput = viewAttendantsInput.lower()
         if viewAttendantsInput == "1":
-            attendantSSN = input("Input SSN with no spaces in between: ")
+            attendantSSN = input("  - Input SSN with no spaces in between: ")
             Attendant = UIAPI.UIAPI.viewWorkerBySSn(self, attendantSSN, "Attendant")
             print(Attendant)
             return viewAttendantsInput
@@ -205,9 +205,9 @@ class View():
             print(unavailableAttendants)
             return viewAttendantsInput
         elif viewAttendantsInput == "5":
-            attendantSSN = input("Input SSN with no spaces in between: ")
-            attendantYear = input("Input year: ")
-            attendantWeek = input("Input week of the year: ")
+            attendantSSN = input("  - Input SSN with no spaces in between: ")
+            attendantYear = input("  - Input year: ")
+            attendantWeek = input("  - Input week of the year: ")
             attendantWeeklyVoyages = UIAPI.UIAPI.viewallVoyagesInWeek(self, attendantSSN, attendantYear, attendantWeek, "Attendant")
             print(attendantWeeklyVoyages)
             return viewAttendantsInput
@@ -228,7 +228,7 @@ class View():
         viewManagersInput = input("Input choice (q to Quit, b for Back): ")
         viewManagersInput = viewManagersInput.lower()
         if viewManagersInput == "1":
-            managerSSN = input("Input SSN with no spaces in between: ")
+            managerSSN = input("  - Input SSN with no spaces in between: ")
             Manager = UIAPI.UIAPI.viewWorkerBySSn(self, managerSSN, "Manager")
             print(Manager)
             return viewManagersInput
@@ -254,10 +254,12 @@ class View():
         viewAirplaneInput = input("Input choice (q to Quit, b for Back): ")
         viewAirplaneInput = viewAirplaneInput.lower()
         if viewAirplaneInput == "1":
-            AirplaneReg = input("Please input airplane registration: ")
+            AirplaneReg = input("  - Input airplane registration: ")
             # Ekki alveg búið fæ ekki self.__planereg = dictionary["Plane registration"] til að virka í Airplane.py
             Airplane = UIAPI.UIAPI.viewCertainAirplane(self, AirplaneReg)  
+            print("")
             print(Airplane)
+            print("")
             viewAirplaneInput = View.viewAirplane(self)
 
         elif viewAirplaneInput == "2":
@@ -282,9 +284,10 @@ class View():
         viewFlightRoutesInput = input("Input choice (q to Quit, b for Back): ")
         viewFlightRoutesInput = viewFlightRoutesInput.lower()
         if viewFlightRoutesInput == "1":
-            flightRouteID = input("Input Flight Route ID: ")
+            flightRouteID = input("  - Input Flight Route ID: ")
+            print("")
             print(UIAPI.UIAPI.viewFlightRoute(self, flightRouteID))
-
+            print("")
             viewFlightRoutesInput = View.viewFlightRoutes(self)
         elif viewFlightRoutesInput == "2":
             allFlightRoutes = UIAPI.UIAPI.viewAllFlightRoutes(self)
@@ -310,9 +313,11 @@ class View():
         viewVoyagesInput = input("Input choice (q to Quit, b for Back): ")
         viewVoyagesInput = viewVoyagesInput.lower()
         if viewVoyagesInput == "1":
-            voyageID = input("Input Voyage ID: ")
+            voyageID = input("  - Input Voyage ID: ")
             voyage = UIAPI.UIAPI.viewVoyage(self, voyageID)
+            print("")
             print(voyage)
+            print("")
             viewVoyagesInput = View.viewVoyages(self)
         elif viewVoyagesInput == "2":
             voyages = UIAPI.UIAPI.viewallVoyages(self)
@@ -324,10 +329,11 @@ class View():
             voyageDate = datetime.datetime(year, month, day)
             allVoyagesDay = UIAPI.UIAPI.viewallVoyagesDay(self, voyageDate)
             print(allVoyagesDay)
+            #print("")
             viewVoyagesInput = View.viewVoyages(self)
         elif viewVoyagesInput == "4":
-            voyageYear = input("Input year: ")
-            voyagetWeek = input("Input week of the year: ")
+            voyageYear = input("  - Input year: ")
+            voyagetWeek = input("  - Input week of the year: ")
             allVoyagesWeek = UIAPI.UIAPI.viewallVoyagesWeek(self, voyageYear, voyagetWeek)
             print(allVoyagesWeek)
             viewVoyagesInput = View.viewVoyages(self)
@@ -352,12 +358,14 @@ class View():
         viewFlightInput = input("Input choice (q to Quit, b for Back): ")
         viewFlightInput = viewFlightInput.lower()
         if viewFlightInput == "1":
-            flightNumber = input("Input flight number: ")
-            flightDay = input("Input the day of the flight you want to view(f.x. 31/12/2019): ")
+            flightNumber = input("  - Input flight number: ")
+            flightDay = input("  - Input date (f.x. 31/12/2019): ")
             day, month, year = map(int, flightDay.split('/'))
             flightDate = datetime.datetime(year, month, day)
             viewFlight = UIAPI.UIAPI.viewCertainFlight(self, flightNumber, flightDate)
+            print("")
             print(viewFlight)
+            print("")
             viewFlightInput = View.viewFlight(self)
         if viewFlightInput == "2":
             allFlights = UIAPI.UIAPI.viewAllFlights(self)
@@ -373,7 +381,9 @@ class View():
         if viewFlightInput == "4":
             viewCancelledFlights = UIAPI.UIAPI.viewFlightsByStatuses(self, ["Landed", "Cancelled"])
             if type(viewCancelledFlights) == str:
+                print("")
                 print(viewCancelledFlights)
+                print("")
             else:
                 printObjects(viewCancelledFlights)
             viewFlightInput = View.viewFlight(self)

@@ -18,10 +18,10 @@ class WorkerIO():
     def create_new_worker(self, newWorker):
         """Takes in list and creates a new worker"""
         try:
-            self.write_worker_to_file(newWorker)
-            return "New worker created."
+            workerInstance = self.write_worker_to_file(newWorker)
+            return ("Worker succesfully created!\n" + str(workerInstance))
         except Exception as e:
-            return "Unable to create worker."
+            return "Unable to create worker!"
 
     def get_workers_from_file(self):
         """Only use for initializing WorkerIO.
@@ -48,12 +48,12 @@ class WorkerIO():
             csvWriter = csv.writer(csvFile)
             orderedDict = self.convert_to_dict_with_id(aList)
             self.__dictList.append(orderedDict)
-            self.add_worker_instance(orderedDict)
+            workerInstance = self.add_worker_instance(orderedDict)
             newList = []
             newList.append(orderedDict['Worker ID'])
             [newList.append(i) for i in aList]
             csvWriter.writerow(newList)
-        return aList, "Worker successfully created!"
+        return workerInstance
 
     def write_dictList_to_file(self):
         """Method overwrites file with data from dictList"""
@@ -156,6 +156,7 @@ class WorkerIO():
     def add_worker_instance(self, dict):
         newWorker = Worker(dict)
         self.workerList.append(newWorker)
+        return newWorker
 
     def create_worker_instances(self):
         """Methood runs through list of dictionaries,
@@ -203,9 +204,3 @@ class Worker():
                 returnString.append((key + ": " + val))
         return "\n".join(returnString)
 
-# writeList = ['1107951952','Elizabeth Mcfadden','Flight Attendant','N/A','Fellsmúli 35','8998835','8998835','test@test.com','True','True']
-# updateList = ['35', 'Position', 'Homosexual']
-# worker = WorkerIO()
-# # print(newline)
-# worker.write_worker_to_file(writeList)
-# worker.update_data_in_file(updateList)

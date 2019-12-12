@@ -200,9 +200,9 @@ class VoyageLL():
 
     def viewVoyage(self, voyageID):
         """takes in the instance and a voyageID you wish to find, returns the instance with that ID if it exists"""
-        print(len(self.voyage))
+        #print(len(self.voyage))
         self.voyage = self.IOAPI.request_voyages()
-        print(len(self.voyage))
+        #print(len(self.voyage))
         for instance in self.voyage:
             if str(instance.voyageID) == str(voyageID):
                 return instance
@@ -218,7 +218,7 @@ class VoyageLL():
             if worker.socialSecurityNumber == pilotToAddInput:
                 doesntExist = False
                 if worker.position != "Captain":
-                    return "Error! that worker doesn't have the correct position."
+                    return "Error! That worker doesn't have the correct position."
                 planeLicence = str(worker.planeLicence)
         if doesntExist:
             return "Error! we couldn't find any worker with that SSN."

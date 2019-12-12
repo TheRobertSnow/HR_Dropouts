@@ -197,11 +197,6 @@ Begin by selecting ID of a existing voyage.
             returnMessage = UIAPI.UIAPI.createDuplicateVoyages(self, argumentList)
             print(returnMessage)
 
-
-
-
-
-
         elif createVoyageMenuInput == "b":
             return createVoyageMenuInput
 
@@ -235,14 +230,14 @@ Please input the following information:''')
             createWorkerList.append(ssn)
             name = input("  - Name: ")
             createWorkerList.append(name)
-            print('''\n  Select worker position\n
+            print('''\n  Select worker position
     1. Captain
     2. Copilot
     3. Flight service manager
     4. Flight attendant
     5. Staff manager
     6. Trip manager''')
-            position = input("  Input choice: ")
+            position = input("Input choice: ")
             if position == "1":
                 createWorkerList.append("Captain")
             elif position == "2":
@@ -257,19 +252,21 @@ Please input the following information:''')
                 createWorkerList.append("Trip manager")
             else:
                 createWorkerList.append("Stupid User")
-
-            planeLicence = input("  - Plane licence: ")
-            createWorkerList.append(planeLicence)
-            address = input("  - Address: ")
+            if position != "1" or position != "2":
+                createWorkerList.insert(3, "")
+            else:
+                planeLicence = input("Plane licence: ")
+                createWorkerList.append(planeLicence)
+            address = input("Address: ")
             createWorkerList.append(address)
             #ekki int
-            phone = input("  - Phone: ")
+            phone = input("Phone: ")
             createWorkerList.append(phone)
             #ekki int
-            cellphone = input("  - Cellphone: ")
+            cellphone = input("Cellphone: ")
             createWorkerList.append(cellphone)
             #email error checka ?
-            email = input("  - Email: ")
+            email = input("Email: ")
             createWorkerList.append(email)
             result = UIAPI.UIAPI.createNewWorker(self, createWorkerList)
             print(result)

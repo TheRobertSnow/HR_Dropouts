@@ -141,7 +141,7 @@ class WorkerLL():
         return self.worker
 
     def createNewWorker(self, createWorkerList):
-        """Takes in a list of worker qualities and creates an instance of that worker and retuns the worker"""
+        """Takes in a list of worker qualities and creates an instance of that worker and returns the worker"""
         createWorkerList.append("TRUE")
         createWorkerList.append("TRUE")
         #0 check social security number
@@ -154,7 +154,6 @@ class WorkerLL():
         if createWorkerList[2] == "Stupid User":
             return "Error!: Position not picked"
         
-
         #5 Phone
         try:
             int(createWorkerList[5])
