@@ -139,7 +139,10 @@ Please input the following information:''')
             flightInstance1 = UIAPI.UIAPI.createNewFlight(self, flightList)
             print(flightInstance1)
             # finds id of created flight
-            voyageList2.append(flightInstance1.flightID)
+            try:
+                voyageList2.append(flightInstance1.flightID)
+            except AttributeError:
+                return createVoyageMenuInput
             # voyageList2.append(flightOutId)
             #print("Flight 1 successfully created!")
 
@@ -150,7 +153,10 @@ Please input the following information:''')
             flightInstance2 = UIAPI.UIAPI.createNewFlight(self, flightList2)
             print(flightInstance2)
             # finds id of created flight
-            voyageList2.append(flightInstance2.flightID)
+            try:
+                voyageList2.append(flightInstance2.flightID)
+            except AttributeError:
+                return createVoyageMenuInput
             # voyageList2.append(flightBackId)
             #print("Flight 2 successfully created!")
             # print(flightBackList)
@@ -163,7 +169,6 @@ Please input the following information:''')
                 captain, copilot, flightServiceManager, flightAttendants = Create.addCrew(self, flight1ID, flight2ID)
             elif addCrewInput.lower() == "n":
                 captain, copilot, flightServiceManager, flightAttendants = "", "", "", ""
-            print("Crew successfully Added!")
             # prints out crew info
             print(captain, copilot, flightServiceManager, flightAttendants)
             voyageList2.insert(2, captain)
