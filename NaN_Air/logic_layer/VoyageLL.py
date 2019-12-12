@@ -1,5 +1,6 @@
 import IOAPI
 from datetime import datetime
+from datetime import timedelta
 from logic_layer import FlightLL
 
 class VoyageLL():
@@ -194,9 +195,6 @@ class VoyageLL():
         return "HALLO"
         
         
-            
-
-
     def viewallVoyages(self):
         return self.IOAPI.request_voyages()
 
