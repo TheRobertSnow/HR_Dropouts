@@ -55,6 +55,7 @@ class FlightIO():
 
     def write_flight_to_file(self, aList):
         """Method takes in a list of data and writes to file"""
+        flightInstance = None
         with open(FILENAME, 'a', encoding="utf8", newline='') as csvFile:
             csvWriter = csv.writer(csvFile)
             orderedDict = self.convert_to_dict_with_id(aList)
@@ -86,7 +87,17 @@ class FlightIO():
 
         for flight in self.flightList:
             #flightDT = flight.departureTime
-            instanceDepartureDate = departureTime.date()
+            # TODO Need to fix the date check!!!!
+            instanceDepartureDate = None
+            if type(flight.departureTime) == str:
+                date, time = flight.departureTime.split()
+                year, month, day = date.split("-")
+                hour, min, sec = time.split(":")
+                instanceDeparture = datetime(int(year), int(month), int(day), int(hour), int(min), int(sec))
+                instanceDepartureDate = instanceDeparture.date()
+            else:
+                instanceDepartureDate = flight.departureTime.date()
+                
             # If the date of the instance matches the given date and destination
             if instanceDepartureDate == departureDate:
                 if flight.destinationID == destinationID and flight.originID == originID:

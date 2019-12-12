@@ -49,8 +49,9 @@ class FlightLL():
         flightList.insert(7, arrivalTime)
         flight = self.flightIO.createNewFlight(flightList)
         print("\nNow there are", len(self.__flightList), "Flight objects in system\n")
+        print(flight)
         return flight
-                
+
     def getCertainflight(self, flightNumber, flightDate):
         self.automatically_change_flight_status()
         for instance in self.__flightList:
@@ -78,7 +79,7 @@ class FlightLL():
             return "There are no flights with the statuses given"
         else:
             return statusFlightList
-    
+
     def automatically_change_flight_status(self):
         flight = self.flightIO.automatically_change_flight_status()
         return flight
