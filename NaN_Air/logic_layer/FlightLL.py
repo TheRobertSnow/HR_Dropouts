@@ -9,7 +9,10 @@ class FlightLL():
         self.flightIO = IOAPI.IOAPI()
         self.__flightList = self.flightIO.getAllFlightInstances()
 
-    def createNewFlight(self, flightList):
+    def createNewFlight(self, flightList1):
+        flightList = []
+        for i in flightList1:
+            flightList.append(i)
         flightNumber = self.flightIO.getFlightNumber(flightList[1], flightList[2], flightList[3])
         airplaneReg = flightList[0]
         airplane = self.flightIO.getCertainAirplane(airplaneReg)
@@ -46,6 +49,7 @@ class FlightLL():
         return flight
                 
     def getCertainflight(self, flightNumber, flightDate):
+        self.automatically_change_flight_status()
         for instance in self.__flightList:
             flightNumbers = instance.flightNumber
             departureTime = datetime.strptime(instance.departureTime, '%Y-%m-%d %H:%M:%S')
@@ -55,20 +59,33 @@ class FlightLL():
         return "Flight not found!"
 
     def getAllFlights(self):
+        self.automatically_change_flight_status()
+        self.__flightList = self.flightIO.getAllFlightInstances()
         return self.__flightList
 
-    def viewFlightsByStatus(self, status):
+    def viewFlightsByStatuses(self, statuses):
+        self.automatically_change_flight_status()
         statusFlightList = []
         for instance in self.__flightList:
             flightStatus = instance.flightStatus
-            if flightStatus == status:
-                statusFlightList.append(instance)
-        return statusFlightList
+            for status in statuses:
+                if flightStatus == status:
+                    statusFlightList.append(instance)
+        if len(statusFlightList) == 0:
+            return "There are no flights with the statuses given"
+        else:
+            return statusFlightList
+    
+    def automatically_change_flight_status(self):
+        flight = self.flightIO.automatically_change_flight_status()
+        return flight
 
     def updateFlightStatus(self, flightlist):
         flight = self.flightIO.updateFlightStatus(flightlist)
+        self.automatically_change_flight_status()
         return flight
 
     def updateFlightDepartureTime(self, newDepartureTime):
         flight = self.flightIO.updateFlightDepartureTime(newDepartureTime)
+        self.automatically_change_flight_status()
         return flight
