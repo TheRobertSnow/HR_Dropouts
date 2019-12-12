@@ -6,9 +6,6 @@ class Create():
         self.uiapi = UIAPI.UIAPI()
 
     def createFlight(airplane=None, origin=None, destination=None):
-        #flightRouteList = UIAPI.UIAPI.viewAllFlightRoutes(self)
-        #for item in flightRouteList:
-            #print(item.flightRouteID, item.country)
         flightList = []
         if airplane == None:
             airplane = input("  - Airplane registration number: ")
@@ -260,7 +257,7 @@ Please input the following information:''')
                 createWorkerList.append("Trip manager")
             else:
                 createWorkerList.append("Stupid User")
-                
+
             planeLicence = input("  - Plane licence: ")
             createWorkerList.append(planeLicence)
             address = input("  - Address: ")
