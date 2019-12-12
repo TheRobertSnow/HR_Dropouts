@@ -77,6 +77,8 @@ class UIAPI:
         return returnData
 
     def viewallVoyagesInWeek(self, ssn, year, week, pos):
+        """We give you a week and position, either "Pilot" or "Attendant" and you return all
+        voyages of that pilot or attendant in a given week. If the """
         returnData = self.workerLL.listWorkerVoyagesByWeek(ssn, year, week, pos)
         return returnData
 
@@ -149,11 +151,11 @@ class UIAPI:
     def verifyStaffForVoyage(self, theKey, SSN, dateOut, dateBack, flightID):
         return self.voyageLL.verifyStaff(theKey, SSN, dateOut, dateBack, flightID)
 
-    def viewallVoyagesWeek(self, week):
+    def viewallVoyagesWeek(self, year, week):
         """Listar öll voyages í ákveðinni viku og hvort að þau séu fullmönnuð, svo
         við þurfum að fá lista eða dict með hverju voyage tilviki og svo upplýsingum
         um hvort að það sé fullmannað í þeirri viku"""
-        returnData = self.voyageLL.viewallVoyagesWeek(week)
+        returnData = self.voyageLL.viewallVoyagesWeek(year, week)
         return returnData
 
     def copyPreviousVoyage(self, voyageID):
