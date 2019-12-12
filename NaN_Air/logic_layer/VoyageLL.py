@@ -110,11 +110,13 @@ class VoyageLL():
         # verifying the pilot exists and is actually a captain
         doesntExist = True
         workerList = self.IOAPI.request_workers()
+        planeLicence = ""
         for worker in workerList:
             if worker.socialSecurityNumber == pilotToAddInput:
                 doesntExist = False
                 if worker.position != "Captain":
                     return "Error! that worker doesn't have the correct position."
+                planeLicence = str(worker.planeLicence)
         if doesntExist:
             return "Error! we couldn't find any worker with that SSN."
 
@@ -129,15 +131,30 @@ class VoyageLL():
                 instance = i
         date = date.split(" ")[0]
         # check if the dates overlap for the same pilot
+        flightID = ""
         for i in voyageList:
             dateCompare = i.departureFromIS
             dateCompare = dateCompare.split(" ")[0]
             if dateCompare == date:
                 if i.mainPilot == pilotToAddInput:  # check if already booked
                     return "Error! that pilot is booked for that day."
-        # verify if he has the correct license(B Krafa geyma fyrir ef tími er)
+                if i.voyageID == voyageID:
+                    flightID = i.flightOutID
         if type(instance) == str:
             return "Voyage was not found"
+        # verify plane licence
+        requiredLicence = ""
+        planeReg = ""
+        flightList = self.IOAPI.getAllFlightInstances()
+        for i in flightList:
+            if i.flightID == flightID:
+                planeReg = i.airplaneRegistrationNumber
+        planeList = self.IOAPI.request_airplanes()
+        for i in planeList:
+            if i.planeRegistration == planeReg:
+                requiredLicence = str(i.manufacturer) + str(i.model)
+        if requiredLicence != planeLicence:
+            return "Error! pilot does not have the required licence"
         # request to update the file and instance.
         return self.IOAPI.updateVoyage(instance, "Main pilot", pilotToAddInput)
 
@@ -146,11 +163,13 @@ class VoyageLL():
         # verifying the pilot exists and is actually a co pilot
         doesntExist = True
         workerList = self.IOAPI.request_workers()
+        planeLicence = ""
         for worker in workerList:
             if worker.socialSecurityNumber == pilotToAddInput:
                 doesntExist = False
                 if worker.position != "Copilot":
                     return "Error! that worker doesn't have the correct position."
+                planeLicence = str(worker.planeLicence)
         if doesntExist:
             return "Error! we couldn't find any worker with that SSN."
 
@@ -165,15 +184,30 @@ class VoyageLL():
                 instance = i
         date = date.split(" ")[0]
         # check if the dates overlap for the same pilot
+        flightID = ""
         for i in voyageList:
             dateCompare = i.departureFromIS
             dateCompare = dateCompare.split(" ")[0]
             if dateCompare == date:
                 if i.assistingPilot == pilotToAddInput:  # check if already booked
                     return "Error! that pilot is booked for that day."
-        # verify if he has the correct license(B Krafa geyma fyrir ef tími er)
+            if i.voyageID == voyageID:
+                flightID = i.flightOutID
         if type(instance) == str:
             return "Voyage was not found"
+        # verify plane licence
+        requiredLicence = ""
+        planeReg = ""
+        flightList = self.IOAPI.getAllFlightInstances()
+        for i in flightList:
+            if i.flightID == flightID:
+                planeReg = i.airplaneRegistrationNumber
+        planeList = self.IOAPI.request_airplanes()
+        for i in planeList:
+            if i.planeRegistration == planeReg:
+                requiredLicence = str(i.manufacturer) + str(i.model)
+        if requiredLicence != planeLicence:
+            return "Error! pilot does not have the required licence"
         # request to update the file and instance.
         return self.IOAPI.updateVoyage(instance, "Assisting pilot", pilotToAddInput)
 
@@ -207,7 +241,6 @@ class VoyageLL():
             if dateCompare == date:
                 if i.mainFlightAttendant == pilotToAddInput:  # check if already main pilot
                     return "Error! that Main Flight attendant is booked for that day."
-        # verify if he has the correct license(B Krafa geyma fyrir ef tími er)
         if type(instance) == str:
             return "Voyage was not found"
         # request to update the file and instance.
@@ -248,7 +281,6 @@ class VoyageLL():
                     pass
                 if pilotToAddInput in flightAttendantList:  # check if already main pilot
                     return "Error! that flight attendant is booked for that day."
-        # verify if he has the correct license(B Krafa geyma fyrir ef tími er)
         if type(instance) == str:
             return "Voyage was not found"
         # request to update the file and instance.
@@ -300,4 +332,6 @@ class VoyageLL():
                         pass
                     if SSN in flightAttendantList:  # check if already main pilot
                         return "Error! that pilot is booked for that day."
+        if theKey == "Captain" or theKey == "Copilot": # checking plane licence
+
         return None
