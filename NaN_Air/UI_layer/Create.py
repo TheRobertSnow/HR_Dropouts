@@ -17,8 +17,10 @@ class Create():
             destination = input("  - Destination ID: ")
         flightList.append(destination)
         departureTime = input("  - Departure time from {}(f.x. 12:30): ".format(origin))
+        #væri betra að hafa þetta shit í logic
         hour, minute = map(int, departureTime.split(':'))
         departureDate = input("  - Departure date from {}(f.x. 24/12/2019): ".format(origin))
+        #þetta líka
         day, month, year = map(int, departureDate.split('/'))
         departureDateTime = datetime.datetime(year, month, day, hour, minute, 00)
         flightList.append(departureDateTime)
@@ -30,19 +32,19 @@ class Create():
         dateBack = UIAPI.UIAPI.getDateFromFlightID(self, secondFlightID)
         print("\nAdd Crew")
         captain = input("  - Captains social security number: ")
-        results = UIAPI.UIAPI.verifyStaffForVoyage(self, "Captain", captain, dateOut, dateBack)
+        results = UIAPI.UIAPI.verifyStaffForVoyage(self, "Captain", captain, dateOut, dateBack, flightID)
         if type(results) == str:
             print(results)
             print("You can try adding a captain later in the update menu, for now the captain is empty")
             captain = ""
         copilot = input("  - Copilots social security number: ")
-        results = UIAPI.UIAPI.verifyStaffForVoyage(self, "Copilot", copilot, dateOut, dateBack)
+        results = UIAPI.UIAPI.verifyStaffForVoyage(self, "Copilot", copilot, dateOut, dateBack, flightID)
         if type(results) == str:
             print(results)
             print("You can try adding a Copilot later in the update menu, for now the captain is empty")
             copilot = ""
         flightServiceManager = input("  - Flight service managers social security number: ")
-        results = UIAPI.UIAPI.verifyStaffForVoyage(self, "Flight Service Manager", flightServiceManager, dateOut, dateBack)
+        results = UIAPI.UIAPI.verifyStaffForVoyage(self, "Flight Service Manager", flightServiceManager, dateOut, dateBack, flightID)
         if type(results) == str:
             print(results)
             print("You can try adding a Manager later in the update menu, for now the captain is empty")
@@ -54,7 +56,7 @@ class Create():
             if flightAttendant == "q":
                 break
             else:
-                results = UIAPI.UIAPI.verifyStaffForVoyage(self, "Flight Attendant", flightAttendant, dateOut, dateBack)
+                results = UIAPI.UIAPI.verifyStaffForVoyage(self, "Flight Attendant", flightAttendant, dateOut, dateBack, flightID)
                 if type(results) == str:
                     print(results)
                 else:
@@ -326,6 +328,10 @@ Please input the following information:''')
             print('''5. Create Flight
 --------------------------------------------
 Please input the following information:''')
+
+            flightRouteList = UIAPI.UIAPI.viewAllFlightRoutes(self)
+            for item in flightRouteList:
+                print(item.flightRouteID, item.country)
             flightList = Create.createFlight()  # Creates a list for createNewFlight
             result = UIAPI.UIAPI.createNewFlight(self, flightList)
             print(result)

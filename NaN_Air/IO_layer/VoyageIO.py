@@ -203,7 +203,14 @@ class Voyage:
         return "\n".join(returnString)
 
     def getflightAttendants(self):
-        return self.flightAttendants
+        flightAttendantList = []
+        flightattendant = self.flightAttendants
+        flightattendant = flightattendant.replace("[", "")
+        flightattendant = flightattendant.replace("]", "")
+        flightattendant = flightattendant.replace("'", "")
+        flightattendant = flightattendant.replace(" ", "")
+        flightAttendantList = flightattendant.split(",")
+        return flightAttendantList
 
     def getflightIDS(self):
         return self.flightOutID, self.flightBackID
