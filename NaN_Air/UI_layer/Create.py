@@ -5,7 +5,10 @@ class Create():
     def __init__(self):
         self.uiapi = UIAPI.UIAPI()
 
-    def createFlight(airplane=None, origin=None, destination=None):
+    def createFlight(self, airplane=None, origin=None, destination=None):
+        flightRouteList = UIAPI.UIAPI.viewAllFlightRoutes(self)
+        for item in flightRouteList:
+            print(item.flightRouteID, item.country)
         flightList = []
         if airplane == None:
             airplane = input("  - Airplane registration number: ")
@@ -242,7 +245,7 @@ Please input the following information:''')
             print('''5. Create Flight
 --------------------------------------------
 Please input the following information:''')
-            flightList = Create.createFlight()  # Creates a list for createNewFlight
+            flightList = Create.createFlight(self)  # Creates a list for createNewFlight
             result = UIAPI.UIAPI.createNewFlight(self, flightList)
             print(result)
             print("--------------------------------------------")
