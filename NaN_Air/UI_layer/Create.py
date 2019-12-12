@@ -16,12 +16,24 @@ class Create():
         if destination == None:
             destination = input("  - Destination ID: ")
         flightList.append(destination)
-        departureTime = input("  - Departure time from {}(f.x. 12:30): ".format(origin))
-        #væri betra að hafa þetta shit í logic
-        hour, minute = map(int, departureTime.split(':'))
-        departureDate = input("  - Departure date from {}(f.x. 24/12/2019): ".format(origin))
-        #þetta líka
-        day, month, year = map(int, departureDate.split('/'))
+        hour, minute, day, month, year = None,None,None,None,None
+        while True:
+            try:
+                departureTime = input("  - Departure time from {}(f.x. 12:30): ".format(origin))
+                #væri betra að hafa þetta shit í logic
+                hour, minute = map(int, departureTime.split(':'))
+                break
+            except Exception as e:
+                print("Wrong time format!")
+        while True:
+            try:
+                departureDate = input("  - Departure date from {}(f.x. 24/12/2019): ".format(origin))
+                #þetta líka
+                day, month, year = map(int, departureDate.split('/'))
+                break
+            except Exception as e:
+                print("Wrong date format!")
+
         departureDateTime = datetime.datetime(year, month, day, hour, minute, 00)
         flightList.append(departureDateTime)
         return flightList
@@ -190,6 +202,7 @@ Begin by selecting ID of a existing voyage.
                 if dateInput.lower() == "s":
                     break
                 else:
+
                     day, month, year = map(int, dateInput.split('/'))
                     dateInput = datetime.datetime(year, month, day)
                     dateList.append(dateInput)
