@@ -45,8 +45,6 @@ class View():
                 viewMenuInput = View.viewMenu(self)
         elif viewMenuInput == "4":
             viewVoyagesOutput = View.viewVoyages(self)
-            #print("voyages functionality isnt there yet :(. this print is found in view.py")
-            viewVoyagesOutput = "b"  # delete this line and the line above and un-comment the line above that when rdy
             if viewVoyagesOutput == "b":
                 viewMenuInput = View.viewMenu(self)
         elif viewMenuInput == "5":
@@ -97,6 +95,7 @@ class View():
                 return viewWorkerInput
             viewWorkerInput = View.viewWorker(self)
         elif viewWorkerInput == "4":
+            print("")
             allStaff = UIAPI.UIAPI.viewAllWorkers(self)
             printObjects(allStaff)
             viewWorkerInput = View.viewWorker(self)
@@ -128,7 +127,9 @@ class View():
         if viewPilotsInput == "1":
             pilotSSN = input("Input SSN with no spaces in between: ")
             pilot = UIAPI.UIAPI.viewWorkerBySSn(self, pilotSSN, "Pilot")
+            print("")
             print(pilot)
+            print("")
             return viewPilotsInput
         elif viewPilotsInput == "2":
             allPilots = UIAPI.UIAPI.viewWorkerByPOS(self, "Pilot")
@@ -165,6 +166,7 @@ class View():
             return viewPilotsInput
         else:
             print("Wrong input, try again")
+            viewPilotsInput = view.viewPilots(self)
         return viewPilotsInput
 
     def viewAttendants(self):
@@ -184,7 +186,9 @@ class View():
         if viewAttendantsInput == "1":
             attendantSSN = input("  - Input SSN with no spaces in between: ")
             Attendant = UIAPI.UIAPI.viewWorkerBySSn(self, attendantSSN, "Attendant")
+            print("")
             print(Attendant)
+            print("")
             return viewAttendantsInput
         elif viewAttendantsInput == "2":
             allAttendants = UIAPI.UIAPI.viewWorkerByPOS(self, "Attendant")
@@ -230,10 +234,13 @@ class View():
         if viewManagersInput == "1":
             managerSSN = input("  - Input SSN with no spaces in between: ")
             Manager = UIAPI.UIAPI.viewWorkerBySSn(self, managerSSN, "Manager")
+            print("")
             print(Manager)
+            print("")
             return viewManagersInput
         elif viewManagersInput == "2":
             allManagers = UIAPI.UIAPI.viewWorkerByPOS(self, "Manager")
+            #print(allManagers)
             printObjects(allManagers)
             return viewManagersInput
         elif viewManagersInput == "b":
@@ -273,7 +280,7 @@ class View():
         else:
             print("Wrong input, try again!")
         return viewAirplaneInput
-
+    	
     def viewFlightRoutes(self):
         print('''3. View Flight Routes
 --------------------------------------------
@@ -299,6 +306,7 @@ class View():
             return viewFlightRoutesInput
         else:
             print("Wrong input, try again!")
+
         return viewFlightRoutesInput
 
     def viewVoyages(self):
