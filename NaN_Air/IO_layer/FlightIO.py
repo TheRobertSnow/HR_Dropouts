@@ -15,7 +15,7 @@ class FlightIO():
     def get_flights(self):
         """Return a list of flight instances"""
         return self.flightList
-    
+
     def automatically_change_flight_status(self):
         now = datetime.now()
         flightStatuses = ["On schedule", "Loading", "In-Air", "Landed", "Cancelled"]
@@ -211,6 +211,13 @@ class FlightIO():
         for dictionary in self.__dictList:
             flight = Flight(dictionary)
             self.flightList.append(flight)
+
+    def createNewFlight(self, flightList):
+        """creates a new airplane instance and writes the airplane to the csv, then it returns the new
+            airplane object"""
+        flightInstance = self.write_flight_to_file(flightList)
+        return flightInstance
+
 
 class Flight:
     def __init__(self, dictionary):

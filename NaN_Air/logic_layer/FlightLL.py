@@ -33,7 +33,10 @@ class FlightLL():
                 timeFrameEnd = flightList[5] + timedelta(minutes = 5)
                 for instance in self.__flightList:
                     if instance.originID == "1":
-                        departureTime = datetime.strptime(instance.departureTime, '%Y-%m-%d %H:%M:%S')
+                        dt = instance.departureTime
+                        if type(instance.departureTime) != str:
+                            dt = instance.departureTime.__str__()
+                        departureTime = datetime.strptime(dt, '%Y-%m-%d %H:%M:%S')
                         if departureTime >= timeFrameStart and departureTime <= timeFrameEnd:
                             return "There is another flight from iceland at {} so the departure time you input is not valid".format(instance.departureTime)
             else:
@@ -89,3 +92,23 @@ class FlightLL():
         flight = self.flightIO.updateFlightDepartureTime(newDepartureTime)
         self.automatically_change_flight_status()
         return flight
+
+    def getCertainFlightFromID(self, flightOutId):
+        self.__flightList = self.flightIO.getAllFlightInstances()
+        for instance in self.__flightList:
+            if str(instance.flightID) == str(flightOutId):
+                return instance
+        return "No flight with that ID found"
+
+    def getNextFlightID(self):
+        return self.flightIO.getNextFlightID()
+
+    def getDate(self, flightID):
+        self.__flightList = self.flightIO.getAllFlightInstances()
+        for instance in self.__flightList:
+            if str(instance.flightID) == str(flightID):
+                date = instance.departureTime
+                date = str(date)
+                date = date.split(" ")[0]
+                return date
+        return "Error! couldn't find a matching ID"
