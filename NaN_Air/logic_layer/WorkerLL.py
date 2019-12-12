@@ -1,6 +1,8 @@
 import sys
 sys.path.append('..')
 import IOAPI
+from datetime import datetime
+from datetime import timedelta
 
 class WorkerLL():
     def __init__(self):
@@ -15,6 +17,7 @@ class WorkerLL():
         It then returns the ssn if it is correct and an error if it is not."""
         if len(ssn) != 10:
             ssn = "\nThat social security number is not correct, try again!"
+            
         try:
             intCheck = int(ssn)
         except ValueError:
@@ -58,7 +61,7 @@ class WorkerLL():
         """Takes social security number and position and returns an instance of a worker in that position 
         with that ssn if it exists."""
         ssn = WorkerLL.checkSSN(self, ssn)
-        if ssn != "\nThat social security number is not correct, try again!":
+        if ssn != "\nThat social security number is not correct, try again!!":
             self.worker = self.IOAPI.request_workers()
             for instance in self.worker:
                 if pos == "":
@@ -76,8 +79,8 @@ class WorkerLL():
                     if instance.position == "Staff manager" or instance.position == "Trip manager":
                         if instance.socialSecurityNumber == ssn:
                             return instance
-        if ssn != "\nThat social security number is not correct, try again!":
-            ssn = "\n{} not found!\n".format(pos)
+        if ssn != "\nSocial security numbers are shown above!":
+            ssn = "\n{} Social security numbers are shown above!\n".format(pos)
         return ssn
 
     def findWorkerByPOS(self, position):
@@ -88,6 +91,8 @@ class WorkerLL():
             for instance in self.worker:
                 if instance.position == "Captain" or instance.position == "Copilot":
                     positionList.append(instance)
+            
+
         elif position == "Attendant":
             for instance in self.worker:
                 if instance.position == "Flight Service Manager" or instance.position == "Flight Attendant":
@@ -119,13 +124,13 @@ class WorkerLL():
         validValue = True
         error = ""
         if ssn != "\nThat social security number is not correct, try again!":
-            validValue, error = WorkerLL.checkNewValue(self, theKey, newValue)          
+            validValue, error = self.checkNewValue(theKey, newValue)          
         if validValue != False:
             self.worker = WorkerLL.get_worker_list(self)
             for instance in self.worker:
                 if instance.socialSecurityNumber == socialSecurityNumber:
                     updatedWorker = self.IOAPI.updateWorker(instance, theKey, newValue)
-                    #self.worker = WorkerLL.get_worker_list(self)
+                    self.worker = WorkerLL.get_worker_list(self)
                     print("Worker succesfully updated!\n")
                     return updatedWorker
         return "{} could not be updated, please try again!".format(error)
@@ -139,98 +144,152 @@ class WorkerLL():
         """Takes in a list of worker qualities and creates an instance of that worker and retuns the worker"""
         createWorkerList.append("TRUE")
         createWorkerList.append("TRUE")
+        #0 check social security number
+        try:
+            int(createWorkerList[0])
+        except ValueError:
+            return "Error!: SSN should be a whole number!"
+        #2 checking position
+        
+        if createWorkerList[2] == "Stupid User":
+            return "Error!: Position not picked"
+        
+
+        #5 Phone
+        try:
+            int(createWorkerList[5])
+        except ValueError:
+            return "Error!: Phone number should be a numbers"
+        #6 Cellphone
+        try:
+            int(createWorkerList[6])
+        except ValueError:
+            return "Error!: Phone number should be a number"
+        
         worker = self.IOAPI.createNewWorker(createWorkerList)
         return worker
 
-    def listUnavailableWorkersbydate(self, date, pos): 
-        """Takes in a date and position and returns a list with each worker who is working on that date
-         and the worker's destination."""
-        unavailableList = []
-        destinationName = ""
+    def listWorkersbydate(self, date, pos, status):  
+        """Takes in a position and a list of workers who are unavailable on that date from 
+        the "listUnavailableWorkersbydate" function"""
+        dashString = "-"
+        flightAttendantList = []
+        mainFlightAttendantList = []
+        mainPilotList = []
+        assistingPilotList = []
+        destinationNameList = []
+        avaialbleWorkerString = ""
+        unAvaialbleWorkerString = ""
+        departureTimeFromISList = []
+        departureTimeToISList = []
+        #departureTimeFromISList2 = []
+        #departureTimeToISList2 = []
+        weekWorkerString = ""
         workerList = WorkerLL.get_worker_list(self) #All workers
         voyages = self.IOAPI.request_voyagestoWorker() #All voyages
-        flightRoutes = self.IOAPI.getAllFlightRouteInstances() #All flight Routes
+        flightRoutes = self.IOAPI.getAllFlightRouteInstances()
+        printString = "\n{} {}s on date: {}".format(status, pos, date)
+        if status == "Available":
+            printString += "\n\n{:^10s} | {:^20s} | {:^22s}\n".format("SSN", "NAME", "POSITION")
+        elif status == "Unavailable":
+            printString += "\n\n{:^10s} | {:^20s} | {:^22s}\n".format("SSN", "NAME", "FLIGHT DESTINATION")
+        printString += dashString * 60
+        for voyage in voyages:
+            departureTimeFromIS = datetime.strptime(voyage.departureFromIS, '%Y-%m-%d %H:%M:%S')
+            departureTimeFromISList.append(departureTimeFromIS)
+            #departureTimeFromISList2.append(departureTimeFromIS.date())
+            departureTimeToIS = datetime.strptime(voyage.departureToIS, '%Y-%m-%d %H:%M:%S')
+            departureTimeToISList.append(departureTimeToIS)
+            #departureTimeToISList2.append(departureTimeToIS.date())
+        
         for voyage in voyages:
             destinationID = voyage.flightRouteID 
+            departureTimeFromIS2 = datetime.strptime(voyage.departureFromIS, '%Y-%m-%d %H:%M:%S')
+            departureTimeToIS2 = datetime.strptime(voyage.departureToIS, '%Y-%m-%d %H:%M:%S')
             for flightroute in flightRoutes:
                 if flightroute.flightRouteID == destinationID:
-                    destinationName = flightroute.country
-            if date in voyage.departureFromIS or date in voyage.departureToIS:
-                for worker in workerList:
-                    if pos == "Pilot":
-                        if voyage.mainPilot == worker.socialSecurityNumber:
-                            toAddList = []
-                            toAddList.append(worker)
-                            toAddList.append(str(worker.name) + " is going to " + str(destinationName) + " on " + str(date) + "!")
-                            unavailableList.append(toAddList)
-                        elif voyage.assistingPilot == worker.socialSecurityNumber:
-                            toAddList = []
-                            toAddList.append(worker)
-                            toAddList.append(str(worker.name) + " is going to " + str(destinationName) + " on " + str(date) + "!")
-                            unavailableList.append(toAddList)
-                    elif pos == "Attendant":
-                        if voyage.mainFlightAttendant == worker.socialSecurityNumber:
-                            toAddList = []
-                            toAddList.append(worker)
-                            toAddList.append(str(worker.name) + " is going to " + str(destinationName) + " on " + str(date) + "!")
-                            unavailableList.append(toAddList) 
-                        elif worker.socialSecurityNumber in voyage.getflightAttendants():
-                            toAddList = []
-                            toAddList.append(worker)
-                            toAddList.append(str(worker.name) + " is going to " + str(destinationName) + " on " + str(date) + "!")
-                            unavailableList.append(toAddList) 
-        if len(unavailableList) == 0:
-            unavailableList = "There are no workers working on that date."
-        return unavailableList
+                    destinationNameList.append(flightroute.country)
+            #if date.date() in [i.date() for i in departureTimeFromISList] or date.date() in [i.date() for i in departureTimeToISList]:
+            if date.date() == departureTimeFromIS2.date() or date.date() == departureTimeToIS2.date():
+                mainPilotList.append(voyage.mainPilot)
+                assistingPilotList.append(voyage.assistingPilot)
+                mainFlightAttendantList.append(voyage.mainFlightAttendant)
+                flightAttendantList.append(voyage.flightAttendants)
+                
+        newFlightAttendantList = []
+        for flightattendant in flightAttendantList:
+            flightattendant = flightattendant.replace("[", "")
+            flightattendant = flightattendant.replace("]", "")
+            flightattendant = flightattendant.replace("'", "")
+            flightattendant = flightattendant.replace(" ", "")
+            newflightAttendant = flightattendant.split(",")
+            newFlightAttendantList.append(newflightAttendant)
 
-    """def listAvailableWorkersbydate(self, pos, unavailableList): 
-        Takes in a position and a list of workers who are unavailable on that date from 
-        the "listUnavailableWorkersbydate" function
-        availableList = []
-        workerList = WorkerLL.get_worker_list(self)
-        voyages = self.IOAPI.request_voyagestoWorker()
-        for instance in workerList:
-            if pos == "Pilot":
-                if instance.position == "Captain" or instance.position == "Copilot" and instance not in unavailableList:
-                    availableList.append(instance)
-            elif pos == "Attendant":
-                if instance.position == "Flight Service Manager" or instance.position == "Flight Attendant" and instance not in unavailableList:
-                    availableList.append(instance)
-        return availableList"""
+        print(departureTimeFromISList,departureTimeToISList)
 
-    def listAvailableWorkersbydate(self, date, pos): 
-        """Takes in a date and position and returns a list with each worker who is working on that date
-         and the worker's destination."""
-        unavailableList = []
-        availableList = []
-        destinationName = ""
-        workerList = WorkerLL.get_worker_list(self) #All workers
-        voyages = self.IOAPI.request_voyagestoWorker() #All voyages
-        flightRoutes = self.IOAPI.getAllFlightRouteInstances() #All flight Routes
-        for voyage in voyages:
-            destinationID = voyage.flightRouteID 
-            for flightroute in flightRoutes:
-                if flightroute.flightRouteID == destinationID:
-                    destinationName = flightroute.country
-            if date in voyage.departureFromIS or date in voyage.departureToIS:
-                for worker in workerList:
-                    if pos == "Pilot":
-                        if voyage.mainPilot == worker.socialSecurityNumber:
-                            unavailableList.append(worker)
-                        elif voyage.assistingPilot == worker.socialSecurityNumber:
-                            unavailableList.append(worker)
-                    elif pos == "Attendant":
-                        if voyage.mainFlightAttendant == worker.socialSecurityNumber:
-                            unavailableList.append(worker) 
-                        elif worker.socialSecurityNumber in voyage.getflightAttendants():
-                            unavailableList.append(worker) 
         for worker in workerList:
-            if worker not in unavailableList:
-                availableList.append(worker)
-        #if len(availableList) == 0:
-            #unavailableList = "There are no workers available on that date."
-        return availableList
+            if pos == "Pilot":  
+                if worker.position == "Captain" and worker.socialSecurityNumber not in mainPilotList:
+                    avaialbleWorkerString += "\n{:10s} | {:20s} | {:22s}".format(worker.socialSecurityNumber,worker.name,worker.position)
+                elif worker.position == "Captain" and worker.socialSecurityNumber in mainPilotList:
+                    for i in range(len(mainPilotList)):
+                        if mainPilotList[i] == worker.socialSecurityNumber:  
+                            unAvaialbleWorkerString += "\n{:10s} | {:20s} | {:22s}".format(worker.socialSecurityNumber,worker.name,destinationNameList[i])
+                            if date.date() in [j.date() for j in departureTimeFromISList]:
+                                for j in range(len(departureTimeFromISList)):
+                                    if date.date() == departureTimeFromISList[j].date():
+                                        weekWorkerString += "\n{:10s} | {:20s} | {} | {} | {}".format(worker.socialSecurityNumber,worker.name,destinationNameList[i],departureTimeFromISList[j],departureTimeToISList[j])
+                elif worker.position == "Copilot" and worker.socialSecurityNumber not in assistingPilotList:
+                    avaialbleWorkerString += "\n{:10s} | {:20s} | {:22s}".format(worker.socialSecurityNumber,worker.name,worker.position)
+                elif worker.position == "Copilot" and worker.socialSecurityNumber in assistingPilotList:
+                    for i in range(len(assistingPilotList)):
+                        if assistingPilotList[i] == worker.socialSecurityNumber: 
+                            unAvaialbleWorkerString += "\n{:10s} | {:20s} | {:22s}".format(worker.socialSecurityNumber,worker.name,destinationNameList[i])
+                    for i in range(len(mainPilotList)):
+                        print(mainPilotList[i])
+                        for j in range(len(departureTimeFromISList)):
+                            print(departureTimeFromISList[j])
+                            if departureTimeFromISList[j] == departureTimeFromIS2 and assistingPilotList[i] == worker.socialSecurityNumber:
+                                weekWorkerString += "\n{:10s} | {:20s} | {} | {} | {}".format(worker.socialSecurityNumber,worker.name,destinationNameList[i],departureTimeFromISList[j],departureTimeToISList[j])
+            elif pos == "Attendant":
+                if worker.position == "Flight Service Manager" and worker.socialSecurityNumber not in mainFlightAttendantList:
+                    avaialbleWorkerString += "\n{:10s} | {:20s} | {:22s}".format(worker.socialSecurityNumber,worker.name,worker.position)
+                elif worker.position == "Flight Service Manager" and worker.socialSecurityNumber in mainFlightAttendantList:
+                    for i in range(len(mainFlightAttendantList)):
+                        if mainFlightAttendantList[i] == worker.socialSecurityNumber: 
+                            unAvaialbleWorkerString += "\n{:10s} | {:20s} | {:22s}".format(worker.socialSecurityNumber,worker.name,destinationNameList[i])  
+                elif worker.position == "Flight Attendant" and worker.socialSecurityNumber not in [j for i in newFlightAttendantList for j in i]:
+                    avaialbleWorkerString += "\n{:10s} | {:20s} | {:22s}".format(worker.socialSecurityNumber,worker.name,worker.position)
+                elif worker.position == "Flight Attendant" and worker.socialSecurityNumber in [j for i in newFlightAttendantList for j in i]:
+                    for i in range(len(newFlightAttendantList)):
+                        if worker.socialSecurityNumber in newFlightAttendantList[i]:
+                            unAvaialbleWorkerString += "\n{:10s} | {:20s} | {:22s}".format(worker.socialSecurityNumber,worker.name,destinationNameList[i])
+        if status == "Unavailable":
+            if len(unAvaialbleWorkerString) == 0:
+                return "There are no workers working on that date!"
+            else:
+                return printString + unAvaialbleWorkerString + "\n"
+        elif status == "Available":
+            if len(avaialbleWorkerString) == 0:
+                return "All workers seem to be unavailable at this date!"
+            else:
+                return printString + avaialbleWorkerString + "\n"
+        elif status == "WEEK":
+            return weekWorkerString
 
-   
-
+    
+    def listWorkerVoyagesByWeek(self, ssn, year, week, pos): 
+        pass
+        #Fá user til þess að velja ssn
+        #Fá user til þess að velja ár
+        #Fá user til þess að velja vikunúmer í því ári
+        #print(datetime.date(2019, 12, 12).strftime("%V"))
+        string = ""
+        day = "{}-W{}".format(year, week)
+        firstWeekday = datetime.strptime(day + '-1', "%Y-W%W-%w")
+        for i in range(7):
+            weekday = firstWeekday + timedelta(days = i)
+            string += WorkerLL.listWorkersbydate(self, weekday, pos, "WEEK")
+        return "\n\n{:^10s} | {:^20s} | {:^22s}".format("SSN", "NAME", "FLIGHT DESTINATION") + string
+       
 

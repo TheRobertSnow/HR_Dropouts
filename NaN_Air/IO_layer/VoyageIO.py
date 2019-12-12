@@ -1,12 +1,15 @@
 import csv
 FILENAME = 'DataFiles/voyage.csv'
-
-
+from IO_layer import FlightIO
 class VoyageIO:
 
     def __init__(self, airplaneList, flightList, workerList, flightRouteList):
-        self.dictList = []
+        self.__dictList = []
         self.voyageList = []
+        self.airplaneList = airplaneList
+        self.flightList = flightList
+        self.workerList = workerList
+        self.flightRouteList = flightRouteList
         self.get_voyages_from_file()
         self.create_voyage_instances()
 
@@ -30,14 +33,18 @@ class VoyageIO:
 
     def write_voyage_to_file(self, aList):
         """Method takes in a list of data and writes to file"""
+        voyage = None
         with open(FILENAME, 'a', encoding="utf8", newline='') as csvFile:
             csvWriter = csv.writer(csvFile)
+            aList = self.fillList(aList)
             orderedDict = self.convert_to_dict_with_id(aList)
             self.__dictList.append(orderedDict)
+            voyage = self.create_voyage_instance(orderedDict)
             newList = []
             newList.append(orderedDict['Voyage ID'])
             [newList.append(i) for i in aList]
             csvWriter.writerow(newList)
+        return voyage
 
     def write_dictList_to_file(self):
         """Method overwrites file with data from dictList"""
@@ -69,6 +76,17 @@ class VoyageIO:
                     if int(value) > highestID:
                         highestID = int(value)
         return highestID + 1
+
+    def fillList(self, aList):
+        testing = FlightIO.FlightIO()
+        self.flightList = FlightIO.FlightIO.get_flights(testing)
+        for flight in self.flightList:
+            if int(flight.flightID) == int(aList[0]):
+                aList.append(flight.destinationID)
+                aList.append(flight.departureTime)
+            elif int(flight.flightID) == int(aList[1]):
+                aList.append(flight.departureTime)
+        return aList
 
     def convert_to_dict_with_id(self, aList):
         """Function takes in a list of arguments,
@@ -140,8 +158,28 @@ class VoyageIO:
             voyage = Voyage(dictionary)
             self.__voyageList.append(voyage)
 
+    def create_voyage_instance(self, orderedDict):
+        voyage = Voyage(orderedDict)
+        self.voyageList.append(voyage)
+        return voyage
+
     def createNewVoyage(self, voyageList):
-        return "were working on this method"
+        voyage = self.write_voyage_to_file(voyageList)
+        return voyage
+
+    def updateCertainVoyage(self, voyageInstance, keyToChange, newValue):
+        """takes in the instance of a plane and the new status, updates the instance and the file then returns
+            the updated instance"""
+        if keyToChange == "Flight attendants":
+            # update the instance
+            voyageInstance.addFlightAttendant(newValue)
+        else:
+            # update the instance
+            voyageInstance.updateValue(keyToChange, newValue)
+
+        # update the csv file
+        self.write_dictList_to_file()
+        return voyageInstance
 
 
 class Voyage:
@@ -158,7 +196,6 @@ class Voyage:
         self.departureFromIS = dictionary["Departure from IS"]
         self.departureToIS = dictionary["Departure to IS"]
 
-
     def __str__(self):
         returnString = []
         for key, val in self.myDictionary.items():
@@ -171,10 +208,12 @@ class Voyage:
     def getflightIDS(self):
         return self.flightOutID, self.flightBackID
 
+    def updateValue(self, key, newStatus):
+        self.myDictionary[key] = newStatus
 
-# writeList = ['35','1107951952','Elizabeth Mcfadden','Cabincrew','Flight Attendant','N/A','Fellsmúli 35','8998835','8998835','test@test.com','True','True']
-# updateList = ['35', 'Position', 'Looser']
-# worker = WorkerIO()
-# # print(newline)
-# worker.write_worker_to_file(writeList)
-# worker.update_data_in_file(updateList)
+    def addFlightAttendant(self, newValue):
+        valueChecker = self.myDictionary["Flight attendants"]
+        if len(valueChecker) == 0:
+            self.myDictionary["Flight attendants"] = newValue
+        else:
+            self.myDictionary["Flight attendants"] += "/" + newValue

@@ -135,28 +135,27 @@ class View():
             printObjects(allPilots)
             return viewPilotsInput
         elif viewPilotsInput == "3":
-            pilotDate = input("Input year-month-day, f.x. 2020-01-22: ")
-            unavailablePilots = UIAPI.UIAPI.listUnavailableWorkersbydate(self, pilotDate, "Pilot")
-            availablePilots = UIAPI.UIAPI.listAvailableWorkersbydate(self, "Pilot", unavailablePilots)
-            printObjects(availablePilots)
+            departureDate = input("  - Input date (f.x. 24/12/2019): ")
+            day, month, year = map(int, departureDate.split('/'))
+            departureDateTime = datetime.datetime(year, month, day)
+            #pilotDate = input("Input year-month-day, f.x. 2020-01-22: ")
+            #unavailablePilots = UIAPI.UIAPI.listUnavailableWorkersbydate(self, pilotDate, "Pilot")
+            availablePilots = UIAPI.UIAPI.listWorkersbydate(self, departureDateTime, "Pilot", "Available")
+            print(availablePilots)
             return viewPilotsInput
         elif viewPilotsInput == "4":
-            pilotDate = input("Input year-month-day, f.x. 2020-01-22: ")
-            unavailablePilots = UIAPI.UIAPI.listUnavailableWorkersbydate(self, pilotDate, "Pilot")
-            print("")
-            for lists in unavailablePilots:
-                print(lists[0])
-                print(lists[1]+ "\n")
-            #printObjects(unavailablePilots)
-            #pilotDate = input("Input date: ")
-            #unavailableAttendants = UIAPI.UIAPI.listUnavailableWorkersbydate(self, pilotDate, "Pilot")
-            #printObjects(unavailableAttendants)
+            departureDate = input("  - Input date (f.x. 24/12/2019): ")
+            day, month, year = map(int, departureDate.split('/'))
+            departureDateTime = datetime.datetime(year, month, day)
+            unavailablePilots = UIAPI.UIAPI.listWorkersbydate(self, departureDateTime, "Pilot", "Unavailable")
+            print(unavailablePilots)
             return viewPilotsInput
         elif viewPilotsInput == "5":
             pilotSSN = input("Input SSN with no spaces in between: ")
-            pilotWeek = input("Input week ")
-            pilotWeeklyVoyages = UIAPI.UIAPI.viewallVoyagesInWeek(self, pilotSSN, pilotWeek, pos="Pilot")
-            printObjects(pilotWeeklyVoyages)
+            pilotYear = input("Input year: ")
+            pilotWeek = input("Input week of the year: ")
+            pilotWeeklyVoyages = UIAPI.UIAPI.viewallVoyagesInWeek(self, pilotSSN, pilotYear, pilotWeek, pos="Pilot")
+            print(pilotWeeklyVoyages)
             return viewPilotsInput
         elif viewPilotsInput == "6":
             pilotLicence = input("Input Plane Licence: ")
@@ -195,22 +194,19 @@ class View():
             return viewAttendantsInput
         elif viewAttendantsInput == "3":
             attendantDate = input("Input year-month-day, f.x. 2020-01-22: ")
-            availableAttendants = UIAPI.UIAPI.listAvailableWorkersbydate(self, attendantDate, "Attendant")
-            printObjects(availableAttendants)
+            availableAttendants = UIAPI.UIAPI.listWorkersbydate(self, attendantDate, "Attendant", "Available")
+            print(availableAttendants)
             return viewAttendantsInput
         elif viewAttendantsInput == "4":
             attendantDate = input("Input year-month-day, f.x. 2020-01-22: ")
-            unavailableAttendants = UIAPI.UIAPI.listUnavailableWorkersbydate(self, attendantDate, "Attendant")
-            print("")
-            for lists in unavailableAttendants:
-                print(lists[0])
-                print(lists[1]+ "\n")
+            unavailableAttendants = UIAPI.UIAPI.listWorkersbydate(self, attendantDate, "Attendant", "Unavailable")
+            print(unavailableAttendants)
             return viewAttendantsInput
         elif viewAttendantsInput == "5":
             attendantSSN = input("Input SSN with no spaces in between: ")
-            attendantWeek = input("Input week: ")
-            attendantWeeklyVoyages = UIAPI.UIAPI.viewallVoyagesInWeek(self, attendantSSN, attendantWeek,
-                                                                      pos="Attendant")
+            attendantYear = input("Input year: ")
+            attendantWeek = input("Input week of the year: ")
+            attendantWeeklyVoyages = UIAPI.UIAPI.viewallVoyagesInWeek(self, attendantSSN, attendantYear, attendantWeek, pos="Attendant")
             printObjects(attendantWeeklyVoyages)
             return viewAttendantsInput
         elif viewAttendantsInput == "b":
@@ -257,8 +253,8 @@ class View():
         viewAirplaneInput = viewAirplaneInput.lower()
         if viewAirplaneInput == "1":
             AirplaneReg = input("Please input airplane registration: ")
-            Airplane = UIAPI.UIAPI.viewCertainAirplane(self,
-                                                       AirplaneReg)  # Ekki alveg búið fæ ekki self.__planereg = dictionary["Plane registration"] til að virka í Airplane.py
+            # Ekki alveg búið fæ ekki self.__planereg = dictionary["Plane registration"] til að virka í Airplane.py
+            Airplane = UIAPI.UIAPI.viewCertainAirplane(self, AirplaneReg)  
             print(Airplane)
             viewAirplaneInput = View.viewAirplane(self)
 
