@@ -22,6 +22,9 @@ class WorkerLL():
         return ssn 
 
     def checkNewValue(self, theKey, newValue):
+        testValue = ""
+        validValue = ""
+        error = ""
         if theKey == "Address":
             try:
                 testValue = newValue.split(" ")
@@ -30,7 +33,7 @@ class WorkerLL():
                 error = "Home address"
             try:
                 testValue = int(testValue[1])
-            except ValueError:
+            except IndexError:
                 validValue = False
                 error = "Home address"
         if theKey == "Phone":
@@ -46,9 +49,7 @@ class WorkerLL():
                 validValue = False
                 error = "Cellphone number"
         if theKey == "Email":
-            try:
-                testValue = testValue.split('@')
-            except ValueError:
+            if "@" not in newValue:
                 validValue = False
                 error = "Email" 
         return validValue, error
@@ -118,13 +119,13 @@ class WorkerLL():
         validValue = True
         error = ""
         if ssn != "\nThat social security number is not correct, try again!":
-            validValue, error = checkNewValue(self, theKey, newValue)          
+            validValue, error = WorkerLL.checkNewValue(self, theKey, newValue)          
         if validValue != False:
             self.worker = WorkerLL.get_worker_list(self)
             for instance in self.worker:
                 if instance.socialSecurityNumber == socialSecurityNumber:
                     updatedWorker = self.IOAPI.updateWorker(instance, theKey, newValue)
-                    self.worker = WorkerLL.get_worker_list(self)
+                    #self.worker = WorkerLL.get_worker_list(self)
                     print("Worker succesfully updated!\n")
                     return updatedWorker
         return "{} could not be updated, please try again!".format(error)
@@ -182,9 +183,9 @@ class WorkerLL():
             unavailableList = "There are no workers working on that date."
         return unavailableList
 
-    def listAvailableWorkersbydate(self, pos, unavailableList):  
-        """Takes in a position and a list of workers who are unavailable on that date from 
-        the "listUnavailableWorkersbydate" function"""
+    """def listAvailableWorkersbydate(self, pos, unavailableList): 
+        Takes in a position and a list of workers who are unavailable on that date from 
+        the "listUnavailableWorkersbydate" function
         availableList = []
         workerList = WorkerLL.get_worker_list(self)
         voyages = self.IOAPI.request_voyagestoWorker()
@@ -195,6 +196,39 @@ class WorkerLL():
             elif pos == "Attendant":
                 if instance.position == "Flight Service Manager" or instance.position == "Flight Attendant" and instance not in unavailableList:
                     availableList.append(instance)
+        return availableList"""
+
+    def listAvailableWorkersbydate(self, date, pos): 
+        """Takes in a date and position and returns a list with each worker who is working on that date
+         and the worker's destination."""
+        unavailableList = []
+        availableList = []
+        destinationName = ""
+        workerList = WorkerLL.get_worker_list(self) #All workers
+        voyages = self.IOAPI.request_voyagestoWorker() #All voyages
+        flightRoutes = self.IOAPI.getAllFlightRouteInstances() #All flight Routes
+        for voyage in voyages:
+            destinationID = voyage.flightRouteID 
+            for flightroute in flightRoutes:
+                if flightroute.flightRouteID == destinationID:
+                    destinationName = flightroute.country
+            if date in voyage.departureFromIS or date in voyage.departureToIS:
+                for worker in workerList:
+                    if pos == "Pilot":
+                        if voyage.mainPilot == worker.socialSecurityNumber:
+                            unavailableList.append(worker)
+                        elif voyage.assistingPilot == worker.socialSecurityNumber:
+                            unavailableList.append(worker)
+                    elif pos == "Attendant":
+                        if voyage.mainFlightAttendant == worker.socialSecurityNumber:
+                            unavailableList.append(worker) 
+                        elif worker.socialSecurityNumber in voyage.getflightAttendants():
+                            unavailableList.append(worker) 
+        for worker in workerList:
+            if worker not in unavailableList:
+                availableList.append(worker)
+        #if len(availableList) == 0:
+            #unavailableList = "There are no workers available on that date."
         return availableList
 
    
