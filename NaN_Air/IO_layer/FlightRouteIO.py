@@ -1,7 +1,5 @@
 import csv
-import sys
 FILENAME = 'DataFiles/flightRoutes.csv'
-
 
 class FlightRouteIO():
 
@@ -15,7 +13,6 @@ class FlightRouteIO():
         """Return a list of flight instances"""
         return self.flightRouteList
     
-
     def get_flight_route_from_file(self):
         """Only use for initializing FlightRouteIO.
         Get flight routes from file in a list of dictionaries"""
@@ -77,7 +74,6 @@ class FlightRouteIO():
                     if value == flightRouteID:
                         travelTime = dictionary['Travel time']
                         return travelTime
-                    
 
     def convert_to_dict_with_id(self, aList):
         """Function converts list to dict, generates an ID
@@ -153,8 +149,6 @@ class FlightRouteIO():
         flightRoute = self.write_flight_route_to_file(flightRouteList)
         return flightRoute  # returns the new object
 
-
-
 class FlightRoute:
     def __init__(self, dictionary):
         self.myDictionary = dictionary
@@ -172,13 +166,3 @@ class FlightRoute:
             returnString.append((key + ": " + str(val)))
         return "\n".join(returnString)
 
-    def __repr__(self):
-        return f"< Flight route ID: {self.flightRouteID} \n>"
-
-# +++ Test cases +++
-# flightroutes = FlightRouteIO()
-# updateline = ["1","Country", "Denmark"]
-# newline = ["Denmark","Reykjavik","0","0:00", "Áslaug Steingrímsdóttir", "3547745010"]
-# # # print(newline)
-# flightroutes.write_flight_route_to_file(newline)
-# flightroutes.update_data_in_file(updateline)

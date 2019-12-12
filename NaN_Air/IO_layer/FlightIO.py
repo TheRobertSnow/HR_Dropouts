@@ -1,5 +1,4 @@
 import csv
-# import datetime
 FILENAME = 'DataFiles/flight.csv'
 from datetime import datetime
 from datetime import timedelta
@@ -111,8 +110,6 @@ class FlightIO():
                 flightNumber = flightNumber + str(numOfFlight)
                 return flightNumber
 
-
-
     def write_dictList_to_file(self):
         """Method overwrites file with data from dictList"""
         with open(FILENAME, 'w', newline='', encoding='utf8') as csvfile:
@@ -218,7 +215,6 @@ class FlightIO():
         flightInstance = self.write_flight_to_file(flightList)
         return flightInstance
 
-
 class Flight:
     def __init__(self, dictionary):
         self.myDictionary = dictionary
@@ -231,7 +227,6 @@ class Flight:
         self.travelTime = dictionary["Travel time"]
         self.departureTime = dictionary["Departure time"]
         self.arrivalTime = dictionary["Arrival time"]
-
 
     def __str__(self):
         returnString = []

@@ -153,8 +153,6 @@ class WorkerLL():
         
         if createWorkerList[2] == "Stupid User":
             return "Error!: Position not picked"
-        
-
         #5 Phone
         try:
             int(createWorkerList[5])

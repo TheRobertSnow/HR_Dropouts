@@ -1,7 +1,5 @@
 import csv
-
 FILENAME = "DataFiles/airplane.csv"
-
 
 def convert_to_dict(aList):
     """Function converts list to dict"""
@@ -13,7 +11,6 @@ def convert_to_dict(aList):
     orderedDict['Seats'] = aList[3]
     orderedDict['Odometer'] = aList[4]
     return orderedDict
-
 
 class AirplaneIO:
 
@@ -123,7 +120,6 @@ class AirplaneIO:
         theDict = convert_to_dict(airplaneList)
         airplane = Airplane(theDict)
         self.airplaneList.append(airplane)  # add the new object to our list
-
         # write to file
         self.write_airplane_to_file(airplaneList)
         return airplane  # returns the new object
@@ -133,11 +129,9 @@ class AirplaneIO:
             the updated instance"""
         # update the instance
         planeInstance.updateStatus(newStatus)
-
         # update the csv file
         self.write_dictList_to_file()
         return planeInstance
-
 
 class Airplane:
     def __init__(self, dictionary):
