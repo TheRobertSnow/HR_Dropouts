@@ -79,7 +79,9 @@ class IOAPI:
     #
     # Flight
     #
-
+    def automatically_change_flight_status(self):
+        return self.flightIO.automatically_change_flight_status()
+    
     def getFlightNumber(self, originID, destinationID, departureTime):
         """Send request to FlightIO to get flight number"""
         return self.flightIO.get_flight_number(originID, destinationID, departureTime)

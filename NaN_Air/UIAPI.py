@@ -100,9 +100,9 @@ class UIAPI:
         returnData = self.flightLL.getAllFlights()
         return returnData
 
-    def viewFlightsByStatus(self, status):
+    def viewFlightsByStatuses(self, statuses):
         """give us all flight instances that dont have a certain status"""
-        returnData = self.flightLL.viewFlightsByStatus(status)
+        returnData = self.flightLL.viewFlightsByStatuses(statuses)
         return returnData
 
     def updateFlightStatus(self, flightlist):
