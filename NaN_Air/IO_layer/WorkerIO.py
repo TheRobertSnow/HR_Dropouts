@@ -1,7 +1,6 @@
 import csv
 FILENAME = 'DataFiles/worker.csv'
-#fieldnames = ['Social Security Number', 'Name', 'Position', 'Plane License', 'Address', 'Phone', 'Cellphone', 'Email', 'Active', 'Available']
-
+FIELDNAMES = ['Social Security Number', 'Name', 'Position', 'Plane License', 'Address', 'Phone', 'Cellphone', 'Email', 'Active', 'Available']
 
 class WorkerIO():
 
@@ -35,12 +34,6 @@ class WorkerIO():
         for dictionary in self.__dictList:
             worker = Worker(dictionary)
             self.workerList.append(worker)
-
-
-    #def get_specific_Worker(self, SSN):
-    #Verðum að gera function til þess að taka upp eitt instance!!!
-
-
 
     def write_worker_to_file(self, objectDict, aList):
         """Method takes in a list of data and writes to file"""
@@ -177,7 +170,6 @@ class WorkerIO():
         self.write_dictList_to_file()  
         return instance 
 
-
 class Worker():
     def __init__(self, dictionary):
         self.myDictionary = dictionary
@@ -199,13 +191,6 @@ class Worker():
     def __str__(self):
         returnString = []
         for key, val in self.myDictionary.items():
-            if key != "Active" and key != "Available": #We do not want to print active and available status
+            if key != "Active" and key != "Available":
                 returnString.append((key + ": " + val))
         return "\n".join(returnString)
-
-# writeList = ['1107951952','Elizabeth Mcfadden','Flight Attendant','N/A','Fellsmúli 35','8998835','8998835','test@test.com','True','True']
-# updateList = ['35', 'Position', 'Homosexual']
-# worker = WorkerIO()
-# # print(newline)
-# worker.write_worker_to_file(writeList)
-# worker.update_data_in_file(updateList)

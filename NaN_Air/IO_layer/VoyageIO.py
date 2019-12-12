@@ -1,6 +1,7 @@
 import csv
 FILENAME = 'DataFiles/voyage.csv'
 from IO_layer import FlightIO
+
 class VoyageIO:
 
     def __init__(self, airplaneList, flightList, workerList, flightRouteList):
@@ -176,11 +177,9 @@ class VoyageIO:
         else:
             # update the instance
             voyageInstance.updateValue(keyToChange, newValue)
-
         # update the csv file
         self.write_dictList_to_file()
         return voyageInstance
-
 
 class Voyage:
     def __init__(self, dictionary):
@@ -201,16 +200,6 @@ class Voyage:
         for key, val in self.myDictionary.items():
             returnString.append((key + ": " + str(val)))
         return "\n".join(returnString)
-
-    def getflightAttendants(self):
-        flightAttendantList = []
-        flightattendant = self.flightAttendants
-        flightattendant = flightattendant.replace("[", "")
-        flightattendant = flightattendant.replace("]", "")
-        flightattendant = flightattendant.replace("'", "")
-        flightattendant = flightattendant.replace(" ", "")
-        flightAttendantList = flightattendant.split(",")
-        return flightAttendantList
 
     def getflightIDS(self):
         return self.flightOutID, self.flightBackID

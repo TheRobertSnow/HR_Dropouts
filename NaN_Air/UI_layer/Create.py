@@ -122,7 +122,7 @@ Please input the following information:''')
 
 
             # adds crew
-            addCrewInput = input("Do you want to add a crew to the voyage? (y/n)")
+            addCrewInput = input("  - Do you want to add a crew to the voyage? (y/n)")
             if addCrewInput.lower() == "y":
                 captain, copilot, flightServiceManager, flightAttendants = Create.addCrew(self, flightOutId, flightBackId)
             elif addCrewInput.lower() == "n":
@@ -155,7 +155,10 @@ Please input the following information:''')
             flightInstance1 = UIAPI.UIAPI.createNewFlight(self, flightList)
             print(flightInstance1)
             # finds id of created flight
-            voyageList2.append(flightInstance1.flightID)
+            try:
+                voyageList2.append(flightInstance1.flightID)
+            except AttributeError:
+                return createVoyageMenuInput
             # voyageList2.append(flightOutId)
             #print("Flight 1 successfully created!")
 
@@ -168,11 +171,14 @@ Please input the following information:''')
             flightInstance2 = UIAPI.UIAPI.createNewFlight(self, flightList2)
             print(flightInstance2)
             # finds id of created flight
-            voyageList2.append(flightInstance2.flightID)
+            try:
+                voyageList2.append(flightInstance2.flightID)
+            except AttributeError:
+                return createVoyageMenuInput
             # voyageList2.append(flightBackId)
             #print("Flight 2 successfully created!")
             # print(flightBackList)
-            addCrewInput = input("Do you want to add a crew to the voyage? (y/n)")
+            addCrewInput = input("  - Do you want to add a crew to the voyage? (y/n)")
             if addCrewInput.lower() == "y":
                 # get flight ids
                 supposedNextID = UIAPI.UIAPI.nextFlightID(self)
@@ -181,7 +187,6 @@ Please input the following information:''')
                 captain, copilot, flightServiceManager, flightAttendants = Create.addCrew(self, flight1ID, flight2ID)
             elif addCrewInput.lower() == "n":
                 captain, copilot, flightServiceManager, flightAttendants = "", "", "", ""
-            print("Crew successfully Added!")
             # prints out crew info
             print(captain, copilot, flightServiceManager, flightAttendants)
             voyageList2.insert(2, captain)
@@ -207,7 +212,7 @@ Begin by selecting ID of a existing voyage.
                     userInput = input("Voyage does not exist...\n - Input voyage ID: ")
             dateList = []
             while True:
-                dateInput = input(" - Input date (e.g. 07/03/2019) (s to stop)\n - Input: ")
+                dateInput = input(" - Input date(e.g. 07/03/2019, s to stop): ")
                 if dateInput.lower() == "s":
                     break
                 else:
@@ -218,22 +223,14 @@ Begin by selecting ID of a existing voyage.
             argumentList = [userInput, dateList]
             returnMessage = UIAPI.UIAPI.createDuplicateVoyages(self, argumentList)
             print(returnMessage)
-
-
-
-
-
-
+            return createVoyageMenuInput
         elif createVoyageMenuInput == "b":
             return createVoyageMenuInput
-
         elif createVoyageMenuInput == "q":
             return createVoyageMenuInput
-
         else:
             print("Wrong input, try again")
             createVoyageMenuInput = Create.createVoyageMenu(self)
-
         return createVoyageMenuInput
 
     def createMenu(self):
@@ -264,7 +261,7 @@ Please input the following information:''')
     4. Flight attendant
     5. Staff manager
     6. Trip manager''')
-            position = input("  Input choice: ")
+            position = input("  - Input choice: ")
             if position == "1":
                 createWorkerList.append("Captain")
             elif position == "2":
