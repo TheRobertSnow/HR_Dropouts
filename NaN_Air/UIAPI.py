@@ -100,13 +100,13 @@ class UIAPI:
         returnData = self.flightLL.getAllFlights()
         return returnData
 
-    def viewFlightsByStatus(self, status):
+    def viewFlightsByStatuses(self, statuses):
         """give us all flight instances that dont have a certain status"""
-        returnData = self.flightLL.viewFlightsByStatus(status)
+        returnData = self.flightLL.viewFlightsByStatuses(statuses)
         return returnData
 
     def updateFlightStatus(self, flightlist):
-        """we give you a new status of a certain flight and you update the instance and the csv file according to that"""
+        """we give you a new status of a certain flight and you update the instance and the csv file accordingly"""
         returnData = self.flightLL.updateFlightStatus(flightlist)
         return returnData
 
@@ -114,6 +114,17 @@ class UIAPI:
         """we give you a new departure time and you update the instance and the csv file according to that"""
         returnData = self.flightLL.updateFlightDepartureTime(newDepartureTime)
         return returnData
+
+    def viewCertainFlightByID(self, flightID):
+        return self.flightLL.getCertainFlightFromID(flightID)
+
+    def nextFlightID(self):
+        """returns the id that will be used in the next flight created"""
+        return self.flightLL.getNextFlightID()
+
+    def getDateFromFlightID(self, flightID):
+        """returns the Date of a flight that matches the ID this method receives"""
+        return self.flightLL.getDate(flightID)
     #
     # voyage related
     #
@@ -135,6 +146,9 @@ class UIAPI:
         um hvort að það sé fullmannað á þeim degi"""
         returnData = self.voyageLL.viewallVoyagesDay(day)
         return returnData
+
+    def verifyStaffForVoyage(self, theKey, SSN, dateOut, dateBack):
+        return self.voyageLL.verifyStaff(theKey, SSN, dateOut, dateBack)
 
     def viewallVoyagesWeek(self, week):
         """Listar öll voyages í ákveðinni viku og hvort að þau séu fullmönnuð, svo
@@ -168,6 +182,12 @@ class UIAPI:
         # TODO
         pass
 
+    def checkVoyageExists(self, voyageID):
+        return self.voyageLL.checkVoyageExists(voyageID)
+
+    def createDuplicateVoyages(self, argumentList):
+        return self.voyageLL.createDuplicateVoyages(argumentList)
+
     def addFlightAttendantVoyage(self, voyageID, pilotToAddInput):
         return self.voyageLL.addFlightAttendantToVoyage(voyageID, pilotToAddInput)
 
@@ -179,6 +199,9 @@ class UIAPI:
 
     def addCaptainVoyage(self, voyageID, pilotToAddInput):
         return self.voyageLL.addCaptainToVoyage(voyageID, pilotToAddInput)
+
+    def checkIfAlreadyUsed(self, flightID):
+        return self.voyageLL.checkIfIdUsed(flightID)
     #
     # flight route related
     #

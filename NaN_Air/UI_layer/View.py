@@ -332,7 +332,7 @@ class View():
   1. View specific flight
   2. View all flights
   3. View active flights
-  4. View cancelled flights
+  4. View cancelled/landed flights
 --------------------------------------------''')
 
         viewFlightInput = input("Input choice (q to Quit, b for Back): ")
@@ -350,12 +350,18 @@ class View():
             printObjects(allFlights)
             viewFlightInput = View.viewFlight(self)
         if viewFlightInput == "3":
-            viewActiveFlights = UIAPI.UIAPI.viewFlightsByStatus(self, "Active")
-            printObjects(viewActiveFlights)
+            viewActiveFlights = UIAPI.UIAPI.viewFlightsByStatuses(self, ["On schedule", "Loading", "In-Air"])
+            if type(viewActiveFlights) == str:
+                print(viewActiveFlights)
+            else:
+                printObjects(viewActiveFlights)
             viewFlightInput = View.viewFlight(self)
         if viewFlightInput == "4":
-            viewCancelledFlights = UIAPI.UIAPI.viewFlightsByStatus(self, "Cancelled")
-            printObjects(viewCancelledFlights)
+            viewCancelledFlights = UIAPI.UIAPI.viewFlightsByStatuses(self, ["Landed", "Cancelled"])
+            if type(viewCancelledFlights) == str:
+                print(viewCancelledFlights)
+            else:
+                printObjects(viewCancelledFlights)
             viewFlightInput = View.viewFlight(self)
         elif viewFlightInput == "b":
             return viewFlightInput

@@ -79,7 +79,9 @@ class IOAPI:
     #
     # Flight
     #
-
+    def automatically_change_flight_status(self):
+        return self.flightIO.automatically_change_flight_status()
+    
     def getFlightNumber(self, originID, destinationID, departureTime):
         """Send request to FlightIO to get flight number"""
         return self.flightIO.get_flight_number(originID, destinationID, departureTime)
@@ -102,9 +104,14 @@ class IOAPI:
     def getAllFlightInstances(self):
         return self.flightIO.get_flights()
 
+    def getNextFlightID(self):
+        return self.flightIO.getNextID()
+
     def send_instance_to_voyage(self):
         """This methood is for sending pointers to the instance lists of
         workers, flights, airplanes and flight routes to voyage."""
         # self.voyages.get_other_class_instances(self.request_airplanes()
         # , self.request_flights(), self.request_workers(), self.request_flight_routes())
         print("")
+
+
