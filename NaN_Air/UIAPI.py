@@ -146,8 +146,8 @@ class UIAPI:
         returnData = self.voyageLL.viewallVoyagesDay(day)
         return returnData
 
-    def verifyStaffForVoyage(self, theKey, SSN, dateOut, dateBack):
-        return self.voyageLL.verifyStaff(theKey, SSN, dateOut, dateBack)
+    def verifyStaffForVoyage(self, theKey, SSN, dateOut, dateBack, flightID):
+        return self.voyageLL.verifyStaff(theKey, SSN, dateOut, dateBack, flightID)
 
     def viewallVoyagesWeek(self, week):
         """Listar öll voyages í ákveðinni viku og hvort að þau séu fullmönnuð, svo

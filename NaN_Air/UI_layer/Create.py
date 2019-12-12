@@ -35,19 +35,19 @@ class Create():
         dateBack = UIAPI.UIAPI.getDateFromFlightID(self, secondFlightID)
         print("\nAdd Crew")
         captain = input("  - Captains social security number: ")
-        results = UIAPI.UIAPI.verifyStaffForVoyage(self, "Captain", captain, dateOut, dateBack)
+        results = UIAPI.UIAPI.verifyStaffForVoyage(self, "Captain", captain, dateOut, dateBack, flightID)
         if type(results) == str:
             print(results)
             print("You can try adding a captain later in the update menu, for now the captain is empty")
             captain = ""
         copilot = input("  - Copilots social security number: ")
-        results = UIAPI.UIAPI.verifyStaffForVoyage(self, "Copilot", copilot, dateOut, dateBack)
+        results = UIAPI.UIAPI.verifyStaffForVoyage(self, "Copilot", copilot, dateOut, dateBack, flightID)
         if type(results) == str:
             print(results)
             print("You can try adding a Copilot later in the update menu, for now the captain is empty")
             copilot = ""
         flightServiceManager = input("  - Flight service managers social security number: ")
-        results = UIAPI.UIAPI.verifyStaffForVoyage(self, "Flight Service Manager", flightServiceManager, dateOut, dateBack)
+        results = UIAPI.UIAPI.verifyStaffForVoyage(self, "Flight Service Manager", flightServiceManager, dateOut, dateBack, flightID)
         if type(results) == str:
             print(results)
             print("You can try adding a Manager later in the update menu, for now the captain is empty")
@@ -59,7 +59,7 @@ class Create():
             if flightAttendant == "q":
                 break
             else:
-                results = UIAPI.UIAPI.verifyStaffForVoyage(self, "Flight Attendant", flightAttendant, dateOut, dateBack)
+                results = UIAPI.UIAPI.verifyStaffForVoyage(self, "Flight Attendant", flightAttendant, dateOut, dateBack, flightID)
                 if type(results) == str:
                     print(results)
                 else:
