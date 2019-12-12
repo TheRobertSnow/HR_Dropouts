@@ -8,3 +8,7 @@ Flight ID,Flight number,Airplane registration number,Origin ID,Destination ID,Fl
 7,NA022,TF-PGK,1,2,On schedule,2:00,2019-12-25 13:00:00,2019-12-25 15:00:00
 8,NA023,TF-PGK,2,1,On schedule,2:00,2019-12-25 15:30:00,2019-12-25 17:30:00
 9,NA024,TF-PGK,1,2,On schedule,2:00,2019-12-25 17:40:00,2019-12-25 19:40:00
+10,NA020,test-test,1,2,On schedule,2:00,2020-07-22 12:30:00,2020-07-22 14:30:00
+11,NA020,test-test,1,2,On schedule,2:00,2020-06-18 06:23:00,2020-06-18 08:23:00
+12,NA011,test-test,1,1,On schedule,0:00,2020-05-23 15:50:00,2020-05-23 15:50:00
+13,NA011,test-test,1,1,On schedule,0:00,2020-06-25 12:30:00,2020-06-25 12:30:00
