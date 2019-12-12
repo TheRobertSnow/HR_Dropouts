@@ -4,13 +4,16 @@ import datetime
 class Create():
     def __init__(self):
         self.uiapi = UIAPI.UIAPI()
-    def createFlight(airplane=None, origin=None, destination=None):
+
+    def createFlight(self, airplane=None, origin=None, destination=None):
         flightList = []
         selfCopy = airplane  # fix for not very good method
         if airplane == None:
             airplane = input("  - Airplane registration number: ")
-            checkReg = UIAPI.UIAPI.viewCertainAirplane(selfCopy, airplane)
-            print(checkReg)
+            checkReg = UIAPI.UIAPI.viewCertainAirplane(self, airplane)
+            if type(checkReg) == str:
+                print(checkReg)
+                return "failed"
         flightList.append(airplane)
         if origin == None:
             origin = input("  - Origin ID: ")
@@ -141,7 +144,7 @@ Please input the following information:''')
             # Get a list of information for the flight
             flightList = "failed"
             while flightList == "failed":
-                flightList = Create.createFlight(None, "1")  # Sends in the id of Reykjavik airport
+                flightList = Create.createFlight(self, None, "1")  # Sends in the id of Reykjavik airport
             # creates flight1
             flightInstance1 = UIAPI.UIAPI.createNewFlight(self, flightList)
             print(flightInstance1)
@@ -154,7 +157,7 @@ Please input the following information:''')
             # Get a list of information for the flight
             flightList2 = "failed"
             while flightList2 == "failed":
-                flightList2 = Create.createFlight(flightList[0], flightList[2], flightList[1])
+                flightList2 = Create.createFlight(self, flightList[0], flightList[2], flightList[1])
             # creates flight2
             flightInstance2 = UIAPI.UIAPI.createNewFlight(self, flightList2)
             print(flightInstance2)
@@ -346,7 +349,7 @@ Please input the following information:''')
                 print(item.flightRouteID, item.country)
             flightList = "failed"
             while flightList == "failed":
-                flightList = Create.createFlight()  # Creates a list for createNewFlight
+                flightList = Create.createFlight(self)  # Creates a list for createNewFlight
             result = UIAPI.UIAPI.createNewFlight(self, flightList)
             print(result)
             print("--------------------------------------------")
