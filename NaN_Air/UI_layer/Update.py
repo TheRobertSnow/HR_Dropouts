@@ -308,10 +308,12 @@ class Update:
         if updateMenuInput == "1":
             instance = ""
             #print(UIAPI.UIAPI.viewAllWorkers(self))
-            while type(instance) == str:
+            while True:
                 ssnInput = input("  - Input the SSN of the Worker you wish to change properties: ")
                 instance = UIAPI.UIAPI.viewWorkerBySSn(self, ssnInput)
                 print(instance)
+                if type(instance) != str:
+                    break
             output = Update.update_Worker(self, ssnInput)
             if output == "b":
                 updateMenuInput = Update.updateMenu(self)
