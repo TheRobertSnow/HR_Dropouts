@@ -148,7 +148,6 @@ class WorkerLL():
 
         if createWorkerList[2] == "Stupid User":
             return "Error!: Position not picked"
-        
         #5 Phone
         try:
             int(createWorkerList[5])
@@ -227,12 +226,12 @@ class WorkerLL():
                             unAvaialbleWorkerString += "\n{:10s} | {:20s} | {:22s}".format(worker.socialSecurityNumber,worker.name,destinationNameList[i])
         if status == "Unavailable":
             if len(unAvaialbleWorkerString) == 0:
-                return "There are no workers working on that date!"
+                return "\nThere are no workers working on that date!\n"
             else:
                 return printString + unAvaialbleWorkerString + "\n"
         elif status == "Available":
             if len(avaialbleWorkerString) == 0:
-                return "All workers seem to be unavailable at this date!"
+                return "\nAll workers seem to be unavailable at this date!\n"
             else:
                 return printString + avaialbleWorkerString + "\n"
 

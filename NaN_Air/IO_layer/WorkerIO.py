@@ -1,7 +1,6 @@
 import csv
 FILENAME = 'DataFiles/worker.csv'
-#fieldnames = ['Social Security Number', 'Name', 'Position', 'Plane License', 'Address', 'Phone', 'Cellphone', 'Email', 'Active', 'Available']
-
+FIELDNAMES = ['Social Security Number', 'Name', 'Position', 'Plane License', 'Address', 'Phone', 'Cellphone', 'Email', 'Active', 'Available']
 
 class WorkerIO():
 
@@ -35,12 +34,6 @@ class WorkerIO():
         for dictionary in self.__dictList:
             worker = Worker(dictionary)
             self.workerList.append(worker)
-
-
-    #def get_specific_Worker(self, SSN):
-    #Verðum að gera function til þess að taka upp eitt instance!!!
-
-
 
     def write_worker_to_file(self, objectDict, aList):
         """Method takes in a list of data and writes to file"""
@@ -178,7 +171,6 @@ class WorkerIO():
         self.write_dictList_to_file()  
         return instance 
 
-
 class Worker():
     def __init__(self, dictionary):
         self.myDictionary = dictionary
@@ -203,4 +195,3 @@ class Worker():
             if key != "Active" and key != "Available": #We do not want to print active and available status
                 returnString.append((key + ": " + str(val)))
         return "\n".join(returnString)
-

@@ -77,8 +77,6 @@ class VoyageLL():
             voyageDict = self.createNewVoyage(voyageList)
         return "Succesfully created all voyages"
 
-
-
     def create_empty_voyage(self):
         """creates a empty voyage from 2 flights"""
         pass
@@ -222,7 +220,6 @@ class VoyageLL():
                 planeLicence = str(worker.planeLicence)
         if doesntExist:
             return "Error! we couldn't find any worker with that SSN."
-
         # verify that the pilot is available
         voyageList = self.IOAPI.request_voyages()
         # get the current date
@@ -275,7 +272,6 @@ class VoyageLL():
                 planeLicence = str(worker.planeLicence)
         if doesntExist:
             return "Error! we couldn't find any worker with that SSN."
-
         # verify that the pilot is available
         voyageList = self.IOAPI.request_voyages()
         # get the current date
@@ -326,7 +322,6 @@ class VoyageLL():
                     return "Error! that worker doesn't have the correct position."
         if doesntExist:
             return "Error! we couldn't find any worker with that SSN."
-
         # verify that the pilot is available
         voyageList = self.IOAPI.request_voyages()
         # get the current date
@@ -361,7 +356,6 @@ class VoyageLL():
                     return "Error! that worker doesn't have the correct position."
         if doesntExist:
             return "Error! we couldn't find any worker with that SSN."
-
         # verify that the pilot is available
         voyageList = self.IOAPI.request_voyages()
         # get the current date
