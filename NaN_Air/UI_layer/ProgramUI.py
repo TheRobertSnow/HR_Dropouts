@@ -8,13 +8,44 @@ class ProgramUI:
         self.object = UIAPI.UIAPI()
 
     def login(self):
-        print('''NaN Air flight system
---------------------------------------------
-Input your ID to login''')
+        print("""
+     $$   $$   $$$$   $$   $$    $$$$   $$  $$$$$
+     $$$  $$  $$  $$  $$$  $$   $$  $$  $$  $$  $$
+     $$ $ $$  $$$$$$  $$ $ $$   $$$$$$  $$  $$$$$
+     $$  $$$  $$  $$  $$  $$$   $$  $$  $$  $$  $$
+     $$   $$  $$  $$  $$   $$   $$  $$  $$  $$  $$
+     
+ $$$$   $$  $$$$$   $$      $$  $$   $$  $$$$$$   $$$$
+$$  $$  $$  $$  $$  $$      $$  $$$  $$  $$      $$
+$$$$$$  $$  $$$$$   $$      $$  $$ $ $$  $$$$$    $$$$ 
+$$  $$  $$  $$  $$  $$      $$  $$  $$$  $$          $$
+$$  $$  $$  $$  $$  $$$$$$  $$  $$   $$  $$$$$$   $$$$ 
 
-        loginIDinput = input("Input: ")
+                        |__^__|
+                           |
+                       /‾‾‾‾‾‾‾\\
+                      /  _____  \\
+                     /  |_____|  \\
+   \\----+--/‾\\--+--<|             |>--+--/‾\\--+----/
+    \\---+--\\_/--+--<|             |>--+--\\_/--+---/
+                     \\           /
+                     /\\_________/\\
+                   !!!     |     !!!
+                          !!!
+          
+--------------------------------------------------------
+Input your SSN to login""") 
+        
+        while True:
+            loginSSNinput = input("Input SSN(1234512345 given for testing purposes): ")
+            manager = self.object.viewWorkerBySSn(loginSSNinput, "Manager")
+            if type(manager) != str:
+                print("\nLogin Successfull!\n")
+                break
+            else:
+                print("Wrong input, try again!")
         ProgramUI.mainMenu(self)
-        return loginIDinput
+        return loginSSNinput
 
     def mainMenu(self):
         print('''Main Menu

@@ -50,6 +50,7 @@ class AirplaneLL:
 
         newPlaneObject = self.__IOAPI.createNewAirplane(newPlaneList)
         self.__airplanes = AirplaneLL.get_airplane_list(self)  # update our list of plane objects
+        print("\nNow there are", len(self.__airplanes), "Airplane objects in system")   
         return newPlaneObject
 
     def getAllAirplanes(self):

@@ -30,6 +30,6 @@ class FlightRouteLL():
             return "\nError: Flight distance must be a whole number!\n"
         
         flightRoute = self.ioAPI.createNewFlightRoute(flightRouteList)
-        print("\nNow there are", len(self.__flightRouteList), "Flight Route objects in system\n")
+        print("\nNow there are", len(self.__flightRouteList), "Flight Route objects in system")
         return flightRoute
 

@@ -35,7 +35,8 @@ class IOAPI:
         return self.airplaneIO.createNewAirplane(airplaneList)
 
     def getCertainAirplane(self, airplaneReg):
-        return self.airplaneIO.getCertainAirplane(airplaneReg)
+        airplane = self.airplaneIO.getCertainAirplane(airplaneReg)
+        return airplane
 
     def request_airplanes(self):
         """returns a updated list of all plane objects"""

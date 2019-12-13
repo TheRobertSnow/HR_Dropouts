@@ -166,6 +166,7 @@ class VoyageIO:
 
     def createNewVoyage(self, voyageList):
         voyage = self.write_voyage_to_file(voyageList)
+        print("\nNow there are", len(self.voyageList), "Voyage objects in system")
         return voyage
 
     def updateCertainVoyage(self, voyageInstance, keyToChange, newValue):

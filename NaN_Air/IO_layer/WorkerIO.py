@@ -14,14 +14,6 @@ class WorkerIO():
         """Return a list of worker instances"""
         return self.workerList
 
-    def create_new_worker(self, newWorker):
-        """Takes in list and creates a new worker"""
-        try:
-            workerInstance = self.write_worker_to_file(newWorker)
-            return ("Worker succesfully created!\n" + str(workerInstance))
-        except Exception as e:
-            return "Unable to create worker!"
-
     def get_workers_from_file(self):
         """Only use for initializing WorkerIO.
         Get workers from file in a list of dictionaries"""
@@ -35,7 +27,7 @@ class WorkerIO():
             worker = Worker(dictionary)
             self.workerList.append(worker)
 
-    def write_worker_to_file(self, objectDict, aList):
+    def write_worker_to_file(self, aList):
         """Method takes in a list of data and writes to file"""
         with open(FILENAME, 'a', encoding="utf8", newline='') as csvFile:
             csvWriter = csv.writer(csvFile)
@@ -145,6 +137,7 @@ class WorkerIO():
                                         i.active = val
                                     elif col == "Available":
                                         i.available = val
+                                    return i
 
     def add_worker_instance(self, dict):
         newWorker = Worker(dict)
@@ -161,10 +154,8 @@ class WorkerIO():
         return self.__workerList
 
     def writeworkertoFile(self, workerList):
-        newWorkerDict = WorkerIO.convert_to_dict_with_id(self, workerList)
-        self.__dictList.append(newWorkerDict)
-        WorkerIO.write_dictList_to_file(self)
-        return "Worker succesfully created!"
+        workerInstance = self.write_worker_to_file(workerList)
+        return workerInstance
 
     def updateCertainWorker(self, instance, key, newValue):
         instance.updateValue(key, newValue) 
