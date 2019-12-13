@@ -88,13 +88,14 @@ class VoyageLL():
 
     def viewallVoyagesDay(self, day):
         voyages = self.IOAPI.request_voyages()
+        printString = "\nVoyages on day {}\n".format(day)
+        printString += "\n{:3s} | {}  | {} | {} | {}\n".format("ID", "ORIGIN", "DEPARTURE TIME FROM IS", "DEPARTURE TIME TO IS", "SUFFICIENTLY MANNED")
+        printString += "-" * 83 + "\n"
         returnString = ""
         mannedString = ""
-        print("")
         for voyage in voyages:
             departureFromIS = datetime.strptime(voyage.departureFromIS, '%Y-%m-%d %H:%M:%S')
             departureToIS = datetime.strptime(voyage.departureToIS, '%Y-%m-%d %H:%M:%S')
-            mannedString = ""
             if day.date() == departureFromIS.date() or day.date() == departureToIS.date():
                 manned = 0
                 if len(voyage.mainPilot) != 0:
@@ -104,30 +105,31 @@ class VoyageLL():
                 if len(voyage.mainFlightAttendant) != 0:
                     manned += 1
                 if manned >= 3:
-                    mannedString = " is sufficently manned!"
+                    mannedString = "YES"
                 elif manned < 3:
-                    mannedString = " is not sufficently manned!"
-                returnString += ("Voyage with ID " + str(voyage.voyageID) + " flying from Iceland " + str(departureFromIS) + " and back " + str(departureToIS) + str(mannedString) + "\n")
+                    mannedString = "NO"
+                returnString += "{:3s} | {} | {}    | {}  | {}\n".format(voyage.voyageID, "Iceland", departureFromIS, departureToIS, mannedString)
         if len(returnString) == 0:
-            returnString = "\nNo voyages found on that date!\n"  
-        return returnString
-
+            return "\nNo voyages found on that date!\n"  
+        else:
+            return printString + returnString
 
     def viewallVoyagesWeek(self, year, week):
         weekdays = []
         voyages = self.IOAPI.request_voyages()
-        returnString = "Voyages in week {}\n--------------------------------------------\n".format(week)
+        printString = "\nVoyages in week {}\n".format(week)
+        printString += "\n{:3s} | {}  | {} | {} | {}\n".format("ID", "ORIGIN", "DEPARTURE TIME FROM IS", "DEPARTURE TIME TO IS", "SUFFICIENTLY MANNED")
+        printString += "-" * 83 + "\n"
+        returnString = ""
         mannedString = ""
         day = "{}-W{}".format(year, week)
         firstWeekday = datetime.strptime(day + '-1', "%Y-W%W-%w")
         for i in range(7):
             weekdays.append(firstWeekday + timedelta(days = i))
-        print("")
         for voyage in voyages:
             departureFromIS = datetime.strptime(voyage.departureFromIS, '%Y-%m-%d %H:%M:%S')
             departureToIS = datetime.strptime(voyage.departureToIS, '%Y-%m-%d %H:%M:%S')
             for days in weekdays:
-                mannedString = ""
                 manned = 0
                 if days.date() == departureFromIS.date() or days.date() == departureToIS.date():
                     if len(voyage.mainPilot) != 0:
@@ -137,13 +139,14 @@ class VoyageLL():
                     if len (voyage.mainFlightAttendant) != 0:
                         manned += 1
                     if manned >= 3:
-                        mannedString = " is sufficently manned!"
+                        mannedString = "YES"
                     elif manned < 3:
-                        mannedString = " is not sufficently manned!"
-                    returnString += ("Voyage with ID " + str(voyage.voyageID) + " flying from Iceland " + str(departureFromIS) + " and back " +str(departureToIS) + str(mannedString) + "\n")
+                        mannedString = "NO"
+                    returnString += "{:3s} | {} | {}    | {}  | {}\n".format(voyage.voyageID, "Iceland", departureFromIS, departureToIS, mannedString)
         if len(returnString) == 0:
-            returnString = "\nThere were no voyages found in this week!\n" 
-        return returnString        
+            return "\nThere were no voyages found in this week!\n" 
+        else:
+            return printString + returnString
         
     def viewallVoyages(self):
         return self.IOAPI.request_voyages()

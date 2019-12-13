@@ -19,9 +19,9 @@ class AirplaneLL:
         for instance in self.__airplanes:
             if instance.planeRegistration == reg:
                 notFound = False
-                print(instance)
+                return instance
         if notFound:
-            print("Airplane not found!")
+            return "\nAirplane not found!\n"
 
     def createNewAirplane(self, newPlaneList):
         """ Takes in a list with all values that match the 'airplane.csv' file, sends a request to create the

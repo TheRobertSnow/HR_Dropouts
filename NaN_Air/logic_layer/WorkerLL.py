@@ -186,11 +186,11 @@ class WorkerLL():
         for voyage in voyages:
             destinationID = voyage.flightRouteID
             departureFromIS = datetime.strptime(voyage.departureFromIS, '%Y-%m-%d %H:%M:%S')
-            #departureToIS = datetime.strptime(voyage.departureToIS, '%Y-%m-%d %H:%M:%S')
+            departureToIS = datetime.strptime(voyage.departureToIS, '%Y-%m-%d %H:%M:%S')
             for flightroute in flightRoutes:
                 if flightroute.flightRouteID == destinationID:
                     destinationNameList.append(flightroute.country)
-            if date.date() == departureFromIS.date():
+            if date.date() == departureFromIS.date() or date.date() == departureToIS.date():
                 mainPilotList.append(voyage.mainPilot)
                 assistingPilotList.append(voyage.assistingPilot)
                 mainFlightAttendantList.append(voyage.mainFlightAttendant)
