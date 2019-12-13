@@ -88,13 +88,14 @@ class VoyageLL():
 
     def viewallVoyagesDay(self, day):
         voyages = self.IOAPI.request_voyages()
+        printString = "\nVoyages on day {}\n".format(day)
+        printString += "\n{:3s} | {}  | {} | {} | {}\n".format("ID", "ORIGIN", "DEPARTURE TIME FROM IS", "DEPARTURE TIME TO IS", "SUFFICIENTLY MANNED")
+        printString += "-" * 83 + "\n"
         returnString = ""
         mannedString = ""
-        print("")
         for voyage in voyages:
             departureFromIS = datetime.strptime(voyage.departureFromIS, '%Y-%m-%d %H:%M:%S')
             departureToIS = datetime.strptime(voyage.departureToIS, '%Y-%m-%d %H:%M:%S')
-            mannedString = ""
             if day.date() == departureFromIS.date() or day.date() == departureToIS.date():
                 manned = 0
                 if len(voyage.mainPilot) != 0:
@@ -104,30 +105,31 @@ class VoyageLL():
                 if len(voyage.mainFlightAttendant) != 0:
                     manned += 1
                 if manned >= 3:
-                    mannedString = " is sufficently manned!"
+                    mannedString = "YES"
                 elif manned < 3:
-                    mannedString = " is not sufficently manned!"
-                returnString += ("Voyage with ID " + str(voyage.voyageID) + " flying from Iceland " + str(departureFromIS) + " and back " + str(departureToIS) + str(mannedString) + "\n")
+                    mannedString = "NO"
+                returnString += "{:3s} | {} | {}    | {}  | {}\n".format(voyage.voyageID, "Iceland", departureFromIS, departureToIS, mannedString)
         if len(returnString) == 0:
-            returnString = "No voyages found on that date!\n"  
-        return returnString
-
+            return "\nNo voyages found on that date!\n"  
+        else:
+            return printString + returnString
 
     def viewallVoyagesWeek(self, year, week):
         weekdays = []
         voyages = self.IOAPI.request_voyages()
-        returnString = "Voyages in week {}\n--------------------------------------------\n".format(week)
+        printString = "\nVoyages in week {}\n".format(week)
+        printString += "\n{:3s} | {}  | {} | {} | {}\n".format("ID", "ORIGIN", "DEPARTURE TIME FROM IS", "DEPARTURE TIME TO IS", "SUFFICIENTLY MANNED")
+        printString += "-" * 83 + "\n"
+        returnString = ""
         mannedString = ""
         day = "{}-W{}".format(year, week)
         firstWeekday = datetime.strptime(day + '-1', "%Y-W%W-%w")
         for i in range(7):
             weekdays.append(firstWeekday + timedelta(days = i))
-        print("")
         for voyage in voyages:
             departureFromIS = datetime.strptime(voyage.departureFromIS, '%Y-%m-%d %H:%M:%S')
             departureToIS = datetime.strptime(voyage.departureToIS, '%Y-%m-%d %H:%M:%S')
             for days in weekdays:
-                mannedString = ""
                 manned = 0
                 if days.date() == departureFromIS.date() or days.date() == departureToIS.date():
                     if len(voyage.mainPilot) != 0:
@@ -137,61 +139,14 @@ class VoyageLL():
                     if len (voyage.mainFlightAttendant) != 0:
                         manned += 1
                     if manned >= 3:
-                        mannedString = " is sufficently manned!"
+                        mannedString = "YES"
                     elif manned < 3:
-                        mannedString = " is not sufficently manned!"
-                    returnString += ("Voyage with ID " + str(voyage.voyageID) + " flying from Iceland " + str(departureFromIS) + " and back " +str(departureToIS) + str(mannedString) + "\n")
+                        mannedString = "NO"
+                    returnString += "{:3s} | {} | {}    | {}  | {}\n".format(voyage.voyageID, "Iceland", departureFromIS, departureToIS, mannedString)
         if len(returnString) == 0:
-            returnString = "There were no voyages found in this week!\n" 
-        return returnString
-
-            
-
-    def listWorkerVoyagesByWeek(self, ssn, year, week, pos): 
-        weekdays = []
-        day = "{}-W{}".format(year, week)
-        firstWeekday = datetime.strptime(day + '-1', "%Y-W%W-%w")
-        for i in range(7):
-            weekdays.append(firstWeekday + timedelta(days = i))
-        destinationNameList = []
-        string = ""
-        workerInfo = ""
-        workerList = WorkerLL.get_worker_list(self) #All workers
-        voyageList = self.IOAPI.request_voyages() #All voyages
-        flightRouteList = self.IOAPI.getAllFlightRouteInstances()         
-        for voyage in voyageList:
-            departureFromIS = datetime.strptime(voyage.departureFromIS, '%Y-%m-%d %H:%M:%S')
-            departureToIS = datetime.strptime(voyage.departureToIS, '%Y-%m-%d %H:%M:%S')
-            destinationID = voyage.flightRouteID
-            for flightroute in flightRouteList:
-                if flightroute.flightRouteID == destinationID:
-                    destinationNameList.append(flightroute.country)
-            if departureFromIS.date() in [i.date() for i in weekdays] or departureToIS.date() in [i.date() for i in weekdays]:
-                for worker in workerList:
-                    if worker.socialSecurityNumber == ssn:
-                        workerInfo = "\n{:10s} | {}".format(worker.socialSecurityNumber,worker.name)
-                    if pos == "Pilot":
-                        if worker.position == "Captain":
-                            if worker.socialSecurityNumber == voyage.mainPilot:
-                                if worker.socialSecurityNumber == ssn:
-                                    print(ssn)
-                        elif worker.position == "Copilot":
-                            if worker.socialSecurityNumber == voyage.assistingPilot:
-                                if worker.socialSecurityNumber == ssn:
-                                    print(ssn)
-                    elif pos == "Attendant":
-                        if worker.position == "Flight Service Manager":
-                            if worker.socialSecurityNumber == voyage.mainFlightAttendant:
-                                if worker.socialSecurityNumber == ssn:
-                                    string += "\n{} | {} | {}".format(departureFromIS, departureToIS, destinationNameList[int(destinationID)])
-                        elif worker.position == "Flight Attendant":
-                            for i in voyage.getflightAttendants():
-                                if i == worker.socialSecurityNumber:
-                                    if worker.socialSecurityNumber == ssn:
-                                        string += "\n{} | {} | {}".format(departureFromIS, departureToIS, destinationNameList[int(destinationID)])
-        print(workerInfo, string)
-        return "HALLO"
-        
+            return "\nThere were no voyages found in this week!\n" 
+        else:
+            return printString + returnString
         
     def viewallVoyages(self):
         return self.IOAPI.request_voyages()
@@ -204,7 +159,7 @@ class VoyageLL():
         for instance in self.voyage:
             if str(instance.voyageID) == str(voyageID):
                 return instance
-        return "Voyage with that ID doesnt exist"
+        return "\nVoyage with that ID doesnt exist\n"
 
     def addCaptainToVoyage(self, voyageID, pilotToAddInput):
         """adds a pilot to a voyage, required the ID of the voyage and the SSN of the worker to add"""
@@ -216,10 +171,10 @@ class VoyageLL():
             if worker.socialSecurityNumber == pilotToAddInput:
                 doesntExist = False
                 if worker.position != "Captain":
-                    return "Error! That worker doesn't have the correct position."
+                    return "\nError! That worker doesn't have the correct position.\n"
                 planeLicence = str(worker.planeLicence)
         if doesntExist:
-            return "Error! we couldn't find any worker with that SSN."
+            return "\nError! we couldn't find any worker with that SSN.\n"
         # verify that the pilot is available
         voyageList = self.IOAPI.request_voyages()
         # get the current date
@@ -237,11 +192,11 @@ class VoyageLL():
             dateCompare = dateCompare.split(" ")[0]
             if dateCompare == date:
                 if i.mainPilot == pilotToAddInput:  # check if already booked
-                    return "Error! that pilot is booked for that day."
+                    return "\nError! that pilot is booked for that day.\n"
                 if i.voyageID == voyageID:
                     flightID = i.flightOutID
         if type(instance) == str:
-            return "Voyage was not found"
+            return "\nVoyage was not found\n"
         # verify plane licence
         requiredLicence = ""
         planeReg = ""
@@ -254,7 +209,7 @@ class VoyageLL():
             if i.planeRegistration == planeReg:
                 requiredLicence = str(i.manufacturer) + str(i.model)
         if requiredLicence != planeLicence:
-            return "Error! pilot does not have the required licence"
+            return "\nError! pilot does not have the required licence\n"
         # request to update the file and instance.
         return self.IOAPI.updateVoyage(instance, "Main pilot", pilotToAddInput)
 
@@ -268,10 +223,10 @@ class VoyageLL():
             if worker.socialSecurityNumber == pilotToAddInput:
                 doesntExist = False
                 if worker.position != "Copilot":
-                    return "Error! that worker doesn't have the correct position."
+                    return "\nError! that worker doesn't have the correct position.\n"
                 planeLicence = str(worker.planeLicence)
         if doesntExist:
-            return "Error! we couldn't find any worker with that SSN."
+            return "\nError! we couldn't find any worker with that SSN.\n"
         # verify that the pilot is available
         voyageList = self.IOAPI.request_voyages()
         # get the current date
@@ -289,11 +244,11 @@ class VoyageLL():
             dateCompare = dateCompare.split(" ")[0]
             if dateCompare == date:
                 if i.assistingPilot == pilotToAddInput:  # check if already booked
-                    return "Error! that pilot is booked for that day."
+                    return "\nError! that pilot is booked for that day.\n"
             if i.voyageID == voyageID:
                 flightID = i.flightOutID
         if type(instance) == str:
-            return "Voyage was not found"
+            return "\nVoyage was not found\n"
         # verify plane licence
         requiredLicence = ""
         planeReg = ""
@@ -306,7 +261,7 @@ class VoyageLL():
             if i.planeRegistration == planeReg:
                 requiredLicence = str(i.manufacturer) + str(i.model)
         if requiredLicence != planeLicence:
-            return "Error! pilot does not have the required licence"
+            return "\nError! pilot does not have the required licence\n"
         # request to update the file and instance.
         return self.IOAPI.updateVoyage(instance, "Assisting pilot", pilotToAddInput)
 
@@ -319,9 +274,9 @@ class VoyageLL():
             if worker.socialSecurityNumber == pilotToAddInput:
                 doesntExist = False
                 if worker.position != "Flight Service Manager":
-                    return "Error! that worker doesn't have the correct position."
+                    return "\nError! that worker doesn't have the correct position.\n"
         if doesntExist:
-            return "Error! we couldn't find any worker with that SSN."
+            return "\nError! we couldn't find any worker with that SSN.\n"
         # verify that the pilot is available
         voyageList = self.IOAPI.request_voyages()
         # get the current date
@@ -338,9 +293,9 @@ class VoyageLL():
             dateCompare = dateCompare.split(" ")[0]
             if dateCompare == date:
                 if i.mainFlightAttendant == pilotToAddInput:  # check if already main pilot
-                    return "Error! that Main Flight attendant is booked for that day."
+                    return "\nError! that Main Flight attendant is booked for that day.\n"
         if type(instance) == str:
-            return "Voyage was not found"
+            return "\nVoyage was not found\n"
         # request to update the file and instance.
         return self.IOAPI.updateVoyage(instance, "Main flight attendant", pilotToAddInput)
 
@@ -353,9 +308,9 @@ class VoyageLL():
             if worker.socialSecurityNumber == pilotToAddInput:
                 doesntExist = False
                 if worker.position != "Flight Attendant":
-                    return "Error! that worker doesn't have the correct position."
+                    return "\nError! that worker doesn't have the correct position.\n"
         if doesntExist:
-            return "Error! we couldn't find any worker with that SSN."
+            return "\nError! we couldn't find any worker with that SSN.\n"
         # verify that the pilot is available
         voyageList = self.IOAPI.request_voyages()
         # get the current date
@@ -377,7 +332,7 @@ class VoyageLL():
                 except ValueError:
                     pass
                 if pilotToAddInput in flightAttendantList:  # check if already main pilot
-                    return "Error! that flight attendant is booked for that day."
+                    return "\nError! that flight attendant is booked for that day.\n"
         if type(instance) == str:
             return "Voyage was not found"
         # request to update the file and instance.
@@ -403,10 +358,10 @@ class VoyageLL():
             if worker.socialSecurityNumber == SSN:
                 doesntExist = False
                 if str(worker.position) != str(theKey):
-                    return "Error! that worker doesn't have the correct position."
+                    return "\nError! that worker doesn't have the correct position.\n"
                 planeLicence = worker.planeLicence
         if doesntExist:
-            return "Error! we couldn't find any worker with that SSN."
+            return "\nError! we couldn't find any worker with that SSN.\n"
         # check if the staff member is already booked for those days
         voyageList = self.IOAPI.request_voyages()
         # check if the dates overlap for the same pilot
@@ -416,13 +371,13 @@ class VoyageLL():
             if dateCompare == dateOut or dateCompare == dateBack:
                 if theKey == "Captain":
                     if i.mainPilot == SSN:  # check if already booked
-                        return "Error! that pilot is booked for that day."
+                        return "\nError! that pilot is booked for that day.\n"
                 elif theKey == "Copilot":
                     if i.assistingPilot == SSN:  # check if already booked
-                        return "Error! that pilot is booked for that day."
+                        return "\nError! that pilot is booked for that day.\n"
                 elif theKey == "Flight Service Manager":
                     if i.mainFlightAttendant == SSN:  # check if already main pilot
-                        return "Error! that Flight Service Manager is booked for that day."
+                        return "\nError! that Flight Service Manager is booked for that day.\n"
                 elif theKey == "Flight Attendant":
                     flightAttendantList = i.flightAttendants
                     try:
@@ -430,7 +385,7 @@ class VoyageLL():
                     except ValueError:
                         pass
                     if SSN in flightAttendantList:  # check if already main pilot
-                        return "Error! that pilot is booked for that day."
+                        return "\nError! that pilot is booked for that day.\n"
         if theKey == "Captain" or theKey == "Copilot": # checking plane licence
             flightList = self.IOAPI.getAllFlightInstances()
             requiredLicence = ""
@@ -445,5 +400,5 @@ class VoyageLL():
                 if planeReg == i.planeRegistration:
                     requiredLicence = str(i.manufacturer) + str(i.model)
             if requiredLicence != planeLicence:
-                return "Error! pilot doesn't have the required licence"
+                return "\nError! pilot doesn't have the required licence\n"
         return None

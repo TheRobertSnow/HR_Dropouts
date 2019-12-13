@@ -78,7 +78,7 @@ class WorkerLL():
                     if instance.position == "Staff Manager" or instance.position == "Trip Manager":
                         if instance.socialSecurityNumber == ssn:
                             return instance
-        return "{} not found, try again!".format(pos)
+        return "\n{} not found, try again!\n".format(pos)
 
     def findWorkerByPOS(self, position):
         """Takes in a position and return a list of all workers in that position."""
@@ -97,8 +97,7 @@ class WorkerLL():
                 if instance.position == "Staff Manager" or instance.position == "Trip Manager":
                     positionList.append(instance)
         if len(positionList) == 0:
-            positionList = "No {}'s found!.".format(position)
-        
+            positionList = "\nNo {}'s found!\n".format(position)
         return positionList
 
     def findWorkerByPlaneLicence(self, plane_Licence):
@@ -129,7 +128,7 @@ class WorkerLL():
                     self.worker = WorkerLL.get_worker_list(self)
                     print("Worker succesfully updated!\n")
                     return updatedWorker
-        return "{} could not be updated, please try again!".format(error)
+        return "\n{} could not be updated, please try again!\n".format(error)
 
     def viewAllWorkers(self):
         """Returns all workers"""
@@ -144,21 +143,21 @@ class WorkerLL():
         try:
             self.checkSSN(createWorkerList[0])
         except ValueError:
-            return "Error!: SSN should be a whole number!"
+            return "\nError!: SSN should be a whole number!\n"
         #2 checking position
 
         if createWorkerList[2] == "Stupid User":
-            return "Error!: Position not picked"
+            return "\nError!: Position not picked\n"
         #5 Phone
         try:
             int(createWorkerList[5])
         except ValueError:
-            return "Error!: Phone number should be a numbers"
+            return "\nError!: Phone number should be a numbers\n"
         #6 Cellphone
         try:
             int(createWorkerList[6])
         except ValueError:
-            return "Error!: Phone number should be a number"
+            return "\nError!: Phone number should be a number\n"
 
         worker = self.IOAPI.createNewWorker(createWorkerList)
         return worker
@@ -187,11 +186,11 @@ class WorkerLL():
         for voyage in voyages:
             destinationID = voyage.flightRouteID
             departureFromIS = datetime.strptime(voyage.departureFromIS, '%Y-%m-%d %H:%M:%S')
-            #departureToIS = datetime.strptime(voyage.departureToIS, '%Y-%m-%d %H:%M:%S')
+            departureToIS = datetime.strptime(voyage.departureToIS, '%Y-%m-%d %H:%M:%S')
             for flightroute in flightRoutes:
                 if flightroute.flightRouteID == destinationID:
                     destinationNameList.append(flightroute.country)
-            if date.date() == departureFromIS.date():
+            if date.date() == departureFromIS.date() or date.date() == departureToIS.date():
                 mainPilotList.append(voyage.mainPilot)
                 assistingPilotList.append(voyage.assistingPilot)
                 mainFlightAttendantList.append(voyage.mainFlightAttendant)
@@ -283,8 +282,8 @@ class WorkerLL():
                                     if worker.socialSecurityNumber == ssn:
                                         workerVoyageString += "\n{}    | {}  | {}".format(departureFromIS, departureToIS, destinationNameList[int(destinationID)-1])
         if len(workerInfo) == 0:
-            return "No worker found with that id!"
+            return "\nNo worker found with that id!\n"
         elif len(workerVoyageString) == 0:
-            return "Worker with that id has no voyages on schedule!"
+            return "\nWorker with that id has no voyages on schedule!\n"
         else:
             return workerInfo + workerVoyageString + "\n"
