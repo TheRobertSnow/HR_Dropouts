@@ -192,6 +192,6 @@ class Worker():
     def __str__(self):
         returnString = []
         for key, val in self.myDictionary.items():
-            if key != "Active" and key != "Available":
+            if key != "Active" and key != "Available": #We do not want to print active and available status
                 returnString.append((key + ": " + str(val)))
         return "\n".join(returnString)

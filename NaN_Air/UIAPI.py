@@ -62,10 +62,10 @@ class UIAPI:
     def viewAllWorkers(self):
         """give us all worker instances, would be nice if we can get 5 at a time or something instead of all at once"""
         returnData = self.workerLL.viewAllWorkers()
-        for instance in returnData:
-            print(str(instance) + "\n")
-        returnstring = "\n"
-        return returnstring
+        #for instance in returnData:
+            #print(str(instance) + "\n")
+        #returnstring = "\n"
+        return returnData
 
     def updateWorker(self, socialSecurityNumber, akey, newValue):
         """we give you a ssn, the key we want to change and the new value of that key, give us back the worker changed"""

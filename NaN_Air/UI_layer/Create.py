@@ -6,8 +6,9 @@ class Create():
         self.uiapi = UIAPI.UIAPI()
 
     def createFlight(self, airplane=None, origin=None, destination=None):
+        """format for creating a new flight, used in both create flight and create voyage
+            returns a list with all values required for creating a flight"""
         flightList = []
-        selfCopy = airplane  # fix for not very good method
         if airplane == None:
             airplane = input("  - Airplane registration number: ")
             checkReg = UIAPI.UIAPI.viewCertainAirplane(self, airplane)
@@ -16,10 +17,20 @@ class Create():
                 return "failed"
         flightList.append(airplane)
         if origin == None:
-            origin = input("  - Origin ID: ")
+            while True:
+                origin = input("  - Origin ID: ")
+                testOrigin = UIAPI.UIAPI.viewFlightRoute(self, origin)
+                if type(testOrigin) != str:
+                    break
+                print("ID not found, please try again")
         flightList.append(origin)
         if destination == None:
-            destination = input("  - Destination ID: ")
+            while True:
+                destination = input("  - Destination ID: ")
+                testDest = UIAPI.UIAPI.viewFlightRoute(self, destination)
+                if type(testDest) != str:
+                    break
+                print("ID not found, please try again")
         flightList.append(destination)
         hour, minute, day, month, year = None,None,None,None,None
         while True:

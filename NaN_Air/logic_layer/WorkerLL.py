@@ -17,7 +17,6 @@ class WorkerLL():
         It then returns the ssn if it is correct and an error if it is not."""
         if len(ssn) != 10:
             ssn = "\nThat social security number is not correct, try again!"
-
         try:
             intCheck = int(ssn)
         except ValueError:
@@ -61,7 +60,7 @@ class WorkerLL():
         """Takes social security number and position and returns an instance of a worker in that position
         with that ssn if it exists."""
         ssn = WorkerLL.checkSSN(self, ssn)
-        if ssn != "\nThat social security number is not correct, try again!!":
+        if ssn != "\nThat social security number is not correct, try again!":
             self.worker = self.IOAPI.request_workers()
             for instance in self.worker:
                 if pos == "":
@@ -76,12 +75,10 @@ class WorkerLL():
                         if instance.socialSecurityNumber == ssn:
                             return instance
                 elif pos == "Manager":
-                    if instance.position == "Staff manager" or instance.position == "Trip manager":
+                    if instance.position == "Staff Manager" or instance.position == "Trip Manager":
                         if instance.socialSecurityNumber == ssn:
                             return instance
-        #if ssn != "\nSocial security numbers are shown above!":
-            #ssn = "\n{} Social security numbers are shown above!\n".format(pos)
-        return ssn
+        return "\n{} not found, try again!\n".format(pos)
 
     def findWorkerByPOS(self, position):
         """Takes in a position and return a list of all workers in that position."""
@@ -91,15 +88,13 @@ class WorkerLL():
             for instance in self.worker:
                 if instance.position == "Captain" or instance.position == "Copilot":
                     positionList.append(instance)
-
-
         elif position == "Attendant":
             for instance in self.worker:
                 if instance.position == "Flight Service Manager" or instance.position == "Flight Attendant":
                     positionList.append(instance)
         elif position == "Manager":
             for instance in self.worker:
-                if instance.position == "Staff manager" or instance.position == "Trip manager":
+                if instance.position == "Staff Manager" or instance.position == "Trip Manager":
                     positionList.append(instance)
         if len(positionList) == 0:
             positionList = "\nNo {}'s found!\n".format(position)
