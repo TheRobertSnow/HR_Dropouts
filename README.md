@@ -9,3 +9,5 @@ Arnar Daði arnars19@ru.is
 Bergur Guðmundsson bergur19@ru.is  
 Daníel Þór danieltg19@ru.is  
 Róbert Harðarson roberth19@ru.is  
+
+https://github.com/TheRobertSnow/HR_Dropouts
