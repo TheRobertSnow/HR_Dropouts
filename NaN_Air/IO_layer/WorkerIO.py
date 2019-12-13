@@ -12,6 +12,8 @@ class WorkerIO():
 
     def get_workers(self):
         """Return a list of worker instances"""
+        self.get_workers_from_file()
+        self.create_worker_instances()
         return self.workerList
 
     def get_workers_from_file(self):
@@ -23,6 +25,7 @@ class WorkerIO():
             for line in csvReader:
                 dictList.append(line)
         self.__dictList = dictList
+        self.workerList = []
         for dictionary in self.__dictList:
             worker = Worker(dictionary)
             self.workerList.append(worker)

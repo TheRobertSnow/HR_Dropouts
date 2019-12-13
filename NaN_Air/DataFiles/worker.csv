@@ -1,16 +1,16 @@
 Worker ID,Social security number,Name,Position,Plane licence,Address,Phone,Cellphone,Email,Active,Available
-1,3009907461,William Carillo,Captain,FokkerF100,Fellsmúli 1,8998801,8998801,test@test.com,TRUE,TRUE
-2,2910858778,Virginia Ho,Captain,BAE146,Fellsmúli 2,8998802,8998802,test@test.com,TRUE,TRUE
-3,2706838569,Gerard Nelson,Captain,FokkerF100,Fellsmúli 3,8998803,8998803,test@test.com,TRUE,TRUE
-4,2209955782,Allen Ley,Captain,BAE146,Fellsmúli 4,8998804,8998804,test@test.com,TRUE,TRUE
-5,2907675667,Felecia Moye,Captain,BAE146,Fellsmúli 5,8998805,8998805,test@test.com,TRUE,TRUE
+1,3009907461,William Carillo,Captain,BoeingMAX,Fellsmúli 1,8998801,8998801,test@test.com,TRUE,TRUE
+2,2910858778,Virginia Ho,Captain,Boeing777,Fellsmúli 2,8998802,8998802,test@test.com,TRUE,TRUE
+3,2706838569,Gerard Nelson,Captain,FokkerF70,Fellsmúli 3,8998803,8998803,test@test.com,TRUE,TRUE
+4,2209955782,Allen Ley,Captain,Boeing737,Fellsmúli 4,8998804,8998804,test@test.com,TRUE,TRUE
+5,2907675667,Felecia Moye,Captain,Boeing747,Fellsmúli 5,8998805,8998805,test@test.com,TRUE,TRUE
 6,1309797899,Tyler Anderson,Captain,FokkerF28,Fellsmúli 5,8998806,8998806,test@test.com,TRUE,TRUE
-7,2410876598,Nan Gage,Copilot,FokkerF100,Fellsmúli 7,8998807,8998807,test@test.com,TRUE,TRUE
-8,2211658134,Charla Johnson,Copilot,BAE146,Lerkiás 9,8998808,8998808,test@test.com,TRUE,TRUE
-9,2504939263,Sam Preciado,Copilot,BAE146,Fellsmúli 9,8998809,8998809,test@test.com,TRUE,TRUE
-10,1900769521,Jasmine Hagadone,Copilot,BAE146,arnar 123,8998810,8998810,test@test.com,TRUE,TRUE
+7,2410876598,Nan Gage,Copilot,FokkerF70,Fellsmúli 7,8998807,8998807,test@test.com,TRUE,TRUE
+8,2211658134,Charla Johnson,Copilot,Boeing777,Lerkiás 9,8998808,8998808,test@test.com,TRUE,TRUE
+9,2504939263,Sam Preciado,Copilot,Boeing737,Fellsmúli 9,8998809,8998809,test@test.com,TRUE,TRUE
+10,1900769521,Jasmine Hagadone,Copilot,Boeing747,arnar 123,8998810,8998810,test@test.com,TRUE,TRUE
 11,2500812671,Anna Phillips,Copilot,FokkerF28,Fellsmúli 11,8998811,8998811,test@test.com,TRUE,TRUE
-12,1309927223,Patricia Bates,Copilot,FokkerF28,Fellsmúli 12,8998812,8998812,test@test.com,TRUE,TRUE
+12,1309927223,Patricia Bates,Copilot,FokkerF100,Fellsmúli 12,8998812,8998812,test@test.com,TRUE,TRUE
 13,1600904199,Sherry Walker,Flight Service Manager,N/A,Fellsmúli 13,8998813,8998813,test@test.com,TRUE,TRUE
 14,303758167,Margarita Fischer,Flight Service Manager,N/A,Fellsmúli 14,8998814,8998814,test@test.com,TRUE,TRUE
 15,2200763823,Judith Aleshire,Flight Service Manager,N/A,Fellsmúli 15,8998815,8998815,test@test.com,TRUE,TRUE
@@ -34,13 +34,6 @@ Worker ID,Social security number,Name,Position,Plane licence,Address,Phone,Cellp
 33,1110732819,Arthur Karr,Flight Attendant,N/A,Fellsmúli 33,8998833,8998833,test@test.com,TRUE,TRUE
 34,2602806942,Teresa Thruman,Flight Attendant,N/A,Fellsmúli 34,8998834,8998834,test@test.com,TRUE,TRUE
 35,1107951952,Elizabeth Mcfadden,Flight Attendant,N/A,Lerkias 9,8998835,8998835,test@test.com,TRUE,TRUE
-36,1234512345,Admin,Staff Manager,,AdminGata 5,83823123,31232133,admin@admin.is,TRUE,TRUE
+36,2504931423,Sam Martin,Copilot,BoeingMAX,Fellsmúli 9,8998323,8992409,test@test.com,TRUE,TRUE
 37,1212121212,Rodriguaz,Flight Attendant,,Kukagata 4,1234567,1234567,rodriguaz@rodriguaz.com,TRUE,TRUE
-38,2311992200,daniel,Captain,Boeing777,lekis,42141241,42141414,defefe,TRUE,TRUE
-39,2312321322,johannes,Copilot,Danni69,lerer,21232,213123,deewf,TRUE,TRUE
-40,2311992099,daniel,Flight Service Manager,,leaed,2312,6983951,frregr,TRUE,TRUE
-41,2311992233,fsefe,Flight Attendant,,ddbtbd,213123,13213123,sgrereg,TRUE,TRUE
-42,2312123212,daniel,Flight Service Manager,,leaskdjf,23123,241341,4frvetbet,TRUE,TRUE
-43,1234512354,fsafe,Flight Attendant,,efewfwf,2312,421412,gregerger,TRUE,TRUE
-44,1234513262,daniel,Flight Service Manager,,eefewg,3123,312312,ffrerv,TRUE,TRUE
-45,2311992099,Daniel,Staff Manager,,Kongagata 4,3221312312,421424,djfnhjsafjkba,TRUE,TRUE
+38,1234512345,Admin,Staff Manager,,AdminGata 5,83823123,31232133,admin@admin.is,TRUE,TRUE

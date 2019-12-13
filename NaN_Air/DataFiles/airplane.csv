@@ -1,38 +1,10 @@
 Plane registration,Manufacturer,Model,Status,Seats,Odometer
 TF-EPG,Fokker,F100,Grounded,110,0
 TF-UVR,Fokker,F28,Grounded,79,0
-TF-XZR,BAe,146,Grounded,98,0
-TF-XZM,BAe,146,Grounded,98,0
-TF-IZE,Fokker,F100,Grounded,110,0
-TF-PGK,BAe,146,Grounded,98,0
+TF-XZR,Boeing,777,Grounded,98,0
+TF-XZM,Boeing,MAX,Grounded,98,0
+TF-IZE,Fokker,F70,Grounded,110,0
+TF-PGK,Boeing,737,Grounded,98,0
 TF-TYQ,Fokker,F100,Grounded,110,0
-TF-LNQ,BAe,146,Working,98,0
+TF-LNQ,Boeing,747,Working,98,0
 TF-XUP,Fokker,F100,Engine failure,110,0
-TF-Danni,Danni,69,Needs inspection,69,69
-TF-Róbert,Róbert,690,Grounded,3432,123
-TF-Arnar,Arnar,6900,Grounded,23123,213231
-TF-ALLI,Alli,23123,Grounded,21312,213123
-TF-Bergur,Boeing,777,Grounded,3213,213123
-TF-Daniel,daniel,45,Grounded,1233,1312
-TF-DANNIGEST,231,23123,Grounded,12312,213123
-Tf-JOHAnn,23123,21312,Grounded,213123,21312
-Tf-COCK,2312,2131,Grounded,213,213
-tf-hate,3123,2312,Grounded,21312,2312
-tf-hatelife,231,12312,Grounded,124,41
-TF-HATEMORE,2312,23123,Grounded,14134134,3141341
-TF-LOL,234,123,Grounded,123,123
-TF-KUKUR,2312,123123,Grounded,213123,23123
-TF-YLSA,22312,213123,Grounded,124124,123123
-tf-lit,123,2131,Grounded,123,2141123
-tf-hahaha,213123,23123,Grounded,123,412
-tf-arnarlol,23123,3123123,Grounded,213123,21312
-TF-DanniLOl,213123,2131,Grounded,312,3123
-tf-kukalabbi,223123,312123,Grounded,23123,213123
-TF-SUCKMADICK,213,1231231,Grounded,213123,213123
-TF-LNQQ,123,123124,Grounded,314314,2141
-tf-abc,123,123,Grounded,123,123
-tf-23,21312r,1312312,Grounded,41241,14
-tf-DANNIKONGUR,23123,213123,Grounded,23123,33123
-tf-hahkuk,233413,4134314,Grounded,341412,21414
-tf-babab,3223123,23214,Grounded,42141,412412412
-TF-Kukurr,Boeing,777,Grounded,433,3242

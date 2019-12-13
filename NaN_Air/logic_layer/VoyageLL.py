@@ -218,7 +218,7 @@ class VoyageLL():
         for i in planeList:
             if i.planeRegistration == planeReg:
                 requiredLicence = str(i.manufacturer) + str(i.model)
-        if requiredLicence != planeLicence:
+        if requiredLicence.lower() != planeLicence.lower():
             return "\nError! pilot does not have the required licence\n"
         # request to update the file and instance.
         return self.IOAPI.updateVoyage(instance, "Main pilot", pilotToAddInput)
@@ -270,7 +270,7 @@ class VoyageLL():
         for i in planeList:
             if i.planeRegistration == planeReg:
                 requiredLicence = str(i.manufacturer) + str(i.model)
-        if requiredLicence != planeLicence:
+        if requiredLicence.lower() != planeLicence.lower():
             return "\nError! pilot does not have the required licence\n"
         # request to update the file and instance.
         return self.IOAPI.updateVoyage(instance, "Assisting pilot", pilotToAddInput)
@@ -403,12 +403,17 @@ class VoyageLL():
             # get the plane reg
             for i in flightList:
                 if i.flightID == flightID:
-                    planeReg = i.planeRegistration
+                    planeReg = i.airplaneRegistrationNumber
             # get the plane licence required
             planeList = self.IOAPI.request_airplanes()
             for i in planeList:
+                print(planeReg, i.planeRegistration)
                 if planeReg == i.planeRegistration:
-                    requiredLicence = str(i.manufacturer) + str(i.model)
+                    print("Succes")
+                    requiredLicence = i.manufacturer + i.model
+            print(requiredLicence)
+            print(planeLicence)
+            print("kukurogpasta")
             if requiredLicence != planeLicence:
                 return "\nError! pilot doesn't have the required licence\n"
         return None

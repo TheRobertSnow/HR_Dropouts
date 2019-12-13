@@ -32,6 +32,8 @@ class AirplaneIO:
     
     def get_airplanes(self):
         """Return a list of plane instances"""
+        self.get_airplanes_from_file()
+        self.create_airplane_instances()
         return self.airplaneList
 
     def get_airplanes_from_file(self):
@@ -44,6 +46,7 @@ class AirplaneIO:
             for line in csvReader:
                 dictList.append(line)
         self.__dictList = dictList
+        self.airplaneList = []
         for dictionary in self.__dictList:
             airplane = Airplane(dictionary)
             self.airplaneList.append(airplane)

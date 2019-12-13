@@ -56,6 +56,7 @@ class FlightIO():
             for line in csvReader:
                 returnList.append(line)
         self.__dictList = returnList
+        self.flightList = []
         for dictionary in self.__dictList:
             flight = Flight(dictionary)
             self.flightList.append(flight)

@@ -1,17 +1,7 @@
 Flight route ID,Country,Airport,Flight distance,Travel time,Emergency contact,Emergency number
-1,Iceland,Reykjavik,0,0:00,Áslaug Steingrímsdóttir,3547745010
-2,Greenland,Nuuk,1400,2:00,Innunguaqamole,6843224
-3,Færeyjar,Þórshöfn,800,0:50,Abdel,64324324
-4,USA,JFK,750,4:25,Jonatann,Jonatann
-5,USA,Newark,30000,4:30,2311,Daniel
-6,Danmörk,DFk,750,2:35,fannsi,23123
-7,SPain,alicante,850,3:25,frgrbref,23124145
-8,Australia,bansdasd,2312,12:34,21312,421412
-9,Reyk,2ef,213,12:30,23123,123123
-10,Germany,STG,21321,10:00,johan,2132231
-11,Holland,HFS,23123,3:30,hal,23213
-12,France,KJS,232,2:34,,
-13,Kroatia,213,312,1:35,,
-14,Urugway,ffaef,23123,2:15,,
-15,Croatia,CRO,231,4:15,,1231231
-16,Spain,ALC,1200,3:40,,
+1,Iceland,Reykjavík,0,0:00,Áslaug Steingrímsdóttir,3547745010
+2,Færeyjar,Þórshöfn,800,0:50,Abdel,64324324
+3,Grænland,Nuuk,1230,1:50,Innuaguac,34352523
+4,Grænland,Kulusuk,850,1:30,Guanguac,2234563
+5,Hjaltlandseyjar,Tingwall,1110,2:00,,
+6,Svalbarði,Longyearbyen,1450,2:30,Yung nigo,3213535
