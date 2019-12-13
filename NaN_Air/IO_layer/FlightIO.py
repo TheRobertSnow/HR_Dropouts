@@ -13,6 +13,8 @@ class FlightIO():
 
     def get_flights(self):
         """Return a list of flight instances"""
+        self.get_flights_from_file()
+        self.create_flight_instances()
         return self.flightList
 
     def automatically_change_flight_status(self):

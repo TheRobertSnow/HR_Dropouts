@@ -8,7 +8,7 @@ TF-PGK,BAe,146,Grounded,98,0
 TF-TYQ,Fokker,F100,Grounded,110,0
 TF-LNQ,BAe,146,Working,98,0
 TF-XUP,Fokker,F100,Engine failure,110,0
-TF-Danni,Danni,69,Grounded,69,69
+TF-Danni,Danni,69,Needs inspection,69,69
 TF-Róbert,Róbert,690,Grounded,3432,123
 TF-Arnar,Arnar,6900,Grounded,23123,213231
 TF-ALLI,Alli,23123,Grounded,21312,213123
@@ -35,3 +35,4 @@ tf-23,21312r,1312312,Grounded,41241,14
 tf-DANNIKONGUR,23123,213123,Grounded,23123,33123
 tf-hahkuk,233413,4134314,Grounded,341412,21414
 tf-babab,3223123,23214,Grounded,42141,412412412
+TF-Kukurr,Boeing,777,Grounded,433,3242

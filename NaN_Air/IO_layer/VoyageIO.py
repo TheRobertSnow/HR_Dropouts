@@ -16,6 +16,8 @@ class VoyageIO:
 
     def get_voyages(self):
         """Return a list of voyage instances"""
+        self.get_voyages_from_file()
+        self.create_voyage_instances()
         return self.voyageList
 
     def get_voyages_from_file(self):
@@ -28,6 +30,7 @@ class VoyageIO:
             for line in csvReader:
                 returnList.append(line)
         self.__dictList = returnList
+        self.voyageList = []
         for dictionary in self.__dictList:
             voyage = Voyage(dictionary)
             self.voyageList.append(voyage)

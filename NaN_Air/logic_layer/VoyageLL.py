@@ -35,6 +35,7 @@ class VoyageLL():
     def createDuplicateVoyages(self, argumentList):
         """Method that creates duplicate voyages.
         argumentList = [voyageID, list_of_dates]"""
+        self.voyage = self.IOAPI.request_voyages()
         desiredVoyage, flightOut, flightBack, voyageDict = None, None, None, None
         for voyage in self.voyage:
             if voyage.voyageID == argumentList[0]:
@@ -77,7 +78,6 @@ class VoyageLL():
             # voyageList.append(desiredVoyage.flightRouteID)
             # voyageList.append(flightOutInstance.departureTime)
             # voyageList.append(flightBackInstance.departureTime)
-            print("Voyage list before creating voyage: ",voyageList)
             voyageDict = self.createNewVoyage(voyageList)
         return "Succesfully created all voyages"
 
@@ -90,8 +90,14 @@ class VoyageLL():
         returnString = ""
         mannedString = ""
         for voyage in voyages:
-            departureFromIS = datetime.strptime(voyage.departureFromIS, '%Y-%m-%d %H:%M:%S')
-            departureToIS = datetime.strptime(voyage.departureToIS, '%Y-%m-%d %H:%M:%S')
+            if type(voyage.departureFromIS) == str:
+                departureFromIS = datetime.strptime(voyage.departureFromIS, '%Y-%m-%d %H:%M:%S')
+            else:
+                departureFromIS = voyage.departureFromIS
+            if type(voyage.departureToIS) == str:
+                departureToIS = datetime.strptime(voyage.departureToIS, '%Y-%m-%d %H:%M:%S')
+            else:
+                departureToIS = voyage.departureToIS
             if day.date() == departureFromIS.date() or day.date() == departureToIS.date():
                 manned = 0
                 if len(voyage.mainPilot) != 0:
@@ -124,8 +130,14 @@ class VoyageLL():
         for i in range(7):
             weekdays.append(firstWeekday + timedelta(days = i))
         for voyage in voyages:
-            departureFromIS = datetime.strptime(voyage.departureFromIS, '%Y-%m-%d %H:%M:%S')
-            departureToIS = datetime.strptime(voyage.departureToIS, '%Y-%m-%d %H:%M:%S')
+            if type(voyage.departureFromIS) == str:
+                departureFromIS = datetime.strptime(voyage.departureFromIS, '%Y-%m-%d %H:%M:%S')
+            else:
+                departureFromIS = voyage.departureFromIS
+            if type(voyage.departureToIS) == str:
+                departureToIS = datetime.strptime(voyage.departureToIS, '%Y-%m-%d %H:%M:%S')
+            else:
+                departureToIS = voyage.departureToIS
             for days in weekdays:
                 manned = 0
                 if days.date() == departureFromIS.date() or days.date() == departureToIS.date():
@@ -390,7 +402,7 @@ class VoyageLL():
             planeReg = ""
             # get the plane reg
             for i in flightList:
-                if i.flightOutID == flightID:
+                if i.flightID == flightID:
                     planeReg = i.planeRegistration
             # get the plane licence required
             planeList = self.IOAPI.request_airplanes()
