@@ -10,6 +10,7 @@ class FlightLL():
         self.__flightList = self.flightIO.getAllFlightInstances()
 
     def createNewFlight(self, flightList1):
+        """Creates Flight with the information from the list -flightList1"""
         flightList = []
         for i in flightList1:
             flightList.append(i)
@@ -52,6 +53,7 @@ class FlightLL():
         return flight
 
     def getCertainflight(self, flightNumber, flightDate):
+        """Gets the flight that is searched for by sending"""
         self.automatically_change_flight_status()
         for instance in self.__flightList:
             flightNumbers = instance.flightNumber
@@ -62,11 +64,13 @@ class FlightLL():
         return "Flight not found!"
 
     def getAllFlights(self):
+        """gets all flights and returns a list of all flights"""
         self.automatically_change_flight_status()
         self.__flightList = self.flightIO.getAllFlightInstances()
         return self.__flightList
 
     def viewFlightsByStatuses(self, statuses):
+        """Views flights by statuses"""
         self.automatically_change_flight_status()
         statusFlightList = []
         for instance in self.__flightList:
@@ -80,20 +84,24 @@ class FlightLL():
             return statusFlightList
 
     def automatically_change_flight_status(self):
+        """Always called to change flight status"""
         flight = self.flightIO.automatically_change_flight_status()
         return flight
 
     def updateFlightStatus(self, flightlist):
+        """updates flight status"""
         flight = self.flightIO.updateFlightStatus(flightlist)
         self.automatically_change_flight_status()
         return flight
 
     def updateFlightDepartureTime(self, newDepartureTime):
+        """updates departure time for flights"""
         flight = self.flightIO.updateFlightDepartureTime(newDepartureTime)
         self.automatically_change_flight_status()
         return flight
 
     def getCertainFlightFromID(self, flightOutId):
+        """searches for flight via id"""
         self.__flightList = self.flightIO.getAllFlightInstances()
         for instance in self.__flightList:
             if str(instance.flightID) == str(flightOutId):
@@ -101,9 +109,11 @@ class FlightLL():
         return "\nNo flight with that ID found\n"
 
     def getNextFlightID(self):
+        """Gets next flight id"""
         return self.flightIO.getNextFlightID()
 
     def getDate(self, flightID):
+        """gets date"""
         self.__flightList = self.flightIO.getAllFlightInstances()
         for instance in self.__flightList:
             if str(instance.flightID) == str(flightID):

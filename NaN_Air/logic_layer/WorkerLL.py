@@ -10,6 +10,7 @@ class WorkerLL():
         self.__workerList = self.IOAPI.request_workers()
 
     def get_worker_list(self):
+        """gets worker list"""
         self.worker = self.IOAPI.request_workers()
         return self.worker
 
@@ -217,6 +218,7 @@ class WorkerLL():
                 return printString + avaialbleWorkerString + "\n"
 
     def listWorkerVoyagesByWeek(self, ssn, year, week, pos):
+        """lists voyages that a worker takes part in"""
         weekdays = []
         day = "{}-W{}".format(year, week)
         firstWeekday = datetime.strptime(day + '-1', "%Y-W%W-%w")

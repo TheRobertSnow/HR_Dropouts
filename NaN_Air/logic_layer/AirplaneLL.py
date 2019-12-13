@@ -11,6 +11,7 @@ class AirplaneLL:
         return self.__IOAPI.request_airplanes()
 
     def getCertainAirplane(self, airplaneReg):
+        """searches for an airplane by sending Airplane register"""
         return self.__IOAPI.getCertainAirplane(airplaneReg)
 
     def find_airplane_by_reg(self, reg):
@@ -54,6 +55,7 @@ class AirplaneLL:
         return newPlaneObject
 
     def getAllAirplanes(self):
+        """Gets all airplanes"""
         return self.__airplanes
 
     def updateAirplaneStatus(self, airplaneReg, newStatus):

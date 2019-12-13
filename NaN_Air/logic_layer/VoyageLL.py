@@ -10,17 +10,21 @@ class VoyageLL():
         self.flightLL = FlightLL.FlightLL()
 
     def get_voyage_list(self):
+        """gets voyage in the form of a list"""
         return self.IOAPI.request_voyages()
 
     def createNewVoyage(self, dataList):
+        """creates new voyage by sending a list with information on the new voyage"""
         return self.IOAPI.createNewVoyage(dataList)
 
     def find_voyage_by_ID(self, id):
+        """searches for voyage with id"""
         for instance in self.voyage:
             if instance.voyageID == id:
                 return instance
 
     def checkVoyageExists(self, voyageID):
+        """tries to find voyage by sending id"""
         voyageExists = False
         voyageList = self.get_voyage_list()
         for voyage in voyageList:
@@ -78,6 +82,7 @@ class VoyageLL():
         return "Succesfully created all voyages"
 
     def viewallVoyagesDay(self, day):
+        """views all voyages on a particular day"""
         voyages = self.IOAPI.request_voyages()
         printString = "\nVoyages on day {}\n".format(day)
         printString += "\n{:3s} | {}  | {} | {} | {}\n".format("ID", "ORIGIN", "DEPARTURE TIME FROM IS", "DEPARTURE TIME TO IS", "SUFFICIENTLY MANNED")
@@ -106,6 +111,7 @@ class VoyageLL():
             return printString + returnString
 
     def viewallVoyagesWeek(self, year, week):
+        """views all voyages in a particular week of a year"""
         weekdays = []
         voyages = self.IOAPI.request_voyages()
         printString = "\nVoyages in week {}\n".format(week)
@@ -140,6 +146,7 @@ class VoyageLL():
             return printString + returnString
         
     def viewallVoyages(self):
+        """ views all voyages """
         return self.IOAPI.request_voyages()
 
     def viewVoyage(self, voyageID):
