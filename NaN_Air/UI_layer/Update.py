@@ -9,74 +9,77 @@ class Update:
     def update_Worker(self, workerSSN):
         print("""1. Update Worker
 --------------------------------------------
-  1. Home Address: 
-  2. Home Phone Number:
-  3. Mobile Phone Number:
+  1. Home Address
+  2. Home Phone Number
+  3. Mobile Phone Number
   4. E-mail Address
 --------------------------------------------""")
-        updateWorkerMenuInput = input("Input choice (q to Quit, b for Back, m for Main Menu): ")
+        updateWorkerMenuInput = input("Input choice (q to Quit, b for Back): ")
         updateWorkerMenuInput = updateWorkerMenuInput.lower()
 
         if updateWorkerMenuInput == "1":
             newHomeAddress = input("Input new home address: ")
             print(UIAPI.UIAPI.updateWorker(self, workerSSN, "Address", newHomeAddress))
-            return updateWorkerMenuInput
+            return "b"
 
         elif updateWorkerMenuInput == "2":
-            newPhoneNumber = int(input("Input new phone number: "))
+            newPhoneNumber = input("Input new phone number: ")
             print(UIAPI.UIAPI.updateWorker(self, workerSSN, "Phone", newPhoneNumber))
-            return updateWorkerMenuInput
+            return "b"
 
         elif updateWorkerMenuInput == "3":
-            newCellNumber = int(input("Input new cellphone number: "))
+            newCellNumber = input("Input new cellphone number: ")
             print(UIAPI.UIAPI.updateWorker(self, workerSSN, "Cellphone", newCellNumber))
-            return updateWorkerMenuInput
+            return "b"
 
         elif updateWorkerMenuInput == "4":
             newEmail = input("Input new E-mail Address: ")
             print(UIAPI.UIAPI.updateWorker(self, workerSSN, "Email", newEmail))
-            return updateWorkerMenuInput
+            return "b"
 
         elif updateWorkerMenuInput == "b":
-            Update.updateMenu(self)
+            return updateWorkerMenuInput
         elif updateWorkerMenuInput == "q":
             print("Exiting program!")
             return updateWorkerMenuInput
         else:
             print("WRONG INPUT, TRY AGAIN")
             Update.update_Worker(self, workerSSN)
+        return updateWorkerMenuInput
 
     def updateairplaneStatus(self, airplane_reg_num_Input):
         print("""2. Update Airplane Status
-    Select Airplane Status
+--------------------------------------------
+        Select Airplane Status
 --------------------------------------------
   1. Working
   2. Engine failure
   3. On Repair
   4. Needs inspection
 --------------------------------------------""")
-        updateairplanestatusMenuInput = input("Input choice (q to Quit, b for Back, m for Main Menu): ")
+        updateairplanestatusMenuInput = input("Input choice (q to Quit, b for Back): ")
         options = ["Working", "Engine failure", "On repair", "Needs inspection"]
         if updateairplanestatusMenuInput == "1" or "2" or "3" or "4":
             if updateairplanestatusMenuInput == "1":
-                result = UIAPI.UIAPI.updateAirplaneStatus(self, airplane_reg_num_Input, options[0])
+                print(UIAPI.UIAPI.updateAirplaneStatus(self, airplane_reg_num_Input, options[0]))
+                return "b"
             elif updateairplanestatusMenuInput == "2":
-                result = UIAPI.UIAPI.updateAirplaneStatus(self, airplane_reg_num_Input, options[1])
+                print(UIAPI.UIAPI.updateAirplaneStatus(self, airplane_reg_num_Input, options[1]))
+                return "b"
             elif updateairplanestatusMenuInput == "3":
-                result = UIAPI.UIAPI.updateAirplaneStatus(self, airplane_reg_num_Input, options[2])
+                print(UIAPI.UIAPI.updateAirplaneStatus(self, airplane_reg_num_Input, options[2]))
+                return "b"
             elif updateairplanestatusMenuInput == "4":
-                result = UIAPI.UIAPI.updateAirplaneStatus(self, airplane_reg_num_Input, options[3])
-            print(result)
+                print(UIAPI.UIAPI.updateAirplaneStatus(self, airplane_reg_num_Input, options[3]))
+                return "b"
         elif updateairplanestatusMenuInput.lower() == "b":
-            Update.updateMenu(self)
-        elif updateairplanestatusMenuInput.lower() == "m":
-            Update.updateMenu(self)
+            return updateairplanestatusMenuInput
         elif updateairplanestatusMenuInput.lower() == "q":
             print("Exiting program!")
         else:
             print("WRONG INPUT, TRY AGAIN")
             Update.updateairplaneStatus(self, airplane_reg_num_Input)
-        Update.updateMenu(self)
+        return updateairplanestatusMenuInput
 
     def updatecurrentflightRoutes(self, flightRouteID):
         print("""3. Update Current Flights Routes
@@ -88,144 +91,146 @@ class Update:
   5. Update Emergency contact 
   6. Update Emergency contact number
 --------------------------------------------""")
-        updateflightrouteMenuInput = input("Input choice (q to Quit, b for Back, m for Main Menu): ")
+        updateflightrouteMenuInput = input("Input choice (q to Quit, b for Back): ")
         if updateflightrouteMenuInput == "1":
             countryInput = input("Input new country: ")
             flightRouteList = [flightRouteID, "Country", countryInput]
             flightRoute = UIAPI.UIAPI.updateFlightRoute(self, flightRouteList)
             print(flightRoute)
             Update.updatecurrentflightRoutes(self, flightRouteID)
+            return "b"
         elif updateflightrouteMenuInput == "2":
             airportInput = input("Input name of new airport: ")
             flightRouteList = [flightRouteID, "Airport", airportInput]
             flightRoute = UIAPI.UIAPI.updateFlightRoute(self, flightRouteList)
             print(flightRoute)
             Update.updatecurrentflightRoutes(self, flightRouteID)
+            return "b"
         elif updateflightrouteMenuInput == "3":
             flightdistanceInput = input("Input new flight distance in kilometers: ")
             flightRouteList = [flightRouteID, "Flight distance", flightdistanceInput]
             flightRoute = UIAPI.UIAPI.updateFlightRoute(self, flightRouteList)
             print(flightRoute)
             Update.updatecurrentflightRoutes(self, flightRouteID)
+            return "b"
         elif updateflightrouteMenuInput == "4":
             traveltimeInput = input("Input new travel time(f.x. 4:30): ")
             flightRouteList = [flightRouteID, "Travel time", traveltimeInput]
             flightRoute = UIAPI.UIAPI.updateFlightRoute(self, flightRouteList)
             print(flightRoute)
             Update.updatecurrentflightRoutes(self, flightRouteID)
+            return "b"
         elif updateflightrouteMenuInput == "5":
             emergencycontactInput = input("Input new emergency contact name: ")
             flightRouteList = [flightRouteID, "Emergency contact", emergencycontactInput]
             flightRoute = UIAPI.UIAPI.updateFlightRoute(self, flightRouteList)
             print(flightRoute)
             Update.updatecurrentflightRoutes(self, flightRouteID)
+            return "b"
         elif updateflightrouteMenuInput == "6":
             emergencycontactnumInput = input("Input new emergency contact number: ")
             flightRouteList = [flightRouteID, "Emergency number", emergencycontactnumInput]
             flightRoute = UIAPI.UIAPI.updateFlightRoute(self, flightRouteList)
             print(flightRoute)
             Update.updatecurrentflightRoutes(self, flightRouteID)
+            return "b"
         elif updateflightrouteMenuInput == "b":
-            Update.updateMenu(self)
-        elif updateflightrouteMenuInput == "m":
             Update.updateMenu(self)
         elif updateflightrouteMenuInput == "q":
             print("Exiting program!")
         else:
             print("Invalid input")
             Update.updatecurrentflightRoutes(self, flightRouteID)
-        Update.updatecurrentflightRoutes(self, flightRouteID)
+        return updateflightrouteMenuInput
 
     def updateVoyage(self, voyageID):
         print("""4. Update Voyage 
 --------------------------------------------
-  1. Update Pilots
-  2. Update Crew
-  3. Update Departure from Iceland
-  4. Update Departure to Iceland
-  5. Cancel Voyage
+  1. Update Crew
+  2. Update Departure from Iceland
+  3. Update Departure to Iceland
+  4. Cancel Voyage
 --------------------------------------------""")
-        updatevoyageMenuInput = input("Input choice (q to Quit, b for Back, m for Main Menu): ")
+        updatevoyageMenuInput = input("Input choice (q to Quit, b for Back): ")
         if updatevoyageMenuInput == "1":
             UIAPI.UIAPI.requestVoyagePilots(self, voyageID)
             print("""1. Update Pilots 
 --------------------------------------------
-  1. Add Pilot(s)
-  2. Remove Pilot(s)
+  1. Add Captain
+  2. Add Co pilot
+  3. Add Flight Service Manager
+  4. Add Flight Attendant(s)
 --------------------------------------------""")
             updatepilotMenuInput = input("Input choice (q to Quit, b for Back, m for Main Menu): ")
             if updatepilotMenuInput == "1":
                 print("""
   1. Add Pilot
 --------------------------------------------""")
+                # adding pilot to voyage
                 pilotToAddInput = input("Input Social Security Number of Pilot to add: ")
-                # TODO check if the ssn exists, and is a pilot
+                print(UIAPI.UIAPI.addCaptainVoyage(self, voyageID, pilotToAddInput))
 
-                # method call here to verify ssn.. worker related
-                print(UIAPI.UIAPI.addPilotVoyage(self, voyageID, pilotToAddInput))
                 print("--------------------------------------------")
+                return "b"
             elif updatepilotMenuInput == "2":
                 print("""
-            2. Remove Pilots
+            2. Add Co pilot
 --------------------------------------------""")
-                pilotToRemoveInput = input("Input Social Security Number of Pilot to remove: ")
-                print(UIAPI.UIAPI.removePilotVoyage(self, voyageID, pilotToRemoveInput))
+                pilotToRemoveInput = input("Input Social Security Number of Co Pilot to add: ")
+                print(UIAPI.UIAPI.addCoPilotVoyage(self, voyageID, pilotToRemoveInput))
                 print("--------------------------------------------")
+                return "b"
+
+            elif updatepilotMenuInput == "3":
+                print("""
+                      3. Add Flight Service Manager
+        --------------------------------------------""")
+                pilotToRemoveInput = input("Input Social Security Number of Flight Service Manager to add: ")
+                print(UIAPI.UIAPI.addMainFlightAttendantVoyage(self, voyageID, pilotToRemoveInput))
+                print("--------------------------------------------")
+                return "b"
+
+            elif updatepilotMenuInput == "4":
+                print("""
+                        4. Add Flight Attendant(s)
+            --------------------------------------------""")
+                pilotToRemoveInput = input("Input Social Security Number of Flight Attendant to add: ")
+                print(UIAPI.UIAPI.addFlightAttendantVoyage(self, voyageID, pilotToRemoveInput))
+                print("--------------------------------------------")
+                return "b"
+
 
         elif updatevoyageMenuInput == "2":
-            print(UIAPI.UIAPI.requestVoyageCrew(self, voyageID))
-            print("""1. Update Crew 
---------------------------------------------
-  1. Add Crew member
-  2. Remove Crew member
---------------------------------------------""")
-            updatecrewMenuInput = input("Input choice(q to Quit, b for Back, m for Main Menu): ")
-            if updatecrewMenuInput == "1":
-                print("""
-            1. Add Crew member
---------------------------------------------""")
-                crewToAddInput = input("Input Social Security Number of Crew member to add: ")
-                # TODO 'method call here to verify ssn and position'
-                print(UIAPI.UIAPI.addCrewVoyage(self, voyageID, crewToAddInput))
-                print("--------------------------------------------")
-            elif updatecrewMenuInput == "2":
-                print("""
-            2. Remove Crew member
---------------------------------------------""")
-                crewToRemoveInput = input("Input Social Security Number of Crew member to remove: ")
-                print(UIAPI.UIAPI.removeCrewVoyage(self, voyageID, crewToRemoveInput))
-                print("--------------------------------------------")
-
-        elif updatevoyageMenuInput == "3":
             print("""3. Update Departure from Iceland
 --------------------------------------------""")
             flightNumber = UIAPI.UIAPI.requestFromIceFlightNumb(self, voyageID)
             departuretimeInput = input("Input new departure time with slashes in between: ")
             updateList = [flightNumber, "Departure time", departuretimeInput]
             print(UIAPI.UIAPI.updateFlightDepartureTime(self, updateList))
+            return "b"
 
-        elif updatevoyageMenuInput == "4":
+        elif updatevoyageMenuInput == "3":
             print("""4. Update Departure to Iceland
 --------------------------------------------""")
             flightNumber = UIAPI.UIAPI.requestToIceFlightNumb(self, voyageID)
             departuretimeInput = input("Input new departure time with slashes in between: ")
             updateList = [flightNumber, "Departure time", departuretimeInput]
             print(UIAPI.UIAPI.updateFlightDepartureTime(self, updateList))
+            return "b"
 
-        elif updatevoyageMenuInput == "5":
+        elif updatevoyageMenuInput == "4":
             voyageID = input("Input voyage ID of the voyage you wish to cancel: ")
             print(UIAPI.UIAPI.cancelVoyage(self, voyageID))
+            return "b"
 
         elif updatevoyageMenuInput == "b":
-            Update.updateVoyage(self, voyageID)
-        elif updatevoyageMenuInput == "m":
-            Update.updateMenu(self)
+            return updatevoyageMenuInput
         elif updatevoyageMenuInput == "q":
             print("Exiting program!")
         else:
             print("Invalid input")
             Update.updateVoyage(self, voyageID)
-        Update.updateVoyage(self, voyageID)
+        return updatevoyageMenuInput
 
     def updateFlights(self, flightNumber, flightDay):
         print("""5. Update Flights 
@@ -233,30 +238,30 @@ class Update:
   1. Update Flight Status
   2. Update Departure Time
 --------------------------------------------""")
-        updateflightMenuInput = input("Input choice (q to Quit, b for Back, m for Main Menu): ")
+        updateflightMenuInput = input("Input choice (q to Quit, b for Back): ")
         if updateflightMenuInput == "1":
             print("""1. Update Flight Status
     Select Flight Status
 --------------------------------------------
-  1. On schedule
-  2. Loading 
-  3. In-Air
-  4. Landed
-  5. Cancelled
+  1. Activate Cancelled flight
+  2. Cancel Active Flight
 --------------------------------------------""")
             updateflightstatusMenuInput = input("Input choice (q to Quit, b for Back, m for Main Menu): ")
-            options = ["On schedule", "Loading", "In-Air", "Landed", "Cancelled"]
-            if updateflightstatusMenuInput == "1" or "2" or "3" or "4" or "5":
+            updateflightstatusMenuInput = updateflightstatusMenuInput.lower()
+            options = ["On schedule", "Cancelled"]
+            if updateflightstatusMenuInput == "1" or "2":
                 flight = UIAPI.UIAPI.updateFlightStatus(self, [flightNumber, flightDay, "Flight status", options[int(updateflightstatusMenuInput)-1]])
                 print(flight)
                 Update.updateFlights(self, flightNumber, flightDay)
+                return "b"
             elif updateflightstatusMenuInput == "b":
-                Update.updateFlights(self, flightNumber, flightDay)
+                return updateflightstatusMenuInput
             elif updateflightstatusMenuInput == "q":
                 print("exiting program!")
             else:
                 print("WRONG INPUT, TRY AGAIN")
                 Update.updateFlights(self, flightNumber, flightDay)
+            return updateflightstatusMenuInput
 
         elif updateflightMenuInput == "2":
             print("""2. Update Departure time
@@ -270,12 +275,13 @@ class Update:
             flight = UIAPI.UIAPI.updateFlightDepartureTime(self, departureTimeList)
             print(flight)
         elif updateflightMenuInput == "b":
-            Update.updateFlights(self, flightNumber)
+            return updateflightMenuInput
         elif updateflightMenuInput == "q":
             print("exiting program!")
         else:
             print("WRONG INPUT, TRY AGAIN")
-            Update.updateFlights(self, flightNumber)
+            Update.updateFlights(self, flightNumber, flightDay)
+        return updateflightMenuInput
 
     def updateMenu(self):
         print('''Update Data
@@ -290,94 +296,83 @@ class Update:
         updateMenuInput = updateMenuInput.lower()
 
         if updateMenuInput == "1":
-            ssnInput = Update.confirmSSN(self)
-            if ssnInput:
-                Update.update_Worker(self, ssnInput)
-            else:
-                updateMenuInput = Update.updateMenu(self)
+            instance = ""
+            print(UIAPI.UIAPI.viewAllWorkers(self))
+            while type(instance) == str:
+                ssnInput = input("Input the SSN of the Worker you wish to change properties: ")
+                instance = UIAPI.UIAPI.viewWorkerBySSn(self, ssnInput)
+                print(instance)
+            output = Update.update_Worker(self, ssnInput)
+            if output == "b":
+                Update.updateMenu(self)
+            elif output == "q":
+                return output
 
         elif updateMenuInput == "2":
-            airplaneReg = Update.confirmPlaneReg(self)
-            if airplaneReg:
-                Update.updateairplaneStatus(self, airplaneReg)
-            else:
-                updateMenuInput = Update.updateMenu(self)
+            instance = ""
+            allAirplanes = UIAPI.UIAPI.viewAllAirplanes(self)
+            for i in allAirplanes:
+                print(i, "\n")
+
+            while type(instance) == str:
+                regInput = input("Input the Register of the Plane you wish to change properties: ")
+                instance = UIAPI.UIAPI.viewCertainAirplane(self, regInput)
+                print(instance)
+            output = Update.updateairplaneStatus(self, regInput)
+            if output == "b":
+                Update.updateMenu(self)
+            elif output == "q":
+                return output
 
         elif updateMenuInput == "3":
-            flightRouteID = Update.confirmFlightRoute(self)
-            if flightRouteID:
-                Update.updatecurrentflightRoutes(self, flightRouteID)
-            else:
-                updateMenuInput = Update.updateMenu(self)
+            instance = ""
+            routes = UIAPI.UIAPI.viewAllFlightRoutes(self)
+            for route in routes:
+                print(route, "\n")
+            while type(instance) == str:
+                flightrouteID = input("Input the ID of the Flight Route you wish to change properties: ")
+                instance = UIAPI.UIAPI.viewFlightRoute(self, flightrouteID)
+                print(instance)
+            output = Update.updatecurrentflightRoutes(self, flightrouteID)
 
         elif updateMenuInput == "4":
-            voyageID = Update.confirmVoyageID(self)
-            if voyageID:
-                Update.update_Worker(self, voyageID)
-            else:
-                updateMenuInput = Update.updateMenu(self)
+            instance = ""
+            allVoyages = UIAPI.UIAPI.viewallVoyages(self)
+            for i in allVoyages:
+                print(i)
+            while type(instance) == str:
+                voyageID = input("Input the ID of the Voyage you wish to change properties: ")
+                instance = UIAPI.UIAPI.viewVoyage(self, voyageID)
+                print(instance)
+            output = Update.updateVoyage(self, voyageID)
+            if output == "b":
+                Update.updateMenu(self)
+            elif output == "q":
+                return output
 
         elif updateMenuInput == "5":
+            #Test = (UIAPI.UIAPI.viewAllFlights(self))
+            #for i in Test:
+                #print(i)
+                #print("")
             flightNum, flightDay = Update.confirmFlightNumOnDay(self)
             if flightNum:
-                Update.updateFlights(self, flightNum, flightDay)
+                output = Update.updateFlights(self, flightNum, flightDay)
+                if output == "b":
+                    Update.updateMenu(self)
+                elif output == "q":
+                    return output
             else:
-                updateMenuInput = Update.updateMenu(self)
-
+                Update.updateMenu(self)
         elif updateMenuInput == "b":
-            return updateMenuInput
+            print("to the menu")
+            return "b"
         elif updateMenuInput == "q":
-            return None
+            return updateMenuInput
         else:
             print("Wrong input, try again")
-            updateMenuInput = Update.updateMenu()
-        print("")
-        return updateMenuInput
-
-    def confirmSSN(self):
-        def validate(ssn):
-            return UIAPI.UIAPI.viewWorkerBySSn(self, ssn)
-
-        ssn = input("Input the the Social Security Number of the worker you wish to change (b to back): ")
-        if ssn.lower() == "b":
-            return False
-        result = validate(ssn)
-        print(result)
-        if result == " not found!":
-            Update.confirmSSN(self)
-        else:
-            return ssn
-
-    def confirmPlaneReg(self):
-        def validate(planeReg):
-            return UIAPI.UIAPI.viewCertainAirplane(self, planeReg)
-
-        planeReg = input("Input the the Register of the plane you wish to change (b to back): ")
-        if planeReg.lower() == "b":
-            return False
-        result = validate(planeReg)
-        print(result)
-        if result == "Airplane not found!":
-            Update.confirmPlaneReg(self)
-        else:
-            return planeReg
-
-    def confirmFlightRoute(self):  # vantar virkni í flightRouteLL
-        def validate(flightRoute):
-            return UIAPI.UIAPI.viewCertainFlightRoute(self, flightRoute)
-
-        flightRouteID = input("Input the the id of the flight route you wish to change (b to back): ")
-        if flightRouteID.lower() == "b":
-            return False
-        result = validate(flightRouteID)
-        print(result)
-        if result == " not found!":
-            Update.confirmPlaneReg(self)
-        else:
-            return flightRouteID
-
-    def confirmVoyageID(self):  # þarf að útfæra VoyageLL
-        print("not yet ready, this is located in Update.py line ~410, ConfirmVoyageID method")
+            Update.updateMenu(self)
+        return output
 
     def confirmFlightNumOnDay(self):
         #def validate(flightNum):

@@ -9,7 +9,10 @@ class FlightLL():
         self.flightIO = IOAPI.IOAPI()
         self.__flightList = self.flightIO.getAllFlightInstances()
 
-    def createNewFlight(self, flightList):
+    def createNewFlight(self, flightList1):
+        flightList = []
+        for i in flightList1:
+            flightList.append(i)
         flightNumber = self.flightIO.getFlightNumber(flightList[1], flightList[2], flightList[3])
         airplaneReg = flightList[0]
         airplane = self.flightIO.getCertainAirplane(airplaneReg)
@@ -30,7 +33,10 @@ class FlightLL():
                 timeFrameEnd = flightList[5] + timedelta(minutes = 5)
                 for instance in self.__flightList:
                     if instance.originID == "1":
-                        departureTime = datetime.strptime(instance.departureTime, '%Y-%m-%d %H:%M:%S')
+                        dt = instance.departureTime
+                        if type(instance.departureTime) != str:
+                            dt = instance.departureTime.__str__()
+                        departureTime = datetime.strptime(dt, '%Y-%m-%d %H:%M:%S')
                         if departureTime >= timeFrameStart and departureTime <= timeFrameEnd:
                             return "There is another flight from iceland at {} so the departure time you input is not valid".format(instance.departureTime)
             else:
@@ -46,6 +52,7 @@ class FlightLL():
         return flight
                 
     def getCertainflight(self, flightNumber, flightDate):
+        self.automatically_change_flight_status()
         for instance in self.__flightList:
             flightNumbers = instance.flightNumber
             departureTime = datetime.strptime(instance.departureTime, '%Y-%m-%d %H:%M:%S')
@@ -55,20 +62,53 @@ class FlightLL():
         return "Flight not found!"
 
     def getAllFlights(self):
+        self.automatically_change_flight_status()
+        self.__flightList = self.flightIO.getAllFlightInstances()
         return self.__flightList
 
-    def viewFlightsByStatus(self, status):
+    def viewFlightsByStatuses(self, statuses):
+        self.automatically_change_flight_status()
         statusFlightList = []
         for instance in self.__flightList:
             flightStatus = instance.flightStatus
-            if flightStatus == status:
-                statusFlightList.append(instance)
-        return statusFlightList
+            for status in statuses:
+                if flightStatus == status:
+                    statusFlightList.append(instance)
+        if len(statusFlightList) == 0:
+            return "There are no flights with the statuses given"
+        else:
+            return statusFlightList
+    
+    def automatically_change_flight_status(self):
+        flight = self.flightIO.automatically_change_flight_status()
+        return flight
 
     def updateFlightStatus(self, flightlist):
         flight = self.flightIO.updateFlightStatus(flightlist)
+        self.automatically_change_flight_status()
         return flight
 
     def updateFlightDepartureTime(self, newDepartureTime):
         flight = self.flightIO.updateFlightDepartureTime(newDepartureTime)
+        self.automatically_change_flight_status()
         return flight
+
+    def getCertainFlightFromID(self, flightOutId):
+        self.__flightList = self.flightIO.getAllFlightInstances()
+        for instance in self.__flightList:
+            if str(instance.flightID) == str(flightOutId):
+                return instance
+        return "No flight with that ID found"
+
+    def getNextFlightID(self):
+        return self.flightIO.getNextFlightID()
+
+    def getDate(self, flightID):
+        self.__flightList = self.flightIO.getAllFlightInstances()
+        for instance in self.__flightList:
+            if str(instance.flightID) == str(flightID):
+                date = instance.departureTime
+                date = str(date)
+                date = date.split(" ")[0]
+                return date
+        return "Error! couldn't find a matching ID"

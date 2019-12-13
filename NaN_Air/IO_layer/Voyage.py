@@ -17,3 +17,5 @@ class CreateVoyage:
         for key, val in self.__myDictionary.items():
             returnString.append((key + ": " + val))
         return "\n".join(returnString)
+
+

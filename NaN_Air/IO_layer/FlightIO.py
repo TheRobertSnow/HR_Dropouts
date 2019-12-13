@@ -16,6 +16,29 @@ class FlightIO():
         """Return a list of flight instances"""
         return self.flightList
 
+    def automatically_change_flight_status(self):
+        now = datetime.now()
+        flightStatuses = ["On schedule", "Loading", "In-Air", "Landed", "Cancelled"]
+        for flight in self.flightList:
+            departureTime = datetime.strptime(flight.departureTime, '%Y-%m-%d %H:%M:%S')
+            loadingTimeStart = departureTime - timedelta(minutes = 20)
+            inAirTimeStart = departureTime + timedelta(minutes = 10)
+            arrivalTime = datetime.strptime(flight.arrivalTime, '%Y-%m-%d %H:%M:%S')
+            landedTimeStart = arrivalTime
+            if flight.flightStatus != flightStatuses[4]:
+                if now < loadingTimeStart:
+                    if flight.flightStatus != flightStatuses[0]:
+                        self.update_data_in_file([flight.flightNumber, departureTime, "Flight status", flightStatuses[0]])
+                elif now >= loadingTimeStart and now < inAirTimeStart:
+                    if flight.flightStatus != flightStatuses[1]:
+                        self.update_data_in_file([flight.flightNumber, departureTime, "Flight status", flightStatuses[1]])
+                elif now >= inAirTimeStart and now < landedTimeStart:
+                    if flight.flightStatus != flightStatuses[2]:
+                        self.update_data_in_file([flight.flightNumber, departureTime, "Flight status", flightStatuses[2]])
+                elif now >= landedTimeStart:
+                    if flight.flightStatus != flightStatuses[3]:
+                        self.update_data_in_file([flight.flightNumber, departureTime, "Flight status", flightStatuses[3]])
+
     def get_flights_from_file(self):
         """Only use for initializing FlightIO.
         Get flight from file in a list of dictionaries"""
@@ -36,18 +59,18 @@ class FlightIO():
             csvWriter = csv.writer(csvFile)
             orderedDict = self.convert_to_dict_with_id(aList)
             self.__dictList.append(orderedDict)
-            self.add_flight_instance(orderedDict)
+            flightInstance = self.add_flight_instance(orderedDict)
             newList = []
             newList.append(orderedDict['Flight ID'])
             [newList.append(i) for i in aList]
             csvWriter.writerow(newList)
-        return orderedDict
+        return flightInstance
 
     def get_flight_number(self, originID, destinationID, departureTime):
         """Method takes in destinationID and departureTime and generates a
         flight number to return"""
         flightsOnDate = []# List of flights to the same destination on the same date
-        flightsOnDateFrom = []# List of flights from the same destination on the same date
+        #flightsOnDateFrom = []# List of flights from the same destination on the same date
         departureDate = departureTime.date()
         numOfFlight = 0 # The last digit in the flight number
         flightNumber = "NA"
@@ -61,7 +84,7 @@ class FlightIO():
         else:
             flightNumber = flightNumber + destinationID
         for flight in self.flightList:
-            flightDT = flight.departureTime
+            #flightDT = flight.departureTime
             instanceDepartureDate = departureTime.date()
             # If the date of the instance matches the given date and destination
             if instanceDepartureDate == departureDate:
@@ -178,6 +201,7 @@ class FlightIO():
     def add_flight_instance(self, dict):
         flight = Flight(dict)
         self.flightList.append(flight)
+        return flight
 
     def create_flight_instances(self):
         """Methood runs through list of dictionaries,
@@ -190,11 +214,8 @@ class FlightIO():
     def createNewFlight(self, flightList):
         """creates a new airplane instance and writes the airplane to the csv, then it returns the new
             airplane object"""
-        flight = self.write_flight_to_file(flightList)
-        return flight  # returns the new object
-
-    def getFlightNumber(self, originID, destinationID, departureTime):
-        return "NA031"
+        flightInstance = self.write_flight_to_file(flightList)
+        return flightInstance
 
 
 class Flight:
@@ -216,12 +237,3 @@ class Flight:
         for key, val in self.myDictionary.items():
             returnString.append((key + ": " + str(val)))
         return "\n".join(returnString)
-
-
-# +++++++++ Test Case ++++++++++++
-# writeList = ['35','1107951952','Elizabeth Mcfadden','Cabincrew','Flight Attendant','N/A','Fellsmúli 35','8998835','8998835','test@test.com','True','True']
-# updateList = ['35', 'Position', 'Looser']
-# worker = WorkerIO()
-# # print(newline)
-# worker.write_worker_to_file(writeList)
-# worker.update_data_in_file(updateList)

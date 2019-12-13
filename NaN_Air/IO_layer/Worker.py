@@ -1,18 +1,18 @@
 class Worker():
     def __init__(self, dictionary):
-        self.__myDictionary = dictionary
-        self.__workerID = dictionary['Worker ID']
-        self.__socialSecurityNumber = dictionary['Social security number']
-        self.__name = dictionary["Name"]
-        self.__position = dictionary["Position"]
-        self.__rank = dictionary["Rank"]
-        self.__planeLicence = dictionary["Plane licence"]
-        self.__address = dictionary["Address"]
-        self.__phone = dictionary["Phone"]
-        self.__cellphone = dictionary["Cellphone"]
-        self.__email = dictionary["Email"]
-        self.__active = dictionary["Active"]
-        self.__available = dictionary["Available"]
+        self.myDictionary = dictionary
+        self.workerID = dictionary['Worker ID']
+        self.socialSecurityNumber = dictionary['Social security number']
+        self.name = dictionary["Name"]
+        self.position = dictionary["Position"]
+        self.rank = dictionary["Rank"]
+        self.planeLicence = dictionary["Plane licence"]
+        self.address = dictionary["Address"]
+        self.phone = dictionary["Phone"]
+        self.cellphone = dictionary["Cellphone"]
+        self.email = dictionary["Email"]
+        self.active = dictionary["Active"]
+        self.available = dictionary["Available"]
 
     def updateValue(self, key, newValue):
         self.myDictionary[key] = newValue
