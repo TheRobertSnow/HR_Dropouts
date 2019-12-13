@@ -56,7 +56,12 @@ class Update:
   3. On Repair
   4. Needs inspection
 --------------------------------------------""")
-        updateairplanestatusMenuInput = input("Input choice (q to Quit, b for Back): ")
+        while True:
+            updateairplanestatusMenuInput = input("Input choice (q to Quit, b for Back): ")
+            if updateairplanestatusMenuInput.lower() in ["1", "2", "3", "4", "b", "q"]:
+                break
+            else:
+                print("Wrong input, try again")
         options = ["Working", "Engine failure", "On repair", "Needs inspection"]
         if updateairplanestatusMenuInput in ["1", "2", "3", "4"]:
             if updateairplanestatusMenuInput == "1":
