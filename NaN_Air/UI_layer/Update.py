@@ -214,27 +214,6 @@ class Update:
                 print("Wrong input, try again")
                 updatepilotMenuInput = Update.updateVoyage(self, voyageID)
             return updatepilotMenuInput
-
-        elif updatevoyageMenuInput == "2":
-            print("""3. Update Departure from Iceland
---------------------------------------------""")
-            flightNumber = UIAPI.UIAPI.requestFromIceFlightNumb(self, voyageID)
-            departuretimeInput = input("  - Input new departure time with slashes in between: ")
-            updateList = [flightNumber, "Departure time", departuretimeInput]
-            print(UIAPI.UIAPI.updateFlightDepartureTime(self, updateList))
-            return "b"
-        elif updatevoyageMenuInput == "3":
-            print("""4. Update Departure to Iceland
---------------------------------------------""")
-            flightNumber = UIAPI.UIAPI.requestToIceFlightNumb(self, voyageID)
-            departuretimeInput = input("  - Input new departure time with slashes in between: ")
-            updateList = [flightNumber, "Departure time", departuretimeInput]
-            print(UIAPI.UIAPI.updateFlightDepartureTime(self, updateList))
-            return "b"
-        elif updatevoyageMenuInput == "4":
-            voyageID = input("  - Input voyage ID of the voyage you wish to cancel: ")
-            print(UIAPI.UIAPI.cancelVoyage(self, voyageID))
-            return "b"
         elif updatevoyageMenuInput == "b":
             return updatevoyageMenuInput
         elif updatevoyageMenuInput == "q":

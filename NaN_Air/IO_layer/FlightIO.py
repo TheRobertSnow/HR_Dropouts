@@ -19,10 +19,16 @@ class FlightIO():
         now = datetime.now()
         flightStatuses = ["On schedule", "Loading", "In-Air", "Landed", "Cancelled"]
         for flight in self.flightList:
-            departureTime = datetime.strptime(flight.departureTime, '%Y-%m-%d %H:%M:%S')
+            if type(flight.departureTime) == str:
+                departureTime = datetime.strptime(flight.departureTime, '%Y-%m-%d %H:%M:%S')
+            else:
+                departureTime = flight.departureTime
             loadingTimeStart = departureTime - timedelta(minutes = 20)
             inAirTimeStart = departureTime + timedelta(minutes = 10)
-            arrivalTime = datetime.strptime(flight.arrivalTime, '%Y-%m-%d %H:%M:%S')
+            if type(flight.arrivalTime) == str:
+                arrivalTime = datetime.strptime(flight.arrivalTime, '%Y-%m-%d %H:%M:%S')
+            else:
+                arrivalTime = flight.arrivalTime
             landedTimeStart = arrivalTime
             if flight.flightStatus != flightStatuses[4]:
                 if now < loadingTimeStart:
@@ -192,7 +198,10 @@ class FlightIO():
                         if col != "Flight ID" or col != "Flight number":
                             for i in self.flightList:
                                 if i.flightNumber == aList[0]:
-                                    departureTime = datetime.strptime(i.departureTime, '%Y-%m-%d %H:%M:%S')
+                                    if type(i.departureTime) == str:
+                                        departureTime = datetime.strptime(i.departureTime, '%Y-%m-%d %H:%M:%S')
+                                    else:
+                                        departureTime = i.departureTime
                                     if departureTime.date() == aList[1].date():
                                         if col == "Flight status":
                                             i.flightStatus = val

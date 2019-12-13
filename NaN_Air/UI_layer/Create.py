@@ -122,22 +122,22 @@ Please input the following information:''')
             # validate flight out id exists and isn't being used
             validID = UIAPI.UIAPI.viewCertainFlightByID(self, flightOutId)
             if type(validID) == str:
-                print("Error! that flight ID doesn't exist.")
+                print("\nError! that flight ID doesn't exist.\n")
                 return createVoyageMenuInput
             usedID = UIAPI.UIAPI.checkIfAlreadyUsed(self, flightOutId)
             if usedID:
-                print("Error! that flight ID is already being used by another voyage.")
+                print("\nError! that flight ID is already being used by another voyage.\n")
                 return createVoyageMenuInput
             voyageList.append(flightOutId)
             flightBackId = input("  - Flight to Iceland ID: ")
             # validate flight back id exists and isn't being used
             validID = UIAPI.UIAPI.viewCertainFlightByID(self, flightBackId)
             if type(validID) == str:
-                print("Error! that flight ID doesn't exist.")
+                print("\nError! that flight ID doesn't exist.\n")
                 return createVoyageMenuInput
             usedID = UIAPI.UIAPI.checkIfAlreadyUsed(self, flightBackId)
             if usedID:
-                print("Error! that flight ID is already being used by another voyage.")
+                print("\nError! that flight ID is already being used by another voyage.\n")
                 return createVoyageMenuInput
             voyageList.append(flightBackId)
 

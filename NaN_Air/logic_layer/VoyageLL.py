@@ -77,15 +77,6 @@ class VoyageLL():
             voyageDict = self.createNewVoyage(voyageList)
         return "Succesfully created all voyages"
 
-    def create_empty_voyage(self):
-        """creates a empty voyage from 2 flights"""
-        pass
-
-    def requestPilots(self, voyageID):
-        """returns pilots related to the voyage ID you send."""
-        pass
-
-
     def viewallVoyagesDay(self, day):
         voyages = self.IOAPI.request_voyages()
         printString = "\nVoyages on day {}\n".format(day)

@@ -23,6 +23,8 @@ class AirplaneIO:
     def getCertainAirplane(self, airplaneReg):
         """checks all current airplanes in the csv file and returns the instance that matches
             takes in the object instance and the reg of the object you need."""
+        self.get_airplanes_from_file()
+        self.create_airplane_instances()
         for instance in self.airplaneList:
             if instance.planeRegistration.lower() == airplaneReg.lower():
                 return instance
@@ -53,9 +55,12 @@ class AirplaneIO:
             csvWriter = csv.writer(csvFile)
             orderedDict = convert_to_dict(aList)
             self.__dictList.append(orderedDict)
+            airplaneInstance = self.add_airplane_instance(orderedDict)
             newList = []
             [newList.append(i) for i in aList]
             csvWriter.writerow(newList)
+        return airplaneInstance
+    
 
     def write_dictList_to_file(self):
         """Method overwrites file with data from dictList"""
@@ -110,26 +115,23 @@ class AirplaneIO:
         for dictionary in self.__dictList:
             airplane = Airplane(dictionary)
             self.airplaneList.append(airplane)
+    
+    def add_airplane_instance(self, dict):
+        airplane = Airplane(dict)
+        self.airplaneList.append(airplane)
+        return airplane
 
     def createNewAirplane(self, airplaneList):
         """creates a new airplane instance and writes the airplane to the csv, then it returns the new
             airplane object"""
-        # add default values
         airplaneList.insert(3, "Grounded")
-        # create instance
-        theDict = convert_to_dict(airplaneList)
-        airplane = Airplane(theDict)
-        self.airplaneList.append(airplane)  # add the new object to our list
-        # write to file
-        self.write_airplane_to_file(airplaneList)
+        airplane = self.write_airplane_to_file(airplaneList)
         return airplane  # returns the new object
 
     def UpdateCertainAirplane(self, planeInstance, newStatus):
         """takes in the instance of a plane and the new status, updates the instance and the file then returns
             the updated instance"""
-        # update the instance
         planeInstance.updateStatus(newStatus)
-        # update the csv file
         self.write_dictList_to_file()
         return planeInstance
 
