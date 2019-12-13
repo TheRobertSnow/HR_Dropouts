@@ -1,6 +1,16 @@
 import UIAPI
 import datetime
 
+def printObject(name):
+    if type(name) == str:
+        print(name)
+    elif type(name) != list:
+        print("")
+        print(name)
+        print("")
+    else:
+        print("kukur")
+        
 class Create():
     def __init__(self):
         self.uiapi = UIAPI.UIAPI()
@@ -138,7 +148,6 @@ Please input the following information:''')
                 captain, copilot, flightServiceManager, flightAttendants = Create.addCrew(self, flightOutId, flightBackId)
             elif addCrewInput.lower() == "n":
                 captain, copilot, flightServiceManager, flightAttendants = "", "", "", ""
-            print("Crew successfully Added!")
             # prints out crew info
             print(captain, copilot, flightServiceManager, flightAttendants)
             voyageList.insert(2, captain)
@@ -146,9 +155,8 @@ Please input the following information:''')
             voyageList.insert(4, flightServiceManager)
             voyageList.insert(5, flightAttendants)
             voyageInstance = UIAPI.UIAPI.createNewVoyage(self, voyageList)
-            print("Voyage successfully created!")
             # Prints out Voyage info
-            print(voyageInstance)
+            printObject(voyageInstance)
             print("--------------------------------------------")
             return createVoyageMenuInput
 
@@ -180,7 +188,7 @@ Please input the following information:''')
                 flightList2 = Create.createFlight(self, flightList[0], flightList[2], flightList[1])
             # creates flight2
             flightInstance2 = UIAPI.UIAPI.createNewFlight(self, flightList2)
-            print(flightInstance2)
+            printObject(flightInstance2)
             # finds id of created flight
             try:
                 voyageList2.append(flightInstance2.flightID)
@@ -206,8 +214,7 @@ Please input the following information:''')
             voyageList2.insert(5, flightAttendants)
             voyageInstance = UIAPI.UIAPI.createNewVoyage(self, voyageList2)
             # Prints out Voyage info
-            print(voyageInstance)
-            print("--------------------------------------------")
+            printObject(voyageInstance)
             return createVoyageMenuInput
 
         elif createVoyageMenuInput == "3":  # Duplicate old voyage.
@@ -233,7 +240,7 @@ Begin by selecting ID of a existing voyage.
                     dateList.append(dateInput)
             argumentList = [userInput, dateList]
             returnMessage = UIAPI.UIAPI.createDuplicateVoyages(self, argumentList)
-            print(returnMessage)
+            printObject(returnMessage)
             return createVoyageMenuInput
         elif createVoyageMenuInput == "b":
             return createVoyageMenuInput
@@ -273,10 +280,13 @@ Please input the following information:''')
     5. Staff Manager
     6. Trip Manager''')
             position = input("  - Input choice: ")
+            planeLicence = ""
             if position == "1":
                 createWorkerList.append("Captain")
+                planeLicence = input("  - Plane licence: ")
             elif position == "2":
                 createWorkerList.append("Copilot")
+                planeLicence = input("  - Plane licence: ")
             elif position == "3":
                 createWorkerList.append("Flight Service Manager")
             elif position == "4":
@@ -287,25 +297,20 @@ Please input the following information:''')
                 createWorkerList.append("Trip Manager")
             else:
                 createWorkerList.append("Stupid User")
-            if position != "1" or position != "2":
-                createWorkerList.insert(3, "")
-            else:
-                planeLicence = input("Plane licence: ")
-                createWorkerList.append(planeLicence)
-            address = input("Address: ")
+            createWorkerList.append(planeLicence)
+            address = input("  - Address: ")
             createWorkerList.append(address)
             #ekki int
-            phone = input("Phone: ")
+            phone = input("  - Phone: ")
             createWorkerList.append(phone)
             #ekki int
-            cellphone = input("Cellphone: ")
+            cellphone = input("  - Cellphone: ")
             createWorkerList.append(cellphone)
             #email error checka ?
-            email = input("Email: ")
+            email = input("  - Email: ")
             createWorkerList.append(email)
             result = UIAPI.UIAPI.createNewWorker(self, createWorkerList)
-            print(result)
-            print("--------------------------------------------")
+            printObject(result)
             createMenuInput = Create.createMenu(self)
         elif createMenuInput == "2":
             print('''2. Create Airplane
@@ -323,8 +328,7 @@ Please input the following information:''')
             odometer = input("  - Odometer(number of km the airplane has travelled): ")
             createAirplaneList.append(odometer)
             result = UIAPI.UIAPI.createNewAirplane(self, createAirplaneList)
-            print(result)
-            print("--------------------------------------------")
+            printObject(result)
             createMenuInput = Create.createMenu(self)
         elif createMenuInput == "3":
             print('''3. Create Flight Route
@@ -344,9 +348,8 @@ Please input the following information:''')
             emergencyNumber = input("  - Emergency contact phonenumber: ")
             createFlightRouteList.append(emergencyNumber)
             result = UIAPI.UIAPI.createNewFlightRoute(self, createFlightRouteList)
-            print(result)
+            printObject(result)
             # Prints the created flight route
-            print("--------------------------------------------")
             createMenuInput = Create.createMenu(self)
         elif createMenuInput == "4":
             createVoyageMenuOutput = Create.createVoyageMenu(self)
@@ -368,8 +371,7 @@ Please input the following information:''')
             while flightList == "failed":
                 flightList = Create.createFlight(self)  # Creates a list for createNewFlight
             result = UIAPI.UIAPI.createNewFlight(self, flightList)
-            print(result)
-            print("--------------------------------------------")
+            printObject(result)
             createMenuInput = Create.createMenu(self)
         elif createMenuInput == "b":
             return createMenuInput

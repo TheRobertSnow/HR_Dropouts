@@ -35,3 +35,6 @@ Worker ID,Social security number,Name,Position,Plane licence,Address,Phone,Cellp
 34,2602806942,Teresa Thruman,Flight Attendant,N/A,Fellsmúli 34,8998834,8998834,test@test.com,TRUE,TRUE
 35,1107951952,Elizabeth Mcfadden,Flight Attendant,N/A,Lerkias 9,8998835,8998835,test@test.com,TRUE,TRUE
 36,1234512345,Admin,Staff Manager,,AdminGata 5,83823123,31232133,admin@admin.is,TRUE,TRUE
+37,1212121212,Rodriguaz,Flight Attendant,,Kukagata 4,1234567,1234567,rodriguaz@rodriguaz.com,TRUE,TRUE
+38,2311992200,daniel,Captain,Boeing777,lekis,42141241,42141414,defefe,TRUE,TRUE
+39,2312321322,johannes,Copilot,Danni69,lerer,21232,213123,deewf,TRUE,TRUE

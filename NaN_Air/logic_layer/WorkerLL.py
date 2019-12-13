@@ -7,21 +7,11 @@ from datetime import timedelta
 class WorkerLL():
     def __init__(self):
         self.IOAPI = IOAPI.IOAPI()
+        self.__workerList = self.IOAPI.request_workers()
 
     def get_worker_list(self):
         self.worker = self.IOAPI.request_workers()
         return self.worker
-
-    def checkSSN(self, ssn):
-        """Takes in a social security and checks if it is of the right length and the correct format.
-        It then returns the ssn if it is correct and an error if it is not."""
-        if len(ssn) != 10:
-            ssn = "\nThat social security number is not correct, try again!"
-        try:
-            intCheck = int(ssn)
-        except ValueError:
-            ssn = "\nThat social security number is not correct, try again!"
-        return ssn
 
     def checkNewValue(self, theKey, newValue):
         testValue = ""
@@ -59,25 +49,23 @@ class WorkerLL():
     def findWorkerBySSN(self, ssn, pos):
         """Takes social security number and position and returns an instance of a worker in that position
         with that ssn if it exists."""
-        ssn = WorkerLL.checkSSN(self, ssn)
-        if ssn != "\nThat social security number is not correct, try again!":
-            self.worker = self.IOAPI.request_workers()
-            for instance in self.worker:
-                if pos == "":
+        self.worker = self.IOAPI.request_workers()
+        for instance in self.worker:
+            if pos == "":
+                if instance.socialSecurityNumber == ssn:
+                    return instance
+            elif pos == "Pilot":
+                if instance.position == "Captain" or instance.position == "Copilot":
                     if instance.socialSecurityNumber == ssn:
                         return instance
-                elif pos == "Pilot":
-                    if instance.position == "Captain" or instance.position == "Copilot":
-                        if instance.socialSecurityNumber == ssn:
-                            return instance
-                elif pos == "Attendant":
-                    if instance.position == "Flight Attendant" or instance.position == "Flight Service Manager":
-                        if instance.socialSecurityNumber == ssn:
-                            return instance
-                elif pos == "Manager":
-                    if instance.position == "Staff Manager" or instance.position == "Trip Manager":
-                        if instance.socialSecurityNumber == ssn:
-                            return instance
+            elif pos == "Attendant":
+                if instance.position == "Flight Attendant" or instance.position == "Flight Service Manager":
+                    if instance.socialSecurityNumber == ssn:
+                        return instance
+            elif pos == "Manager":
+                if instance.position == "Staff Manager" or instance.position == "Trip Manager":
+                    if instance.socialSecurityNumber == ssn:
+                        return instance
         return "\n{} not found, try again!\n".format(pos)
 
     def findWorkerByPOS(self, position):
@@ -115,19 +103,13 @@ class WorkerLL():
         """Takes in a social security number, key and value, finds a worker instance and
         then uses key and value and to update the values of that worker instance if it exists.
         It then returns that instance (if it exists)"""
-        ssn = WorkerLL.checkSSN(self, socialSecurityNumber)
-        validValue = True
-        error = ""
-        if ssn != "\nThat social security number is not correct, try again!":
-            validValue, error = self.checkNewValue(theKey, newValue)
-        if validValue != False:
-            self.worker = WorkerLL.get_worker_list(self)
-            for instance in self.worker:
-                if instance.socialSecurityNumber == socialSecurityNumber:
-                    updatedWorker = self.IOAPI.updateWorker(instance, theKey, newValue)
-                    self.worker = WorkerLL.get_worker_list(self)
-                    print("Worker succesfully updated!\n")
-                    return updatedWorker
+        self.worker = WorkerLL.get_worker_list(self)
+        for instance in self.worker:
+            if instance.socialSecurityNumber == socialSecurityNumber:
+                updatedWorker = self.IOAPI.updateWorker(instance, theKey, newValue)
+                self.worker = WorkerLL.get_worker_list(self)
+                print("Worker succesfully updated!\n")
+                return updatedWorker
         return "\n{} could not be updated, please try again!\n".format(error)
 
     def viewAllWorkers(self):
@@ -139,27 +121,26 @@ class WorkerLL():
         """Takes in a list of worker qualities and creates an instance of that worker and returns the worker"""
         createWorkerList.append("TRUE")
         createWorkerList.append("TRUE")
-        #0 check social security number
+        if len(createWorkerList[0]) != 10:
+            return "\nError!: That social security number is not the right length\n"
         try:
-            self.checkSSN(createWorkerList[0])
+            intCheck = int(createWorkerList[0])
         except ValueError:
-            return "\nError!: SSN should be a whole number!\n"
-        #2 checking position
-
+            return "\nError!: That social security number countains a letter\n"
         if createWorkerList[2] == "Stupid User":
             return "\nError!: Position not picked\n"
-        #5 Phone
         try:
             int(createWorkerList[5])
         except ValueError:
-            return "\nError!: Phone number should be a numbers\n"
-        #6 Cellphone
+            return "\nError!: Phone number should be a int\n"
         try:
             int(createWorkerList[6])
         except ValueError:
-            return "\nError!: Phone number should be a number\n"
+            return "\nError!: Phone number should be a int\n"
 
         worker = self.IOAPI.createNewWorker(createWorkerList)
+        self.__workerList = WorkerLL.get_worker_list(self)
+        print("\nNow there are", len(self.__workerList), "Worker objects in system")  
         return worker
 
     def listWorkersbydate(self, date, pos, status):

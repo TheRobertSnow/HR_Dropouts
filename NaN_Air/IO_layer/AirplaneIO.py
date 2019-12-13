@@ -7,9 +7,9 @@ def convert_to_dict(aList):
     orderedDict['Plane registration'] = aList[0]
     orderedDict['Manufacturer'] = aList[1]
     orderedDict['Model'] = aList[2]
-    orderedDict['Status'] = "Grounded"  # default value
-    orderedDict['Seats'] = aList[3]
-    orderedDict['Odometer'] = aList[4]
+    orderedDict['Status'] = aList[3]
+    orderedDict['Seats'] = aList[4]
+    orderedDict['Odometer'] = aList[5]
     return orderedDict
 
 class AirplaneIO:

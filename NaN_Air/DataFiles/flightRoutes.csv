@@ -2,4 +2,6 @@ Flight route ID,Country,Airport,Flight distance,Travel time,Emergency contact,Em
 1,Wonderland,Reykjavik,0,0:00,Áslaug Steingrímsdóttir,3547745010
 2,Greenland,Nuuk,1400,2:00,Innunguaqamole,6843224
 3,Færeyjar,Þórshöfn,800,0:50,Abdel,64324324
-4,Spain,ALC,690,4:15,,
+4,USA,JFK,750,4:25,Jonatann,Jonatann
+5,USA,Newark,30000,4:30,2311,Daniel
+6,Danmörk,DFk,750,2:35,fannsi,23123

@@ -32,12 +32,12 @@ class FlightRouteIO():
             csvWriter = csv.writer(csvFile)
             orderedDict = self.convert_to_dict_with_id(aList)
             self.__dictList.append(orderedDict)
-            self.add_flight_route_instance(orderedDict)
+            flightRouteInsatance = self.add_flight_route_instance(orderedDict)
             newList = []
             newList.append(orderedDict['Flight route ID'])
             [newList.append(i) for i in aList]
             csvWriter.writerow(newList)
-        return orderedDict
+        return flightRouteInsatance
 
     def write_dictList_to_file(self):
         """Method overwrites file with data from dictList"""
@@ -133,6 +133,7 @@ class FlightRouteIO():
     def add_flight_route_instance(self, dict):
         newFlightRoute = FlightRoute(dict)
         self.flightRouteList.append(newFlightRoute)
+        return newFlightRoute
 
     def create_flight_route_instances(self):
         """Methood runs through list of dictionaries,

@@ -47,9 +47,8 @@ class FlightLL():
         flightList.insert(5, travelTime)
         arrivalTime = flightList[6] + timedelta(hours = travelHours, minutes = travelMinutes)
         flightList.insert(7, arrivalTime)
-        flight = self.flightIO.createNewFlight(flightList)
-        print("\nNow there are", len(self.__flightList), "Flight objects in system\n")
-        print(flight)
+        flight = self.flightIO.createNewFlight(flightList)                                          
+        print("\nNow there are", len(self.__flightList), "Flight objects in system")      
         return flight
 
     def getCertainflight(self, flightNumber, flightDate):
