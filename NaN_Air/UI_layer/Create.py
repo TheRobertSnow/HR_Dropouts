@@ -234,10 +234,12 @@ Begin by selecting ID of a existing voyage.
                 if dateInput.lower() == "s":
                     break
                 else:
-
-                    day, month, year = map(int, dateInput.split('/'))
-                    dateInput = datetime.datetime(year, month, day)
-                    dateList.append(dateInput)
+                    try:
+                        day, month, year = map(int, dateInput.split('/'))
+                        dateInput = datetime.datetime(year, month, day)
+                        dateList.append(dateInput)
+                    except:
+                        print("Invalid date input, please try again!")
             argumentList = [userInput, dateList]
             returnMessage = UIAPI.UIAPI.createDuplicateVoyages(self, argumentList)
             printObject(returnMessage)

@@ -8,8 +8,8 @@ class FlightRouteLL():
         self.__flightRouteList = self.ioAPI.getAllFlightRouteInstances()        
 
     def find_flight_route_by_id(self, flightID):
-        self.flightRoute = self.ioAPI.getAllFlightRouteInstances()
-        for instance in self.flightRoute:
+        self.__flightRouteList = self.ioAPI.getAllFlightRouteInstances()
+        for instance in self.__flightRouteList:
             if flightID == instance.flightRouteID:
                 return instance
         return "\nFlight route not found!\n"

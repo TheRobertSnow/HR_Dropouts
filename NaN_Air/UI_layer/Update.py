@@ -131,8 +131,8 @@ class Update:
             Update.updatecurrentflightRoutes(self, flightRouteID)
             return "b"
         elif updateflightrouteMenuInput == "6":
-            emergencycontactnumInput = input("  - Input new emergency contact number: ")
             while True:
+                emergencycontactnumInput = input("  - Input new emergency contact number: ")
                 try:
                     emergencycontactnumInput = int(emergencycontactnumInput)
                     emergencycontactnumInput = str(emergencycontactnumInput)
@@ -163,7 +163,6 @@ class Update:
         updatevoyageMenuInput = input("Input choice (q to Quit, b for Back): ")
         updatevoyageMenuInput = updatevoyageMenuInput.lower()
         if updatevoyageMenuInput == "1":
-            UIAPI.UIAPI.requestVoyagePilots(self, voyageID)
             while True:
                 print("""1. Update Pilots 
 --------------------------------------------
@@ -174,7 +173,7 @@ class Update:
 --------------------------------------------""")
 
                 updatepilotMenuInput = input("Input choice (q to Quit, b for Back, m for Main Menu): ")
-                if updatepilotMenuInput in ["1"]:
+                if updatepilotMenuInput in ["1", "2", "3", "4"]:
                     break
                 print("Wrong input, please try again")
             if updatepilotMenuInput == "1":
@@ -240,7 +239,7 @@ class Update:
                 flight = UIAPI.UIAPI.updateFlightStatus(self, [flightNumber, flightDay, "Flight status", options[int(updateflightstatusMenuInput)-1]])
                 print(flight)
                 Update.updateFlights(self, flightNumber, flightDay)
-                return "b"
+                return updateflightstatusMenuInput
             elif updateflightstatusMenuInput == "b":
                 return updateflightstatusMenuInput
             elif updateflightstatusMenuInput == "q":
@@ -260,7 +259,7 @@ class Update:
             departureTimeList = [flightNumber, flightDay, "Departure time", departureDateTime]
             flight = UIAPI.UIAPI.updateFlightDepartureTime(self, departureTimeList)
             print(flight)
-            return updateflightstatusMenuInput
+            return updateflightMenuInput
         elif updateflightMenuInput == "b":
             return updateflightMenuInput
         elif updateflightMenuInput == "q":
@@ -346,7 +345,7 @@ class Update:
                 try:
                     flightNum, flightDay = Update.confirmFlightNumOnDay(self)
                     if flightNum == "back":
-                        return "b"
+                        updateMenuInput = Update.updateMenu(self)
                     break
                 except TypeError:
                     print("Flight Not Found")
@@ -370,7 +369,7 @@ class Update:
     def confirmFlightNumOnDay(self):
         #def validate(flightNum):
             #return UIAPI.UIAPI.viewCertainFlight(self, flightNum)
-        flightNum = input("  - Input the the number of the flight you wish to change (b to back): ")
+        flightNum = input("  - Input the the flight number of the flight you wish to change(b for back): ")
         if flightNum.lower() == "b":
             return "back", "back"
         while True:

@@ -21,6 +21,24 @@ def printObjects(name):
             print(theObject)
         print("")
 
+def makeDateFromInput():
+    day, month, year = None, None, None
+    dateInput = ""
+    dateOutput = ""
+    while True:
+        dateInput = input("  - Input date(f.x. 24/12/2019), b for back: ")
+        if dateInput == "b":
+            dateOutput = "b"
+            break
+        else:
+            try:
+                day, month, year = map(int, dateInput.split('/'))
+                dateOutput = datetime.datetime(year, month, day)
+                break
+            except Exception:
+                print("Wrong input, try again!")
+    return dateOutput
+
 class View():
     def __init__(self):
         self.uiapi = UIAPI.UIAPI()
@@ -140,40 +158,16 @@ class View():
             printObjects(allPilots)
             return viewPilotsInput
         elif viewPilotsInput == "3":
-            day, month, year = None, None, None
-            viewPilotDate = ""
-            while True:
-                viewPilotDate = input("  - Input date(f.x. 24/12/2019), b for back: ")
-                if viewPilotDate == "b":
-                    return viewPilotsInput
-                else:
-                    try:
-                        day, month, year = map(int, viewPilotDate.split('/'))
-                        if year > 0 and year < 3000:
-                            break
-                    except Exception:
-                        print("Wrong input, try again!")
-            viewPilotDate = datetime.datetime(year, month, day)
-            availablePilots = UIAPI.UIAPI.listWorkersbydate(self, viewPilotDate, "Pilot", "Available")
-            printObjects(availablePilots)
+            viewPilotNotDate = makeDateFromInput()
+            if viewPilotNotDate != "b":
+                availablePilots = UIAPI.UIAPI.listWorkersbydate(self, viewPilotNotDate, "Pilot", "Available")
+                printObjects(availablePilots)
             return viewPilotsInput
         elif viewPilotsInput == "4":
-            day, month, year = None, None, None
-            viewPilotDate = ""
-            while True:
-                viewPilotDate = input("  - Input date(f.x. 24/12/2019), b for back: ")
-                if viewPilotDate == "b":
-                    return viewPilotsInput
-                else:
-                    try:
-                        day, month, year = map(int, viewPilotDate.split('/'))
-                        if year > 0 and year < 3000:
-                            break
-                    except Exception:
-                        print("Wrong input, try again!")
-            viewPilotDate = datetime.datetime(year, month, day)
-            unavailablePilots = UIAPI.UIAPI.listWorkersbydate(self, viewPilotDate, "Pilot", "Unavailable")
-            printObjects(unavailablePilots)
+            viewPilotDate = makeDateFromInput()
+            if viewPilotDate != "b":
+                unavailablePilots = UIAPI.UIAPI.listWorkersbydate(self, viewPilotDate, "Pilot", "Unavailable")
+                printObjects(unavailablePilots)
             return viewPilotsInput
         elif viewPilotsInput == "5":
             while True:
@@ -227,40 +221,16 @@ class View():
             printObjects(allAttendants)
             return viewAttendantsInput
         elif viewAttendantsInput == "3":
-            day, month, year = None, None, None
-            viewAttendantDate = ""
-            while True:
-                viewAttendantDate = input("  - Input date(f.x. 24/12/2019), b for back: ")
-                if viewAttendantDate == "b":
-                    return viewAttendantsInput
-                else:
-                    try:
-                        day, month, year = map(int, viewAttendantDate.split('/'))
-                        if year > 0 and year < 3000:
-                            break
-                    except Exception:
-                        print("Wrong input, try again!")
-            viewAttendantDate = datetime.datetime(year, month, day)
-            availableAttendants = UIAPI.UIAPI.listWorkersbydate(self, viewAttendantDate, "Attendant", "Available")
-            printObjects(availableAttendants)
+            viewAttendantNotDate = makeDateFromInput()
+            if viewAttendantNotDate != "b":
+                availableAttendants = UIAPI.UIAPI.listWorkersbydate(self, viewAttendantNotDate, "Attendant", "Available")
+                printObjects(availableAttendants)
             return viewAttendantsInput
         elif viewAttendantsInput == "4":
-            day, month, year = None, None, None
-            viewAttendantDate = ""
-            while True:
-                viewAttendantDate = input("  - Input date(f.x. 24/12/2019), b for back: ")
-                if viewAttendantDate == "b":
-                    return viewAttendantsInput
-                else:
-                    try:
-                        day, month, year = map(int, viewAttendantDate.split('/'))
-                        if year > 0 and year < 3000:
-                            break
-                    except Exception:
-                        print("Wrong input, try again!")
-            viewAttendantDate = datetime.datetime(year, month, day)
-            unavailableAttendants = UIAPI.UIAPI.listWorkersbydate(self, viewAttendantDate, "Attendant", "Unavailable")
-            printObjects(unavailableAttendants)
+            viewAttendantDate = makeDateFromInput()
+            if viewAttendantDate != "b":
+                unavailableAttendants = UIAPI.UIAPI.listWorkersbydate(self, viewAttendantDate, "Attendant", "Unavailable")
+                printObjects(unavailableAttendants)
             return viewAttendantsInput
         elif viewAttendantsInput == "5":
             attendantSSN = input("  - Input SSN with no spaces in between: ")
@@ -379,22 +349,10 @@ class View():
             printObjects(voyages)
             viewVoyagesInput = View.viewVoyages(self)
         elif viewVoyagesInput == "3":
-            day, month, year = None, None, None
-            voyageDate = ""
-            while True:
-                voyageDate = input("  - Input date(f.x. 24/12/2019), b for Back: ")
-                if voyageDate == "b":
-                    viewVoyagesInput = View.viewVoyages(self)
-                else:
-                    try:
-                        day, month, year = map(int, voyageDate.split('/'))
-                        if year > 0 and year < 3000:
-                            break
-                    except Exception:
-                        print("Wrong input, try again!")
-            voyageDate = datetime.datetime(year, month, day)
-            allVoyagesDay = UIAPI.UIAPI.viewallVoyagesDay(self, voyageDate)
-            printObjects(allVoyagesDay)
+            voyageDate = makeDateFromInput()
+            if voyageDate != "b":
+                allVoyagesDay = UIAPI.UIAPI.viewallVoyagesDay(self, voyageDate)
+                printObjects(allVoyagesDay)
             viewVoyagesInput = View.viewVoyages(self)
         elif viewVoyagesInput == "4":
             voyageYear = input("  - Input year: ")
@@ -424,11 +382,10 @@ class View():
         viewFlightInput = viewFlightInput.lower()
         if viewFlightInput == "1":
             flightNumber = input("  - Input flight number: ")
-            flightDay = input("  - Input date (f.x. 31/12/2019): ")
-            day, month, year = map(int, flightDay.split('/'))
-            flightDate = datetime.datetime(year, month, day)
-            viewFlight = UIAPI.UIAPI.viewCertainFlight(self, flightNumber, flightDate)
-            printObjects(viewFlight)
+            flightDate = makeDateFromInput()
+            if flightDate != "b":
+                viewFlight = UIAPI.UIAPI.viewCertainFlight(self, flightNumber, flightDate)
+                printObjects(viewFlight)
             viewFlightInput = View.viewFlight(self)
         if viewFlightInput == "2":
             allFlights = UIAPI.UIAPI.viewAllFlights(self)

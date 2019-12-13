@@ -1,5 +1,5 @@
 Flight route ID,Country,Airport,Flight distance,Travel time,Emergency contact,Emergency number
-1,Wonderland,Reykjavik,0,0:00,Áslaug Steingrímsdóttir,3547745010
+1,Iceland,Reykjavik,0,0:00,Áslaug Steingrímsdóttir,3547745010
 2,Greenland,Nuuk,1400,2:00,Innunguaqamole,6843224
 3,Færeyjar,Þórshöfn,800,0:50,Abdel,64324324
 4,USA,JFK,750,4:25,Jonatann,Jonatann
@@ -7,3 +7,10 @@ Flight route ID,Country,Airport,Flight distance,Travel time,Emergency contact,Em
 6,Danmörk,DFk,750,2:35,fannsi,23123
 7,SPain,alicante,850,3:25,frgrbref,23124145
 8,Australia,bansdasd,2312,12:34,21312,421412
+9,Reyk,2ef,213,12:30,23123,123123
+10,Germany,STG,21321,10:00,johan,2132231
+11,Holland,HFS,23123,3:30,hal,23213
+12,France,KJS,232,2:34,,
+13,Kroatia,213,312,1:35,,
+14,Urugway,ffaef,23123,2:15,,
+15,Croatia,CRO,231,4:15,,1231231

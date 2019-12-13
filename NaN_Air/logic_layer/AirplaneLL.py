@@ -60,7 +60,7 @@ class AirplaneLL:
         """takes in the register of plane that needs to be updated and what the new status is."""
         # finding the plane reg object
         for instance in self.__airplanes:
-            if instance.planeRegistration == airplaneReg:
+            if instance.planeRegistration.lower() == airplaneReg.lower():
                 updatedObject = self.__IOAPI.updatePlane(instance, newStatus)
                 self.__airplanes = AirplaneLL.get_airplane_list(self)  # update our list of plane objects
                 return updatedObject

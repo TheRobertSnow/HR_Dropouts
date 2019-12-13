@@ -85,10 +85,6 @@ class AirplaneIO:
                 if key == 'Plane registration':
                     if value == aList[0]:
                         if col != "Plane registration":
-                            self.__dictList[index][col] = val
-                            self.write_dictList_to_file()
-                            self.get_airplanes_from_file()
-                            self.create_airplane_instances()
                             for i in self.airplaneList:
                                 if i.planeRegistration == aList[0]:
                                     if col == "Manufacturer":
@@ -107,6 +103,11 @@ class AirplaneIO:
                                         i.active = val
                                     elif col == "Available":
                                         i.available = val
+                                    self.__dictList[index][col] = val
+                                    self.write_dictList_to_file()
+                                    self.get_airplanes_from_file()
+                                    self.create_airplane_instances()
+                                    return i
 
     def create_airplane_instances(self):
         """Method runs through list of dictionaries,
@@ -131,8 +132,7 @@ class AirplaneIO:
     def UpdateCertainAirplane(self, planeInstance, newStatus):
         """takes in the instance of a plane and the new status, updates the instance and the file then returns
             the updated instance"""
-        planeInstance.updateStatus(newStatus)
-        self.write_dictList_to_file()
+        planeInstance = AirplaneIO.update_data_in_file(self, [planeInstance.planeRegistration, "Status", newStatus])
         return planeInstance
 
 class Airplane:

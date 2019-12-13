@@ -11,6 +11,8 @@ class FlightRouteIO():
 
     def get_flightRoutes(self):
         """Return a list of flight instances"""
+        self.get_flight_route_from_file()
+        self.create_flight_route_instances()
         return self.flightRouteList
     
     def get_flight_route_from_file(self):
@@ -22,6 +24,7 @@ class FlightRouteIO():
             for line in csvReader:
                 returnList.append(line)
         self.__dictList = returnList
+        self.flightRouteList = []
         for dictionary in self.__dictList:
             flightRoute = FlightRoute(dictionary)
             self.flightRouteList.append(flightRoute)
@@ -126,7 +129,7 @@ class FlightRouteIO():
                                         i.emergencyNumber = val
                                     self.__dictList[index][col] = val
                                     self.write_dictList_to_file()
-                                    self.get_flight_route_from_file()
+                                    self.get_flightRoutes()
                                     self.create_flight_route_instances()
                                     return i
 
