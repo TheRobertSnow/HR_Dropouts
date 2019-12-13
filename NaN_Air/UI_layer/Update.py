@@ -58,7 +58,7 @@ class Update:
 --------------------------------------------""")
         updateairplanestatusMenuInput = input("Input choice (q to Quit, b for Back): ")
         options = ["Working", "Engine failure", "On repair", "Needs inspection"]
-        if updateairplanestatusMenuInput == "1" or "2" or "3" or "4":
+        if updateairplanestatusMenuInput in ["1", "2", "3", "4"]:
             if updateairplanestatusMenuInput == "1":
                 print(UIAPI.UIAPI.updateAirplaneStatus(self, airplane_reg_num_Input, options[0]))
                 return "b"
@@ -78,7 +78,6 @@ class Update:
         else:
             print("Wrong input, try again")
             Update.updateairplaneStatus(self, airplane_reg_num_Input)
-        return updateairplanestatusMenuInput
 
     def updatecurrentflightRoutes(self, flightRouteID):
         print("""3. Update Current Flights Routes
