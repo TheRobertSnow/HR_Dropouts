@@ -159,9 +159,6 @@ class Update:
         print("""4. Update Voyage 
 --------------------------------------------
   1. Update Crew
-  2. Update Departure from Iceland
-  3. Update Departure to Iceland
-  4. Cancel Voyage
 --------------------------------------------""")
         updatevoyageMenuInput = input("Input choice (q to Quit, b for Back): ")
         updatevoyageMenuInput = updatevoyageMenuInput.lower()
@@ -177,7 +174,7 @@ class Update:
 --------------------------------------------""")
 
                 updatepilotMenuInput = input("Input choice (q to Quit, b for Back, m for Main Menu): ")
-                if updatepilotMenuInput in ["1", "2", "3", "4"]:
+                if updatepilotMenuInput in ["1"]:
                     break
                 print("Wrong input, please try again")
             if updatepilotMenuInput == "1":
