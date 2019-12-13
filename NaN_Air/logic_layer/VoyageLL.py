@@ -212,7 +212,7 @@ class VoyageLL():
         planeReg = ""
         flightList = self.IOAPI.getAllFlightInstances()
         for i in flightList:
-            if i.flightID == flightID:
+            if i.flightID == str(flightID):
                 planeReg = i.airplaneRegistrationNumber
         planeList = self.IOAPI.request_airplanes()
         for i in planeList:
@@ -264,7 +264,7 @@ class VoyageLL():
         planeReg = ""
         flightList = self.IOAPI.getAllFlightInstances()
         for i in flightList:
-            if i.flightID == flightID:
+            if i.flightID == str(flightID):
                 planeReg = i.airplaneRegistrationNumber
         planeList = self.IOAPI.request_airplanes()
         for i in planeList:
@@ -402,18 +402,13 @@ class VoyageLL():
             planeReg = ""
             # get the plane reg
             for i in flightList:
-                if i.flightID == flightID:
+                if i.flightID == str(flightID):
                     planeReg = i.airplaneRegistrationNumber
             # get the plane licence required
             planeList = self.IOAPI.request_airplanes()
             for i in planeList:
-                print(planeReg, i.planeRegistration)
                 if planeReg == i.planeRegistration:
-                    print("Succes")
                     requiredLicence = i.manufacturer + i.model
-            print(requiredLicence)
-            print(planeLicence)
-            print("kukurogpasta")
             if requiredLicence != planeLicence:
                 return "\nError! pilot doesn't have the required licence\n"
         return None
