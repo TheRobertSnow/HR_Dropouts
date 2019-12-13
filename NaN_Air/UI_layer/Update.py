@@ -381,17 +381,20 @@ class Update:
             #for i in Test:
                 #print(i)
                 #print("")
-            try:
-                flightNum, flightDay = Update.confirmFlightNumOnDay(self)
-            except TypeError:
-                print("Flight Not Found")
+            while True:
+                try:
+                    flightNum, flightDay = Update.confirmFlightNumOnDay(self)
+                    if flightNum == "back":
+                        return "b"
+                    break
+                except TypeError:
+                    print("Flight Not Found")
+
+            output = Update.updateFlights(self, flightNum, flightDay)
+            if output == "b":
                 Update.updateMenu(self)
-            if flightNum:
-                output = Update.updateFlights(self, flightNum, flightDay)
-                if output == "b":
-                    Update.updateMenu(self)
-                elif output == "q":
-                    return output
+            elif output == "q":
+                return output
             else:
                 Update.updateMenu(self)
         elif updateMenuInput == "b":
@@ -408,7 +411,7 @@ class Update:
             #return UIAPI.UIAPI.viewCertainFlight(self, flightNum)
         flightNum = input("  - Input the the number of the flight you wish to change (b to back): ")
         if flightNum.lower() == "b":
-            return False
+            return "back", "back"
         while True:
             flightDay = input("  - Input the day of the flight you want to update(f.x. 31/12/2019): ")
             try:
