@@ -1,5 +1,4 @@
 import csv
-# import datetime
 FILENAME = 'DataFiles/flight.csv'
 from datetime import datetime
 from datetime import timedelta
@@ -55,6 +54,7 @@ class FlightIO():
 
     def write_flight_to_file(self, aList):
         """Method takes in a list of data and writes to file"""
+        flightInstance = None
         with open(FILENAME, 'a', encoding="utf8", newline='') as csvFile:
             csvWriter = csv.writer(csvFile)
             orderedDict = self.convert_to_dict_with_id(aList)
@@ -85,7 +85,17 @@ class FlightIO():
             flightNumber = flightNumber + destinationID
         for flight in self.flightList:
             #flightDT = flight.departureTime
-            instanceDepartureDate = departureTime.date()
+            # TODO Need to fix the date check!!!!
+            instanceDepartureDate = None
+            if type(flight.departureTime) == str:
+                date, time = flight.departureTime.split()
+                year, month, day = date.split("-")
+                hour, min, sec = time.split(":")
+                instanceDeparture = datetime(int(year), int(month), int(day), int(hour), int(min), int(sec))
+                instanceDepartureDate = instanceDeparture.date()
+            else:
+                instanceDepartureDate = flight.departureTime.date()
+                
             # If the date of the instance matches the given date and destination
             if instanceDepartureDate == departureDate:
                 if flight.destinationID == destinationID and flight.originID == originID:
@@ -109,8 +119,6 @@ class FlightIO():
                     numOfFlight += 2
                 flightNumber = flightNumber + str(numOfFlight)
                 return flightNumber
-
-
 
     def write_dictList_to_file(self):
         """Method overwrites file with data from dictList"""
@@ -217,7 +225,6 @@ class FlightIO():
         flightInstance = self.write_flight_to_file(flightList)
         return flightInstance
 
-
 class Flight:
     def __init__(self, dictionary):
         self.myDictionary = dictionary
@@ -230,7 +237,6 @@ class Flight:
         self.travelTime = dictionary["Travel time"]
         self.departureTime = dictionary["Departure time"]
         self.arrivalTime = dictionary["Arrival time"]
-
 
     def __str__(self):
         returnString = []

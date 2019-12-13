@@ -62,10 +62,10 @@ class UIAPI:
     def viewAllWorkers(self):
         """give us all worker instances, would be nice if we can get 5 at a time or something instead of all at once"""
         returnData = self.workerLL.viewAllWorkers()
-        for instance in returnData:
-            print(str(instance) + "\n")
-        returnstring = "\n"
-        return returnstring
+        #for instance in returnData:
+            #print(str(instance) + "\n")
+        #returnstring = "\n"
+        return returnData
 
     def updateWorker(self, socialSecurityNumber, akey, newValue):
         """we give you a ssn, the key we want to change and the new value of that key, give us back the worker changed"""
@@ -76,10 +76,11 @@ class UIAPI:
         returnData = self.workerLL.listWorkersbydate(date, pos, status)
         return returnData
 
-    def viewallVoyagesInWeek(self, week, pos):
+    def viewallVoyagesInWeek(self, ssn, year, week, pos):
         """We give you a week and position, either "Pilot" or "Attendant" and you return all
         voyages of that pilot or attendant in a given week. If the """
-        pass
+        returnData = self.workerLL.listWorkerVoyagesByWeek(ssn, year, week, pos)
+        return returnData
 
     #
     # flight related
@@ -147,14 +148,14 @@ class UIAPI:
         returnData = self.voyageLL.viewallVoyagesDay(day)
         return returnData
 
-    def verifyStaffForVoyage(self, theKey, SSN, dateOut, dateBack):
-        return self.voyageLL.verifyStaff(theKey, SSN, dateOut, dateBack)
+    def verifyStaffForVoyage(self, theKey, SSN, dateOut, dateBack, flightID):
+        return self.voyageLL.verifyStaff(theKey, SSN, dateOut, dateBack, flightID)
 
-    def viewallVoyagesWeek(self, week):
+    def viewallVoyagesWeek(self, year, week):
         """Listar öll voyages í ákveðinni viku og hvort að þau séu fullmönnuð, svo
         við þurfum að fá lista eða dict með hverju voyage tilviki og svo upplýsingum
         um hvort að það sé fullmannað í þeirri viku"""
-        returnData = self.voyageLL.viewallVoyagesWeek(week)
+        returnData = self.voyageLL.viewallVoyagesWeek(year, week)
         return returnData
 
     def copyPreviousVoyage(self, voyageID):

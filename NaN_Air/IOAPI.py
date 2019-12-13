@@ -17,17 +17,14 @@ class IOAPI:
     # Worker
     #
     def createNewWorker(self, workerList):
-        self.workerIO.writeworkertoFile(workerList)
-        return "Worker succesfully created!"
+        worker = self.workerIO.writeworkertoFile(workerList)
+        return worker
 
     def request_workers(self):
         return self.workerIO.get_workers()
 
     def updateWorker(self, instance, key, newValue):
         return self.workerIO.updateCertainWorker(instance, key, newValue)
-
-    def request_voyagestoWorker(self):
-        return self.voyageIO.get_voyages()
 
     #
     # Airplane

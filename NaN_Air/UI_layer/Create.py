@@ -5,26 +5,51 @@ class Create():
     def __init__(self):
         self.uiapi = UIAPI.UIAPI()
 
-    def createFlight(airplane=None, origin=None, destination=None):
-        #flightRouteList = UIAPI.UIAPI.viewAllFlightRoutes(self)
-        #for item in flightRouteList:
-            #print(item.flightRouteID, item.country)
+    def createFlight(self, airplane=None, origin=None, destination=None):
+        """format for creating a new flight, used in both create flight and create voyage
+            returns a list with all values required for creating a flight"""
         flightList = []
         if airplane == None:
             airplane = input("  - Airplane registration number: ")
+            checkReg = UIAPI.UIAPI.viewCertainAirplane(self, airplane)
+            if type(checkReg) == str:
+                print(checkReg)
+                return "failed"
         flightList.append(airplane)
         if origin == None:
-            origin = input("  - Origin ID: ")
+            while True:
+                origin = input("  - Origin ID: ")
+                testOrigin = UIAPI.UIAPI.viewFlightRoute(self, origin)
+                if type(testOrigin) != str:
+                    break
+                print("ID not found, please try again")
         flightList.append(origin)
         if destination == None:
-            destination = input("  - Destination ID: ")
+            while True:
+                destination = input("  - Destination ID: ")
+                testDest = UIAPI.UIAPI.viewFlightRoute(self, destination)
+                if type(testDest) != str:
+                    break
+                print("ID not found, please try again")
         flightList.append(destination)
-        departureTime = input("  - Departure time from {}(f.x. 12:30): ".format(origin))
-        #væri betra að hafa þetta shit í logic
-        hour, minute = map(int, departureTime.split(':'))
-        departureDate = input("  - Departure date from {}(f.x. 24/12/2019): ".format(origin))
-        #þetta líka
-        day, month, year = map(int, departureDate.split('/'))
+        hour, minute, day, month, year = None,None,None,None,None
+        while True:
+            try:
+                departureTime = input("  - Departure time from {}(f.x. 12:30): ".format(origin))
+                #væri betra að hafa þetta shit í logic
+                hour, minute = map(int, departureTime.split(':'))
+                break
+            except Exception as e:
+                print("Wrong time format!")
+        while True:
+            try:
+                departureDate = input("  - Departure date from {}(f.x. 24/12/2019): ".format(origin))
+                #þetta líka
+                day, month, year = map(int, departureDate.split('/'))
+                break
+            except Exception as e:
+                print("Wrong date format!")
+
         departureDateTime = datetime.datetime(year, month, day, hour, minute, 00)
         flightList.append(departureDateTime)
         return flightList
@@ -35,19 +60,19 @@ class Create():
         dateBack = UIAPI.UIAPI.getDateFromFlightID(self, secondFlightID)
         print("\nAdd Crew")
         captain = input("  - Captains social security number: ")
-        results = UIAPI.UIAPI.verifyStaffForVoyage(self, "Captain", captain, dateOut, dateBack)
+        results = UIAPI.UIAPI.verifyStaffForVoyage(self, "Captain", captain, dateOut, dateBack, flightID)
         if type(results) == str:
             print(results)
             print("You can try adding a captain later in the update menu, for now the captain is empty")
             captain = ""
         copilot = input("  - Copilots social security number: ")
-        results = UIAPI.UIAPI.verifyStaffForVoyage(self, "Copilot", copilot, dateOut, dateBack)
+        results = UIAPI.UIAPI.verifyStaffForVoyage(self, "Copilot", copilot, dateOut, dateBack, flightID)
         if type(results) == str:
             print(results)
             print("You can try adding a Copilot later in the update menu, for now the captain is empty")
             copilot = ""
         flightServiceManager = input("  - Flight service managers social security number: ")
-        results = UIAPI.UIAPI.verifyStaffForVoyage(self, "Flight Service Manager", flightServiceManager, dateOut, dateBack)
+        results = UIAPI.UIAPI.verifyStaffForVoyage(self, "Flight Service Manager", flightServiceManager, dateOut, dateBack, flightID)
         if type(results) == str:
             print(results)
             print("You can try adding a Manager later in the update menu, for now the captain is empty")
@@ -59,7 +84,7 @@ class Create():
             if flightAttendant == "q":
                 break
             else:
-                results = UIAPI.UIAPI.verifyStaffForVoyage(self, "Flight Attendant", flightAttendant, dateOut, dateBack)
+                results = UIAPI.UIAPI.verifyStaffForVoyage(self, "Flight Attendant", flightAttendant, dateOut, dateBack, flightID)
                 if type(results) == str:
                     print(results)
                 else:
@@ -108,7 +133,7 @@ Please input the following information:''')
 
 
             # adds crew
-            addCrewInput = input("Do you want to add a crew to the voyage? (y/n)")
+            addCrewInput = input("  - Do you want to add a crew to the voyage? (y/n)")
             if addCrewInput.lower() == "y":
                 captain, copilot, flightServiceManager, flightAttendants = Create.addCrew(self, flightOutId, flightBackId)
             elif addCrewInput.lower() == "n":
@@ -134,27 +159,37 @@ Please input the following information:''')
             voyageList2 = []
             print("\nFlight from Iceland")
             # Get a list of information for the flight
-            flightList = Create.createFlight(None, "1") #   Sends in the id of Reykjavik airport
+            flightList = "failed"
+            while flightList == "failed":
+                flightList = Create.createFlight(self, None, "1")  # Sends in the id of Reykjavik airport
             # creates flight1
             flightInstance1 = UIAPI.UIAPI.createNewFlight(self, flightList)
             print(flightInstance1)
             # finds id of created flight
-            voyageList2.append(flightInstance1.flightID)
+            try:
+                voyageList2.append(flightInstance1.flightID)
+            except AttributeError:
+                return createVoyageMenuInput
             # voyageList2.append(flightOutId)
             #print("Flight 1 successfully created!")
 
             print("\nFlight to Iceland")
             # Get a list of information for the flight
-            flightList2 = Create.createFlight(flightList[0], flightList[2], flightList[1])
+            flightList2 = "failed"
+            while flightList2 == "failed":
+                flightList2 = Create.createFlight(self, flightList[0], flightList[2], flightList[1])
             # creates flight2
             flightInstance2 = UIAPI.UIAPI.createNewFlight(self, flightList2)
             print(flightInstance2)
             # finds id of created flight
-            voyageList2.append(flightInstance2.flightID)
+            try:
+                voyageList2.append(flightInstance2.flightID)
+            except AttributeError:
+                return createVoyageMenuInput
             # voyageList2.append(flightBackId)
             #print("Flight 2 successfully created!")
             # print(flightBackList)
-            addCrewInput = input("Do you want to add a crew to the voyage? (y/n)")
+            addCrewInput = input("  - Do you want to add a crew to the voyage? (y/n)")
             if addCrewInput.lower() == "y":
                 # get flight ids
                 supposedNextID = UIAPI.UIAPI.nextFlightID(self)
@@ -163,7 +198,6 @@ Please input the following information:''')
                 captain, copilot, flightServiceManager, flightAttendants = Create.addCrew(self, flight1ID, flight2ID)
             elif addCrewInput.lower() == "n":
                 captain, copilot, flightServiceManager, flightAttendants = "", "", "", ""
-            print("Crew successfully Added!")
             # prints out crew info
             print(captain, copilot, flightServiceManager, flightAttendants)
             voyageList2.insert(2, captain)
@@ -189,32 +223,25 @@ Begin by selecting ID of a existing voyage.
                     userInput = input("Voyage does not exist...\n - Input voyage ID: ")
             dateList = []
             while True:
-                dateInput = input(" - Input date (e.g. 07/03/2019) (s to stop)\n - Input: ")
+                dateInput = input(" - Input date(e.g. 07/03/2019, s to stop): ")
                 if dateInput.lower() == "s":
                     break
                 else:
+
                     day, month, year = map(int, dateInput.split('/'))
                     dateInput = datetime.datetime(year, month, day)
                     dateList.append(dateInput)
             argumentList = [userInput, dateList]
             returnMessage = UIAPI.UIAPI.createDuplicateVoyages(self, argumentList)
             print(returnMessage)
-
-
-
-
-
-
+            return createVoyageMenuInput
         elif createVoyageMenuInput == "b":
             return createVoyageMenuInput
-
         elif createVoyageMenuInput == "q":
             return createVoyageMenuInput
-
         else:
             print("Wrong input, try again")
             createVoyageMenuInput = Create.createVoyageMenu(self)
-
         return createVoyageMenuInput
 
     def createMenu(self):
@@ -238,14 +265,14 @@ Please input the following information:''')
             createWorkerList.append(ssn)
             name = input("  - Name: ")
             createWorkerList.append(name)
-            print('''\n  Select worker position\n
+            print('''\n  Select worker position
     1. Captain
     2. Copilot
     3. Flight service manager
     4. Flight attendant
     5. Staff manager
     6. Trip manager''')
-            position = input("  Input choice: ")
+            position = input("  - Input choice: ")
             if position == "1":
                 createWorkerList.append("Captain")
             elif position == "2":
@@ -260,19 +287,21 @@ Please input the following information:''')
                 createWorkerList.append("Trip manager")
             else:
                 createWorkerList.append("Stupid User")
-                
-            planeLicence = input("  - Plane licence: ")
-            createWorkerList.append(planeLicence)
-            address = input("  - Address: ")
+            if position != "1" or position != "2":
+                createWorkerList.insert(3, "")
+            else:
+                planeLicence = input("Plane licence: ")
+                createWorkerList.append(planeLicence)
+            address = input("Address: ")
             createWorkerList.append(address)
             #ekki int
-            phone = input("  - Phone: ")
+            phone = input("Phone: ")
             createWorkerList.append(phone)
             #ekki int
-            cellphone = input("  - Cellphone: ")
+            cellphone = input("Cellphone: ")
             createWorkerList.append(cellphone)
             #email error checka ?
-            email = input("  - Email: ")
+            email = input("Email: ")
             createWorkerList.append(email)
             result = UIAPI.UIAPI.createNewWorker(self, createWorkerList)
             print(result)
@@ -335,7 +364,9 @@ Please input the following information:''')
             flightRouteList = UIAPI.UIAPI.viewAllFlightRoutes(self)
             for item in flightRouteList:
                 print(item.flightRouteID, item.country)
-            flightList = Create.createFlight()  # Creates a list for createNewFlight
+            flightList = "failed"
+            while flightList == "failed":
+                flightList = Create.createFlight(self)  # Creates a list for createNewFlight
             result = UIAPI.UIAPI.createNewFlight(self, flightList)
             print(result)
             print("--------------------------------------------")

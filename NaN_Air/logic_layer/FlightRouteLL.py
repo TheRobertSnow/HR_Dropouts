@@ -2,7 +2,6 @@ import sys
 sys.path.append('..')
 import IOAPI
 
-
 class FlightRouteLL():
     def __init__(self):
         self.ioAPI = IOAPI.IOAPI()
@@ -33,7 +32,4 @@ class FlightRouteLL():
         flightRoute = self.ioAPI.createNewFlightRoute(flightRouteList)
         print("\nNow there are", len(self.__flightRouteList), "Flight Route objects in system\n")
         return flightRoute
-
-    def viewFlightRoute(self, voyageID):
-        pass
 
